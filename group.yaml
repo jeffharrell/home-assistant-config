@@ -1,0 +1,93 @@
+## GROUPS
+
+# Tabs
+
+default_view:
+    view: yes
+    entities:
+      - group.lights
+      - group.media_center
+      - group.climate
+      - group.scenes
+
+status:
+  view: yes
+  entities:
+    - group.occupied_rooms
+    - group.garage
+
+settings:
+  view: yes
+  entities:
+    - group.toggles
+
+# Cards
+
+lights:
+  name: Lights
+  entities:
+    - group.kitchen_lights
+    - light.island_lights_level_5_0
+    - light.family_room_lights_level_8_0
+    - light.pantry_light_level_3_0
+    - light.dining_room_lights_level_2_0
+    - switch.living_room_switch_10_0
+    - light.master_bedroom_l_level_4_0
+    - switch.outside_lights_switch_9_0
+
+climate:
+  name: Climate
+  entities:
+    - climate.meadowlands
+    - switch.house_fan
+    - sensor.family_room_temperature
+    - sensor.living_room_temperature
+    - sensor.master_bedroom_temperature
+    - sensor.masons_room_temperature
+    - sensor.brinks_room_temperature
+
+media_center:
+  name: Media Center
+  control: hidden
+  entities:
+    - switch.apple_tv
+    - switch.fire_tv
+    - switch.cable_tv
+    - switch.dvd_player
+    - switch.music
+
+kitchen_lights:
+  name: Kitchen
+  entities:
+    - light.kitchen_lights_1_level_7_0
+    - light.kitchen_lights_2_level_6_0
+
+garage:
+  name: Garage
+  entities:
+    - sensor.garage_jillian
+    - sensor.garage_jeff
+    - sensor.garage_guest
+
+occupied_rooms:
+  name: Occupied Rooms
+  entities:
+    - binary_sensor.meadowlands_occupancy
+    - binary_sensor.family_room_occupancy
+    - binary_sensor.living_room_occupancy
+    - binary_sensor.masons_room_occupancy
+    - binary_sensor.brinks_room_occupancy
+    - binary_sensor.master_bedroom_occupancy
+
+toggles:
+  name: Settings
+  control: hidden
+  entities:
+    - input_boolean.away_mode
+    - input_boolean.notify_garage
+
+scenes:
+  name: Scenes
+  entities:
+    - scene.good_morning
+    - scene.good_night

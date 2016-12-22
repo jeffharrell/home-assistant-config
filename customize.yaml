@@ -1,0 +1,123 @@
+## CUSTOMIZATIONS
+
+
+# Lights
+
+light.pantry_light_level_3_0:
+  friendly_name: Pantry
+light.dining_room_lights_level_2_0:
+  friendly_name: Dining Room
+light.master_bedroom_l_level_4_0:
+  friendly_name: Master Bedroom
+light.family_room_lights_level_8_0:
+  friendly_name: Family Room
+light.island_lights_level_5_0:
+  friendly_name: Island
+light.kitchen_lights_1_level_7_0:
+  hidden: true
+light.kitchen_lights_2_level_6_0:
+  hidden: true
+
+
+# Switches
+
+switch.outside_lights_switch_9_0:
+  friendly_name: Back Yard
+  icon: mdi:lightbulb
+switch.living_room_switch_10_0:
+  friendly_name: Living Room
+  icon: mdi:lightbulb
+
+
+# Climate
+
+climate.meadowlands:
+  friendly_name: Thermostat
+sensor.meadowlands_temperature:
+  hidden: true
+sensor.meadowlands_humidity:
+  hidden: true
+sensor.family_room_temperature:
+  friendly_name: Family Room
+sensor.living_room_temperature:
+  friendly_name: Living Room
+sensor.masons_room_temperature:
+  friendly_name: Mason's Room
+sensor.brinks_room_temperature:
+  friendly_name: Brink's Room
+sensor.master_bedroom_temperature:
+  friendly_name: Master Bedroom
+switch.house_fan:
+  friendly_name: House Fan
+  icon: mdi:fan
+
+
+# Media
+
+switch.apple_tv:
+  icon: mdi:apple
+switch.fire_tv:
+  icon: mdi:amazon
+switch.cable_tv:
+  icon: mdi:television
+switch.dvd_player:
+  icon: mdi:movie
+switch.music:
+  icon: mdi:music-box
+
+
+# Scenes
+
+scene.good_morning:
+  icon: mdi:brightness-5
+scene.good_night:
+  icon: mdi:brightness-2
+
+
+# Garage
+
+sensor.garage_guest:
+  friendly_name: Guest Door
+  icon: mdi:home
+sensor.garage_jeff:
+  friendly_name: Jeff's Door
+  icon: mdi:home
+sensor.garage_jillian:
+  friendly_name: Jillian's Door
+  icon: mdi:home
+binary_sensor.garage_door_guest_sensor_11_0:
+  hidden: true
+binary_sensor.garage_door_jillian_sensor_12_0:
+  hidden: true
+binary_sensor.garage_door_jeff_sensor_13_0:
+  hidden: true
+sensor.garage_door_guest_alarm_type_11_0:
+  hidden: true
+sensor.garage_door_guest_alarm_level_11_1:
+  hidden: true
+sensor.garage_door_guest_sourcenodeid_11_2:
+  hidden: true
+sensor.garage_door_guest_burglar_11_10:
+  hidden: true
+sensor.garage_door_jillian_alarm_type_12_0:
+  hidden: true
+sensor.garage_door_jillian_alarm_level_12_1:
+  hidden: true
+sensor.garage_door_jillian_sourcenodeid_12_2:
+  hidden: true
+sensor.garage_door_jillian_burglar_12_10:
+  hidden: true
+sensor.garage_door_jeff_alarm_type_13_0:
+  hidden: true
+sensor.garage_door_jeff_alarm_level_13_1:
+  hidden: true
+sensor.garage_door_jeff_sourcenodeid_13_2:
+  hidden: true
+sensor.garage_door_jeff_burglar_13_10:
+  hidden: true
+
+
+# Misc
+
+sun.sun:
+  hidden: true

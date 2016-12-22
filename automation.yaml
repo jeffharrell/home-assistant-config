@@ -1,0 +1,55 @@
+## Automation
+
+- alias: Send garage status after Alarm is armed
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_home'
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_away'
+  action:
+    - delay: 0:05
+    - service: notify.sms_jeff
+      data:
+        title: Home Alert
+        message: Garage doors are {% if is_state("binary_sensor.garage_door_guest_sensor_11_0", "on") or is_state("binary_sensor.garage_door_jillian_sensor_12_0", "on") or is_state("binary_sensor.garage_door_jeff_sensor_13_0", "on") %}OPEN{% else %}Closed{% endif %}.
+
+
+# - alias: Away lights on at sunset
+#   trigger:
+#     - platform: sun
+#       event: sunset
+#       offset: '-00:45:00'
+#     - platform: state
+#       entity_id: alarm_control_panel.simplisafe
+#       state: 'armed_away'
+#   condition:
+#     conditions: and
+#       - condition: state
+#         entity_id: alarm_control_panel.simplisafe
+#         state: 'armed_away'
+#       - condition: sun
+#         after: sunset
+#         after_offset: '-00:45:00'
+#   action:
+#     service: switch.turn_on
+#     entity_id: switch.living_room_switch_10_0
+
+# - alias: Away lights on a bit before sunset
+#   trigger:
+#     platform: sun
+#     event: sunset
+#     offset: '-00:45:00'
+#   action:
+#     service: switch.turn_on
+#     entity_id: switch.living_room_switch_10_0
+
+# - alias: Away lights off a few hours after sunrise
+#   trigger:
+#     platform: sun
+#     event: sunrise
+#     offset: '-07:00:00'
+#   action:
+#     service: switch.turn_off
+#     entity_id: switch.living_room_switch_10_0

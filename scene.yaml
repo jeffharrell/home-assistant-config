@@ -1,0 +1,14 @@
+## SCENES
+
+- name: Good Morning
+  entities:
+    light.island_lights_level_5_0:
+      state: on
+      brightness: 127
+    alarm_control_panel.simplisafe: 'disarmed'
+
+- name: Good Night
+  entities:
+    group.all_lights: off
+    alarm_control_panel.simplisafe: 'armed_home'
+

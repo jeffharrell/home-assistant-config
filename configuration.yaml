@@ -1,0 +1,75 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: !secret units
+  time_zone: !secret time_zone
+  customize: !include customize.yaml
+
+
+## CONFIGURATION
+
+frontend:
+
+http:
+  api_password: !secret http_password
+  trusted_networks: !secret http_trusted_networks
+#  ssl_certificate: !secret ssl_certificate
+#  ssl_key: !secret ssl_key
+
+updater:
+
+history:
+
+logger:
+  default: error
+
+
+## FEATURES
+
+zwave: !include zwave.yaml
+
+ecobee:
+  api_key: !secret ecobee_api_key
+
+mqtt:
+  broker: !secret mqtt_url
+  port: !secret mqtt_port
+
+alarm_control_panel:
+  platform: simplisafe
+  username: !secret simplisafe_user
+  password: !secret simplisafe_pass
+
+notify:
+  - name: sms_jeff
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    starttls: true
+    sender: !secret gmail_sender
+    username: !secret gmail_user
+    password: !secret gmail_pass
+    recipient: !secret sms_jeff_recipient
+
+emulated_hue:
+
+wemo:
+
+sun:
+
+
+## COMPONENTS
+
+group: !include group.yaml
+
+sensor: !include sensor.yaml
+
+switch: !include switch.yaml
+
+input_boolean: !include input_boolean.yaml
+
+scene: !include scene.yaml
+
+automation: !include automation.yaml

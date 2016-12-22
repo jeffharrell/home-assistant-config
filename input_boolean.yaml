@@ -1,0 +1,12 @@
+## BOOLEAN INPUTS
+
+away_mode:
+  name: Enable away mode
+  initial: off
+  icon: mdi:cloud-outline-off
+
+notify_garage:
+  name: Enable garage door open notifications
+  initial: on
+  icon: mdi:cloud-outline-off
+
