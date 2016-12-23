@@ -29,3 +29,11 @@ customize:
     refresh_value: true
     polling_intensity: 2
     delay: 5
+  switch.outside_lights_switch_9_0:
+    refresh_value: true
+    polling_intensity: 2
+    delay: 5
+  switch.living_room_switch_10_0:
+    refresh_value: true
+    polling_intensity: 2
+    delay: 5

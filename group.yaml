@@ -13,7 +13,7 @@ default_view:
 status:
   view: yes
   entities:
-    - group.occupied_rooms
+    - group.rooms
     - group.garage
 
 settings:
@@ -40,11 +40,6 @@ climate:
   entities:
     - climate.meadowlands
     - switch.house_fan
-    - sensor.family_room_temperature
-    - sensor.living_room_temperature
-    - sensor.master_bedroom_temperature
-    - sensor.masons_room_temperature
-    - sensor.brinks_room_temperature
 
 media_center:
   name: Media Center
@@ -62,6 +57,15 @@ kitchen_lights:
     - light.kitchen_lights_1_level_7_0
     - light.kitchen_lights_2_level_6_0
 
+rooms:
+  name: Rooms
+  entities:
+    - sensor.family_room_status
+    - sensor.living_room_status
+    - sensor.masons_room_status
+    - sensor.brinks_room_status
+    - sensor.master_bedroom_status
+
 garage:
   name: Garage
   entities:
@@ -69,25 +73,16 @@ garage:
     - sensor.garage_jeff
     - sensor.garage_guest
 
-occupied_rooms:
-  name: Occupied Rooms
-  entities:
-    - binary_sensor.meadowlands_occupancy
-    - binary_sensor.family_room_occupancy
-    - binary_sensor.living_room_occupancy
-    - binary_sensor.masons_room_occupancy
-    - binary_sensor.brinks_room_occupancy
-    - binary_sensor.master_bedroom_occupancy
-
 toggles:
   name: Settings
   control: hidden
   entities:
     - input_boolean.away_mode
-    - input_boolean.notify_garage
+    - input_boolean.notify_enable
 
 scenes:
   name: Scenes
   entities:
+    - scene.movie_time
     - scene.good_morning
     - scene.good_night

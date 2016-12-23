@@ -17,10 +17,6 @@ light.kitchen_lights_1_level_7_0:
   hidden: true
 light.kitchen_lights_2_level_6_0:
   hidden: true
-
-
-# Switches
-
 switch.outside_lights_switch_9_0:
   friendly_name: Back Yard
   icon: mdi:lightbulb
@@ -38,15 +34,15 @@ sensor.meadowlands_temperature:
 sensor.meadowlands_humidity:
   hidden: true
 sensor.family_room_temperature:
-  friendly_name: Family Room
+  hidden: true
 sensor.living_room_temperature:
-  friendly_name: Living Room
+  hidden: true
 sensor.masons_room_temperature:
-  friendly_name: Mason's Room
+  hidden: true
 sensor.brinks_room_temperature:
-  friendly_name: Brink's Room
+  hidden: true
 sensor.master_bedroom_temperature:
-  friendly_name: Master Bedroom
+  hidden: true
 switch.house_fan:
   friendly_name: House Fan
   icon: mdi:fan
@@ -68,11 +64,31 @@ switch.music:
 
 # Scenes
 
+scene.movie_time:
+  icon: mdi:movie
 scene.good_morning:
   icon: mdi:brightness-5
 scene.good_night:
   icon: mdi:brightness-2
 
+
+# Rooms
+
+sensor.family_room_status:
+  friendly_name: Family Room
+  icon: mdi:thermometer
+sensor.living_room_status:
+  friendly_name: Living Room
+  icon: mdi:thermometer
+sensor.masons_room_status:
+  friendly_name: Mason's Room
+  icon: mdi:thermometer
+sensor.brinks_room_status:
+  friendly_name: Brinkley's Room
+  icon: mdi:thermometer
+sensor.master_bedroom_status:
+  friendly_name: Master Bedroom
+  icon: mdi:thermometer
 
 # Garage
 
