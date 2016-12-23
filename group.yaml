@@ -81,7 +81,7 @@ toggles:
   control: hidden
   entities:
     - input_boolean.vacation_mode
-    - input_boolean.notify_enable
+    - input_boolean.disable_notify
 
 scenes:
   name: Scenes

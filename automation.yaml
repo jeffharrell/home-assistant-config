@@ -1,6 +1,16 @@
 ## Automation
 
-- alias: Send garage status after Alarm is armed
+- alias: Reset settings at midnight
+  trigger:
+    platform: time
+    after: '00:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id:
+      - input_boolean.disable_notify
+
+
+- alias: Send garage status when alarm is armed
   trigger:
     - platform: state
       entity_id: alarm_control_panel.simplisafe
@@ -8,8 +18,23 @@
     - platform: state
       entity_id: alarm_control_panel.simplisafe
       to: 'armed_away'
+  condition:
+    condition: state
+    entity_id: input_boolean.disable_notify
+    state: 'off'
   action:
-    - delay: 0:05
+    - delay: 0:00
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.garage_door_guest_sensor_11_0
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.garage_door_jillian_sensor_12_0
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.garage_door_jeff_sensor_13_0
+          state: 'on'
     - service: notify.sms_jeff
       data:
         title: Home Alert

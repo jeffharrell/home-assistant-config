@@ -5,8 +5,8 @@ vacation_mode:
   initial: off
   icon: mdi:toggle-switch
 
-notify_enable:
-  name: Notifications
-  initial: on
+disable_notify:
+  name: Disable notifications (Until midnight)
+  initial: off
   icon: mdi:toggle-switch
 
