@@ -27,8 +27,14 @@ switch.living_room_switch_10_0:
 
 # Climate
 
-climate.meadowlands:
-  friendly_name: Thermostat
+sensor.climate_temp:
+  friendly_name: Temperature
+sensor.climate_humidity:
+  friendly_name: Humidity
+  icon: mdi:water
+sensor.climate_mode:
+  friendly_name: Mode
+  icon: mdi:nest-thermostat
 sensor.meadowlands_temperature:
   hidden: true
 sensor.meadowlands_humidity:

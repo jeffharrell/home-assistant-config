@@ -1,7 +1,7 @@
 ## BOOLEAN INPUTS
 
-away_mode:
-  name: Away mode
+vacation_mode:
+  name: Vacation mode
   initial: off
   icon: mdi:toggle-switch
 

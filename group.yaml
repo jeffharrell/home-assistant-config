@@ -38,7 +38,10 @@ lights:
 climate:
   name: Climate
   entities:
-    - climate.meadowlands
+    - sensor.climate_temp
+    - sensor.climate_humidity
+    - sensor.climate_mode
+
     - switch.house_fan
 
 media_center:
@@ -77,7 +80,7 @@ toggles:
   name: Settings
   control: hidden
   entities:
-    - input_boolean.away_mode
+    - input_boolean.vacation_mode
     - input_boolean.notify_enable
 
 scenes:

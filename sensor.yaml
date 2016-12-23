@@ -12,27 +12,46 @@
       value_template: '{% if is_state("binary_sensor.garage_door_jeff_sensor_13_0", "off") %}Closed{% else %}Open{% endif %}'
       entity_id: binary_sensor.garage_door_jeff_sensor_13_0
     family_room_status:
-      value_template: '{% if is_state("binary_sensor.family_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.family_room_temperature.state }}°F'
+      value_template: '{% if is_state("binary_sensor.family_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.family_room_temperature.state }}'
+      unit_of_measurement: °F
       entity_id:
         - binary_sensor.family_room_occupancy
         - sensor.family_room_temperature
     living_room_status:
-      value_template: '{% if is_state("binary_sensor.living_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.living_room_temperature.state }}°F'
+      value_template: '{% if is_state("binary_sensor.living_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.living_room_temperature.state }}'
+      unit_of_measurement: °F
       entity_id:
         - binary_sensor.living_room_occupancy
         - sensor.living_room_temperature
     masons_room_status:
-      value_template: '{% if is_state("binary_sensor.masons_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.masons_room_temperature.state }}°F'
+      value_template: '{% if is_state("binary_sensor.masons_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.masons_room_temperature.state }}'
+      unit_of_measurement: °F
       entity_id:
         - binary_sensor.masons_room_occupancy
         - sensor.masons_room_temperature
     brinks_room_status:
-      value_template: '{% if is_state("binary_sensor.brinks_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.brinks_room_temperature.state }}°F'
+      value_template: '{% if is_state("binary_sensor.brinks_room_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.brinks_room_temperature.state }}'
+      unit_of_measurement: °F
       entity_id:
         - binary_sensor.brinks_room_occupancy
         - sensor.brinks_room_temperature
     master_bedroom_status:
-      value_template: '{% if is_state("binary_sensor.master_bedroom_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.master_bedroom_temperature.state }}°F'
+      value_template: '{% if is_state("binary_sensor.master_bedroom_occupancy", "on") %}(occupied) {% endif %}{{ states.sensor.master_bedroom_temperature.state }}'
+      unit_of_measurement: °F
       entity_id:
         - binary_sensor.master_bedroom_occupancy
         - sensor.master_bedroom_temperature
+    climate_temp:
+      value_template: '{{states.climate.meadowlands.attributes.current_temperature}}'
+      unit_of_measurement: °F
+      entity_id:
+        - climate.meadowlands
+    climate_humidity:
+      value_template: '{{states.climate.meadowlands.attributes.actual_humidity}}'
+      unit_of_measurement: '%'
+      entity_id:
+        - climate.meadowlands
+    climate_mode:
+      value_template: '{{states.climate.meadowlands.attributes.operation_mode}}'
+      entity_id:
+        - climate.meadowlands
