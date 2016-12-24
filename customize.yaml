@@ -57,14 +57,19 @@ switch.house_fan:
 # Media
 
 switch.apple_tv:
+  friendly_name: Apple TV
   icon: mdi:apple
 switch.fire_tv:
+  friendly_name: Fire TV
   icon: mdi:amazon
 switch.cable_tv:
+  friendly_name: Cable TV
   icon: mdi:television
 switch.dvd_player:
+  friendly_name: DVD Player
   icon: mdi:movie
 switch.music:
+  friendly_name: Music
   icon: mdi:music-box
 
 

@@ -33,9 +33,10 @@ zwave: !include zwave.yaml
 ecobee:
   api_key: !secret ecobee_api_key
 
-mqtt:
-  broker: !secret mqtt_url
-  port: !secret mqtt_port
+remote:
+  - platform: harmony
+    name: Family Room
+    host: 192.168.2.144
 
 alarm_control_panel:
   platform: simplisafe

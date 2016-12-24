@@ -1,12 +1,12 @@
 ## BOOLEAN INPUTS
 
-vacation_mode:
-  name: Vacation mode
+disable_away_mode:
+  name: Disable away mode
   initial: off
   icon: mdi:toggle-switch
 
 disable_notify:
-  name: Disable notifications (Until midnight)
+  name: Disable notifications
   initial: off
   icon: mdi:toggle-switch
 

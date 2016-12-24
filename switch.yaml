@@ -1,35 +1,64 @@
 ## SWITCHES
 
-
-# Media Center
-
-- platform: mqtt
-  name: "Apple TV"
-  state_topic:   "harmony-api/hubs/family-room/activities/apple-tv/state"
-  command_topic: "harmony-api/hubs/family-room/activities/apple-tv/command"
-  payload_on: "on"
-  payload_off: "off"
-- platform: mqtt
-  name: "Fire TV"
-  state_topic:   "harmony-api/hubs/family-room/activities/fire-tv/state"
-  command_topic: "harmony-api/hubs/family-room/activities/fire-tv/command"
-  payload_on: "on"
-  payload_off: "off"
-- platform: mqtt
-  name: "Cable TV"
-  state_topic:   "harmony-api/hubs/family-room/activities/cable-tv/state"
-  command_topic: "harmony-api/hubs/family-room/activities/cable-tv/command"
-  payload_on: "on"
-  payload_off: "off"
-- platform: mqtt
-  name: "DVD Player"
-  state_topic:   "harmony-api/hubs/family-room/activities/dvd-player/state"
-  command_topic: "harmony-api/hubs/family-room/activities/dvd-player/command"
-  payload_on: "on"
-  payload_off: "off"
-- platform: mqtt
-  name: "Music"
-  state_topic:   "harmony-api/hubs/family-room/activities/music/state"
-  command_topic: "harmony-api/hubs/family-room/activities/music/command"
-  payload_on: "on"
-  payload_off: "off"
+- platform: template
+  switches:
+    apple_tv:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "Apple TV" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 21762413
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room
+    cable_tv:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "Cable TV" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 21762510
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room
+    fire_tv:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "Fire TV" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 22767959
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room
+    dvd_player:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "DVD Player" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 21762603
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room
+    music:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "Music" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 18890244
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room
+    receiver_bluetooth:
+      value_template: '{{ states.remote.family_room.attributes.current_activity == "Reciever Bluetooth" }}'
+      turn_on:
+        service: remote.turn_on
+        entity_id: remote.family_room
+        data:
+          activity: 22068322
+      turn_off:
+        service: remote.turn_off
+        entity_id: remote.family_room

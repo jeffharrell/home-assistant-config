@@ -3,11 +3,46 @@
 - alias: Reset settings at midnight
   trigger:
     platform: time
-    after: '00:00'
+    after: '00:00:00'
   action:
     service: homeassistant.turn_off
     entity_id:
       - input_boolean.disable_notify
+      - input_boolean.disable_away_mode
+
+
+- alias: Away - Lights on
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:20:00'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.simplisafe
+    state: 'armed_away'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_away_mode
+      state: 'off'
+    - service: switch.turn_on
+      entity_id: switch.living_room_switch_10_0
+
+
+- alias: Away mode - Lights off
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '05:00:00'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.simplisafe
+    state: 'armed_away'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_away_mode
+      state: 'off'
+    - service: switch.turn_off
+      entity_id: switch.living_room_switch_10_0
 
 
 - alias: Send garage status when alarm is armed
@@ -23,7 +58,7 @@
     entity_id: input_boolean.disable_notify
     state: 'off'
   action:
-    - delay: 0:05
+    - delay: '0:05:00'
     - condition: or
       conditions:
         - condition: state
@@ -39,42 +74,3 @@
       data:
         title: Home Alert
         message: Garage doors are OPEN.
-
-
-# - alias: Away lights on at sunset
-#   trigger:
-#     - platform: sun
-#       event: sunset
-#       offset: '-00:45:00'
-#     - platform: state
-#       entity_id: alarm_control_panel.simplisafe
-#       state: 'armed_away'
-#   condition:
-#     conditions: and
-#       - condition: state
-#         entity_id: alarm_control_panel.simplisafe
-#         state: 'armed_away'
-#       - condition: sun
-#         after: sunset
-#         after_offset: '-00:45:00'
-#   action:
-#     service: switch.turn_on
-#     entity_id: switch.living_room_switch_10_0
-
-# - alias: Away lights on a bit before sunset
-#   trigger:
-#     platform: sun
-#     event: sunset
-#     offset: '-00:45:00'
-#   action:
-#     service: switch.turn_on
-#     entity_id: switch.living_room_switch_10_0
-
-# - alias: Away lights off a few hours after sunrise
-#   trigger:
-#     platform: sun
-#     event: sunrise
-#     offset: '-07:00:00'
-#   action:
-#     service: switch.turn_off
-#     entity_id: switch.living_room_switch_10_0

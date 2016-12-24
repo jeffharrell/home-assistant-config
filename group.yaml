@@ -80,7 +80,7 @@ toggles:
   name: Settings
   control: hidden
   entities:
-    - input_boolean.vacation_mode
+    - input_boolean.disable_away_mode
     - input_boolean.disable_notify
 
 scenes:
