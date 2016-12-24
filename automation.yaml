@@ -23,7 +23,7 @@
     entity_id: input_boolean.disable_notify
     state: 'off'
   action:
-    - delay: 0:00
+    - delay: 0:05
     - condition: or
       conditions:
         - condition: state
@@ -38,7 +38,7 @@
     - service: notify.sms_jeff
       data:
         title: Home Alert
-        message: Garage doors are {% if is_state("binary_sensor.garage_door_guest_sensor_11_0", "on") or is_state("binary_sensor.garage_door_jillian_sensor_12_0", "on") or is_state("binary_sensor.garage_door_jeff_sensor_13_0", "on") %}OPEN{% else %}Closed{% endif %}.
+        message: Garage doors are OPEN.
 
 
 # - alias: Away lights on at sunset
