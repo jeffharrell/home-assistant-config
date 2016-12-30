@@ -11,6 +11,7 @@
     light.kitchen_lights_2_level_6_0: off
     light.pantry_light_level_3_0: off
 
+
 - name: Good Morning
   entities:
     alarm_control_panel.simplisafe: 'disarmed'
@@ -18,8 +19,10 @@
       state: on
       brightness: 127
 
+
 - name: Good Night
   entities:
     group.all_lights: off
+    group.all_switches: off
     alarm_control_panel.simplisafe: 'armed_home'
 
