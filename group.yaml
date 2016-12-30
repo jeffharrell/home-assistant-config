@@ -86,6 +86,6 @@ toggles:
 scenes:
   name: Scenes
   entities:
-    - scene.movie_time
     - scene.good_morning
     - scene.good_night
+    - scene.movie_time

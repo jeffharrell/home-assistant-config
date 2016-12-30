@@ -5,10 +5,14 @@
     platform: time
     after: '00:00:00'
   action:
-    service: homeassistant.turn_off
-    entity_id:
-      - input_boolean.disable_notify
-      - input_boolean.disable_away_mode
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.disable_notify
+        - input_boolean.disable_away_mode
+    - service: notify.sms_jeff
+      data:
+        title: Home Alert
+        message: Resetting settings.
 
 
 - alias: Away - Lights on
@@ -26,6 +30,10 @@
       state: 'off'
     - service: switch.turn_on
       entity_id: switch.living_room_switch_10_0
+    - service: notify.sms_jeff
+      data:
+        title: Home Alert
+        message: Away mode lights on.
 
 
 - alias: Away mode - Lights off
@@ -43,6 +51,10 @@
       state: 'off'
     - service: switch.turn_off
       entity_id: switch.living_room_switch_10_0
+    - service: notify.sms_jeff
+      data:
+        title: Home Alert
+        message: Away mode lights off.
 
 
 - alias: Send garage status when alarm is armed
@@ -73,4 +85,4 @@
     - service: notify.sms_jeff
       data:
         title: Home Alert
-        message: Garage doors are OPEN.
+        message: Garage door is OPEN.
