@@ -46,13 +46,8 @@ climate:
 
 media_center:
   name: Media Center
-  control: hidden
   entities:
-    - switch.apple_tv
-    - switch.fire_tv
-    - switch.cable_tv
-    - switch.dvd_player
-    - switch.music
+    - input_select.family_room_media
 
 kitchen_lights:
   name: Kitchen

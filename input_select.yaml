@@ -1,0 +1,11 @@
+family_room_media:
+  name: TV
+  options:
+    - Power Off
+    - Apple TV
+    - Cable TV
+    - Fire TV
+    - DVD Player
+    - Music
+  initial: Power Off
+  icon: mdi:television

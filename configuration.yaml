@@ -67,9 +67,9 @@ group: !include group.yaml
 
 sensor: !include sensor.yaml
 
-switch: !include switch.yaml
-
 input_boolean: !include input_boolean.yaml
+
+input_select: !include input_select.yaml
 
 scene: !include scene.yaml
 
