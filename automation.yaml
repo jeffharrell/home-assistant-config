@@ -32,9 +32,6 @@
   trigger:
     platform: state
     entity_id: input_select.family_room_media
-  condition:
-    condition: template
-    value_template: '{{ states.input_select.family_room_media.state != "Power Off" }}'
   action:
     service: remote.turn_on
     data_template:
@@ -50,22 +47,32 @@
           21762603
         {% elif states.input_select.family_room_media.state == 'Music' %}
           18890244
+        {% else %}
+          -1
         {% endif %}
-
-
-- alias: Remote - Off
-  trigger:
-    platform: state
-    entity_id: input_select.family_room_media
-    to: 'Power Off'
-  action:
-    service: remote.turn_off
-    entity_id: remote.family_room
 
 
 # Away Mode
 
-- alias: Away - Lights on
+- alias: Change climate with alarm
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.simplisafe
+    state: 'armed_away'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_away_mode
+      state: 'off'
+    - service: climate.set_away_mode
+      data:
+        entity_id: climate.meadowlands
+        away_mode: true
+    - service: notify.sms_jeff
+      data:
+        title: Home Assistant
+        message: Thermostat is set to {{ states.climate.meadowlands.state }} mode.
+
+- alias: Away - Lights on with sun
   trigger:
     platform: sun
     event: sunset
@@ -82,11 +89,11 @@
       entity_id: switch.living_room_switch_10_0
     - service: notify.sms_jeff
       data:
-        title: Home Alert
+        title: Home Assistant
         message: Away mode lights on.
 
 
-- alias: Away mode - Lights off
+- alias: Away mode - Lights off with sun
   trigger:
     platform: sun
     event: sunset
@@ -103,11 +110,11 @@
       entity_id: switch.living_room_switch_10_0
     - service: notify.sms_jeff
       data:
-        title: Home Alert
+        title: Home Assistant
         message: Away mode lights off.
 
 
-- alias: Send garage status when alarm is armed
+- alias: Send garage status after alarm is armed
   trigger:
     - platform: state
       entity_id: alarm_control_panel.simplisafe
@@ -134,7 +141,7 @@
           state: 'on'
     - service: notify.sms_jeff
       data:
-        title: Home Alert
+        title: Home Assistant
         message: Garage door is OPEN.
 
 
