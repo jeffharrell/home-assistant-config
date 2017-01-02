@@ -55,6 +55,13 @@ notify:
     recipient: !secret sms_jeff_recipient
 
 emulated_hue:
+  type: alexa
+  expose_by_default: true
+  exposed_domains:
+    - switch
+    - light
+    - group
+    - scene
 
 wemo:
 
