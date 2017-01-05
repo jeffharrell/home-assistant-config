@@ -1,5 +1,5 @@
 family_room_media:
-  name: TV
+  name: Family Room
   options:
     - Power Off
     - Apple TV
@@ -7,5 +7,6 @@ family_room_media:
     - Fire TV
     - DVD Player
     - Music
+    - Bluetooth
   initial: Power Off
   icon: mdi:television

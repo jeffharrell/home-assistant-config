@@ -45,7 +45,7 @@ climate:
     - switch.house_fan
 
 media_center:
-  name: Media Center
+  name: Media
   entities:
     - input_select.family_room_media
 

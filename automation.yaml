@@ -1,76 +1,34 @@
 ## Automation
 
-# Media Center
-
-- alias: Remote - Update UI
-  trigger:
-    - platform: event
-      event_type: homeassistant_start
-    - platform: state
-      entity_id: remote.family_room
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.family_room_media
-        option: >
-          {% if states.remote.family_room.attributes.current_activity == 'Apple TV' %}
-            Apple TV
-          {% elif states.remote.family_room.attributes.current_activity == 'Cable TV' %}
-            Cable TV
-          {% elif states.remote.family_room.attributes.current_activity == 'Fire TV' %}
-            Fire TV
-          {% elif states.remote.family_room.attributes.current_activity == 'DVD Player' %}
-            DVD Player
-          {% elif states.remote.family_room.attributes.current_activity == 'Music' %}
-            Music
-          {% else %}
-            Power Off
-          {% endif %}
-
-
-- alias: Remote - Change
-  trigger:
-    platform: state
-    entity_id: input_select.family_room_media
-  action:
-    service: remote.turn_on
-    data_template:
-      entity_id: remote.family_room
-      activity: >
-        {% if states.input_select.family_room_media.state == 'Apple TV' %}
-          21762413
-        {% elif states.input_select.family_room_media.state == 'Cable TV' %}
-          21762510
-        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
-          22767959
-        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
-          21762603
-        {% elif states.input_select.family_room_media.state == 'Music' %}
-          18890244
-        {% else %}
-          -1
-        {% endif %}
-
 
 # Away Mode
 
 - alias: Change climate with alarm
   trigger:
-    platform: state
-    entity_id: alarm_control_panel.simplisafe
-    state: 'armed_away'
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_away'
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'disarmed'
   action:
     - condition: state
       entity_id: input_boolean.disable_away_mode
       state: 'off'
     - service: climate.set_away_mode
-      data:
+      data_template:
         entity_id: climate.meadowlands
-        away_mode: true
+        away_mode: >
+          {% if states.alarm_control_panel.simplisafe.state == 'armed_away' %}
+            true
+          {% else %}
+            false
+          {% endif %}
     - service: notify.sms_jeff
       data:
         title: Home Assistant
-        message: Thermostat is set to {{ states.climate.meadowlands.state }} mode.
+        message: Thermostat is set to away_mode {{ states.climate.meadowlands.attributes.away_mode|uppercase }}.
+
 
 - alias: Away - Lights on with sun
   trigger:
@@ -143,6 +101,62 @@
       data:
         title: Home Assistant
         message: Garage door is OPEN.
+
+
+# Media Center
+
+- alias: Remote - Update UI
+  trigger:
+    - platform: event
+      event_type: homeassistant_start
+    - platform: state
+      entity_id: remote.family_room
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.family_room_media
+        option: >
+          {% if states.remote.family_room.attributes.current_activity == 'Apple TV' %}
+            Apple TV
+          {% elif states.remote.family_room.attributes.current_activity == 'Cable TV' %}
+            Cable TV
+          {% elif states.remote.family_room.attributes.current_activity == 'Fire TV' %}
+            Fire TV
+          {% elif states.remote.family_room.attributes.current_activity == 'DVD Player' %}
+            DVD Player
+          {% elif states.remote.family_room.attributes.current_activity == 'Music' %}
+            Music
+          {% elif states.remote.family_room.attributes.current_activity == 'Receiver Bluetooth' %}
+            Bluetooth
+          {% else %}
+            Power Off
+          {% endif %}
+
+
+- alias: Remote - Change
+  trigger:
+    platform: state
+    entity_id: input_select.family_room_media
+  action:
+    service: remote.turn_on
+    data_template:
+      entity_id: remote.family_room
+      activity: >
+        {% if states.input_select.family_room_media.state == 'Apple TV' %}
+          21762413
+        {% elif states.input_select.family_room_media.state == 'Cable TV' %}
+          21762510
+        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
+          22767959
+        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
+          21762603
+        {% elif states.input_select.family_room_media.state == 'Music' %}
+          18890244
+        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
+          22068322
+        {% else %}
+          -1
+        {% endif %}
 
 
 # Misc

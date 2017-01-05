@@ -52,6 +52,6 @@
       entity_id:
         - climate.meadowlands
     climate_mode:
-      value_template: '{{states.climate.meadowlands.attributes.operation_mode|capitalize}} / {{states.climate.meadowlands.attributes.mode|capitalize}}'
+      value_template: '{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% if states.climate.meadowlands.attributes.away_mode == "on" %} (Away){% endif %}'
       entity_id:
         - climate.meadowlands
