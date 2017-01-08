@@ -77,7 +77,7 @@
       entity_id: alarm_control_panel.simplisafe
       to: 'armed_away'
     - platform: time
-      after: '21:00:00
+      after: '21:00:00'
   condition:
     condition: state
     entity_id: input_boolean.disable_notify

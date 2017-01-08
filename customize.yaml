@@ -25,7 +25,9 @@ switch.outside_lights_switch_9_0:
 switch.living_room_switch_10_0:
   friendly_name: Living Room
   icon: mdi:lightbulb
-
+switch.entryway_light_switch_14_0:
+  friendly_name: Entryway
+  icon: mdi:lightbulb
 
 # Climate
 

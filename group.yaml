@@ -32,6 +32,7 @@ lights:
     - light.pantry_light_level_3_0
     - light.dining_room_lights_level_2_0
     - switch.living_room_switch_10_0
+    - switch.entryway_light_switch_14_0
     - light.master_bedroom_l_level_4_0
     - switch.outside_lights_switch_9_0
 
