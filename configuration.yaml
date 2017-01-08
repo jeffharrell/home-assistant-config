@@ -63,6 +63,8 @@ emulated_hue:
     - group
     - scene
 
+graphite:
+
 wemo:
 
 sun:

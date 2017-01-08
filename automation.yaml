@@ -27,7 +27,7 @@
     - service: notify.sms_jeff
       data:
         title: Home Assistant
-        message: Thermostat is set to away_mode {{ states.climate.meadowlands.attributes.away_mode|uppercase }}.
+        message: Thermostat is set to away_mode {{ states.climate.meadowlands.attributes.away_mode }}.
 
 
 - alias: Away - Lights on with sun
