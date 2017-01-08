@@ -68,7 +68,7 @@
         message: Away mode lights off.
 
 
-- alias: Send garage status after alarm is armed
+- alias: Send garage status if open after night
   trigger:
     - platform: state
       entity_id: alarm_control_panel.simplisafe
@@ -76,6 +76,8 @@
     - platform: state
       entity_id: alarm_control_panel.simplisafe
       to: 'armed_away'
+    - platform: time
+      after: '21:00:00
   condition:
     condition: state
     entity_id: input_boolean.disable_notify
