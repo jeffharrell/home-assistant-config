@@ -116,8 +116,6 @@
         option: >
           {% if states.remote.family_room.attributes.current_activity == 'Apple TV' %}
             Apple TV
-          {% elif states.remote.family_room.attributes.current_activity == 'Cable TV' %}
-            Cable TV
           {% elif states.remote.family_room.attributes.current_activity == 'Fire TV' %}
             Fire TV
           {% elif states.remote.family_room.attributes.current_activity == 'DVD Player' %}
@@ -142,8 +140,6 @@
       activity: >
         {% if states.input_select.family_room_media.state == 'Apple TV' %}
           21762413
-        {% elif states.input_select.family_room_media.state == 'Cable TV' %}
-          21762510
         {% elif states.input_select.family_room_media.state == 'Fire TV' %}
           22767959
         {% elif states.input_select.family_room_media.state == 'DVD Player' %}
