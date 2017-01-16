@@ -5,16 +5,16 @@
   entities:
     light.kitchen_lights_1_level_7_0:
       state: on
-      brightness: 35
+      brightness: 40
     light.kitchen_lights_2_level_6_0:
       state: on
-      brightness: 35
+      brightness: 40
     light.island_lights_level_5_0: off
     light.family_room_lights_level_8_0: off
     light.pantry_light_level_3_0: off
 
 
-- name: Good Morning
+- name: Morning
   entities:
     alarm_control_panel.simplisafe: 'disarmed'
     light.island_lights_level_5_0:
@@ -22,7 +22,7 @@
       brightness: 127
 
 
-- name: Good Night
+- name: Night
   entities:
     group.all_lights: off
     group.all_switches: off
