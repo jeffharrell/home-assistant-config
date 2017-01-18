@@ -3,29 +3,6 @@
 
 # Away Mode
 
-- alias: Change climate with alarm
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'armed_away'
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'disarmed'
-  action:
-    - condition: state
-      entity_id: input_boolean.disable_away_mode
-      state: 'off'
-    - service: climate.set_away_mode
-      data_template:
-        entity_id: climate.meadowlands
-        away_mode: >
-          {% if states.alarm_control_panel.simplisafe.state == 'armed_away' %}
-            true
-          {% else %}
-            false
-          {% endif %}
-
-
 - alias: Away - Lights on with sun
   trigger:
     platform: sun

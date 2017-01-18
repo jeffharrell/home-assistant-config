@@ -157,6 +157,28 @@ group.toggles:
   emulated_hue: false
 
 
+# Dark Sky
+
+sensor.dark_sky_temperature:
+  friendly_name: Temperature
+sensor.dark_sky_daily_high_temperature:
+  friendly_name: High
+sensor.dark_sky_daily_low_temperature:
+  friendly_name: Low
+sensor.dark_sky_wind_speed:
+  friendly_name: Wind Speed
+sensor.dark_sky_humidity:
+  friendly_name: Humidity
+sensor.dark_sky_dew_point:
+  friendly_name: Dew Point
+sensor.dark_sky_pressure:
+  friendly_name: Pressure
+sensor.dark_sky_visibility:
+  friendly_name: Visibility
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Cloud Coverage
+
+
 # Misc
 
 sun.sun:

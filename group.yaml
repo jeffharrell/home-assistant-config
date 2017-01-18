@@ -14,6 +14,7 @@ status:
   view: yes
   entities:
     - group.rooms
+    - group.outside
     - group.garage
 
 settings:
@@ -71,6 +72,20 @@ garage:
     - sensor.garage_jillian
     - sensor.garage_jeff
     - sensor.garage_guest
+
+outside:
+  name: Outside
+  entities:
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_daily_high_temperature
+    - sensor.dark_sky_daily_low_temperature
+    - sensor.dark_sky_wind_speed
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_dew_point
+    - sensor.dark_sky_pressure
+    - sensor.dark_sky_visibility
+    - sensor.dark_sky_cloud_coverage
+
 
 toggles:
   name: Settings

@@ -55,3 +55,17 @@
       value_template: '{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% if states.climate.meadowlands.attributes.away_mode == "on" %} (Away){% endif %}'
       entity_id:
         - climate.meadowlands
+
+- platform: darksky
+  api_key: !secret darksky_api_key
+  monitored_conditions:
+    - temperature
+    - dew_point
+    - wind_speed
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+    - temperature_max
+    - temperature_min
+
