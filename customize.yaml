@@ -28,6 +28,13 @@ switch.living_room_switch_10_0:
 switch.entryway_light_switch_14_0:
   friendly_name: Entryway
   icon: mdi:lightbulb
+switch.hallway_light_switch_15_0:
+  friendly_name: Hallway
+  icon: mdi:lightbulb
+switch.kitchen_cabinets_switch_16_0:
+  friendly_name: Kitchen Cabinets
+  icon: mdi:lightbulb
+
 
 # Climate
 

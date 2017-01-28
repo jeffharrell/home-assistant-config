@@ -37,3 +37,7 @@ customize:
     refresh_value: true
     polling_intensity: 2
     delay: 5
+  switch.hallway_light_switch_15_0:
+    refresh_value: true
+    polling_intensity: 2
+    delay: 5

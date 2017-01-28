@@ -17,6 +17,8 @@
 - name: Good Morning
   entities:
     alarm_control_panel.simplisafe: 'disarmed'
+    switch.kitchen_cabinets_switch_16_0:
+      state: on
     light.island_lights_level_5_0:
       state: on
       brightness: 127
