@@ -60,7 +60,7 @@
     entity_id: input_boolean.disable_notify
     state: 'off'
   action:
-    - delay: '0:05:00'
+    - delay: '0:10:00'
     - condition: or
       conditions:
         - condition: state
