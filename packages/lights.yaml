@@ -53,6 +53,12 @@ homeassistant:
       icon: mdi:lightbulb
 
 
+alarm_control_panel:
+  - platform: simplisafe
+    username: !secret simplisafe_user
+    password: !secret simplisafe_pass
+
+
 automation:
   - alias: Away - Lights on with sun
     trigger:

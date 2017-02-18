@@ -16,53 +16,18 @@ homeassistant:
 
 frontend:
 
-http:
-  api_password: !secret http_password
-  trusted_networks: !secret http_trusted_networks
-
 history:
 
 logger:
   default: error
 
-ecobee:
-  api_key: !secret ecobee_api_key
+http: !include config/http.yaml
 
-alarm_control_panel:
-  - platform: simplisafe
-    username: !secret simplisafe_user
-    password: !secret simplisafe_pass
+notify: !include config/notify.yaml
 
-notify:
-  - name: jeffs_phone
-    platform: smtp
-    server: smtp.gmail.com
-    port: 587
-    starttls: true
-    sender: !secret gmail_sender
-    username: !secret gmail_user
-    password: !secret gmail_pass
-    recipient: !secret jeffs_phone
-  - name: jillians_phone
-    platform: smtp
-    server: smtp.gmail.com
-    port: 587
-    starttls: true
-    sender: !secret gmail_sender
-    username: !secret gmail_user
-    password: !secret gmail_pass
-    recipient: !secret jillians_phone
+emulated_hue: !include config/emulated_hue.yaml
 
-emulated_hue:
-  type: alexa
-  expose_by_default: true
-  exposed_domains:
-    - switch
-    - light
-    - group
-    - scene
-
-zwave: !include zwave.yaml
+zwave: !include config/zwave.yaml
 
 graphite:
 

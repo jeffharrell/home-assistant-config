@@ -86,6 +86,10 @@ homeassistant:
       hidden: true
 
 
+ecobee:
+  api_key: !secret ecobee_api_key
+
+
 sensor:
 # - platform: darksky
 #   api_key: !secret darksky_api_key

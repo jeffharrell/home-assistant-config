@@ -1,0 +1,7 @@
+type: alexa
+expose_by_default: true
+exposed_domains:
+- switch
+- light
+- group
+- scene

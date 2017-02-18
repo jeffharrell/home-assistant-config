@@ -1,0 +1,2 @@
+api_password: !secret http_password
+trusted_networks: !secret http_trusted_networks
