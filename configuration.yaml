@@ -11,6 +11,8 @@ homeassistant:
     media: !include packages/media.yaml
     climate: !include packages/climate.yaml
     scenes: !include packages/scenes.yaml
+    inside: !include packages/inside.yaml
+    outside: !include packages/outside.yaml
     garage: !include packages/garage.yaml
     settings: !include packages/settings.yaml
 

@@ -5,21 +5,6 @@ group:
       - sensor.climate_humidity
       - sensor.climate_mode
       - switch.house_fan
-  Inside:
-    entities:
-      - sensor.family_room_status
-      - sensor.living_room_status
-      - sensor.masons_room_status
-      - sensor.brinks_room_status
-      - sensor.master_bedroom_status
-  Outside:
-    entities:
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_daily_high_temperature
-      - sensor.dark_sky_daily_low_temperature
-      - sensor.dark_sky_wind_speed
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_cloud_coverage
 
 
 homeassistant:
@@ -36,54 +21,9 @@ homeassistant:
       hidden: true
     sensor.meadowlands_humidity:
       hidden: true
-    sensor.family_room_temperature:
-      hidden: true
-    sensor.living_room_temperature:
-      hidden: true
-    sensor.masons_room_temperature:
-      hidden: true
-    sensor.brinks_room_temperature:
-      hidden: true
-    sensor.*_temperature:
-      hidden: true
     switch.house_fan:
       friendly_name: House Fan
       icon: mdi:fan
-    sensor.family_room_status:
-      friendly_name: Family Room
-      icon: mdi:thermometer
-    sensor.living_room_status:
-      friendly_name: Living Room
-      icon: mdi:thermometer
-    sensor.masons_room_status:
-      friendly_name: Mason's Room
-      icon: mdi:thermometer
-    sensor.brinks_room_status:
-      friendly_name: Brinkley's Room
-      icon: mdi:thermometer
-    sensor.master_bedroom_status:
-      friendly_name: Master Bedroom
-      icon: mdi:thermometer
-    sensor.dark_sky_temperature:
-      friendly_name: Temperature
-    sensor.dark_sky_daily_high_temperature:
-      friendly_name: High
-    sensor.dark_sky_daily_low_temperature:
-      friendly_name: Low
-    sensor.dark_sky_wind_speed:
-      friendly_name: Wind Speed
-    sensor.dark_sky_humidity:
-      friendly_name: Humidity
-    sensor.dark_sky_dew_point:
-      friendly_name: Dew Point
-    sensor.dark_sky_pressure:
-      friendly_name: Pressure
-    sensor.dark_sky_visibility:
-      friendly_name: Visibility
-    sensor.dark_sky_cloud_coverage:
-      friendly_name: Cloud Coverage
-    sun.sun:
-      hidden: true
 
 
 ecobee:
@@ -91,55 +31,8 @@ ecobee:
 
 
 sensor:
-# - platform: darksky
-#   api_key: !secret darksky_api_key
-#   monitored_conditions:
-#     - temperature
-#     - dew_point
-#     - wind_speed
-#     - cloud_cover
-#     - humidity
-#     - pressure
-#     - visibility
-#     - temperature_max
-#     - temperature_min
   - platform: template
     sensors:
-      family_room_status:
-        value_template: '{% if is_state("binary_sensor.family_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.family_room_temperature.state }}'
-        unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.family_room_occupancy
-          - sensor.family_room_temperature
-
-      living_room_status:
-        value_template: '{% if is_state("binary_sensor.living_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.living_room_temperature.state }}'
-        unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.living_room_occupancy
-          - sensor.living_room_temperature
-
-      masons_room_status:
-        value_template: '{% if is_state("binary_sensor.masons_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.masons_room_temperature.state }}'
-        unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.masons_room_occupancy
-          - sensor.masons_room_temperature
-
-      brinks_room_status:
-        value_template: '{% if is_state("binary_sensor.brinks_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.brinks_room_temperature.state }}'
-        unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.brinks_room_occupancy
-          - sensor.brinks_room_temperature
-
-      master_bedroom_status:
-        value_template: '{% if is_state("binary_sensor.master_bedroom_occupancy", "on") %}☺ {% endif %}{{ states.sensor.master_bedroom_temperature.state }}'
-        unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.master_bedroom_occupancy
-          - sensor.master_bedroom_temperature
-
       climate_temp:
         value_template: '{{states.climate.meadowlands.attributes.current_temperature}}'
         unit_of_measurement: °F

@@ -1,0 +1,28 @@
+group:
+  Outside:
+    entities:
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_cloud_coverage
+
+
+homeassistant:
+  customize:
+    sensor.dark_sky_temperature:
+      friendly_name: Temperature
+    sensor.dark_sky_wind_speed:
+      friendly_name: Wind Speed
+    sensor.dark_sky_humidity:
+      friendly_name: Humidity
+    sensor.dark_sky_cloud_coverage:
+      friendly_name: Cloud Coverage
+
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - temperature
+      - wind_speed
+      - cloud_cover
+      - humidity

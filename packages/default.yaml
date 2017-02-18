@@ -9,7 +9,7 @@ group:
   status:
     view: yes
     entities:
-      - group.Rooms
+      - group.Inside
       - group.Outside
       - group.Garage
   admin:
