@@ -9,14 +9,11 @@ homeassistant:
   time_zone: !secret time_zone
   customize: !include customize.yaml
 
-
 frontend:
 
 http:
   api_password: !secret http_password
   trusted_networks: !secret http_trusted_networks
-  ssl_certificate: !secret ssl_certificate
-  ssl_key: !secret ssl_key
 
 updater:
 
