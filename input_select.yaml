@@ -1,13 +1,2 @@
 ## INPUT SELECT
 
-family_room_media:
-  name: Family Room
-  options:
-    - Power Off
-    - Apple TV
-    - Fire TV
-    - DVD Player
-    - Music
-    - Bluetooth
-  initial: Power Off
-  icon: mdi:television

@@ -8,14 +8,13 @@ homeassistant:
   unit_system: !secret units
   time_zone: !secret time_zone
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
 frontend:
 
 http:
   api_password: !secret http_password
   trusted_networks: !secret http_trusted_networks
-
-updater:
 
 history:
 
@@ -74,20 +73,3 @@ graphite:
 wemo:
 
 sun:
-
-
-# COMPONENTS
-
-alert: !include alert.yaml
-
-group: !include group.yaml
-
-sensor: !include sensor.yaml
-
-input_boolean: !include input_boolean.yaml
-
-input_select: !include input_select.yaml
-
-scene: !include scene.yaml
-
-automation: !include automation.yaml

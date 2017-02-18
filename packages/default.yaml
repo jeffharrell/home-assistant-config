@@ -1,0 +1,21 @@
+
+group:
+  default_view:
+      view: yes
+      entities:
+        - group.lights
+        - group.media_center
+        - group.climate
+        - group.scenes
+
+  status:
+    view: yes
+    entities:
+      - group.outside
+      - group.rooms
+      - group.garage
+
+  settings:
+    view: yes
+    entities:
+      - group.settings

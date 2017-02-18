@@ -1,0 +1,32 @@
+
+group:
+  settings:
+    control: hidden
+    entities:
+      - input_boolean.disable_away_mode
+      - input_boolean.disable_notify
+
+
+input_boolean:
+  disable_away_mode:
+    name: Disable away mode
+    initial: off
+    icon: mdi:toggle-switch
+
+  disable_notify:
+    name: Disable notifications
+    initial: off
+    icon: mdi:toggle-switch
+
+
+automation:
+  - alias: Reset settings at midnight
+    trigger:
+      platform: time
+      after: '00:00:00'
+    action:
+      - service: homeassistant.turn_off
+        entity_id:
+          - input_boolean.disable_notify
+          - input_boolean.disable_away_mode
+
