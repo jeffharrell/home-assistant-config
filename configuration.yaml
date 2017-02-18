@@ -1,3 +1,5 @@
+## CONFIGURATION
+
 homeassistant:
   name: Home
   latitude: !secret latitude
@@ -7,8 +9,6 @@ homeassistant:
   time_zone: !secret time_zone
   customize: !include customize.yaml
 
-
-## CONFIGURATION
 
 frontend:
 
@@ -26,7 +26,7 @@ logger:
   default: error
 
 
-## FEATURES
+# FEATURES
 
 zwave: !include zwave.yaml
 
@@ -70,7 +70,7 @@ wemo:
 sun:
 
 
-## COMPONENTS
+# COMPONENTS
 
 group: !include group.yaml
 

@@ -1,6 +1,5 @@
 ## SCENES
 
-
 - name: Movie Time
   entities:
     light.kitchen_lights_1_level_7_0:

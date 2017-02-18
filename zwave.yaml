@@ -1,4 +1,5 @@
-# ZWAVE
+## ZWAVE
+
 usb_path: /dev/ttyACM0
 customize:
   light.pantry_light_level_3_0:
