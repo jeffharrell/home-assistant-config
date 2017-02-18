@@ -1,5 +1,3 @@
-## CONFIGURATION
-
 homeassistant:
   name: Home
   latitude: !secret latitude
@@ -7,8 +5,14 @@ homeassistant:
   elevation: !secret elevation
   unit_system: !secret units
   time_zone: !secret time_zone
-  customize: !include customize.yaml
-  packages: !include_dir_named packages
+  packages:
+    default: !include packages/default.yaml
+    lights: !include packages/lights.yaml
+    media: !include packages/media.yaml
+    climate: !include packages/climate.yaml
+    scenes: !include packages/scenes.yaml
+    garage: !include packages/garage.yaml
+    settings: !include packages/settings.yaml
 
 frontend:
 
@@ -21,18 +25,8 @@ history:
 logger:
   default: error
 
-
-# FEATURES
-
-zwave: !include zwave.yaml
-
 ecobee:
   api_key: !secret ecobee_api_key
-
-remote:
-  - platform: harmony
-    name: Family Room
-    host: !secret harmony_host
 
 alarm_control_panel:
   - platform: simplisafe
@@ -67,6 +61,8 @@ emulated_hue:
     - light
     - group
     - scene
+
+zwave: !include zwave.yaml
 
 graphite:
 

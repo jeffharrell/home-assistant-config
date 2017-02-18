@@ -1,11 +1,19 @@
-
-
 group:
-  scenes:
+  Scenes:
     entities:
       - scene.good_morning
       - scene.good_night
       - scene.movie_time
+
+
+homeassistant:
+  customize:
+    scene.movie_time:
+      icon: mdi:movie
+    scene.good_morning:
+      icon: mdi:brightness-5
+    scene.good_night:
+      icon: mdi:brightness-2
 
 
 scene:

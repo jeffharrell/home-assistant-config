@@ -1,3 +1,52 @@
+group:
+  Garage:
+    entities:
+      - sensor.garage_jillian
+      - sensor.garage_jeff
+      - sensor.garage_guest
+
+
+homeassistant:
+  customize:
+    sensor.garage_guest:
+      friendly_name: Guest Door
+      icon: mdi:home
+    sensor.garage_jeff:
+      friendly_name: Jeff's Door
+      icon: mdi:home
+    sensor.garage_jillian:
+      friendly_name: Jillian's Door
+      icon: mdi:home
+    binary_sensor.garage_door_guest_sensor_11_0:
+      hidden: true
+    binary_sensor.garage_door_jillian_sensor_12_0:
+      hidden: true
+    binary_sensor.garage_door_jeff_sensor_13_0:
+      hidden: true
+    sensor.garage_door_guest_alarm_type_11_0:
+      hidden: true
+    sensor.garage_door_guest_alarm_level_11_1:
+      hidden: true
+    sensor.garage_door_guest_sourcenodeid_11_2:
+      hidden: true
+    sensor.garage_door_guest_burglar_11_10:
+      hidden: true
+    sensor.garage_door_jillian_alarm_type_12_0:
+      hidden: true
+    sensor.garage_door_jillian_alarm_level_12_1:
+      hidden: true
+    sensor.garage_door_jillian_sourcenodeid_12_2:
+      hidden: true
+    sensor.garage_door_jillian_burglar_12_10:
+      hidden: true
+    sensor.garage_door_jeff_alarm_type_13_0:
+      hidden: true
+    sensor.garage_door_jeff_alarm_level_13_1:
+      hidden: true
+    sensor.garage_door_jeff_sourcenodeid_13_2:
+      hidden: true
+    sensor.garage_door_jeff_burglar_13_10:
+      hidden: true
 
 
 sensor:
@@ -6,20 +55,14 @@ sensor:
       garage_guest:
         value_template: '{% if is_state("binary_sensor.garage_door_guest_sensor_11_0", "off") %}Closed{% else %}Open{% endif %}'
         entity_id: binary_sensor.garage_door_guest_sensor_11_0
+
       garage_jeff:
         value_template: '{% if is_state("binary_sensor.garage_door_jillian_sensor_12_0", "off") %}Closed{% else %}Open{% endif %}'
         entity_id: binary_sensor.garage_door_jillian_sensor_12_0
+
       garage_jillian:
         value_template: '{% if is_state("binary_sensor.garage_door_jeff_sensor_13_0", "off") %}Closed{% else %}Open{% endif %}'
         entity_id: binary_sensor.garage_door_jeff_sensor_13_0
-
-
-group:
-  garage:
-    entities:
-      - sensor.garage_jillian
-      - sensor.garage_jeff
-      - sensor.garage_guest
 
 
 alert:

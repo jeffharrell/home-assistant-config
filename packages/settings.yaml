@@ -1,6 +1,5 @@
-
 group:
-  settings:
+  Settings:
     control: hidden
     entities:
       - input_boolean.disable_away_mode

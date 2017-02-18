@@ -1,10 +1,7 @@
-## Lights
-
-
 group:
-  lights:
+  Lights:
     entities:
-      - group.kitchen_lights
+      - group.Kitchen
       - light.island_lights_level_5_0
       - switch.kitchen_cabinets_switch_16_0
       - light.family_room_lights_level_8_0
@@ -15,12 +12,45 @@ group:
       - switch.hallway_light_switch_15_0
       - light.master_bedroom_l_level_4_0
       - switch.outside_lights_switch_9_0
-
-  kitchen_lights:
-    name: Kitchen
+  Kitchen:
     entities:
       - light.kitchen_lights_1_level_7_0
       - light.kitchen_lights_2_level_6_0
+
+
+homeassistant:
+  customize:
+    light.pantry_light_level_3_0:
+      friendly_name: Pantry
+    light.dining_room_lights_level_2_0:
+      friendly_name: Dining Room
+    light.master_bedroom_l_level_4_0:
+      friendly_name: Master Bedroom
+    light.family_room_lights_level_8_0:
+      friendly_name: Family Room
+    light.island_lights_level_5_0:
+      friendly_name: Island
+    light.kitchen_lights_1_level_7_0:
+      hidden: true
+      emulated_hue: false
+    light.kitchen_lights_2_level_6_0:
+      hidden: true
+      emulated_hue: false
+    switch.outside_lights_switch_9_0:
+      friendly_name: Back Yard
+      icon: mdi:lightbulb
+    switch.living_room_switch_10_0:
+      friendly_name: Living Room
+      icon: mdi:lightbulb
+    switch.entryway_light_switch_14_0:
+      friendly_name: Entryway
+      icon: mdi:lightbulb
+    switch.hallway_light_switch_15_0:
+      friendly_name: Hallway
+      icon: mdi:lightbulb
+    switch.kitchen_cabinets_switch_16_0:
+      friendly_name: Kitchen Cabinets
+      icon: mdi:lightbulb
 
 
 automation:
