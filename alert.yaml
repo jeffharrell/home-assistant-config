@@ -1,0 +1,33 @@
+garage_door_jeff:
+  name: Garage is open
+  entity_id: binary_sensor.garage_door_jeff_sensor_13_0
+  state: 'on'
+  repeat: 15
+  can_acknowledge: True
+  skip_first: True
+  notifiers:
+    - jeffs_phone
+    - jillians_phone
+
+garage_door_jillian:
+  name: Garage is open
+  entity_id: binary_sensor.garage_door_jillian_sensor_12_0
+  state: 'on'
+  repeat: 15
+  can_acknowledge: True
+  skip_first: True
+  notifiers:
+    - jeffs_phone
+    - jillians_phone
+
+garage_door_guest:
+  name: Garage is open
+  entity_id: binary_sensor.garage_door_guest_sensor_11_0
+  state: 'on'
+  repeat: 15
+  can_acknowledge: True
+  skip_first: True
+  notifiers:
+    - jeffs_phone
+    - jillians_phone
+

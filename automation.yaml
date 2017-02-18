@@ -6,7 +6,6 @@
   trigger:
     platform: sun
     event: sunset
-    offset: '00:00:00'
   condition:
     condition: state
     entity_id: alarm_control_panel.simplisafe
@@ -17,10 +16,10 @@
       state: 'off'
     - service: switch.turn_on
       entity_id: switch.living_room_switch_10_0
-    - service: notify.sms_jeff
+    - service: notify.jeffs_phone
       data:
         title: Home Assistant
-        message: Away mode lights on.
+        message: Away mode lights on
 
 
 - alias: Away mode - Lights off with sun
@@ -38,43 +37,10 @@
       state: 'off'
     - service: switch.turn_off
       entity_id: switch.living_room_switch_10_0
-    - service: notify.sms_jeff
+    - service: notify.jeffs_phone
       data:
         title: Home Assistant
-        message: Away mode lights off.
-
-
-- alias: Send garage status if open after night
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'armed_home'
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'armed_away'
-    - platform: time
-      after: '21:00:00'
-  condition:
-    condition: state
-    entity_id: input_boolean.disable_notify
-    state: 'off'
-  action:
-    - delay: '0:10:00'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.garage_door_guest_sensor_11_0
-          state: 'on'
-        - condition: state
-          entity_id: binary_sensor.garage_door_jillian_sensor_12_0
-          state: 'on'
-        - condition: state
-          entity_id: binary_sensor.garage_door_jeff_sensor_13_0
-          state: 'on'
-    - service: notify.sms_jeff
-      data:
-        title: Home Assistant
-        message: Garage door is OPEN.
+        message: Away mode lights off
 
 
 # Media Center
