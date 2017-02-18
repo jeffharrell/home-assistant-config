@@ -15,8 +15,8 @@ frontend:
 http:
   api_password: !secret http_password
   trusted_networks: !secret http_trusted_networks
-#  ssl_certificate: !secret ssl_certificate
-#  ssl_key: !secret ssl_key
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
 
 updater:
 
@@ -36,12 +36,12 @@ ecobee:
 remote:
   - platform: harmony
     name: Family Room
-    host: 192.168.2.144
+    host: !secret harmony_host
 
 alarm_control_panel:
-  platform: simplisafe
-  username: !secret simplisafe_user
-  password: !secret simplisafe_pass
+  - platform: simplisafe
+    username: !secret simplisafe_user
+    password: !secret simplisafe_pass
 
 notify:
   - name: sms_jeff
