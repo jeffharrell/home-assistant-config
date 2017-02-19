@@ -2,6 +2,7 @@ group:
   default_view:
       view: yes
       entities:
+        - updater.updater
         - group.Lights
         - group.Media
         - group.Climate
