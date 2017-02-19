@@ -3,6 +3,9 @@ group:
       view: yes
       entities:
         - updater.updater
+        - alert.garage_door_guest
+        - alert.garage_door_jeff
+        - alert.garage_door_jillian
         - group.Lights
         - group.Media
         - group.Climate
