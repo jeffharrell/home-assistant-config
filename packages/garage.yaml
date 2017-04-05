@@ -53,22 +53,22 @@ sensor:
   - platform: template
     sensors:
       garage_guest:
-        value_template: '{% if is_state("binary_sensor.garage_door_guest_sensor_11_0", "off") %}Closed{% else %}Open{% endif %}'
-        entity_id: binary_sensor.garage_door_guest_sensor_11_0
-
-      garage_jeff:
-        value_template: '{% if is_state("binary_sensor.garage_door_jillian_sensor_12_0", "off") %}Closed{% else %}Open{% endif %}'
-        entity_id: binary_sensor.garage_door_jillian_sensor_12_0
+        value_template: '{% if is_state("binary_sensor.ecolink_doorwindow_sensor_sensor_11_0", "off") %}Closed{% else %}Open{% endif %}'
+        entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_11_0
 
       garage_jillian:
-        value_template: '{% if is_state("binary_sensor.garage_door_jeff_sensor_13_0", "off") %}Closed{% else %}Open{% endif %}'
-        entity_id: binary_sensor.garage_door_jeff_sensor_13_0
+        value_template: '{% if is_state("binary_sensor.ecolink_doorwindow_sensor_sensor_12_0", "off") %}Closed{% else %}Open{% endif %}'
+        entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_12_0
+
+      garage_jeff:
+        value_template: '{% if is_state("binary_sensor.ecolink_doorwindow_sensor_sensor_13_0", "off") %}Closed{% else %}Open{% endif %}'
+        entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_13_0
 
 
 alert:
   garage_door_jeff:
     name: Garage is open (Jeff)
-    entity_id: binary_sensor.garage_door_jeff_sensor_13_0
+    entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_13_0
     state: 'on'
     repeat:
       - 15
@@ -82,7 +82,7 @@ alert:
 
   garage_door_jillian:
     name: Garage is open (Jillian)
-    entity_id: binary_sensor.garage_door_jillian_sensor_12_0
+    entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_12_0
     state: 'on'
     repeat:
       - 15
@@ -96,7 +96,7 @@ alert:
 
   garage_door_guest:
     name: Garage is open (Guest)
-    entity_id: binary_sensor.garage_door_guest_sensor_11_0
+    entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_11_0
     state: 'on'
     repeat:
       - 15

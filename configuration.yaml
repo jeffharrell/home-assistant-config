@@ -31,8 +31,6 @@ emulated_hue: !include config/emulated_hue.yaml
 
 zwave: !include config/zwave.yaml
 
-graphite:
-
 wemo:
 
 sun:
