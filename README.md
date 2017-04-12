@@ -5,7 +5,7 @@ Configuration for [Home Assistant](https://home-assistant.io/).
 
 ## Network Architecture
 
-
+![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
 ### Principles
 
