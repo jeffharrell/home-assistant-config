@@ -7,6 +7,17 @@ Configuration for [Home Assistant](https://home-assistant.io/).
 
 ![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
+### Setup
+- Synology NAS DS716+II
+- Home Assistant
+- Aoetec Z-Stick
+- GE Smart Dimmer Z-Wave Lightswitches 
+- Ecolink Z-Wave Sensor
+- Ecobee 3 Smart Thermostat
+- Wemo Insight
+- Logitech Harmony Hub
+- Amazon Alexa
+
 ### Principles
 
 1. Devices should not be exposed directly to the internet and must remain behind a firewall
