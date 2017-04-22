@@ -99,11 +99,11 @@ automation:
           title: Home Assistant
           message: Away mode lights off
 
-    - alias: Alarm - All lights on
-      trigger:
-        platform: state
-        entity_id: alarm_control_panel.simplisafe
-        state: 'alarm_trigger'
-      action:
-        - service: homeassistant.turn_on
-        - entity_id: group.Lights
+  - alias: Alarm - All lights on
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.simplisafe
+      state: 'alarm_trigger'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: group.Lights
