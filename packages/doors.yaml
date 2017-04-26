@@ -108,3 +108,22 @@ alert:
       - jeffs_phone
       - jillians_phone
 
+
+automation:
+  - alias: Doorbell notification
+    trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell_sensor_19_0
+      state: 'on'
+    action:
+      - condition: state
+        entity_id: input_boolean.disable_notify
+        state: 'off'
+      - service: notify.jeffs_phone
+        data:
+          title: Home Assistant
+          message: Doorbell alert
+      - service: notify.jillians_phone
+        data:
+          title: Home Assistant
+          message: Doorbell alert
