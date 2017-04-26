@@ -23,15 +23,15 @@ Configuration files and setup instructions for my home's automation.
 
 ### Setup
 
-I've been automating things in my house for the past few years as a fun side project and have gone through a few variations, but finally feel like I've settled on something which works well for me. If you're just looking at getting into home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) which provides a complete package. The setup I've documented below is a bit more advanced and requires some elbow grease. 
+After automating my house for the past few years as a fun side project and going through a few variations I finally feel like I've settled on something which works well. If you're just looking at getting into home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) as it provides a complete package. If you're willing to dig a bit deeper and provide some elbow grease, read on.
 
-Before I get too far into the details, I want to call out a few principles I have for my home automation. These come from lessons learned and from a general sensitivity to network security:
+Before going too far, I want to call out a few principles I have since these helped shape how I created my setup. These come from lessons learned in past iterations and from a general sensitivity to network security:
 
-1. Devices must be able to communicate over my home's local network. While SmartThings and similar hubs are easy to set up, they generally route their automation commands through the open internet. At times this can cause a lag in responsiveness, but more importantly, I don't want other companies understanding my house's data.
+1. **Devices must be able to communicate over my home's local network.** While SmartThings and similar hubs are easy to set up, they generally route their automation commands through the open internet. At times this can cause a lag in responsiveness, but more importantly, I don't want other companies understanding my house's data.
 
-2. Devices should not be exposed directly to the internet and should remain behind a firewall. Look at the latest [Dyn DNS attack](http://dyn.com/blog/dyn-analysis-summary-of-friday-october-21-attack/). IoT devices are not safe if exposed to the public internet. 
+2. **Devices should not be exposed directly to the internet.** Read up on the latest [Dyn DNS attack](http://dyn.com/blog/dyn-analysis-summary-of-friday-october-21-attack/) if you're not familiar. IoT devices are not safe if exposed to the public internet. 
 
-3. Devices should look and behave like a normal, non-automated device. This is more of a personal preference, but I want my light switches and other devices to look and behave like normal light switches so that users don't know the difference.
+3. **Devices should look and behave like a normal, non-automated device.** This is more of a personal preference, but I want my light switches and other devices to look and behave like normal light switches so that users don't know the difference.
 
 
 With those principles in mind, my home network is controlled by [Home Assistant](https://home-assistant.io/). This is an open source application which runs locally and once configured can communicate with an assortment of devices. I explored a few other similar applications like HABmin and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, and a good looking design for it's apps. 
