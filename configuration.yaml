@@ -13,7 +13,7 @@ homeassistant:
     scenes: !include packages/scenes.yaml
     inside: !include packages/inside.yaml
     outside: !include packages/outside.yaml
-    garage: !include packages/garage.yaml
+    doors: !include packages/doors.yaml
     settings: !include packages/settings.yaml
 
 frontend:
