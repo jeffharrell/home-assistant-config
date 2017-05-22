@@ -1,10 +1,8 @@
 # Home Automation
 
-Configuration files and setup instructions for my Home Assistant installation.
-
 After a fun project to automate my house over the last few years I finally feel like I've settled in a solution which works well. If you're just getting started with home automation I recommend you try out a soluton like [SmartThings](https://www.smartthings.com/) as it provides the complete package. If you're willing to dig a bit deeper and provide some elbow grease, read on.
 
-#### Principles 
+## Principles 
 
 Before I get started I want to call out a few principles I used to shape my setup. These come from lessons learned and a general sensitivity to network security:
 
@@ -15,7 +13,7 @@ Before I get started I want to call out a few principles I used to shape my setu
 3. **Security devices should be read only.** Fairly self explanatory, but any home alarm or cameras tied into the system should be read only and for automation purposes.
 
 
-#### Setup 
+## Setup 
 
 ![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
