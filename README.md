@@ -1,6 +1,6 @@
 # Home Automation
 
-A few years ago I started a project to automate my house and I have finally settled in a solution which works well. If you're just getting started with home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) or [Wink](https://www.wink.com/) as they provides the complete package. If you're willing to dig a bit deeper and roll up your sleeves, read on.
+A few years ago I started a project to automate my house and have finally settled in a solution which works well. If you're just getting started with home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) or [Wink](https://www.wink.com/) as they provides the complete package. If you're willing to dig a bit deeper and roll up your sleeves, read on.
 
 ## Principles 
 
