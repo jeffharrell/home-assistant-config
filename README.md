@@ -1,10 +1,10 @@
 # Home Automation
 
-After a fun project to automate my house over the last few years I finally feel like I've settled in a solution which works well. If you're just getting started with home automation I recommend you try out a soluton like [SmartThings](https://www.smartthings.com/) as it provides the complete package. If you're willing to dig a bit deeper and provide some elbow grease, read on.
+A few years ago I started a project to automate my house and I have finally settled in a solution which works well. If you're just getting started with home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) or [Wink](https://www.wink.com/) as they provides the complete package. If you're willing to dig a bit deeper and roll up your sleeves, read on.
 
 ## Principles 
 
-Before I get started I want to call out a few principles I used to shape my setup. These come from lessons learned and a general sensitivity to network security:
+Before I get started I want to call out a few concepts I used to shape my setup:
 
 1. **Keep communication local to the network.** While SmartThings and similar hubs are easy to set up, they often route their traffic through the open internet. This can cause a lag in responsiveness, but more importantly, I don't want other companies understanding my house usage patterns.
 
