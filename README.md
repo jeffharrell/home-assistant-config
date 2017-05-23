@@ -24,11 +24,11 @@ Before I get started I want to call out a few concepts I used to shape my setup:
 
 - **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster.
 
-- **House Fan:** The house fan is controlled using the [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY).
+- **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY).
 
 - **Garage Door Sensors:** The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/).
 
-- **Doorbell:** This was a fun one. I learned about dry contact sensors and ended up using a [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) and magnetic switch connected to my existing doorbell to trigger a Z-Wave event when it was rung.
+- **Doorbell:** This was a fun one. I learned about dry contact sensors and ended up using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic switch connected to my existing doorbell. This causes it to trigger a Z-Wave event when rung. Win!
 
 
 `4`, `5` – The remainder of the devices communicate over some form of HTTP/TCP. 
