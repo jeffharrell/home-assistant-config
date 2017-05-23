@@ -24,7 +24,9 @@ Before I get started I want to call out a few concepts I used to shape my setup:
 
 - **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster.
 
-- **Garage Door Sensors:** The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/) which are your basic contact sensor.
+- **House Fan:** The house fan is controlled using the [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY).
+
+- **Garage Door Sensors:** The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/).
 
 - **Doorbell:** This was a fun one. I learned about dry contact sensors and ended up using a [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) and magnetic switch connected to my existing doorbell to trigger a Z-Wave event when it was rung.
 
@@ -38,3 +40,9 @@ Before I get started I want to call out a few concepts I used to shape my setup:
 - **Voice Input:** [Amazon Echo Dot](https://www.amazon.com/All-New-Echo-Dot-2nd-Generation/dp/B01DFKC2SO/) is connected into the system and able to control all of the devices, plus do all of the standard Alexa commands.
 
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather.
+
+
+`7` – [Plex](https://www.plex.tv/) is running as a package on the Synology NAS and used to stream movies locally. It will be connected into the Home Assistant instance eventually.
+
+
+`8`- [Channels DVR](https://community.getchannels.com/dvr) is running as a package on the Synology NAS and used to record TV shows. It will be connected into the Home Assistant instance eventually.
