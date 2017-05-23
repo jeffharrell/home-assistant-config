@@ -7,7 +7,7 @@ A few years ago I started a project to automate my house and have finally settle
 
 Before I get started I want to call out a few concepts I used to shape my setup:
 
-1. **Keep communication local to the network.** While SmartThings and similar hubs are easy to set up they typically do so by routing their traffic through the open internet to their servers. This can cause a lag in responsiveness, but more importantly, it means they are getting your data and can understand your home usage patterns. No thanks.
+1. **Keep communication local to the network.** While SmartThings and similar hubs are easy to set up they typically achieve that by routing their traffic through the open internet to their servers. This can cause a lag in responsiveness, but more importantly, it means they are getting your data and can understand your home usage patterns. No thanks.
 
 2. **Devices should look and behave like a normal device.** More of a personal preference, but I want my light switches and other devices to look and behave like normal light switches. I shouldn't be required to use my phone to turn something on and vistors shouldn't notice that anything is out of the ordinary.
 
