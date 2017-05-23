@@ -1,51 +1,48 @@
 # Home Automation
 
-Configuration files and setup instructions for my home's automation.
+A few years ago I started a project to automate my house and have finally settled on a solution which works for me. If you're just getting started with home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) or [Wink](https://www.wink.com/) as they provide a complete package. If you're willing to dig a bit deeper and roll up your sleeves, read on.
 
 
-## Network Diagram
+## Principles 
+
+Before I get started I want to call out a few concepts I used in my setup:
+
+1. **Keep communication local to the network.** While SmartThings and similar hubs are easy to set up they typically achieve that by routing their traffic through the open internet to their servers. This can cause a lag in responsiveness, but more importantly, it means those servers get your data and can understand your home usage patterns. No thanks.
+
+2. **Devices should look and behave like a normal device.** More of a personal preference here, but I want my light switches to look and behave like normal light switches. That applies to every household device. I shouldn't be required to use my phone to turn something on and vistors shouldn't notice that anything is out of the ordinary.
+
+
+## Setup 
 
 ![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
+`1` – My home network is controlled by the open source application [Home Assistant](https://home-assistant.io/). Other options were explored like SmartThings, HABmin, and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, is highly customizable, and a good looking design for it's apps.
 
-### Hardware Used
-- [Home Assistant](https://home-assistant.io/)
-- [Synology NAS DS716+II](https://www.amazon.com/Synology-DS716-II-Storage-DiskStation/dp/B01EMPW5Z6/)
-- [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/)
-- [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/) 
-- [Ecolink Z-Wave Sensor](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/)
-- [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/)
-- [Ecobee 3 Smart Thermostat](https://www.amazon.com/Ecobee3-Thermostat-Sensor-Generation-Amazon/dp/B00ZIRV39M/)
-- [Wemo Insight Switch](https://www.amazon.com/Insight-Switch-Control-Lights-Appliances/dp/B01DBXNYCS/)
-- [Logitech Harmony Hub](https://www.amazon.com/Logitech-Harmony-Companion-Control-Entertainment/dp/B00N3RFC4G/)
-- [Amazon Echo Dot](https://www.amazon.com/All-New-Echo-Dot-2nd-Generation/dp/B01DFKC2SO/)
+`2` – Home Assistant is running in a Docker container on a [Synology NAS DS716+II](https://www.amazon.com/Synology-DS716-II-Storage-DiskStation/dp/B01EMPW5Z6/). The NAS is not externally accessible from the internet and if you wish to connect to it remotely you need to VPN into the local network. Internal to the local network all traffic is served over SSL.
 
+`3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through an [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) plugged into the Synology NAS. Z-Wave devices are low power and help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices.
 
-### Setup
+- **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster.
 
-After automating my house for the past few years as a fun side project and going through a few variations I finally feel like I've settled on something which works well. If you're just looking at getting into home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) as it provides a complete package. If you're willing to dig a bit deeper and provide some elbow grease, read on.
+- **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY). Instant on / off capability.
 
-Before going too far, I want to call out a few principles I used to shape my setup. These come from lessons learned in past iterations and from a general sensitivity to network security:
+- **Garage Door Sensors:** The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.
 
-1. **Devices must be able to communicate over my local network.** While SmartThings and similar hubs are easy to set up, they generally route their automation commands through the open internet. This can cause a lag in responsiveness, but more importantly, I don't want other companies understanding my house's usage.
-
-2. **Devices should not be exposed directly to the internet.** This is similar to 1, but read up on the latest [Dyn DNS attack](http://dyn.com/blog/dyn-analysis-summary-of-friday-october-21-attack/) if you're not familiar. IoT devices are not safe if exposed to the public internet. 
-
-3. **Devices should look and behave like a normal, non-automated device.** More of a personal preference, but I want my light switches and other devices to look and behave like normal light switches and I shouldn't be required to use my phone to turn something on.
+- **Doorbell:** This was a fun one. I found out about dry contact sensors and ended up using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic relay switch that's connected to my existing doorbell magnet. This causes it to trigger a Z-Wave event when rung. Win!
 
 
-With those principles in mind, my home network is controlled by [Home Assistant](https://home-assistant.io/). This is an open source application which runs locally and once configured can communicate with an assortment of devices. I explored a few other similar applications like HABmin and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, and a good looking design for it's apps. 
+`4`, `5` – The remainder of the devices communicate over some form of HTTP/TCP/MQTT. 
 
-Home Assistant is running in a Docker container on my Synology NAS. This could be running on any computer from a Mac Mini to a Raspberry Pi. I'm simply using my NAS because it's low powered and is currently running my DVR and Plex servers locally. 
+- **Media Center:** If you're in the market for a smart remote then the [Logitech Harmony Hub](https://www.amazon.com/Logitech-Harmony-Companion-Control-Entertainment/dp/B00N3RFC4G/) is great. Plus, it can be controlled locally through Home Assistant.
 
-Out of the box, Home Assistant can easily communicate with any TCP-based device like my Echo Dot, [Harmony Hub](https://github.com/jeffharrell/home-assistant-config/blob/master/packages/media.yaml#L7-L9), and [Ecobee Thermostat](https://github.com/jeffharrell/home-assistant-config/blob/master/packages/climate.yaml#L29-L30). These can be connected just by enabling the platforms in your configuration. 
+- **Thermostat:** I opted to go with a [Ecobee 3 Smart Thermostat](https://www.amazon.com/Ecobee3-Thermostat-Sensor-Generation-Amazon/dp/B00ZIRV39M/) since it can use occupancy and room sensors.
 
-You'll notice that my light switches and sensors are all [z-wave](https://en.wikipedia.org/wiki/Z-Wave) based. Z-wave devices are low power devices which help me keep to the principles I mentioned of local network and normal look and feel. The NAS can't communicate with z-wave devices on it's own though, so I have a USB Aoetec Z-Stick plugged into it. With the Z-Stick, Home Assistant can be [configured](https://github.com/jeffharrell/home-assistant-config/blob/master/config/zwave.yaml#L3-L4) to communicate with the z-wave network. 
+- **Voice Input:** [Amazon Echo Dot](https://www.amazon.com/All-New-Echo-Dot-2nd-Generation/dp/B01DFKC2SO/) is connected into the system and able to control all of the devices.
+
+- **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather and tied into automations.
 
 
-### Automation
+`7` – [Plex](https://www.plex.tv/) is used to stream movies locally. It will be connected into the Home Assistant instance eventually.
 
-### Security
 
-1. As a security precaution, alarm status is read-only and cannot be set from the system
-2. Additionally, home cameras are not tied into the system, but are available to access on the local network
+`8`- [Channels DVR](https://community.getchannels.com/dvr) is used to record TV shows. It will be connected into the Home Assistant instance eventually.
