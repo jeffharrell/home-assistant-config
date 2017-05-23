@@ -18,9 +18,9 @@ Before I get started I want to call out a few concepts I used to shape my setup:
 
 `1` – My home network is controlled by the open source application [Home Assistant](https://home-assistant.io/). Other options were explored like SmartThings, HABmin, and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, is highly customizable, and a good looking design for it's apps.
 
-`2` – Home Assistant is running in a Docker container on a [Synology NAS DS716+II](https://www.amazon.com/Synology-DS716-II-Storage-DiskStation/dp/B01EMPW5Z6/). The NAS is not externally accessible from the internet and if you wish to connect to the NAS remotely you need to VPN into the local network. Internal to the local network all traffic is served over SSL.
+`2` – Home Assistant is running in a Docker container on a [Synology NAS DS716+II](https://www.amazon.com/Synology-DS716-II-Storage-DiskStation/dp/B01EMPW5Z6/). The NAS is not externally accessible from the internet and if you wish to connect to it remotely you need to VPN into the local network. Internal to the local network all traffic is served over SSL.
 
-`3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through a [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) plugged into the Synology NAS. Z-Wave devices are low power devices which help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices so that helps.
+`3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through an [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) plugged into the Synology NAS. Z-Wave devices are low power devices which help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices.
 
 - **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster.
 
