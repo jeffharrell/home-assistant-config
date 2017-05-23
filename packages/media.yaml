@@ -27,8 +27,8 @@ input_select:
 automation:
   - alias: Remote - Update UI
     trigger:
-      - platform: event
-        event_type: homeassistant_start
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id: remote.family_room
     action:

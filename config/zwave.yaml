@@ -1,5 +1,18 @@
-## ZWAVE
-
 usb_path: /dev/ttyACM0
 autoheal: False
-debug: True
+device_config:
+  light.dining_room_lights_level_2_0:
+    refresh_value: True
+    delay: 5
+  light.family_room_lights_level_8_0:
+    refresh_value: True
+    delay: 5
+  light.island_lights_level_5_0:
+    refresh_value: True
+    delay: 5
+  light.master_bedroom_l_level_4_0:
+    refresh_value: True
+    delay: 5
+  light.pantry_light_level_3_0:
+    refresh_value: True
+    delay: 5
