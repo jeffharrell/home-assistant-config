@@ -42,7 +42,7 @@ Before I get started I want to call out a few concepts I used to shape my setup:
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather.
 
 
-`7` – [Plex](https://www.plex.tv/) is running as a package on the Synology NAS and used to stream movies locally. It will be connected into the Home Assistant instance eventually.
+`7` – [Plex](https://www.plex.tv/) is used to stream movies locally. It will be connected into the Home Assistant instance eventually.
 
 
-`8`- [Channels DVR](https://community.getchannels.com/dvr) is running as a package on the Synology NAS and used to record TV shows. It will be connected into the Home Assistant instance eventually.
+`8`- [Channels DVR](https://community.getchannels.com/dvr) is used to record TV shows. It will be connected into the Home Assistant instance eventually.
