@@ -22,31 +22,3 @@ input_boolean:
     name: Lights off (delayed)
     initial: off
     icon: mdi:toggle-switch
-
-
-automation:
-  - alias: Reset settings at midnight
-    trigger:
-      platform: time
-      after: '00:00:00'
-    action:
-      - service: homeassistant.turn_off
-        entity_id:
-          - input_boolean.disable_notify
-          - input_boolean.disable_away_mode
-
-  - alias: Lights off (delayed)
-    trigger:
-      platform: state
-      entity_id: input_boolean.delayed_lights_off
-      state: 'on'
-    action:
-      - delay: 0:30
-      - condition: state
-        entity_id: input_boolean.delayed_lights_off
-        state: 'on'
-      - service: homeassistant.turn_off
-        entity_id:
-          - group.all_lights
-          - group.all_switches
-          - input_boolean.delayed_lights_off

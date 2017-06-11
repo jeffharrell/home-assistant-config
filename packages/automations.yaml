@@ -1,0 +1,147 @@
+- id: doorbell_notification
+  alias: Doorbell notification
+  trigger:
+    platform: state
+    entity_id: binary_sensor.doorbell_sensor_19_0
+    to: 'on'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_notify
+      state: 'off'
+    - service: notify.jeffs_phone
+      data:
+        title: Home Assistant
+        message: Doorbell
+    - service: notify.jillians_phone
+      data:
+        title: Home Assistant
+        message: Doorbell
+
+- id: away_lights_on
+  alias: Away - Lights on with sun
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.simplisafe
+    state: 'armed_away'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_away_mode
+      state: 'off'
+    - service: switch.turn_on
+      entity_id: switch.living_room_switch_10_0
+    - service: notify.jeffs_phone
+      data:
+        title: Home Assistant
+        message: Away mode lights on
+
+- id: away_lights_off
+  alias: Away - Lights off with sun
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '06:00:00'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.simplisafe
+    state: 'armed_away'
+  action:
+    - condition: state
+      entity_id: input_boolean.disable_away_mode
+      state: 'off'
+    - service: switch.turn_off
+      entity_id: switch.living_room_switch_10_0
+    - service: notify.jeffs_phone
+      data:
+        title: Home Assistant
+        message: Away mode lights off
+
+- id: alarm_lights_on
+  alias: Alarm - All lights on
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.simplisafe
+    to: 'alarm_trigger'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.Lights
+
+- id: remote_update
+  alias: Remote - Update
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: remote.family_room
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.family_room_media
+        option: >
+          {% if states.remote.family_room.attributes.current_activity == 'Apple TV' %}
+            Apple TV
+          {% elif states.remote.family_room.attributes.current_activity == 'Fire TV' %}
+            Fire TV
+          {% elif states.remote.family_room.attributes.current_activity == 'DVD Player' %}
+            DVD Player
+          {% elif states.remote.family_room.attributes.current_activity == 'Music' %}
+            Music
+          {% elif states.remote.family_room.attributes.current_activity == 'Receiver Bluetooth' %}
+            Bluetooth
+          {% else %}
+            Power Off
+          {% endif %}
+
+- id: remote_change
+  alias: Remote - Change
+  trigger:
+    platform: state
+    entity_id: input_select.family_room_media
+  action:
+    service: remote.turn_on
+    data_template:
+      entity_id: remote.family_room
+      activity: >
+        {% if states.input_select.family_room_media.state == 'Apple TV' %}
+          21762413
+        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
+          22767959
+        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
+          21762603
+        {% elif states.input_select.family_room_media.state == 'Music' %}
+          18890244
+        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
+          22068322
+        {% else %}
+          -1
+        {% endif %}
+
+- id: settings_reset
+  alias: Reset settings at midnight
+  trigger:
+    platform: time
+    at: '00:00:00'
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.disable_notify
+        - input_boolean.disable_away_mode
+
+- id: settings_lights_off
+  alias: Lights off (delayed)
+  trigger:
+    platform: state
+    entity_id: input_boolean.delayed_lights_off
+    to: 'on'
+  action:
+    - delay: 0:30
+    - condition: state
+      entity_id: input_boolean.delayed_lights_off
+      state: 'on'
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.all_lights
+        - group.all_switches
+        - input_boolean.delayed_lights_off

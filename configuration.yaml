@@ -21,7 +21,7 @@ frontend:
 history:
 
 logger:
-  default: warn
+  default: info
   logs:
     homeassistant.components.alarm_control_panel.simplisafe: critical
 
@@ -32,5 +32,7 @@ notify: !include config/notify.yaml
 emulated_hue: !include config/emulated_hue.yaml
 
 zwave: !include config/zwave.yaml
+
+automation: !include packages/automations.yaml
 
 sun:

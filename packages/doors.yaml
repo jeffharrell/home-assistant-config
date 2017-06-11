@@ -67,7 +67,7 @@ sensor:
 
 alert:
   garage_door_jeff:
-    name: Garage is open (Jeff)
+    name: Jeff's garage is open
     entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_13_0
     state: 'on'
     repeat:
@@ -81,7 +81,7 @@ alert:
       - jillians_phone
 
   garage_door_jillian:
-    name: Garage is open (Jillian)
+    name: Jillian's garage is open
     entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_12_0
     state: 'on'
     repeat:
@@ -95,7 +95,7 @@ alert:
       - jillians_phone
 
   garage_door_guest:
-    name: Garage is open (Guest)
+    name: Guest garage is open
     entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_11_0
     state: 'on'
     repeat:
@@ -107,23 +107,3 @@ alert:
     notifiers:
       - jeffs_phone
       - jillians_phone
-
-
-automation:
-  - alias: Doorbell notification
-    trigger:
-      platform: state
-      entity_id: binary_sensor.doorbell_sensor_19_0
-      state: 'on'
-    action:
-      - condition: state
-        entity_id: input_boolean.disable_notify
-        state: 'off'
-      - service: notify.jeffs_phone
-        data:
-          title: Home Assistant
-          message: Doorbell alert
-      - service: notify.jillians_phone
-        data:
-          title: Home Assistant
-          message: Doorbell alert
