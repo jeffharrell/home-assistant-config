@@ -2,7 +2,7 @@
   alias: Doorbell notification
   trigger:
     platform: state
-    entity_id: binary_sensor.doorbell_sensor_19_0
+    entity_id: binary_sensor.doorbell_sensor
     to: 'on'
   action:
     - condition: state
@@ -31,7 +31,7 @@
       entity_id: input_boolean.disable_away_mode
       state: 'off'
     - service: switch.turn_on
-      entity_id: switch.living_room_switch_10_0
+      entity_id: switch.living_room_switch
     - service: notify.jeffs_phone
       data:
         title: Home Assistant
@@ -52,7 +52,7 @@
       entity_id: input_boolean.disable_away_mode
       state: 'off'
     - service: switch.turn_off
-      entity_id: switch.living_room_switch_10_0
+      entity_id: switch.living_room_switchhouse_fan_switch
     - service: notify.jeffs_phone
       data:
         title: Home Assistant

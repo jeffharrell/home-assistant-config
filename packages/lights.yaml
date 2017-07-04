@@ -2,53 +2,53 @@ group:
   Lights:
     entities:
       - group.Kitchen
-      - light.island_lights_level_5_0
-      - switch.kitchen_cabinets_switch_16_0
-      - light.family_room_lights_level_8_0
-      - light.pantry_light_level_3_0
-      - light.dining_room_lights_level_2_0
-      - switch.living_room_switch_10_0
-      - switch.entryway_light_switch_14_0
-      - switch.hallway_light_switch_15_0
-      - light.master_bedroom_l_level_4_0
-      - switch.outside_lights_switch_9_0
+      - light.island_lights_level
+      - switch.kitchen_cabinets_switch
+      - light.family_room_lights_level
+      - light.pantry_light_level
+      - light.dining_room_lights_level
+      - switch.living_room_switch
+      - switch.entryway_light_switch
+      - switch.hallway_light_switch
+      - light.master_bedroom_l_level
+      - switch.outside_lights_switch
   Kitchen:
     entities:
-      - light.kitchen_lights_1_level_7_0
-      - light.kitchen_lights_2_level_6_0
+      - light.kitchen_lights_1_level
+      - light.kitchen_lights_2_level
 
 
 homeassistant:
   customize:
-    light.pantry_light_level_3_0:
+    light.pantry_light_level:
       friendly_name: Pantry
-    light.dining_room_lights_level_2_0:
+    light.dining_room_lights_level:
       friendly_name: Dining Room
-    light.master_bedroom_l_level_4_0:
+    light.master_bedroom_l_level:
       friendly_name: Master Bedroom
-    light.family_room_lights_level_8_0:
+    light.family_room_lights_level:
       friendly_name: Family Room
-    light.island_lights_level_5_0:
+    light.island_lights_level:
       friendly_name: Island
-    light.kitchen_lights_1_level_7_0:
+    light.kitchen_lights_1_level:
       hidden: true
       emulated_hue: false
-    light.kitchen_lights_2_level_6_0:
+    light.kitchen_lights_2_level:
       hidden: true
       emulated_hue: false
-    switch.outside_lights_switch_9_0:
+    switch.outside_lights_switch:
       friendly_name: Back Yard
       icon: mdi:lightbulb
-    switch.living_room_switch_10_0:
+    switch.living_room_switch:
       friendly_name: Living Room
       icon: mdi:lightbulb
-    switch.entryway_light_switch_14_0:
+    switch.entryway_light_switch:
       friendly_name: Entryway
       icon: mdi:lightbulb
-    switch.hallway_light_switch_15_0:
+    switch.hallway_light_switch:
       friendly_name: Hallway
       icon: mdi:lightbulb
-    switch.kitchen_cabinets_switch_16_0:
+    switch.kitchen_cabinets_switch:
       friendly_name: Kitchen Cabinets
       icon: mdi:lightbulb
 

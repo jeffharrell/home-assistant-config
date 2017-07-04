@@ -4,7 +4,7 @@ group:
       - sensor.climate_temp
       - sensor.climate_humidity
       - sensor.climate_mode
-      - switch.house_fan_switch_20_0
+      - switch.house_fan_switch
 
 
 homeassistant:
@@ -21,7 +21,7 @@ homeassistant:
       hidden: true
     sensor.meadowlands_humidity:
       hidden: true
-    switch.house_fan_switch_20_0:
+    switch.house_fan_switch:
       friendly_name: House Fan
       icon: mdi:fan
 
