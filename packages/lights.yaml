@@ -32,8 +32,10 @@ homeassistant:
       friendly_name: Island
     light.kitchen_lights_1_level:
       hidden: true
+      emulated_hue: false
     light.kitchen_lights_2_level:
       hidden: true
+      emulated_hue: false
     switch.outside_lights_switch:
       friendly_name: Back Yard
       icon: mdi:lightbulb
@@ -49,6 +51,8 @@ homeassistant:
     switch.kitchen_cabinets_switch:
       friendly_name: Kitchen Cabinets
       icon: mdi:lightbulb
+    group.Kitchen:
+      emulated_hue: true
 
 
 alarm_control_panel:
