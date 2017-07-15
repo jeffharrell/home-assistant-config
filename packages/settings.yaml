@@ -3,9 +3,9 @@ group:
     control: hidden
     entities:
       - input_boolean.delayed_lights_off
+      - input_slider.delay_timer
       - input_boolean.disable_away_mode
       - input_boolean.disable_notify
-
 
 input_boolean:
   disable_away_mode:
@@ -19,6 +19,14 @@ input_boolean:
     icon: mdi:toggle-switch
 
   delayed_lights_off:
-    name: Lights off (delayed)
+    name: Lights off
     initial: off
     icon: mdi:toggle-switch
+
+input_slider:
+  delay_timer:
+    name: Minutes
+    initial: 30
+    min: 0
+    max: 180
+    step: 1

@@ -136,7 +136,7 @@
     entity_id: input_boolean.delayed_lights_off
     to: 'on'
   action:
-    - delay: 0:30
+    - delay: '00:{{ states.input_slider.delay_timer.state | int }}:00'
     - condition: state
       entity_id: input_boolean.delayed_lights_off
       state: 'on'
