@@ -21,9 +21,7 @@ frontend:
 history:
 
 logger:
-  default: info
-  logs:
-    homeassistant.components.alarm_control_panel.simplisafe: critical
+  default: error
 
 http: !include config/http.yaml
 

@@ -1,5 +1,6 @@
 - id: doorbell_notification
   alias: Doorbell notification
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.doorbell_sensor
@@ -19,6 +20,7 @@
 
 - id: away_lights_on
   alias: Away - Lights on with sun
+  initial_state: True
   trigger:
     platform: sun
     event: sunset
@@ -39,6 +41,7 @@
 
 - id: away_lights_off
   alias: Away - Lights off with sun
+  initial_state: True
   trigger:
     platform: sun
     event: sunset
@@ -52,7 +55,7 @@
       entity_id: input_boolean.disable_away_mode
       state: 'off'
     - service: switch.turn_off
-      entity_id: switch.living_room_switchhouse_fan_switch
+      entity_id: switch.living_room_switch
     - service: notify.jeffs_phone
       data:
         title: Home Assistant
@@ -60,6 +63,7 @@
 
 - id: alarm_lights_on
   alias: Alarm - All lights on
+  initial_state: True
   trigger:
     platform: state
     entity_id: alarm_control_panel.simplisafe
@@ -70,6 +74,7 @@
 
 - id: remote_update
   alias: Remote - Update
+  initial_state: True
   trigger:
     - platform: homeassistant
       event: start
@@ -96,6 +101,7 @@
 
 - id: remote_change
   alias: Remote - Change
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_select.family_room_media
@@ -120,6 +126,7 @@
 
 - id: settings_reset
   alias: Reset settings at midnight
+  initial_state: True
   trigger:
     platform: time
     at: '00:00:00'
@@ -131,6 +138,7 @@
 
 - id: settings_lights_off
   alias: Lights off (delayed)
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_boolean.delayed_lights_off
