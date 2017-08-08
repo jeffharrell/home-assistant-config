@@ -18,6 +18,35 @@
         title: Home Assistant
         message: Doorbell
 
+- id: house_fan_turns_off_ac
+  alias: House fan turns off AC
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: switch.house_fan_switch
+    to: 'on'
+  action:
+    - condition: template
+      value_template: '{{ states.climate.meadowlands.attributes.operation_mode == "cool" }}'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.meadowlands
+        temperature: 80
+
+- id: house_fan_resumes_ac
+  alias: House fan resumes AC
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: switch.house_fan_switch
+    to: 'off'
+  action:
+    - condition: template
+      value_template: '{{ states.climate.meadowlands.attributes.operation_mode == "cool" }}'
+    - service: climate.ecobee_resume_program
+      data:
+        entity_id: climate.meadowlands
+
 - id: away_lights_on
   alias: Away - Lights on with sun
   initial_state: True
