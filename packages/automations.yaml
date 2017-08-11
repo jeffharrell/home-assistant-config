@@ -1,14 +1,11 @@
 - id: doorbell_notification
-  alias: Doorbell notification
+  alias: Doorbell notifications
   initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.doorbell_sensor
     to: 'on'
   action:
-    - condition: state
-      entity_id: input_boolean.disable_notify
-      state: 'off'
     - service: notify.jeffs_phone
       data:
         title: Home Assistant
@@ -17,6 +14,7 @@
       data:
         title: Home Assistant
         message: Doorbell
+
 
 - id: house_fan_turns_off_ac
   alias: House fan turns off AC
@@ -33,6 +31,7 @@
         entity_id: climate.meadowlands
         temperature: 80
 
+
 - id: house_fan_resumes_ac
   alias: House fan resumes AC
   initial_state: True
@@ -47,8 +46,9 @@
       data:
         entity_id: climate.meadowlands
 
+
 - id: away_lights_on
-  alias: Away - Lights on with sun
+  alias: Turn lights on when sun sets
   initial_state: True
   trigger:
     platform: sun
@@ -58,9 +58,6 @@
     entity_id: alarm_control_panel.simplisafe
     state: 'armed_away'
   action:
-    - condition: state
-      entity_id: input_boolean.disable_away_mode
-      state: 'off'
     - service: switch.turn_on
       entity_id: switch.living_room_switch
     - service: notify.jeffs_phone
@@ -68,8 +65,9 @@
         title: Home Assistant
         message: Away mode lights on
 
+
 - id: away_lights_off
-  alias: Away - Lights off with sun
+  alias: Turn lights off if left on
   initial_state: True
   trigger:
     platform: sun
@@ -80,9 +78,6 @@
     entity_id: alarm_control_panel.simplisafe
     state: 'armed_away'
   action:
-    - condition: state
-      entity_id: input_boolean.disable_away_mode
-      state: 'off'
     - service: switch.turn_off
       entity_id: switch.living_room_switch
     - service: notify.jeffs_phone
@@ -90,8 +85,9 @@
         title: Home Assistant
         message: Away mode lights off
 
+
 - id: alarm_lights_on
-  alias: Alarm - All lights on
+  alias: Turn all lights on if alarm goes off
   initial_state: True
   trigger:
     platform: state
@@ -101,8 +97,9 @@
     - service: homeassistant.turn_on
       entity_id: group.Lights
 
+
 - id: remote_update
-  alias: Remote - Update
+  alias: Update remote UI widget
   initial_state: True
   trigger:
     - platform: homeassistant
@@ -128,8 +125,9 @@
             Power Off
           {% endif %}
 
+
 - id: remote_change
-  alias: Remote - Change
+  alias: Turn on device with remote UI widget
   initial_state: True
   trigger:
     platform: state
@@ -153,20 +151,9 @@
           -1
         {% endif %}
 
-- id: settings_reset
-  alias: Reset settings at midnight
-  initial_state: True
-  trigger:
-    platform: time
-    at: '00:00:00'
-  action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - input_boolean.disable_notify
-        - input_boolean.disable_away_mode
 
 - id: settings_lights_off
-  alias: Lights off (delayed)
+  alias: Turn lights off (delayed)
   initial_state: True
   trigger:
     platform: state

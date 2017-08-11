@@ -19,6 +19,12 @@ homeassistant:
       icon: mdi:home
 
 
+alarm_control_panel:
+  - platform: simplisafe
+    username: !secret simplisafe_user
+    password: !secret simplisafe_pass
+
+
 sensor:
   - platform: template
     sensors:

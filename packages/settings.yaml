@@ -1,27 +1,3 @@
-group:
-  Settings:
-    control: hidden
-    entities:
-      - input_boolean.delayed_lights_off
-      - input_slider.delay_timer
-      - input_boolean.disable_away_mode
-      - input_boolean.disable_notify
-
-input_boolean:
-  disable_away_mode:
-    name: Disable away mode
-    initial: off
-    icon: mdi:toggle-switch
-
-  disable_notify:
-    name: Disable notifications
-    initial: off
-    icon: mdi:toggle-switch
-
-  delayed_lights_off:
-    name: Lights off
-    initial: off
-    icon: mdi:toggle-switch
 
 input_slider:
   delay_timer:

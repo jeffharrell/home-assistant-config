@@ -53,9 +53,3 @@ homeassistant:
       icon: mdi:lightbulb
     group.Kitchen:
       emulated_hue: true
-
-
-alarm_control_panel:
-  - platform: simplisafe
-    username: !secret simplisafe_user
-    password: !secret simplisafe_pass

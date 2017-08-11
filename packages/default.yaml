@@ -2,7 +2,6 @@ group:
   default_view:
       view: yes
       entities:
-        - updater.updater
         - alert.garage_door_guest
         - alert.garage_door_jeff
         - alert.garage_door_jillian
@@ -10,13 +9,20 @@ group:
         - group.Media
         - group.Climate
         - group.Scenes
-  status:
+  temps:
     view: yes
     entities:
       - group.Inside
       - group.Outside
+  doors:
+    view: yes
+    entities:
       - group.Garage
   admin:
     view: yes
     entities:
-      - group.Settings
+      - automation.turn_lights_off_delayed
+      - automation.turn_lights_on_when_sun_sets
+      - automation.turn_lights_off_if_left_on
+      - automation.turn_all_lights_on_if_alarm_goes_off
+      - automation.doorbell_notifications
