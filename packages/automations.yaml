@@ -156,16 +156,16 @@
   alias: Turn lights off (delayed)
   initial_state: True
   trigger:
-    platform: state
-    entity_id: input_boolean.delayed_lights_off
-    to: 'on'
+    platform: numeric_state
+    entity_id: input_slider.delay_timer
+    above: 0
   action:
     - delay: '00:{{ states.input_slider.delay_timer.state | int }}:00'
-    - condition: state
-      entity_id: input_boolean.delayed_lights_off
-      state: 'on'
     - service: homeassistant.turn_off
       entity_id:
         - group.all_lights
         - group.all_switches
-        - input_boolean.delayed_lights_off
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.delay_timer
+        value: 0

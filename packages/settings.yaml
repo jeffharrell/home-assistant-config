@@ -1,8 +1,8 @@
 
 input_slider:
   delay_timer:
-    name: Minutes
-    initial: 30
+    name: Turn lights off in (minutes)
+    initial: 0
     min: 0
     max: 180
     step: 1
