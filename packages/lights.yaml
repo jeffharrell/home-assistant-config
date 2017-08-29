@@ -1,7 +1,7 @@
 group:
   Lights:
     entities:
-      - group.Kitchen
+      - light.kitchen_lights_1_level
       - light.island_lights_level
       - switch.kitchen_cabinets_switch
       - light.family_room_lights_level
@@ -12,10 +12,6 @@ group:
       - switch.hallway_light_switch
       - light.master_bedroom_l_level
       - switch.outside_lights_switch
-  Kitchen:
-    entities:
-      - light.kitchen_lights_1_level
-      - light.kitchen_lights_2_level
 
 
 homeassistant:
@@ -31,8 +27,7 @@ homeassistant:
     light.island_lights_level:
       friendly_name: Island
     light.kitchen_lights_1_level:
-      hidden: true
-      emulated_hue: false
+      friendly_name: Kitchen
     light.kitchen_lights_2_level:
       hidden: true
       emulated_hue: false
@@ -51,5 +46,3 @@ homeassistant:
     switch.kitchen_cabinets_switch:
       friendly_name: Kitchen Cabinets
       icon: mdi:lightbulb
-    group.Kitchen:
-      emulated_hue: true

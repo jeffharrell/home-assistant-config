@@ -92,7 +92,7 @@
   trigger:
     platform: state
     entity_id: alarm_control_panel.simplisafe
-    to: 'alarm_trigger'
+    to: 'triggered'
   action:
     - service: homeassistant.turn_on
       entity_id: group.Lights
@@ -169,3 +169,27 @@
       data_template:
         entity_id: input_slider.delay_timer
         value: 0
+
+
+- id: change_theme_after_sunrise
+  alias: Change theme after sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "+00:00:00"
+  action:
+    - service: frontend.set_theme
+      data:
+        name: default
+
+
+- id: change_theme_after_sunset
+  alias: Change theme after sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+00:00:00"
+  action:
+    - service: frontend.set_theme
+      data:
+        name: dark
