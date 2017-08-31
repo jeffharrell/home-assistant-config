@@ -98,6 +98,25 @@
       entity_id: group.Lights
 
 
+- id: settings_lights_off
+  alias: Turn lights off (delayed)
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: input_slider.delay_timer
+    above: 0
+  action:
+    - delay: '00:{{ states.input_slider.delay_timer.state | int }}:00'
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.all_lights
+        - group.all_switches
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.delay_timer
+        value: 0
+
+
 - id: remote_update
   alias: Update remote UI widget
   initial_state: True
@@ -150,25 +169,6 @@
         {% else %}
           -1
         {% endif %}
-
-
-- id: settings_lights_off
-  alias: Turn lights off (delayed)
-  initial_state: True
-  trigger:
-    platform: numeric_state
-    entity_id: input_slider.delay_timer
-    above: 0
-  action:
-    - delay: '00:{{ states.input_slider.delay_timer.state | int }}:00'
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.all_lights
-        - group.all_switches
-    - service: input_slider.select_value
-      data_template:
-        entity_id: input_slider.delay_timer
-        value: 0
 
 
 - id: change_theme_after_sunrise
