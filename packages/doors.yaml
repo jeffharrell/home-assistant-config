@@ -29,15 +29,15 @@ sensor:
   - platform: template
     sensors:
       garage_guest:
-        value_template: '{% if is_state("binary_sensor.guest_garage_door_sensor", "off") %}Closed{% else %}Open{% endif %}'
+        value_template: '{% if is_state("binary_sensor.guest_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.guest_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.guest_garage_door_sensor
 
       garage_jillian:
-        value_template: '{% if is_state("binary_sensor.jillians_garage_door_sensor", "off") %}Closed{% else %}Open{% endif %}'
+        value_template: '{% if is_state("binary_sensor.jillians_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.jillians_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.jillians_garage_door_sensor
 
       garage_jeff:
-        value_template: '{% if is_state("binary_sensor.jeffs_garage_door_sensor", "off") %}Closed{% else %}Open{% endif %}'
+        value_template: '{% if is_state("binary_sensor.jeffs_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.jeffs_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.jeffs_garage_door_sensor
 
 
