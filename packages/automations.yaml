@@ -15,6 +15,13 @@
         data:
           images:
             - /tmp/front_door.png
+    - service: notify.jillians_phone
+      data:
+        title: Home Assistant
+        message: Doorbell
+        data:
+          images:
+            - /tmp/front_door.png
 
 
 - id: house_fan_turns_off_ac
