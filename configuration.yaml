@@ -15,6 +15,7 @@ homeassistant:
     outside: !include packages/outside.yaml
     doors: !include packages/doors.yaml
     settings: !include packages/settings.yaml
+    camera: !include packages/camera.yaml
 
 frontend:
   themes:

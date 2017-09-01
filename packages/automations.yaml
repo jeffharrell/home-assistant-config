@@ -6,14 +6,15 @@
     entity_id: binary_sensor.doorbell_sensor
     to: 'on'
   action:
+    - service: shell_command.snapshot_front_door
+    - delay: '00:00:01'
     - service: notify.jeffs_phone
       data:
         title: Home Assistant
         message: Doorbell
-    - service: notify.jillians_phone
-      data:
-        title: Home Assistant
-        message: Doorbell
+        data:
+          images:
+            - /tmp/front_door.png
 
 
 - id: house_fan_turns_off_ac
@@ -22,6 +23,7 @@
   trigger:
     platform: state
     entity_id: switch.house_fan_switch
+    from: 'off'
     to: 'on'
   action:
     - condition: template
@@ -38,6 +40,7 @@
   trigger:
     platform: state
     entity_id: switch.house_fan_switch
+    from: 'on'
     to: 'off'
   action:
     - condition: template
@@ -169,27 +172,3 @@
         {% else %}
           -1
         {% endif %}
-
-
-- id: change_theme_after_sunrise
-  alias: Change theme after sunrise
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: "+00:00:00"
-  action:
-    - service: frontend.set_theme
-      data:
-        name: default
-
-
-- id: change_theme_after_sunset
-  alias: Change theme after sunset
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "+00:00:00"
-  action:
-    - service: frontend.set_theme
-      data:
-        name: dark

@@ -1,0 +1,8 @@
+camera:
+  - platform: synology
+    url: !secret synology_url
+    username: !secret synology_user
+    password: !secret synology_pass
+
+shell_command:
+  snapshot_front_door: 'bash /config/scripts/snapshot_front_door.sh {{ states.camera.front_door.attributes.entity_picture }}'
