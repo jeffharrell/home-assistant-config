@@ -24,8 +24,22 @@
             - /tmp/front_door.png
 
 
-- id: house_fan_turns_off_ac
-  alias: House fan turns off AC
+- id: thermostat_to_away_with_alarm
+  alias: Turn thermostat to away mode with alarm
+  initial_state: False
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.simplisafe
+    to: 'armed_away'
+  action:
+    - service: climate.set_away_mode
+      data:
+        entity_id: climate.meadowlands
+        away_mode: true
+
+
+- id: ac_off_with_house_fan
+  alias: Turn AC off when house fan turns on
   initial_state: True
   trigger:
     platform: state
@@ -41,17 +55,18 @@
         temperature: 80
 
 
-- id: house_fan_resumes_ac
-  alias: House fan resumes AC
+- id: resume_thermostat
+  alias: Resume thermostat
   initial_state: True
   trigger:
-    platform: state
-    entity_id: switch.house_fan_switch
-    from: 'on'
-    to: 'off'
+    - platform: state
+      entity_id: switch.house_fan_switch
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      from: 'armed_away'
   action:
-    - condition: template
-      value_template: '{{ states.climate.meadowlands.attributes.operation_mode == "cool" }}'
     - service: climate.ecobee_resume_program
       data:
         entity_id: climate.meadowlands
