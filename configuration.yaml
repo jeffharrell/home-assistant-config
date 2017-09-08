@@ -13,11 +13,14 @@ homeassistant:
     scenes: !include packages/scenes.yaml
     inside: !include packages/inside.yaml
     outside: !include packages/outside.yaml
-    doors: !include packages/doors.yaml
+    sensors: !include packages/sensors.yaml
     settings: !include packages/settings.yaml
-    camera: !include packages/camera.yaml
+    security: !include packages/security.yaml
 
 frontend:
+  themes:
+    alarm:
+      primary-color: "red"
 
 config:
 

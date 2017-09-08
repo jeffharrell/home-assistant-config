@@ -194,3 +194,32 @@
         {% else %}
           -1
         {% endif %}
+
+
+- id: set_theme_when_alarm_enabled
+  alias: Set theme when the alarm is enabled
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_home'
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_away'
+  action:
+    service: frontend.set_theme
+    data:
+      name: alarm
+
+
+- id: set_theme_when_alarm_disabled
+  alias: Set theme when the alarm is disabled
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'disarmed'
+  action:
+    service: frontend.set_theme
+    data:
+      name: default

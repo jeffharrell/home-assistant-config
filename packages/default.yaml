@@ -11,7 +11,7 @@ group:
     entities:
       - group.Inside
       - group.Outside
-      - group.Garage
+      - group.Sensors
   admin:
     view: yes
     entities:
