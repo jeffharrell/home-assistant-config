@@ -1,0 +1,18 @@
+include:
+  domains:
+    - switch
+    - bin
+    - light
+    - climate
+    - media_player
+  entities:
+    - binary_sensor.brinks_room_occupancy
+    - binary_sensor.family_room_occupancy
+    - binary_sensor.living_room_occupancy
+    - binary_sensor.masons_room_occupancy
+    - binary_sensor.master_bedroom_occupancy
+    - sensor.garage_guest
+    - sensor.garage_jeff
+    - sensor.garage_jillian
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_humidity

@@ -26,7 +26,7 @@
 
 - id: thermostat_to_away_with_alarm
   alias: Turn thermostat to away mode with alarm
-  initial_state: False
+  initial_state: True
   trigger:
     platform: state
     entity_id: alarm_control_panel.simplisafe
