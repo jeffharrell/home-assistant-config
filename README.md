@@ -26,7 +26,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY). Instant on / off capability.
 
-- **Garage Door Sensors:** The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.
+- **Garage Door Sensors:** ~The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.~ The door sensors have been replaced with [Z-wave Garage Door Tilt Sensors](https://www.amazon.com/gp/product/B01MRZB0NT/) which are more reliable.
 
 - **Doorbell:** This was a fun one. I found out about dry contact sensors and ended up using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic relay switch that's connected to my existing doorbell magnet. This causes it to trigger a Z-Wave event when rung. Win!
 
