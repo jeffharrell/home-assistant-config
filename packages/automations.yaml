@@ -115,9 +115,8 @@
   alias: Turn all lights on if alarm goes off
   initial_state: True
   trigger:
-    platform: state
-    entity_id: alarm_control_panel.simplisafe
-    to: 'triggered'
+    platform: template
+    value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
   action:
     - service: homeassistant.turn_on
       entity_id: group.Lights
@@ -172,6 +171,32 @@
 
 - id: remote_change
   alias: Turn on device with remote UI widget
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_select.family_room_media
+  action:
+    service: remote.turn_on
+    data_template:
+      entity_id: remote.family_room
+      activity: >
+        {% if states.input_select.family_room_media.state == 'Apple TV' %}
+          21762413
+        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
+          22767959
+        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
+          21762603
+        {% elif states.input_select.family_room_media.state == 'Music' %}
+          18890244
+        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
+          22068322
+        {% else %}
+          -1
+        {% endif %}
+
+
+- id: music_outside_speakers
+  alias: Turn on outside speakers
   initial_state: True
   trigger:
     platform: state

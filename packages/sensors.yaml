@@ -39,7 +39,7 @@ sensor:
         entity_id: binary_sensor.jeffs_garage_door_sensor
 
       doorbell:
-        value_template: '{% if is_state("binary_sensor.doorbell_sensor", "on") %}Ding Dong{% elif is_state("binary_sensor.doorbell_sensor", "off") %}Silent{% else %}Unknown{% endif %}'
+        value_template: '{% if is_state("binary_sensor.doorbell_sensor", "on") %}Ding Dong{% elif is_state("binary_sensor.doorbell_sensor", "off") %}Off{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.doorbell_sensor
 
 

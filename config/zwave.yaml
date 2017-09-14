@@ -26,6 +26,14 @@ device_config:
     refresh_value: True
     delay: 5
     polling_intensity: 1
+  light.masons_room_level:
+    refresh_value: True
+    delay: 5
+    polling_intensity: 1
+  light.brinks_room_level:
+    refresh_value: True
+    delay: 5
+    polling_intensity: 1
   switch.living_room_switch:
     polling_intensity: 1
   switch.entryway_light_switch:
