@@ -35,7 +35,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **Media Center:** If you're in the market for a smart remote then the [Logitech Harmony Hub](https://www.amazon.com/Logitech-Harmony-Companion-Control-Entertainment/dp/B00N3RFC4G/) is great. Plus, it can be controlled locally through Home Assistant.
 
-- **IP Cameras:** I have both Foscom and Amcresst cameras tied into my automations so if you do something like ring my doorbell it takes a photo if you and sends it to me.
+- **IP Cameras:** I have both Foscom and Amcrest cameras tied into my automations. If you do something like ring my doorbell then an automation takes a photo if you and sends it to me.
 
 - **Thermostat:** I opted to go with a [Ecobee 3 Smart Thermostat](https://www.amazon.com/Ecobee3-Thermostat-Sensor-Generation-Amazon/dp/B00ZIRV39M/) since it can use occupancy and room sensors.
 
