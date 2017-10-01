@@ -4,3 +4,4 @@ exposed_domains:
 - switch
 - light
 - scene
+- script
