@@ -35,7 +35,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **Media Center:** If you're in the market for a smart remote then the [Logitech Harmony Hub](https://www.amazon.com/Logitech-Harmony-Companion-Control-Entertainment/dp/B00N3RFC4G/) is great. Plus, it can be controlled locally through Home Assistant.
 
-- **IP Cameras:** I have both Foscom and Amcrest cameras tied into my automations. If you do something like ring my doorbell then an automation takes a photo if you and sends it to me.
+- **IP Cameras:** I have both Foscom and Amcrest cameras tied into my automations. If you do an action like ring my doorbell then an automation will take a picture of you and send it to my phone.
 
 - **Thermostat:** I opted to go with a [Ecobee 3 Smart Thermostat](https://www.amazon.com/Ecobee3-Thermostat-Sensor-Generation-Amazon/dp/B00ZIRV39M/) since it can use occupancy and room sensors.
 
@@ -44,7 +44,5 @@ Before I get started I want to call out a few concepts I used in my setup:
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather and tied into automations.
 
 
-`7` – [Plex](https://www.plex.tv/) is used to stream movies locally. It will be connected into the Home Assistant instance eventually.
+`7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR. 
 
-
-`8`- [Channels DVR](https://community.getchannels.com/dvr) is used to record TV shows. It will be connected into the Home Assistant instance eventually.
