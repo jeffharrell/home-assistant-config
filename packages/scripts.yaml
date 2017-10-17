@@ -1,0 +1,8 @@
+outside_speakers:
+  alias: Outside speakers
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.family_room
+        device: 34171929
+        command: "Party"

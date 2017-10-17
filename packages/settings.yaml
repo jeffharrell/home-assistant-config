@@ -1,5 +1,10 @@
+group:
+  Settings:
+    entities:
+      - input_number.delay_timer
 
-input_slider:
+
+input_number:
   delay_timer:
     name: Turn lights off in (minutes)
     initial: 0

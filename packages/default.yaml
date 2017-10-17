@@ -12,10 +12,10 @@ group:
       - group.Inside
       - group.Outside
       - group.Sensors
-  admin:
+  tools:
     view: yes
     entities:
       - alert.garage_door_guest
       - alert.garage_door_jeff
       - alert.garage_door_jillian
-      - input_slider.delay_timer
+      - group.Settings
