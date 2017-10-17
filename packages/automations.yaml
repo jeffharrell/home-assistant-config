@@ -127,17 +127,17 @@
   initial_state: True
   trigger:
     platform: numeric_state
-    entity_id: input_slider.delay_timer
+    entity_id: input_number.delay_timer
     above: 0
   action:
-    - delay: '00:{{ states.input_slider.delay_timer.state | int }}:00'
+    - delay: '00:{{ states.input_number.delay_timer.state | int }}:00'
     - service: homeassistant.turn_off
       entity_id:
         - group.all_lights
         - group.all_switches
-    - service: input_slider.select_value
+    - service: input_number.select_value
       data_template:
-        entity_id: input_slider.delay_timer
+        entity_id: input_number.delay_timer
         value: 0
 
 
@@ -171,32 +171,6 @@
 
 - id: remote_change
   alias: Turn on device with remote UI widget
-  initial_state: True
-  trigger:
-    platform: state
-    entity_id: input_select.family_room_media
-  action:
-    service: remote.turn_on
-    data_template:
-      entity_id: remote.family_room
-      activity: >
-        {% if states.input_select.family_room_media.state == 'Apple TV' %}
-          21762413
-        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
-          22767959
-        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
-          21762603
-        {% elif states.input_select.family_room_media.state == 'Music' %}
-          18890244
-        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
-          22068322
-        {% else %}
-          -1
-        {% endif %}
-
-
-- id: music_outside_speakers
-  alias: Turn on outside speakers
   initial_state: True
   trigger:
     platform: state
