@@ -1,5 +1,5 @@
 outside_speakers:
-  alias: Outside speakers
+  alias: Back Yard Speakers
   sequence:
     - service: remote.send_command
       data:
