@@ -6,8 +6,9 @@ group:
 
 input_number:
   delay_timer:
-    name: Turn lights off in (minutes)
+    name: Turn lights off
     initial: 0
     min: 0
     max: 180
-    step: 1
+    step: 5
+    unit_of_measurement: Minutes

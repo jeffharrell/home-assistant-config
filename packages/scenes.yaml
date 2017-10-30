@@ -2,16 +2,16 @@ group:
   Scenes:
     entities:
       - scene.good_morning
+      - scene.dinner_lights
+      - scene.movie_time
       - scene.good_night
-      - scene.cook_time
-      - scene.night_time
 
 
 homeassistant:
   customize:
-    scene.night_time:
+    scene.movie_time:
       icon: mdi:movie
-    scene.cook_time:
+    scene.dinner_lights:
       icon: mdi:food-variant
     scene.good_morning:
       icon: mdi:brightness-5
@@ -20,7 +20,7 @@ homeassistant:
 
 
 scene:
-  - name: Night Time
+  - name: Movie Time
     entities:
       light.kitchen_lights_1_level:
         state: on
@@ -28,11 +28,12 @@ scene:
       light.kitchen_lights_2_level:
         state: on
         brightness: 40
-      light.island_lights_level: off
       light.family_room_lights_level: off
+      switch.kitchen_cabinets_switch: off
+      light.island_lights_level: off
       light.pantry_light_level: off
 
-  - name: Cook Time
+  - name: Dinner Lights
     entities:
       light.kitchen_lights_1_level:
         state: on
@@ -43,6 +44,7 @@ scene:
       light.family_room_lights_level:
         state: on
         brightness: 40
+      switch.kitchen_cabinets_switch: off
       light.island_lights_level: off
       light.pantry_light_level: off
 

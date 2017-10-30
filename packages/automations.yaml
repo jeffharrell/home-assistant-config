@@ -1,5 +1,4 @@
-- id: doorbell_notification
-  alias: Doorbell notifications
+- alias: Doorbell notifications
   initial_state: True
   trigger:
     platform: state
@@ -24,8 +23,7 @@
             - /tmp/front_door.png
 
 
-- id: thermostat_to_away_with_alarm
-  alias: Turn thermostat to away mode with alarm
+- alias: Turn thermostat to away mode with alarm
   initial_state: True
   trigger:
     platform: state
@@ -38,8 +36,7 @@
         away_mode: true
 
 
-- id: ac_off_with_house_fan
-  alias: Turn AC off when house fan turns on
+- alias: Turn AC off when house fan turns on
   initial_state: True
   trigger:
     platform: state
@@ -55,8 +52,7 @@
         temperature: 80
 
 
-- id: resume_thermostat
-  alias: Resume thermostat
+- alias: Resume thermostat
   initial_state: True
   trigger:
     - platform: state
@@ -72,8 +68,20 @@
         entity_id: climate.meadowlands
 
 
-- id: away_lights_on
-  alias: Turn lights on when sun sets
+- alias: Turn the house off when the alarm changes to away
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.simplisafe
+    to: 'armed_away'
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.all_lights
+        - group.all_switches
+
+
+- alias: Turn lights on when sun sets
   initial_state: True
   trigger:
     platform: sun
@@ -91,8 +99,7 @@
         message: Away mode lights on
 
 
-- id: away_lights_off
-  alias: Turn lights off if left on
+- alias: Turn lights off if left on
   initial_state: True
   trigger:
     platform: sun
@@ -111,8 +118,7 @@
         message: Away mode lights off
 
 
-- id: alarm_lights_on
-  alias: Turn all lights on if alarm goes off
+- alias: Turn all lights on if alarm goes off
   initial_state: True
   trigger:
     platform: template
@@ -122,8 +128,7 @@
       entity_id: group.Lights
 
 
-- id: settings_lights_off
-  alias: Turn lights off (delayed)
+- alias: Turn lights off (delayed)
   initial_state: True
   trigger:
     platform: numeric_state
@@ -141,8 +146,7 @@
         value: 0
 
 
-- id: remote_update
-  alias: Update remote UI widget
+- alias: Update remote UI widget
   initial_state: True
   trigger:
     - platform: homeassistant
@@ -169,8 +173,7 @@
           {% endif %}
 
 
-- id: remote_change
-  alias: Turn on device with remote UI widget
+- alias: Turn on device with remote UI widget
   initial_state: True
   trigger:
     platform: state
@@ -195,8 +198,7 @@
         {% endif %}
 
 
-- id: set_theme_when_alarm_enabled
-  alias: Set theme when the alarm is enabled
+- alias: Set theme when the alarm is enabled
   initial_state: True
   trigger:
     - platform: state
@@ -211,8 +213,7 @@
       name: alarm
 
 
-- id: set_theme_when_alarm_disabled
-  alias: Set theme when the alarm is disabled
+- alias: Set theme when the alarm is disabled
   initial_state: True
   trigger:
     - platform: state
