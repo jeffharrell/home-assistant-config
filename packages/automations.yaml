@@ -79,6 +79,7 @@
       entity_id:
         - group.all_lights
         - group.all_switches
+        - remote.family_room
 
 
 - alias: Turn lights on when sun sets
@@ -141,7 +142,7 @@
         - group.all_lights
         - group.all_switches
     - service: input_number.select_value
-      data_template:
+      data:
         entity_id: input_number.delay_timer
         value: 0
 

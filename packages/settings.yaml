@@ -9,6 +9,6 @@ input_number:
     name: Turn lights off
     initial: 0
     min: 0
-    max: 180
-    step: 5
+    max: 60
+    step: 1
     unit_of_measurement: Minutes
