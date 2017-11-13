@@ -184,43 +184,34 @@
     data_template:
       entity_id: remote.family_room
       activity: >
-        {% if states.input_select.family_room_media.state == 'Apple TV' %}
+        {% if is_state(input_select.family_room_media, 'Apple TV') %}
           21762413
-        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
+        {% elif is_state(input_select.family_room_media, 'Fire TV') %}
           22767959
-        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
+        {% elif is_state(input_select.family_room_media, 'DVD Player') %}
           21762603
-        {% elif states.input_select.family_room_media.state == 'Music' %}
+        {% elif is_state(input_select.family_room_media, 'Music') %}
           18890244
-        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
+        {% elif is_state(input_select.family_room_media, 'Bluetooth') %}
           22068322
         {% else %}
           -1
         {% endif %}
 
 
-- alias: Set theme when the alarm is enabled
+- alias: Set theme when alarm changes
   initial_state: True
   trigger:
     - platform: state
       entity_id: alarm_control_panel.simplisafe
-      to: 'armed_home'
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'armed_away'
   action:
     service: frontend.set_theme
-    data:
-      name: alarm
-
-
-- alias: Set theme when the alarm is disabled
-  initial_state: True
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'disarmed'
-  action:
-    service: frontend.set_theme
-    data:
-      name: default
+    data_template:
+      name: >
+        {% if is_state(alarm_control_panel.simplisafe, 'armed_home') %}
+          alarm
+        {% elif is_state(alarm_control_panel.simplisafe, 'armed_away') %}
+          alarm
+        {% else %}
+          default
+        {% endif %}
