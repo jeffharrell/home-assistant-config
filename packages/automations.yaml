@@ -184,15 +184,15 @@
     data_template:
       entity_id: remote.family_room
       activity: >
-        {% if is_state(input_select.family_room_media, 'Apple TV') %}
+        {% if states.input_select.family_room_media.state == 'Apple TV' %}
           21762413
-        {% elif is_state(input_select.family_room_media, 'Fire TV') %}
+        {% elif states.input_select.family_room_media.state == 'Fire TV' %}
           22767959
-        {% elif is_state(input_select.family_room_media, 'DVD Player') %}
+        {% elif states.input_select.family_room_media.state == 'DVD Player' %}
           21762603
-        {% elif is_state(input_select.family_room_media, 'Music') %}
+        {% elif states.input_select.family_room_media.state == 'Music' %}
           18890244
-        {% elif is_state(input_select.family_room_media, 'Bluetooth') %}
+        {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
           22068322
         {% else %}
           -1
@@ -208,9 +208,9 @@
     service: frontend.set_theme
     data_template:
       name: >
-        {% if is_state(alarm_control_panel.simplisafe, 'armed_home') %}
+        {% if states.alarm_control_panel.simplisafe.state == 'armed_home' %}
           alarm
-        {% elif is_state(alarm_control_panel.simplisafe, 'armed_away') %}
+        {% elif states.alarm_control_panel.simplisafe.state == 'armed_away' %}
           alarm
         {% else %}
           default
