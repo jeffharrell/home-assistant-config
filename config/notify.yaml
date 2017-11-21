@@ -17,3 +17,9 @@
   username: !secret gmail_user
   password: !secret gmail_pass
   recipient: !secret jillians_phone
+
+- name: jeff_and_jillians_phone
+  platform: group
+  services:
+    - service: jeffs_phone
+    - service: jillians_phone

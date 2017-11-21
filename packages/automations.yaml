@@ -5,22 +5,17 @@
     entity_id: binary_sensor.doorbell_sensor
     to: 'on'
   action:
-    - service: shell_command.snapshot_front_door
-    - delay: '00:00:01'
-    - service: notify.jeffs_phone
+    - service: camera.snapshot
+      data:
+        entity_id: camera.front_door
+        filename: /tmp/snapshot_doorbell.png
+    - service: notify.jeff_and_jillians_phone
       data:
         title: Home Assistant
         message: Doorbell
         data:
           images:
-            - /tmp/front_door.png
-    - service: notify.jillians_phone
-      data:
-        title: Home Assistant
-        message: Doorbell
-        data:
-          images:
-            - /tmp/front_door.png
+            - /tmp/snapshot_doorbell.png
 
 
 - alias: Turn thermostat to away mode with alarm
@@ -132,16 +127,18 @@
 - alias: Turn lights off (delayed)
   initial_state: True
   trigger:
-    platform: numeric_state
+    platform: state
     entity_id: input_number.delay_timer
-    above: 0
   action:
     - delay: '00:{{ states.input_number.delay_timer.state | int }}:00'
+    - condition: numeric_state
+      entity_id: input_number.delay_timer
+      above: 0
     - service: homeassistant.turn_off
       entity_id:
         - group.all_lights
         - group.all_switches
-    - service: input_number.select_value
+    - service: input_number.set_value
       data:
         entity_id: input_number.delay_timer
         value: 0

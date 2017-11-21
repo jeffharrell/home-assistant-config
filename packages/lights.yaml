@@ -38,10 +38,10 @@ homeassistant:
       friendly_name: Guest Room
     light.kitchen_lights_1_level:
       hidden: true
-      emulated_hue: false
+      emulated_hue_hidden: true
     light.kitchen_lights_2_level:
       hidden: true
-      emulated_hue: false
+      emulated_hue_hidden: true
     switch.outside_lights_switch:
       friendly_name: Back Yard
       icon: mdi:lightbulb
@@ -58,4 +58,4 @@ homeassistant:
       friendly_name: Kitchen Cabinets
       icon: mdi:lightbulb
     group.Kitchen:
-      emulated_hue: true
+      emulated_hue_hidden: false
