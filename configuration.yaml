@@ -19,15 +19,12 @@ homeassistant:
   whitelist_external_dirs:
     - /tmp
 
-frontend:
-  themes:
-    alarm:
-      primary-color: "red"
-
 config:
 
 logger:
   default: error
+
+frontend: !include config/frontend.yaml
 
 history: !include config/history.yaml
 

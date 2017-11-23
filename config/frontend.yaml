@@ -1,0 +1,5 @@
+javascript_version: latest
+
+themes:
+  alarm:
+    primary-color: "red"
