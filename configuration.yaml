@@ -36,8 +36,6 @@ emulated_hue: !include config/emulated_hue.yaml
 
 zwave: !include config/zwave.yaml
 
-automation: !include packages/automations.yaml
-
 script: !include packages/scripts.yaml
 
 sun:

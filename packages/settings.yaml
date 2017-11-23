@@ -6,7 +6,7 @@ group:
 
 input_number:
   delay_timer:
-    name: Turn lights off
+    name: Turn lights off in...
     initial: 0
     min: 0
     max: 60

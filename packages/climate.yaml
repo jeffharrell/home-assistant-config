@@ -51,3 +51,46 @@ sensor:
           - climate.meadowlands
 
 
+automation:
+  - alias: Thermostat lowers when alarm changes to away
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_away'
+    action:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.meadowlands
+          away_mode: true
+
+  - alias: Thermostat turns off AC when house fan turns on
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: switch.house_fan_switch
+      from: 'off'
+      to: 'on'
+    action:
+      - condition: template
+        value_template: '{{ states.climate.meadowlands.attributes.operation_mode == "cool" }}'
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.meadowlands
+          temperature: 80
+
+  - alias: Thermostat resumes when states revert
+    initial_state: True
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: switch.house_fan_switch
+        from: 'on'
+        to: 'off'
+      - platform: state
+        entity_id: alarm_control_panel.simplisafe
+        from: 'armed_away'
+    action:
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.meadowlands

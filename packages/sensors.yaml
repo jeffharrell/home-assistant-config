@@ -54,8 +54,7 @@ alert:
     can_acknowledge: True
     skip_first: True
     notifiers:
-      - jeffs_phone
-      - jillians_phone
+      - jeff_and_jillians_phone
 
   garage_door_jillian:
     name: Jillian's garage is open
@@ -67,8 +66,7 @@ alert:
     can_acknowledge: True
     skip_first: True
     notifiers:
-      - jeffs_phone
-      - jillians_phone
+      - jeff_and_jillians_phone
 
   garage_door_guest:
     name: Guest garage is open
@@ -80,5 +78,25 @@ alert:
     can_acknowledge: True
     skip_first: True
     notifiers:
-      - jeffs_phone
-      - jillians_phone
+      - jeff_and_jillians_phone
+
+
+automation:
+  - alias: Ringing the doorbell sends a notification
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell_sensor
+      to: 'on'
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id: camera.front_door
+          filename: /tmp/snapshot_doorbell.png
+      - service: notify.jeff_and_jillians_phone
+        data:
+          title: Home Assistant
+          message: Doorbell
+          data:
+            images:
+              - /tmp/snapshot_doorbell.png

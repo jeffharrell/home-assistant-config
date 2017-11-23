@@ -59,3 +59,60 @@ homeassistant:
       icon: mdi:lightbulb
     group.Kitchen:
       emulated_hue_hidden: false
+
+
+automation:
+  - alias: Sun setting in away mode turns lights on
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+    condition:
+      condition: state
+      entity_id: alarm_control_panel.simplisafe
+      state: 'armed_away'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.living_room_switch
+      - service: notify.jeffs_phone
+        data:
+          title: Home Assistant
+          message: Away mode lights on
+
+  - alias: Sun rising in away mode turns lights off
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '06:00:00'
+    condition:
+      condition: state
+      entity_id: alarm_control_panel.simplisafe
+      state: 'armed_away'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.living_room_switch
+      - service: notify.jeffs_phone
+        data:
+          title: Home Assistant
+          message: Away mode lights off
+
+  - alias: Delay lights off when timer changes
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: input_number.delay_timer
+    action:
+      - delay: '00:{{ states.input_number.delay_timer.state | int }}:00'
+      - condition: numeric_state
+        entity_id: input_number.delay_timer
+        above: 0
+      - service: homeassistant.turn_off
+        entity_id:
+          - group.all_lights
+          - group.all_switches
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.delay_timer
+          value: 0

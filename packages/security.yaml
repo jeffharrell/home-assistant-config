@@ -9,3 +9,44 @@ camera:
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
+
+
+automation:
+  - alias: Alarm status sets theme
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.simplisafe
+    action:
+      service: frontend.set_theme
+      data_template:
+        name: >
+          {% if states.alarm_control_panel.simplisafe.state == 'armed_home' %}
+            alarm
+          {% elif states.alarm_control_panel.simplisafe.state == 'armed_away' %}
+            alarm
+          {% else %}
+            default
+          {% endif %}
+
+  - alias: Alarm away turns house off
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.simplisafe
+      to: 'armed_away'
+    action:
+      - service: homeassistant.turn_off
+        entity_id:
+          - group.all_lights
+          - group.all_switches
+          - remote.family_room
+
+  - alias: Alarm alert turns lights on
+    initial_state: True
+    trigger:
+      platform: template
+      value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: group.Lights
