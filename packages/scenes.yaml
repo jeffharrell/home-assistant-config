@@ -2,7 +2,7 @@ group:
   Scenes:
     entities:
       - scene.good_morning
-      - scene.dinner_lights
+      - scene.dinner_time
       - scene.movie_time
       - scene.good_night
 
@@ -11,7 +11,7 @@ homeassistant:
   customize:
     scene.movie_time:
       icon: mdi:movie
-    scene.dinner_lights:
+    scene.dinner_time:
       icon: mdi:food-variant
     scene.good_morning:
       icon: mdi:brightness-5
@@ -33,7 +33,7 @@ scene:
       light.pantry_light_level: off
       switch.kitchen_cabinets_switch: off
 
-  - name: Dinner Lights
+  - name: Dinner Time
     entities:
       light.kitchen_lights_1_level:
         state: on

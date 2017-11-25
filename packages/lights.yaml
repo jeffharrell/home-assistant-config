@@ -33,9 +33,9 @@ homeassistant:
     light.island_lights_level:
       friendly_name: Island
     light.masons_room_level:
-      friendly_name: Mason's Room
+      friendly_name: Mason's Bedroom
     light.guest_room_level:
-      friendly_name: Guest Room
+      friendly_name: Guest Bedroom
     light.kitchen_lights_1_level:
       hidden: true
       emulated_hue_hidden: true
