@@ -4,8 +4,6 @@ group:
       - sensor.dark_sky_temperature
       - sensor.dark_sky_wind_speed
       - sensor.dark_sky_humidity
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_visibility
 
 
 homeassistant:
@@ -16,10 +14,6 @@ homeassistant:
       friendly_name: Wind Speed
     sensor.dark_sky_humidity:
       friendly_name: Humidity
-    sensor.dark_sky_cloud_coverage:
-      friendly_name: Cloud Coverage
-    sensor.dark_sky_visibility:
-      friendly_name: Visibility
 
 sensor:
   - platform: darksky
@@ -27,6 +21,4 @@ sensor:
     monitored_conditions:
       - temperature
       - wind_speed
-      - cloud_cover
       - humidity
-      - visibility

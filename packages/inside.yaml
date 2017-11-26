@@ -25,10 +25,10 @@ homeassistant:
       friendly_name: Living Room
       icon: mdi:thermometer
     sensor.masons_room_status:
-      friendly_name: Mason's Room
+      friendly_name: Mason's Bedroom
       icon: mdi:thermometer
     sensor.brinks_room_status:
-      friendly_name: Brinkley's Room
+      friendly_name: Brinkley's Bedroom
       icon: mdi:thermometer
     sensor.master_bedroom_status:
       friendly_name: Master Bedroom
