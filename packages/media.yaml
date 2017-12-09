@@ -16,7 +16,6 @@ input_select:
     options:
       - Power Off
       - Apple TV
-      - Fire TV
       - DVD Player
       - Music
       - Bluetooth
@@ -40,13 +39,11 @@ automation:
           option: >
             {% if states.remote.family_room.attributes.current_activity == 'Apple TV' %}
               Apple TV
-            {% elif states.remote.family_room.attributes.current_activity == 'Fire TV' %}
-              Fire TV
             {% elif states.remote.family_room.attributes.current_activity == 'DVD Player' %}
               DVD Player
             {% elif states.remote.family_room.attributes.current_activity == 'Music' %}
               Music
-            {% elif states.remote.family_room.attributes.current_activity == 'Receiver Bluetooth' %}
+            {% elif states.remote.family_room.attributes.current_activity == 'Bluetooth Speakers' %}
               Bluetooth
             {% else %}
               Power Off
@@ -65,8 +62,6 @@ automation:
         activity: >
           {% if states.input_select.family_room_media.state == 'Apple TV' %}
             21762413
-          {% elif states.input_select.family_room_media.state == 'Fire TV' %}
-            22767959
           {% elif states.input_select.family_room_media.state == 'DVD Player' %}
             21762603
           {% elif states.input_select.family_room_media.state == 'Music' %}
