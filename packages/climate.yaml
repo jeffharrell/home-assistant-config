@@ -53,7 +53,7 @@ sensor:
 
 automation:
   - alias: Thermostat lowers when alarm changes to away
-    initial_state: True
+    initial_state: False
     trigger:
       platform: state
       entity_id: alarm_control_panel.simplisafe

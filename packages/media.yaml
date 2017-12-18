@@ -4,6 +4,12 @@ group:
       - input_select.family_room_media
 
 
+media_player:
+  - platform: spotify
+    client_id: !secret spotify_client
+    client_secret: !secret spotify_secret
+
+
 remote:
   - platform: harmony
     name: Family Room
