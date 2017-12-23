@@ -1,0 +1,7 @@
+host: !secret influxdb_host
+exclude:
+  domains:
+    - automation
+    - camera
+    - group
+    - zwave

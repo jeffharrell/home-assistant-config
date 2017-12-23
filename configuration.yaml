@@ -21,14 +21,17 @@ homeassistant:
 
 config:
 
-logger:
-  default: error
+logger: !include config/logger.yaml
+
+http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
 
 history: !include config/history.yaml
 
-http: !include config/http.yaml
+recorder: !include config/recorder.yaml
+
+influxdb: !include config/influxdb.yaml
 
 notify: !include config/notify.yaml
 
