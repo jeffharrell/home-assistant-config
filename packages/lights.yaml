@@ -12,7 +12,6 @@ group:
       - switch.hallway_light_switch
       - light.master_bedroom_l_level
       - light.masons_room_level
-      - light.guest_room_level
       - switch.outside_lights_switch
   Kitchen:
     entities:
@@ -34,8 +33,6 @@ homeassistant:
       friendly_name: Island
     light.masons_room_level:
       friendly_name: Mason's Bedroom
-    light.guest_room_level:
-      friendly_name: Guest Bedroom
     light.kitchen_lights_1_level:
       hidden: true
       emulated_hue_hidden: true

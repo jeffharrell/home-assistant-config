@@ -12,6 +12,7 @@ group:
       - group.Inside
       - group.Outside
       - group.Sensors
+      - group.Batteries
   tools:
     view: yes
     entities:

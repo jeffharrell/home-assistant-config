@@ -10,10 +10,6 @@ device_config:
     refresh_value: True
     delay: 5
     polling_intensity: 1
-  light.guest_room_level:
-    refresh_value: True
-    delay: 5
-    polling_intensity: 1
   light.island_lights_level:
     refresh_value: True
     delay: 5

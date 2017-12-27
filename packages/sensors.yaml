@@ -1,11 +1,16 @@
 group:
   Sensors:
     entities:
-      - sensor.garage_jillian
       - sensor.garage_jeff
+      - sensor.garage_jillian
       - sensor.garage_guest
       - sensor.doorbell
-
+  Batteries:
+    entities:
+      - sensor.garage_jeff_battery
+      - sensor.garage_jillian_battery
+      - sensor.garage_guest_battery
+      - sensor.doorbell_battery
 
 homeassistant:
   customize:
@@ -18,10 +23,21 @@ homeassistant:
     sensor.garage_jillian:
       friendly_name: Jillian's Garage Door
       icon: mdi:home
+    sensor.garage_guest_battery:
+      friendly_name: Guest Garage Door
+      icon: mdi:battery
+    sensor.garage_jeff_battery:
+      friendly_name: Jeff's Garage Door
+      icon: mdi:battery
+    sensor.garage_jillian_battery:
+      friendly_name: Jillian's Garage Door
+      icon: mdi:battery
     sensor.doorbell:
       friendly_name: Doorbell
       icon: mdi:bell
-
+    sensor.doorbell_battery:
+      friendly_name: Doorbell
+      icon: mdi:battery
 
 sensor:
   - platform: template
@@ -30,17 +46,37 @@ sensor:
         value_template: '{% if is_state("binary_sensor.guest_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.guest_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.guest_garage_door_sensor
 
+      garage_guest_battery:
+        value_template: '{{ states.zwave.guest_garage_door.attributes.battery_level }}'
+        entity_id: zwave.guest_garage_door
+        unit_of_measurement: '%'
+
       garage_jillian:
         value_template: '{% if is_state("binary_sensor.jillians_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.jillians_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.jillians_garage_door_sensor
+
+      garage_jillian_battery:
+        value_template: '{{ states.zwave.jillians_garage_door.attributes.battery_level }}'
+        entity_id: zwave.jillians_garage_door
+        unit_of_measurement: '%'
 
       garage_jeff:
         value_template: '{% if is_state("binary_sensor.jeffs_garage_door_sensor", "on") %}Open{% elif is_state("binary_sensor.jeffs_garage_door_sensor", "off") %}Closed{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.jeffs_garage_door_sensor
 
+      garage_jeff_battery:
+        value_template: '{{ states.zwave.jeffs_garage_door.attributes.battery_level }}'
+        entity_id: zwave.jeffs_garage_door
+        unit_of_measurement: '%'
+
       doorbell:
-        value_template: '{% if is_state("binary_sensor.doorbell_sensor", "on") %}Ding Dong{% elif is_state("binary_sensor.doorbell_sensor", "off") %}Waiting{% else %}Unknown{% endif %}'
+        value_template: '{% if is_state("binary_sensor.doorbell_sensor", "on") %}Ding Dong!{% elif is_state("binary_sensor.doorbell_sensor", "off") %}Idle{% else %}Unknown{% endif %}'
         entity_id: binary_sensor.doorbell_sensor
+
+      doorbell_battery:
+        value_template: '{{ states.zwave.doorbell.attributes.battery_level }}'
+        entity_id: zwave.doorbell
+        unit_of_measurement: '%'
 
 
 alert:
