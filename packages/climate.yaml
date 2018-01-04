@@ -50,6 +50,11 @@ sensor:
         entity_id:
           - climate.meadowlands
 
+      climate_operation:
+        value_template: '{{states.climate.meadowlands.attributes.operation}}'
+        entity_id:
+          - climate.meadowlands
+
 
 automation:
   - alias: Thermostat lowers when alarm changes to away
