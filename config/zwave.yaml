@@ -1,11 +1,11 @@
 usb_path: /dev/ttyACM0
 autoheal: False
-polling_interval: 60000
+polling_interval: 30000
 device_config:
   light.dining_room_lights_level:
     refresh_value: True
-    delay: 5
-    polling_intensity: 1
+    delay: 6
+    polling_intensity: 2
   light.family_room_lights_level:
     refresh_value: True
     delay: 5
@@ -33,13 +33,13 @@ device_config:
   light.pantry_light_level:
     refresh_value: True
     delay: 5
-    polling_intensity: 1
+    polling_intensity: 2
   switch.entryway_light_switch:
-    polling_intensity: 1
+    polling_intensity: 2
   switch.hallway_light_switch:
     polling_intensity: 1
   switch.kitchen_cabinets_switch:
-    polling_intensity: 1
+    polling_intensity: 2
   switch.living_room_switch:
     polling_intensity: 1
   switch.outside_lights_switch:
