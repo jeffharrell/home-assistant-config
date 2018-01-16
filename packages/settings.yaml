@@ -2,6 +2,7 @@ group:
   Settings:
     entities:
       - input_number.delay_timer
+      - input_select.log_level
 
 
 input_number:
@@ -12,3 +13,29 @@ input_number:
     max: 60
     step: 1
     unit_of_measurement: Minutes
+
+
+input_select:
+  log_level:
+    name: Log level
+    options:
+      - critical
+      - fatal
+      - error
+      - warning
+      - warn
+      - info
+      - debug
+      - notset
+    initial: warn
+
+
+automation:
+  - alias: Log Level
+    trigger:
+      platform: state
+      entity_id: input_select.log_level
+    action:
+      service: logger.set_level
+      data_template:
+        homeassistant.components: "{{ trigger.to_state.state }}"

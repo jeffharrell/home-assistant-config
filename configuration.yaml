@@ -21,6 +21,8 @@ homeassistant:
 
 config:
 
+logbook:
+
 logger: !include config/logger.yaml
 
 http: !include config/http.yaml

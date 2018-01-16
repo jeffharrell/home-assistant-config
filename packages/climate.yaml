@@ -57,18 +57,6 @@ sensor:
 
 
 automation:
-  - alias: Thermostat lowers when alarm changes to away
-    initial_state: False
-    trigger:
-      platform: state
-      entity_id: alarm_control_panel.simplisafe
-      to: 'armed_away'
-    action:
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.meadowlands
-          away_mode: true
-
   - alias: Thermostat turns off AC when house fan turns on
     initial_state: True
     trigger:

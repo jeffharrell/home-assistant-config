@@ -127,3 +127,18 @@ automation:
         data:
           entity_id: input_number.delay_timer
           value: 0
+
+  - alias: Turn on lights when alarm disarmed
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.simplisafe
+      from: 'armed_away'
+      to: 'disarmed'
+    action:
+      - condition: sun
+        after: sunset
+        after_offset: '-1:00:00'
+      - service: homeassistant.turn_on
+        entity_id:
+          - switch.hallway_light_switch
