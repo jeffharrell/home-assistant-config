@@ -1,41 +1,111 @@
 group:
   Settings:
     entities:
-      - input_number.delay_timer
+      - input_select.delay_timer
       - input_select.log_level
+  Batteries:
+    entities:
+      - sensor.garage_jeff_battery
+      - sensor.garage_jillian_battery
+      - sensor.garage_guest_battery
+      - sensor.doorbell_battery
 
 
-input_number:
-  delay_timer:
-    name: Turn lights off in...
-    initial: 0
-    min: 0
-    max: 60
-    step: 1
-    unit_of_measurement: Minutes
+homeassistant:
+  customize:
+    group.all_automations:
+      friendly_name: Automations
+      control: hidden
+      hidden: false
+    sensor.garage_guest_battery:
+      friendly_name: Guest Garage Door
+      icon: mdi:battery
+    sensor.garage_jeff_battery:
+      friendly_name: Jeff's Garage Door
+      icon: mdi:battery
+    sensor.garage_jillian_battery:
+      friendly_name: Jillian's Garage Door
+      icon: mdi:battery
+    sensor.doorbell_battery:
+      friendly_name: Doorbell
+      icon: mdi:battery
 
 
 input_select:
   log_level:
     name: Log level
     options:
-      - critical
-      - fatal
-      - error
-      - warning
-      - warn
-      - info
-      - debug
-      - notset
-    initial: warn
+      - Critical
+      - Fatal
+      - Error
+      - Warning
+      - Warn
+      - Info
+      - Debug
+      - Notset
+    initial: Error
+  delay_timer:
+    name: Turn lights off in
+    options:
+      - "Choose"
+      - "0:15"
+      - "0:30"
+      - "1:00"
+      - "1:30"
+      - "2:00"
+
+
+sensor:
+  - platform: template
+    sensors:
+      garage_guest_battery:
+        value_template: '{{ states.zwave.guest_garage_door.attributes.battery_level }}'
+        entity_id: zwave.guest_garage_door
+        unit_of_measurement: '%'
+
+      garage_jillian_battery:
+        value_template: '{{ states.zwave.jillians_garage_door.attributes.battery_level }}'
+        entity_id: zwave.jillians_garage_door
+        unit_of_measurement: '%'
+
+      garage_jeff_battery:
+        value_template: '{{ states.zwave.jeffs_garage_door.attributes.battery_level }}'
+        entity_id: zwave.jeffs_garage_door
+        unit_of_measurement: '%'
+
+      doorbell_battery:
+        value_template: '{{ states.zwave.doorbell.attributes.battery_level }}'
+        entity_id: zwave.doorbell
+        unit_of_measurement: '%'
 
 
 automation:
   - alias: Log Level
+    initial_state: True
+    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.log_level
     action:
       service: logger.set_level
       data_template:
-        homeassistant.components: "{{ trigger.to_state.state }}"
+        homeassistant.components: "{{ trigger.to_state.state|lower }}"
+
+  - alias: Delay lights off when timer changes
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: input_select.delay_timer
+    action:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Choose' }}"
+      - delay: "{{ trigger.to_state.state }}"
+      - service: homeassistant.turn_off
+        entity_id:
+          - group.all_lights
+          - group.all_switches
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.delay_timer
+          option: Choose

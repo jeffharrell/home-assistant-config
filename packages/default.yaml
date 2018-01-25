@@ -12,7 +12,6 @@ group:
       - group.Inside
       - group.Outside
       - group.Sensors
-      - group.Batteries
   tools:
     view: yes
     entities:
@@ -20,12 +19,5 @@ group:
       - alert.garage_door_jeff
       - alert.garage_door_jillian
       - group.Settings
+      - group.Batteries
       - group.all_automations
-
-
-homeassistant:
-  customize:
-    group.all_automations:
-      friendly_name: Automations
-      control: hidden
-      hidden: false

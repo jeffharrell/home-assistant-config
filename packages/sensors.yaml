@@ -5,12 +5,6 @@ group:
       - binary_sensor.jillians_garage_door_sensor
       - binary_sensor.guest_garage_door_sensor
       - binary_sensor.doorbell_sensor
-  Batteries:
-    entities:
-      - sensor.garage_jeff_battery
-      - sensor.garage_jillian_battery
-      - sensor.garage_guest_battery
-      - sensor.doorbell_battery
 
 homeassistant:
   customize:
@@ -26,45 +20,10 @@ homeassistant:
       friendly_name: Jillian's Garage Door
       device_class: opening
       icon: mdi:home
-    sensor.garage_guest_battery:
-      friendly_name: Guest Garage Door
-      icon: mdi:battery
-    sensor.garage_jeff_battery:
-      friendly_name: Jeff's Garage Door
-      icon: mdi:battery
-    sensor.garage_jillian_battery:
-      friendly_name: Jillian's Garage Door
-      icon: mdi:battery
     binary_sensor.doorbell_sensor:
       friendly_name: Doorbell
       device_class: sound
       icon: mdi:bell
-    sensor.doorbell_battery:
-      friendly_name: Doorbell
-      icon: mdi:battery
-
-sensor:
-  - platform: template
-    sensors:
-      garage_guest_battery:
-        value_template: '{{ states.zwave.guest_garage_door.attributes.battery_level }}'
-        entity_id: zwave.guest_garage_door
-        unit_of_measurement: '%'
-
-      garage_jillian_battery:
-        value_template: '{{ states.zwave.jillians_garage_door.attributes.battery_level }}'
-        entity_id: zwave.jillians_garage_door
-        unit_of_measurement: '%'
-
-      garage_jeff_battery:
-        value_template: '{{ states.zwave.jeffs_garage_door.attributes.battery_level }}'
-        entity_id: zwave.jeffs_garage_door
-        unit_of_measurement: '%'
-
-      doorbell_battery:
-        value_template: '{{ states.zwave.doorbell.attributes.battery_level }}'
-        entity_id: zwave.doorbell
-        unit_of_measurement: '%'
 
 
 alert:

@@ -108,26 +108,6 @@ automation:
           title: Home Assistant
           message: Away mode lights off
 
-  - alias: Delay lights off when timer changes
-    initial_state: True
-    hide_entity: True
-    trigger:
-      platform: state
-      entity_id: input_number.delay_timer
-    action:
-      - delay: '00:{{ states.input_number.delay_timer.state | int }}:00'
-      - condition: numeric_state
-        entity_id: input_number.delay_timer
-        above: 0
-      - service: homeassistant.turn_off
-        entity_id:
-          - group.all_lights
-          - group.all_switches
-      - service: input_number.set_value
-        data:
-          entity_id: input_number.delay_timer
-          value: 0
-
   - alias: Turn on lights when alarm disarmed
     initial_state: True
     trigger:
