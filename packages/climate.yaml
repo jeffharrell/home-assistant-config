@@ -36,24 +36,16 @@ sensor:
       climate_temp:
         value_template: '{{states.climate.meadowlands.attributes.current_temperature}}'
         unit_of_measurement: °F
-        entity_id:
-          - climate.meadowlands
 
       climate_humidity:
         value_template: '{{states.climate.meadowlands.attributes.actual_humidity}}'
         unit_of_measurement: '%'
-        entity_id:
-          - climate.meadowlands
 
       climate_mode:
         value_template: '{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% if states.climate.meadowlands.attributes.away_mode == "on" %} (Away){% endif %}'
-        entity_id:
-          - climate.meadowlands
 
       climate_operation:
         value_template: '{{states.climate.meadowlands.attributes.operation}}'
-        entity_id:
-          - climate.meadowlands
 
 
 automation:

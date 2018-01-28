@@ -15,13 +15,13 @@ input_select:
   family_room_media:
     name: Input
     options:
-      - Choose
+      - Select
       - Power Off
       - Apple TV
       - DVD Player
       - Music
       - Bluetooth
-    initial: Choose
+    initial: Select
 
 
 sensor:
@@ -31,6 +31,12 @@ sensor:
         friendly_name: Family Room
         value_template: '{{ states.remote.family_room.attributes.current_activity }}'
         icon_template: mdi:television
+
+
+homeassistant:
+  customize:
+    input_select.family_room_media:
+      icon: mdi:remote
 
 
 automation:
@@ -59,4 +65,4 @@ automation:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.family_room_media
-          option: Choose
+          option: Select

@@ -63,6 +63,6 @@ scene:
 
   - name: Good Night
     entities:
-      group.all_lights: off
-      group.all_switches: off
+      group.Lights: off
+      switch.house_fan_switch: off
       alarm_control_panel.simplisafe: 'armed_home'

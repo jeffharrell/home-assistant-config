@@ -38,8 +38,8 @@ automation:
     action:
       - service: homeassistant.turn_off
         entity_id:
-          - group.all_lights
-          - group.all_switches
+          - group.Lights
+          - switch.house_fan_switch
           - remote.family_room
 
   - alias: Alarm alert turns lights on
@@ -49,7 +49,9 @@ automation:
       value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
     action:
       - service: homeassistant.turn_on
-        entity_id: group.Lights
+        entity_id:
+          - group.Lights
+          - switch.front_yard_switch
 
   - alias: Alarm reminders if not set
     initial_state: True

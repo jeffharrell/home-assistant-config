@@ -42,5 +42,5 @@ device_config:
     polling_intensity: 2
   switch.living_room_switch:
     polling_intensity: 1
-  switch.outside_lights_switch:
+  switch.back_yard_switch:
     polling_intensity: 1
