@@ -60,22 +60,18 @@ sensor:
     sensors:
       garage_guest_battery:
         value_template: '{{ states.zwave.guest_garage_door.attributes.battery_level }}'
-        entity_id: zwave.guest_garage_door
         unit_of_measurement: '%'
 
       garage_jillian_battery:
         value_template: '{{ states.zwave.jillians_garage_door.attributes.battery_level }}'
-        entity_id: zwave.jillians_garage_door
         unit_of_measurement: '%'
 
       garage_jeff_battery:
         value_template: '{{ states.zwave.jeffs_garage_door.attributes.battery_level }}'
-        entity_id: zwave.jeffs_garage_door
         unit_of_measurement: '%'
 
       doorbell_battery:
         value_template: '{{ states.zwave.doorbell.attributes.battery_level }}'
-        entity_id: zwave.doorbell
         unit_of_measurement: '%'
 
 

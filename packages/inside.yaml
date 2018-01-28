@@ -41,34 +41,19 @@ sensor:
       family_room_status:
         value_template: '{% if is_state("binary_sensor.family_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.family_room_temperature.state }}'
         unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.family_room_occupancy
-          - sensor.family_room_temperature
 
       living_room_status:
         value_template: '{% if is_state("binary_sensor.living_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.living_room_temperature.state }}'
         unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.living_room_occupancy
-          - sensor.living_room_temperature
 
       masons_room_status:
         value_template: '{% if is_state("binary_sensor.masons_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.masons_room_temperature.state }}'
         unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.masons_room_occupancy
-          - sensor.masons_room_temperature
 
       brinks_room_status:
         value_template: '{% if is_state("binary_sensor.brinks_room_occupancy", "on") %}☺ {% endif %}{{ states.sensor.brinks_room_temperature.state }}'
         unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.brinks_room_occupancy
-          - sensor.brinks_room_temperature
 
       master_bedroom_status:
         value_template: '{% if is_state("binary_sensor.master_bedroom_occupancy", "on") %}☺ {% endif %}{{ states.sensor.master_bedroom_temperature.state }}'
         unit_of_measurement: °F
-        entity_id:
-          - binary_sensor.master_bedroom_occupancy
-          - sensor.master_bedroom_temperature

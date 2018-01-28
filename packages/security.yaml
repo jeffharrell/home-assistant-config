@@ -50,8 +50,24 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - group.Lights
+          - switch.kitchen_cabinets_switch
+          - switch.living_room_switch
+          - switch.entryway_light_switch
+          - switch.hallway_light_switch
+          - switch.back_yard_switch
           - switch.front_yard_switch
+      - service: light.turn_on
+        entity_id:
+          - light.kitchen_lights_1_level
+          - light.kitchen_lights_2_level
+          - light.island_lights_level
+          - light.family_room_lights_level
+          - light.pantry_light_level
+          - light.dining_room_lights_level
+          - light.master_bedroom_l_level
+          - light.masons_room_level
+        data:
+          brightness: 255
 
   - alias: Alarm reminders if not set
     initial_state: True
