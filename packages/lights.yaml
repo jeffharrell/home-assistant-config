@@ -85,10 +85,6 @@ automation:
     action:
       - service: switch.turn_on
         entity_id: switch.front_yard_switch
-      - service: notify.jeffs_phone
-        data:
-          title: Home Assistant
-          message: Front lights on
 
   - alias: Front lights off with sunrise
     initial_state: True
@@ -99,10 +95,6 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.front_yard_switch
-      - service: notify.jeffs_phone
-        data:
-          title: Home Assistant
-          message: Front lights off
 
   - alias: Sun setting in away mode turns lights on
     initial_state: True

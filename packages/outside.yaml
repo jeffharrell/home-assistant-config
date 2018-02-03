@@ -4,6 +4,7 @@ group:
       - sensor.dark_sky_temperature
       - sensor.dark_sky_wind_speed
       - sensor.dark_sky_humidity
+      - sensor.front_lights
 
 
 homeassistant:
@@ -14,6 +15,8 @@ homeassistant:
       friendly_name: Wind Speed
     sensor.dark_sky_humidity:
       friendly_name: Humidity
+    sensor.front_lights:
+      friendly_name: Front Lights
 
 sensor:
   - platform: darksky
@@ -22,3 +25,14 @@ sensor:
       - temperature
       - wind_speed
       - humidity
+
+  - platform: template
+    sensors:
+      front_lights:
+        value_template: '{{ states.switch.front_yard_switch.state }}'
+        entity_picture_template: >
+          {%- if is_state('switch.front_yard_switch', 'on') -%}
+            /local/lightbulb-on.svg
+          {%- else -%}
+            /local/lightbulb.svg
+          {%- endif -%}
