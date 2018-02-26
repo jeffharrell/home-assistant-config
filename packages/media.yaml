@@ -29,7 +29,7 @@ sensor:
     sensors:
       family_room_media:
         friendly_name: Family Room
-        value_template: '{{ states.remote.family_room.attributes.current_activity }}'
+        value_template: '{{ states.remote.family_room.attributes.current_activity|replace("PowerOff", "Off") }}'
         icon_template: mdi:television
 
 
