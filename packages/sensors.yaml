@@ -4,7 +4,6 @@ group:
       - binary_sensor.jeffs_garage_door_sensor
       - binary_sensor.jillians_garage_door_sensor
       - binary_sensor.guest_garage_door_sensor
-      - binary_sensor.doorbell_sensor
 
 homeassistant:
   customize:
@@ -20,10 +19,6 @@ homeassistant:
       friendly_name: Jillian's Garage Door
       device_class: opening
       icon: mdi:home
-    binary_sensor.doorbell_sensor:
-      friendly_name: Doorbell
-      device_class: sound
-      icon: mdi:bell
 
 
 alert:

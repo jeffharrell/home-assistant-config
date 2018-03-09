@@ -1,11 +1,29 @@
 group:
   Outside:
     entities:
-      - sensor.front_lights
+      - switch.front_yard_switch
+      - switch.skybell_front_door_do_not_disturb
       - sensor.outdoor_temperature
       - sensor.outdoor_wind_speed
       - sensor.outdoor_humidity
 
+
+homeassistant:
+  customize:
+    switch.skybell_front_door_do_not_disturb:
+      friendly_name: Doorbell Mute
+      icon: mdi:bell
+
+
+skybell:
+  username: !secret skybell_user
+  password: !secret skybell_pass
+
+
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
 
 sensor:
   - platform: darksky
@@ -17,16 +35,6 @@ sensor:
 
   - platform: template
     sensors:
-      front_lights:
-        friendly_name: Front Lights
-        value_template: '{{ states.switch.front_yard_switch.state }}'
-        entity_picture_template: >
-          {%- if is_state('switch.front_yard_switch', 'on') -%}
-            /local/lightbulb-on.svg
-          {%- else -%}
-            /local/lightbulb.svg
-          {%- endif -%}
-
       outdoor_temperature:
         friendly_name: Temperature
         value_template: '{{ states.sensor.dark_sky_temperature.state|round|int }}'

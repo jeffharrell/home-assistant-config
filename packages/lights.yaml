@@ -40,7 +40,7 @@ homeassistant:
       hidden: true
       emulated_hue_hidden: true
     switch.front_yard_switch:
-      friendly_name: Front Yard
+      friendly_name: Front Light
       icon: mdi:lightbulb
     switch.back_yard_switch:
       friendly_name: Back Yard
