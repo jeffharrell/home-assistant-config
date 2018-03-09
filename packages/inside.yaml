@@ -25,7 +25,7 @@ sensor:
     sensors:
       family_room_status:
         friendly_name: Family Room
-        value_template: '{{ states.sensor.family_room_temperature.state }}'
+        value_template: '{{ states.sensor.family_room_temperature.state|round|int }}'
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state('binary_sensor.family_room_occupancy', 'on') -%}
@@ -36,7 +36,7 @@ sensor:
 
       living_room_status:
         friendly_name: Living Room
-        value_template: '{{ states.sensor.living_room_temperature.state }}'
+        value_template: '{{ states.sensor.living_room_temperature.state|round|int }}'
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state('binary_sensor.living_room_occupancy', 'on') -%}
@@ -47,7 +47,7 @@ sensor:
 
       masons_room_status:
         friendly_name: Mason's Bedroom
-        value_template: '{{ states.sensor.masons_room_temperature.state }}'
+        value_template: '{{ states.sensor.masons_room_temperature.state|round|int }}'
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state('binary_sensor.masons_room_occupancy', 'on') -%}
@@ -58,7 +58,7 @@ sensor:
 
       brinks_room_status:
         friendly_name: Brinkley's Bedroom
-        value_template: '{{ states.sensor.brinks_room_temperature.state }}'
+        value_template: '{{ states.sensor.brinks_room_temperature.state|round|int }}'
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state('binary_sensor.brinks_room_occupancy', 'on') -%}
@@ -69,7 +69,7 @@ sensor:
 
       master_bedroom_status:
         friendly_name: Master Bedroom
-        value_template: '{{ states.sensor.master_bedroom_temperature.state }}'
+        value_template: '{{ states.sensor.master_bedroom_temperature.state|round|int }}'
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state('binary_sensor.master_bedroom_occupancy', 'on') -%}
