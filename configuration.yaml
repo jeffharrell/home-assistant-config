@@ -23,8 +23,6 @@ config:
 
 logbook: !include config/logbook.yaml
 
-logger: !include config/logger.yaml
-
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
@@ -44,3 +42,8 @@ zwave: !include config/zwave.yaml
 script: !include packages/scripts.yaml
 
 sun:
+
+logger:
+  default: warn
+  logs:
+    homeassistant.components: warn
