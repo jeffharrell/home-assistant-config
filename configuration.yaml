@@ -46,4 +46,7 @@ sun:
 logger:
   default: warn
   logs:
-    homeassistant.components: warn
+    homeassistant.components.notify.smtp: error
+    homeassistant.components.alarm_control_panel: error
+    homeassistant.components.sensor.darksky: error
+    homeassistant.helpers.entity: error

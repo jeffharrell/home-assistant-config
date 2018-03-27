@@ -1,7 +1,7 @@
 group:
   Lights:
     entities:
-      - switch.kitchen
+      - light.Kitchen
       - light.island_lights_level
       - switch.kitchen_cabinets_switch
       - light.family_room_lights_level
@@ -13,7 +13,11 @@ group:
       - light.master_bedroom_l_level
       - light.masons_room_level
       - switch.back_yard_switch
-  Kitchen:
+
+
+light:
+  - platform: group
+    name: Kitchen
     entities:
       - light.kitchen_lights_1_level
       - light.kitchen_lights_2_level
@@ -57,22 +61,9 @@ homeassistant:
     switch.kitchen_cabinets_switch:
       friendly_name: Kitchen Cabinets
       icon: mdi:lightbulb
-    switch.kitchen:
+    light.Kitchen:
       friendly_name: Kitchen
       icon: mdi:lightbulb
-
-
-switch:
-  - platform: template
-    switches:
-      kitchen:
-        value_template: "{{ is_state('group.Kitchen', 'on') }}"
-        turn_on:
-          service: light.turn_on
-          entity_id: group.Kitchen
-        turn_off:
-          service: light.turn_off
-          entity_id: group.Kitchen
 
 
 automation:
