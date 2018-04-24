@@ -14,7 +14,6 @@ group:
       - light.masons_room_level
       - switch.back_yard_switch
 
-
 light:
   - platform: group
     name: Kitchen
