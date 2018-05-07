@@ -3,7 +3,7 @@ group:
     control: hidden
     entities:
       - switch.front_yard_switch
-#      - switch.skybell_front_door_do_not_disturb
+      - switch.skybell_front_door_do_not_disturb
       - sensor.outdoor_temperature
       - sensor.outdoor_wind_speed
       - sensor.outdoor_humidity
@@ -16,15 +16,14 @@ homeassistant:
       icon: mdi:bell
 
 
-# skybell:
-#   username: !secret skybell_user
-#   password: !secret skybell_pass
+skybell:
+  username: !secret skybell_user
+  password: !secret skybell_pass
 
-
-# switch:
-#   - platform: skybell
-#     monitored_conditions:
-#       - do_not_disturb
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
 
 sensor:
   - platform: darksky
@@ -33,6 +32,8 @@ sensor:
       - temperature
       - wind_speed
       - humidity
+      - precip_probability
+      - summary
 
   - platform: template
     sensors:

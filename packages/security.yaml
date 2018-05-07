@@ -73,7 +73,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: '{{ states.climate.meadowlands.attributes.away_mode == "on" and states.alarm_control_panel.simplisafe.state != "armed_away" }}'
+      value_template: '{{ (states.climate.meadowlands.attributes.away_mode == "on" or states.climate.meadowlands.attributes.mode == "Away") and states.alarm_control_panel.simplisafe.state != "armed_away" }}'
     action:
       - service: notify.jeffs_phone
         data:

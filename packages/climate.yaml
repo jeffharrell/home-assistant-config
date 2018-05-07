@@ -16,7 +16,7 @@ homeassistant:
       icon: mdi:water
     sensor.climate_mode:
       friendly_name: Mode
-      icon: mdi:nest-thermostat
+      icon: mdi:thermostat
     sensor.meadowlands_temperature:
       hidden: true
     sensor.meadowlands_humidity:
