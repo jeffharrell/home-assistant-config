@@ -12,7 +12,6 @@ group:
       - switch.hallway_light_switch
       - light.master_bedroom_l_level
       - light.masons_room_level
-      - switch.back_yard_switch
 
 light:
   - platform: group
@@ -42,12 +41,6 @@ homeassistant:
     light.kitchen_lights_2_level:
       hidden: true
       emulated_hue_hidden: true
-    switch.front_yard_switch:
-      friendly_name: Front Light
-      icon: mdi:lightbulb
-    switch.back_yard_switch:
-      friendly_name: Back Yard
-      icon: mdi:lightbulb
     switch.living_room_switch:
       friendly_name: Living Room
       icon: mdi:lightbulb
@@ -66,27 +59,7 @@ homeassistant:
 
 
 automation:
-  - alias: Front lights on with sunset
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunset
-      offset: '+00:00:00'
-    action:
-      - service: switch.turn_on
-        entity_id: switch.front_yard_switch
-
-  - alias: Front lights off with sunrise
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunrise
-      offset: '-01:00:00'
-    action:
-      - service: switch.turn_off
-        entity_id: switch.front_yard_switch
-
-  - alias: Sun setting in away mode turns lights on
+  - alias: Away mode lights on
     initial_state: True
     trigger:
       platform: sun
@@ -103,7 +76,7 @@ automation:
           title: Home Assistant
           message: Away mode lights on
 
-  - alias: Sun rising in away mode turns lights off
+  - alias: Away mode lights off
     initial_state: True
     trigger:
       platform: sun
@@ -121,7 +94,7 @@ automation:
           title: Home Assistant
           message: Away mode lights off
 
-  - alias: Turn on lights when alarm disarmed
+  - alias: Lights on when alarm disarmed
     initial_state: True
     trigger:
       platform: state

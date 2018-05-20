@@ -2,18 +2,36 @@ group:
   Outside:
     control: hidden
     entities:
-      - switch.front_yard_switch
-      - switch.skybell_front_door_do_not_disturb
       - sensor.outdoor_temperature
-      - sensor.outdoor_wind_speed
-      - sensor.outdoor_humidity
+      - sensor.dark_sky_summary
+      - switch.front_yard_switch
+      - switch.back_yard_switch
+      - switch.front_landscape
+      - switch.back_landscape
+      - switch.skybell_front_door_do_not_disturb
 
 
 homeassistant:
   customize:
+    switch.front_yard_switch:
+      friendly_name: Front Light
+      icon: mdi:lightbulb
+    switch.back_yard_switch:
+      friendly_name: Back Yard
+      icon: mdi:lightbulb
+    switch.front_landscape:
+      friendly_name: Front Landscape
+      icon: mdi:lightbulb
+    switch.back_landscape:
+      friendly_name: Back Landscape
+      icon: mdi:lightbulb
     switch.skybell_front_door_do_not_disturb:
       friendly_name: Mute Doorbell
       icon: mdi:bell
+    sensor.dark_sky_summary:
+      friendly_name: Today
+      icon: mdi:weather-sunny
+      entity_picture:
 
 
 skybell:
@@ -30,9 +48,6 @@ sensor:
     api_key: !secret darksky_api_key
     monitored_conditions:
       - temperature
-      - wind_speed
-      - humidity
-      - precip_probability
       - summary
 
   - platform: template
@@ -43,14 +58,48 @@ sensor:
         unit_of_measurement: °F
         icon_template: mdi:thermometer
 
-      outdoor_wind_speed:
-        friendly_name: Wind Speed
-        value_template: '{{ states.sensor.dark_sky_wind_speed.state|round|int }}'
-        unit_of_measurement: 'mph'
-        icon_template: mdi:weather-windy
 
-      outdoor_humidity:
-        friendly_name: Humidity
-        value_template: '{{ states.sensor.dark_sky_humidity.state|round|int }}'
-        unit_of_measurement: '%'
-        icon_template: mdi:water
+automation:
+  - alias: Landscape lights on
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '+00:30:00'
+    action:
+      - service: switch.turn_on
+        entity_id:
+          - switch.front_landscape
+          - switch.back_landscape
+
+  - alias: Landscape lights off
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '+02:30:00'
+    action:
+      - service: switch.turn_off
+        entity_id:
+          - switch.front_landscape
+          - switch.back_landscape
+
+  - alias: Front door light on
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '+02:30:00'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.front_yard_switch
+
+  - alias: Front lights off with sunrise
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: '-01:00:00'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.front_yard_switch
