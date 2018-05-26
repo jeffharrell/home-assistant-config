@@ -105,8 +105,9 @@ sensor:
             /local/thermometer.svg
           {%- endif -%}
 
+
 automation:
-  - alias: Thermostat turns off AC when house fan turns on
+  - alias: AC off when house fan on
     initial_state: True
     trigger:
       platform: state
@@ -121,7 +122,7 @@ automation:
           entity_id: climate.meadowlands
           temperature: 80
 
-  - alias: Thermostat resumes when states revert
+  - alias: Resume thermostat when states revert
     initial_state: True
     hide_entity: True
     trigger:

@@ -3,6 +3,21 @@ group:
     entities:
       - sensor.family_room_media
       - input_select.family_room_media
+      - group.PlayOutside
+  PlayOutside:
+    entities:
+      - script.back_yard_speakers      
+
+
+homeassistant:
+  customize:
+    input_select.family_room_media:
+      icon: mdi:remote
+    group.PlayOutside:
+      friendly_name: Play Outside
+      icon: mdi:speaker
+      visible: False
+      assumed_state: False
 
 
 remote:
@@ -33,16 +48,10 @@ sensor:
         icon_template: mdi:television
 
 
-homeassistant:
-  customize:
-    input_select.family_room_media:
-      icon: mdi:remote
-
-
 automation:
-  - alias: Media input changes trigger remote
+  - alias: Media input acts as remote
     initial_state: True
-    hide_entity: False
+    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.family_room_media
@@ -66,3 +75,22 @@ automation:
         data_template:
           entity_id: input_select.family_room_media
           option: Select
+
+  - alias: Show Play Outside Controls
+    initial_state: True
+    hide_entity: True
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id: remote.family_room
+    action:
+      service: group.set_visibility
+      data_template:
+        entity_id: group.PlayOutside
+        visible: >
+          {% if states.remote.family_room.attributes.current_activity == 'Music' %}
+            True
+          {% else %}
+            False
+          {% endif %}       

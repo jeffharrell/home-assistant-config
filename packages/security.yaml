@@ -12,8 +12,9 @@ camera:
 
 
 automation:
-  - alias: Alarm status sets theme
+  - alias: Alarm status changes theme
     initial_state: True
+    hide_entity: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.simplisafe
@@ -69,7 +70,7 @@ automation:
         data:
           brightness: 255
 
-  - alias: Alarm reminders if not set
+  - alias: Remind if alarm not set
     initial_state: True
     trigger:
       platform: template

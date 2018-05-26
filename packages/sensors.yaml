@@ -76,7 +76,7 @@ alert:
 
 
 automation:
-  - alias: Ringing the doorbell sends a notification
+  - alias: Doorbell notifications
     initial_state: True
     trigger:
       platform: state

@@ -60,7 +60,7 @@ automation:
       - service: switch.turn_on
         entity_id: switch.front_yard_switch
 
-  - alias: Front lights off with sunrise
+  - alias: Front lights off 
     initial_state: True
     trigger:
       platform: sun
@@ -69,3 +69,21 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.front_yard_switch
+
+  - alias: Fountain on
+    initial_state: True
+    trigger:
+      platform: time
+      at: '09:00:00'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.fountain
+
+  - alias: Fountain off 
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      - service: switch.turn_off
+        entity_id: switch.fountain       

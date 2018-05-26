@@ -95,7 +95,7 @@ automation:
       data_template:
         homeassistant.components: "{{ trigger.to_state.state|lower }}"
 
-  - alias: Delay lights off when timer changes
+  - alias: Delay lights off 
     initial_state: True
     hide_entity: True
     trigger:
