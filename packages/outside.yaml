@@ -1,13 +1,15 @@
 group:
-  Outside:
+  Yard:
+    name: Outside
     control: hidden
     entities:
+      - sensor.dark_sky_summary      
       - sensor.outdoor_temperature
-      - sensor.dark_sky_summary
       - switch.front_yard_switch
       - switch.back_yard_switch
       - switch.front_landscape
       - switch.back_landscape
+      - switch.fountain
       - switch.skybell_front_door_do_not_disturb
 
 
@@ -17,7 +19,7 @@ homeassistant:
       friendly_name: Front Light
       icon: mdi:lightbulb
     switch.back_yard_switch:
-      friendly_name: Back Yard
+      friendly_name: Back Light
       icon: mdi:lightbulb
     switch.front_landscape:
       friendly_name: Front Landscape
@@ -25,6 +27,9 @@ homeassistant:
     switch.back_landscape:
       friendly_name: Back Landscape
       icon: mdi:lightbulb
+    switch.fountain:
+      friendly_name: Fountain
+      icon: mdi:fountain
     switch.skybell_front_door_do_not_disturb:
       friendly_name: Mute Doorbell
       icon: mdi:bell
@@ -49,6 +54,7 @@ sensor:
     monitored_conditions:
       - temperature
       - summary
+      - humidity
 
   - platform: template
     sensors:
@@ -65,7 +71,6 @@ automation:
     trigger:
       platform: sun
       event: sunset
-      offset: '+00:30:00'
     action:
       - service: switch.turn_on
         entity_id:
@@ -75,9 +80,8 @@ automation:
   - alias: Landscape lights off
     initial_state: True
     trigger:
-      platform: sun
-      event: sunset
-      offset: '+02:30:00'
+      platform: time
+      at: '22:00:00'
     action:
       - service: switch.turn_off
         entity_id:
@@ -87,9 +91,8 @@ automation:
   - alias: Front door light on
     initial_state: True
     trigger:
-      platform: sun
-      event: sunset
-      offset: '+02:30:00'
+      platform: time
+      at: '22:00:00'
     action:
       - service: switch.turn_on
         entity_id: switch.front_yard_switch

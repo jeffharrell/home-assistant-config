@@ -1,17 +1,16 @@
 group:
   default_view:
-    name: Home
+    name: Inside
     view: yes
     entities:
       - group.Lights
       - group.Media
       - group.Climate
       - group.Scenes
-  status:
+  outside:
     view: yes
     entities:
-      - group.Inside
-      - group.Outside
+      - group.Yard
       - group.Sensors
   tools:
     view: yes

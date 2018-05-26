@@ -10,7 +10,7 @@ group:
       - switch.living_room_switch
       - switch.entryway_light_switch
       - switch.hallway_light_switch
-      - light.master_bedroom_l_level
+      - light.master_bedroom_level
       - light.masons_room_level
 
 light:
@@ -27,7 +27,7 @@ homeassistant:
       friendly_name: Pantry
     light.dining_room_lights_level:
       friendly_name: Dining Room
-    light.master_bedroom_l_level:
+    light.master_bedroom_level:
       friendly_name: Master Bedroom
     light.family_room_lights_level:
       friendly_name: Family Room

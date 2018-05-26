@@ -1,10 +1,13 @@
 group:
   Climate:
     entities:
-      - sensor.climate_temp
-      - sensor.climate_humidity
       - sensor.climate_mode
       - switch.house_fan_switch
+      - sensor.family_room_status
+      - sensor.living_room_status
+      - sensor.masons_room_status
+      - sensor.brinks_room_status
+      - sensor.master_bedroom_status      
 
 
 homeassistant:
@@ -24,6 +27,14 @@ homeassistant:
     switch.house_fan_switch:
       friendly_name: House Fan
       icon: mdi:fan
+    sensor.family_room_temperature:
+      hidden: true
+    sensor.living_room_temperature:
+      hidden: true
+    sensor.masons_room_temperature:
+      hidden: true
+    sensor.brinks_room_temperature:
+      hidden: true      
 
 
 ecobee:
@@ -33,20 +44,66 @@ ecobee:
 sensor:
   - platform: template
     sensors:
-      climate_temp:
-        value_template: '{{states.climate.meadowlands.attributes.current_temperature}}'
-        unit_of_measurement: °F
-
-      climate_humidity:
-        value_template: '{{states.climate.meadowlands.attributes.actual_humidity}}'
-        unit_of_measurement: '%'
-
       climate_mode:
         value_template: '{% if states.climate.meadowlands.attributes.mode == "Away" %}Away{% else %}{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% endif %}'
 
       climate_operation:
         value_template: '{{states.climate.meadowlands.attributes.operation}}'
 
+      family_room_status:
+        friendly_name: Family Room
+        value_template: '{{ states.sensor.family_room_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state('binary_sensor.family_room_occupancy', 'on') -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
+      living_room_status:
+        friendly_name: Living Room
+        value_template: '{{ states.sensor.living_room_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state('binary_sensor.living_room_occupancy', 'on') -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
+      masons_room_status:
+        friendly_name: Mason's Bedroom
+        value_template: '{{ states.sensor.masons_room_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state('binary_sensor.masons_room_occupancy', 'on') -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
+      brinks_room_status:
+        friendly_name: Brinkley's Bedroom
+        value_template: '{{ states.sensor.brinks_room_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state('binary_sensor.brinks_room_occupancy', 'on') -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
+      master_bedroom_status:
+        friendly_name: Master Bedroom
+        value_template: '{{ states.sensor.master_bedroom_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state('binary_sensor.master_bedroom_occupancy', 'on') -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
 
 automation:
   - alias: Thermostat turns off AC when house fan turns on
