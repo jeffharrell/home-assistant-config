@@ -1,16 +1,12 @@
 group:
-  Yard:
-    name: Outside
+  Landscaping:
     control: hidden
     entities:
-      - sensor.dark_sky_summary      
-      - sensor.outdoor_temperature
       - switch.front_yard_switch
       - switch.back_yard_switch
       - switch.front_landscape
       - switch.back_landscape
       - switch.fountain
-      - switch.skybell_front_door_do_not_disturb
 
 
 homeassistant:
@@ -29,40 +25,7 @@ homeassistant:
       icon: mdi:lightbulb
     switch.fountain:
       friendly_name: Fountain
-      icon: mdi:fountain
-    switch.skybell_front_door_do_not_disturb:
-      friendly_name: Mute Doorbell
-      icon: mdi:bell
-    sensor.dark_sky_summary:
-      friendly_name: Today
-      icon: mdi:weather-sunny
-      entity_picture:
-
-
-skybell:
-  username: !secret skybell_user
-  password: !secret skybell_pass
-
-switch:
-  - platform: skybell
-    monitored_conditions:
-      - do_not_disturb
-
-sensor:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    monitored_conditions:
-      - temperature
-      - summary
-      - humidity
-
-  - platform: template
-    sensors:
-      outdoor_temperature:
-        friendly_name: Temperature
-        value_template: '{{ states.sensor.dark_sky_temperature.state|round|int }}'
-        unit_of_measurement: °F
-        icon_template: mdi:thermometer
+      icon: mdi:cup-water
 
 
 automation:

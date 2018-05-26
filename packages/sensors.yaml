@@ -1,9 +1,11 @@
 group:
   Sensors:
+    control: hidden
     entities:
       - binary_sensor.jeffs_garage_door_sensor
       - binary_sensor.jillians_garage_door_sensor
       - binary_sensor.guest_garage_door_sensor
+      - switch.skybell_front_door_do_not_disturb
 
 homeassistant:
   customize:
@@ -19,6 +21,20 @@ homeassistant:
       friendly_name: Jillian's Garage Door
       device_class: opening
       icon: mdi:home
+    switch.skybell_front_door_do_not_disturb:
+      friendly_name: Mute Doorbell
+      icon: mdi:bell
+
+
+skybell:
+  username: !secret skybell_user
+  password: !secret skybell_pass
+
+
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
 
 
 alert:

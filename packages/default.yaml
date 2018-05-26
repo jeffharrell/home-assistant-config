@@ -10,7 +10,8 @@ group:
   outside:
     view: yes
     entities:
-      - group.Yard
+      - group.Weather
+      - group.Landscaping
       - group.Sensors
   tools:
     view: yes

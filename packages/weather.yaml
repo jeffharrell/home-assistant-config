@@ -1,0 +1,29 @@
+group:
+  Weather:
+    entities:
+      - sensor.dark_sky_summary      
+      - sensor.outdoor_temperature
+
+
+homeassistant:
+  customize:
+    sensor.dark_sky_summary:
+      friendly_name: Today
+      icon: mdi:weather-sunny
+      entity_picture:
+
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - temperature
+      - summary
+      - humidity
+
+  - platform: template
+    sensors:
+      outdoor_temperature:
+        friendly_name: Temperature
+        value_template: '{{ states.sensor.dark_sky_temperature.state|round|int }}'
+        unit_of_measurement: °F
+        icon_template: mdi:thermometer

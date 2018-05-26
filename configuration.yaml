@@ -11,7 +11,8 @@ homeassistant:
     media: !include packages/media.yaml
     climate: !include packages/climate.yaml
     scenes: !include packages/scenes.yaml
-    outside: !include packages/outside.yaml
+    landscaping: !include packages/landscaping.yaml
+    weather: !include packages/weather.yaml
     sensors: !include packages/sensors.yaml
     settings: !include packages/settings.yaml
     security: !include packages/security.yaml
