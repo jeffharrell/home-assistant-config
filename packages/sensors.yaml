@@ -76,7 +76,7 @@ alert:
 
 
 automation:
-  - alias: Doorbell notifications
+  - alias: Doorbell - Notifications
     initial_state: True
     trigger:
       platform: state

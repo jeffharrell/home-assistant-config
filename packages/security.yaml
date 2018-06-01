@@ -12,7 +12,7 @@ camera:
 
 
 automation:
-  - alias: Alarm status changes theme
+  - alias: Alarm - Status changes theme
     initial_state: True
     hide_entity: True
     trigger:
@@ -30,7 +30,7 @@ automation:
             default
           {% endif %}
 
-  - alias: Alarm away turns house off
+  - alias: Alarm - Away mode lights off
     initial_state: True
     trigger:
       platform: state
@@ -40,10 +40,11 @@ automation:
       - service: homeassistant.turn_off
         entity_id:
           - group.Lights
+          - switch.back_yard_switch
           - switch.house_fan_switch
           - remote.family_room
 
-  - alias: Alarm alert turns lights on
+  - alias: Alarm - Alert lighting
     initial_state: True
     trigger:
       platform: template
@@ -57,6 +58,7 @@ automation:
           - switch.hallway_light_switch
           - switch.back_yard_switch
           - switch.front_yard_switch
+          - switch.guest_room_switch
       - service: light.turn_on
         entity_id:
           - light.kitchen_lights_1_level
@@ -65,12 +67,12 @@ automation:
           - light.family_room_lights_level
           - light.pantry_light_level
           - light.dining_room_lights_level
-          - light.master_bedroom_l_level
+          - light.master_bedroom_level
           - light.masons_room_level
         data:
           brightness: 255
 
-  - alias: Remind if alarm not set
+  - alias: Alarm - Reminder
     initial_state: True
     trigger:
       platform: template
@@ -79,4 +81,4 @@ automation:
       - service: notify.jeffs_phone
         data:
           title: Home Assistant
-          message: Alarm is not set. Are you away?
+          message: The alarm is not armed. Are you away?

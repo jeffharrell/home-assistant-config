@@ -6,7 +6,7 @@ group:
       - group.PlayOutside
   PlayOutside:
     entities:
-      - script.back_yard_speakers      
+      - script.back_yard_speakers
 
 
 homeassistant:
@@ -49,7 +49,7 @@ sensor:
 
 
 automation:
-  - alias: Media input acts as remote
+  - alias: Media - Input acts as remote
     initial_state: True
     hide_entity: True
     trigger:
@@ -76,7 +76,7 @@ automation:
           entity_id: input_select.family_room_media
           option: Select
 
-  - alias: Show Play Outside Controls
+  - alias: Media - Show outside speaker controls
     initial_state: True
     hide_entity: True
     trigger:
@@ -93,4 +93,4 @@ automation:
             True
           {% else %}
             False
-          {% endif %}       
+          {% endif %}

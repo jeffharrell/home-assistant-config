@@ -29,61 +29,51 @@ homeassistant:
 
 
 automation:
-  - alias: Landscape lights on
+  - alias: Landscape - Lights
     initial_state: True
     trigger:
-      platform: sun
-      event: sunset
+      # on
+      - platform: sun
+        event: sunset
+        offset: '00:15:00'
+      # off
+      - platform: time
+        at: '22:00:00'
     action:
-      - service: switch.turn_on
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == 'sunset' %}on{% else %}off{% endif %}
         entity_id:
           - switch.front_landscape
           - switch.back_landscape
 
-  - alias: Landscape lights off
+
+  - alias: Landscape - Front door light
     initial_state: True
     trigger:
-      platform: time
-      at: '22:00:00'
+      # on
+      - platform: time
+        at: '22:00:00'
+      # off
+      - platform: sun
+        event: sunrise
+        offset: '-01:00:00'
     action:
-      - service: switch.turn_off
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == 'sunrise' %}off{% else %}on{% endif %}
         entity_id:
-          - switch.front_landscape
-          - switch.back_landscape
+          - switch.front_yard_switch
 
-  - alias: Front door light on
+  - alias: Landscape - Fountain
     initial_state: True
     trigger:
-      platform: time
-      at: '22:00:00'
+      # on
+      - platform: time
+        at: '09:00:00'
+      # off
+      - platform: sun
+        event: sunset
     action:
-      - service: switch.turn_on
-        entity_id: switch.front_yard_switch
-
-  - alias: Front lights off 
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunrise
-      offset: '-01:00:00'
-    action:
-      - service: switch.turn_off
-        entity_id: switch.front_yard_switch
-
-  - alias: Fountain on
-    initial_state: True
-    trigger:
-      platform: time
-      at: '09:00:00'
-    action:
-      - service: switch.turn_on
-        entity_id: switch.fountain
-
-  - alias: Fountain off 
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunset
-    action:
-      - service: switch.turn_off
-        entity_id: switch.fountain       
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == 'sunset' %}off{% else %}on{% endif %}
+        entity_id:
+          - switch.fountain

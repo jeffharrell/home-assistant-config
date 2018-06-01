@@ -3,14 +3,15 @@ group:
     entities:
       - light.family_room_lights_level
       - light.dining_room_lights_level
-      - switch.living_room_switch      
+      - switch.living_room_switch
       - light.Kitchen
       - light.island_lights_level
       - switch.kitchen_cabinets_switch
       - light.pantry_light_level
       - switch.entryway_light_switch
       - switch.hallway_light_switch
-      - light.masons_room_level      
+      - switch.guest_room_switch
+      - light.masons_room_level
       - light.master_bedroom_level
 
 light:
@@ -41,6 +42,9 @@ homeassistant:
     light.kitchen_lights_2_level:
       hidden: true
       emulated_hue_hidden: true
+    switch.guest_room_switch:
+      friendly_name: Guest Bedroom
+      icon: mdi:lightbulb
     switch.living_room_switch:
       friendly_name: Living Room
       icon: mdi:lightbulb
@@ -59,51 +63,38 @@ homeassistant:
 
 
 automation:
-  - alias: Away mode lights on
+  - alias: Lights - Toggle when away
     initial_state: True
     trigger:
-      platform: sun
-      event: sunset
+      - platform: sun
+        event: sunset
+      - platform: sun
+        event: sunrise
+        offset: '06:00:00'
     condition:
       condition: state
       entity_id: alarm_control_panel.simplisafe
       state: 'armed_away'
     action:
-      - service: switch.turn_on
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == 'sunrise' %}off{% else %}on{% endif %}
         entity_id: switch.living_room_switch
       - service: notify.jeffs_phone
-        data:
+        data_template:
           title: Home Assistant
-          message: Away mode lights on
+          message: I am turning the lights {% if trigger and trigger.event == 'sunrise' %}off{% else %}on{% endif %} since you are away.
 
-  - alias: Away mode lights off
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunset
-      offset: '06:00:00'
-    condition:
-      condition: state
-      entity_id: alarm_control_panel.simplisafe
-      state: 'armed_away'
-    action:
-      - service: switch.turn_off
-        entity_id: switch.living_room_switch
-      - service: notify.jeffs_phone
-        data:
-          title: Home Assistant
-          message: Away mode lights off
-
-  - alias: Lights on when alarm disarmed
+  - alias: Lights - Turn on when coming home
     initial_state: True
     trigger:
       platform: state
       entity_id: alarm_control_panel.simplisafe
       from: 'armed_away'
+      to: 'disarmed'
     action:
       - condition: sun
         after: sunset
-        after_offset: '-1:00:00'
+        after_offset: '00:30:00'
       - service: homeassistant.turn_on
         entity_id:
           - switch.hallway_light_switch

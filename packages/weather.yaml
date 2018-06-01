@@ -1,9 +1,9 @@
 group:
   Weather:
     entities:
-      - sensor.outdoor_forecast     
+      - sensor.outdoor_forecast
       - sensor.outdoor_temperature
-      - sensor.outdoor_temperature_max
+      - sensor.outdoor_temperature_high
 
 
 sensor:
@@ -11,7 +11,7 @@ sensor:
     api_key: !secret darksky_api_key
     monitored_conditions:
       - temperature
-      - temperature_max
+      - temperature_high
       - hourly_summary
       - humidity
 
@@ -23,9 +23,9 @@ sensor:
         unit_of_measurement: °F
         icon_template: mdi:thermometer
 
-      outdoor_temperature_max:
+      outdoor_temperature_high:
         friendly_name: High
-        value_template: '{{ states.sensor.dark_sky_daily_high_temperature.state|round|int }}'
+        value_template: '{{ states.sensor.dark_sky_daytime_high_temperature.state|round|int }}'
         unit_of_measurement: °F
         icon_template: mdi:thermometer
 
@@ -36,11 +36,11 @@ sensor:
           {%- if 'cloud' in states.sensor.dark_sky_hourly_summary.state -%}
             mdi:weather-cloudy
           {%- elif 'fog' in states.sensor.dark_sky_hourly_summary.state -%}
-            mdi:weather-fog 
+            mdi:weather-fog
           {%- elif 'rain' in states.sensor.dark_sky_hourly_summary.state -%}
-            mdi:weather-rainy  
+            mdi:weather-rainy
           {%- elif 'wind' in states.sensor.dark_sky_hourly_summary.state -%}
-            mdi:weather-windy                       
+            mdi:weather-windy
           {%- else -%}
             mdi:weather-sunny
-          {%- endif %}        
+          {%- endif %}

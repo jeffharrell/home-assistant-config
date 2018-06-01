@@ -2,10 +2,6 @@ usb_path: /dev/ttyACM0
 autoheal: False
 polling_interval: 30000
 device_config:
-  light.dining_room_lights_level:
-    refresh_value: True
-    delay: 6
-    polling_intensity: 2
   light.family_room_lights_level:
     refresh_value: True
     delay: 5
