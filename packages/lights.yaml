@@ -66,23 +66,24 @@ automation:
   - alias: Lights - Toggle when away
     initial_state: True
     trigger:
+      # on
       - platform: sun
         event: sunset
-      - platform: sun
-        event: sunrise
-        offset: '06:00:00'
+      # off
+      - platform: time
+        at: '23:03:00'
     condition:
       condition: state
       entity_id: alarm_control_panel.simplisafe
       state: 'armed_away'
     action:
       - service_template: >
-          switch.turn_{% if trigger and trigger.event == 'sunrise' %}off{% else %}on{% endif %}
+          switch.turn_{% if trigger and trigger.event == 'sunset' %}on{% else %}off{% endif %}
         entity_id: switch.living_room_switch
       - service: notify.jeffs_phone
         data_template:
           title: Home Assistant
-          message: I am turning the lights {% if trigger and trigger.event == 'sunrise' %}off{% else %}on{% endif %} since you are away.
+          message: I am turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}.
 
   - alias: Lights - Turn on when coming home
     initial_state: True

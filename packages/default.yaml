@@ -20,5 +20,6 @@ group:
       - alert.garage_door_jeff
       - alert.garage_door_jillian
       - group.Settings
+      - group.Energy
       - group.Batteries
       - group.all_automations

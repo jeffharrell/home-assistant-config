@@ -1,0 +1,23 @@
+group:
+  Energy:
+    entities:
+      - sensor.home_energy_meter_power
+      - sensor.home_energy_meter_energy
+      - sensor.home_energy_meter_current
+      - sensor.home_energy_meter_voltage
+
+
+homeassistant:
+  customize:
+    sensor.home_energy_meter_current:
+      friendly_name: Current
+      icon: mdi:current-ac
+    sensor.home_energy_meter_energy:
+      friendly_name: Energy
+      icon: mdi:battery-charging
+    sensor.home_energy_meter_power:
+      friendly_name: Power
+      icon: mdi:power-socket-us
+    sensor.home_energy_meter_voltage:
+      friendly_name: Voltage
+      icon: mdi:flash

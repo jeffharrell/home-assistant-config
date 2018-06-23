@@ -12,6 +12,7 @@ homeassistant:
     climate: !include packages/climate.yaml
     scenes: !include packages/scenes.yaml
     landscaping: !include packages/landscaping.yaml
+    energy: !include packages/energy.yaml
     weather: !include packages/weather.yaml
     sensors: !include packages/sensors.yaml
     settings: !include packages/settings.yaml
@@ -20,8 +21,6 @@ homeassistant:
     - /tmp
 
 config:
-
-logbook: !include config/logbook.yaml
 
 http: !include config/http.yaml
 
