@@ -73,24 +73,3 @@ alert:
     skip_first: True
     notifiers:
       - jeff_and_jillians_phone
-
-
-automation:
-  - alias: Doorbell - Notifications
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: binary_sensor.doorbell_sensor
-      to: 'on'
-    action:
-      - service: camera.snapshot
-        data:
-          entity_id: camera.front_door
-          filename: /tmp/snapshot_doorbell.png
-      - service: notify.jeff_and_jillians_phone
-        data:
-          title: Home Assistant
-          message: Doorbell
-          data:
-            images:
-              - /tmp/snapshot_doorbell.png

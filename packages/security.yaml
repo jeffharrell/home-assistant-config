@@ -9,7 +9,7 @@ camera:
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
-
+  - platform: skybell
 
 automation:
   - alias: Alarm - Status changes theme
@@ -72,13 +72,32 @@ automation:
         data:
           brightness: 255
 
+  - alias: Alarm - Alert Pics
+    initial_state: True
+    trigger:
+      platform: template
+      value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
+    action:
+      - service: script.turn_on
+        entity_id: script.snapshot_cameras_and_send
+
   - alias: Alarm - Reminder
     initial_state: True
     trigger:
       platform: template
       value_template: '{{ (states.climate.meadowlands.attributes.away_mode == "on" or states.climate.meadowlands.attributes.mode == "Away") and states.alarm_control_panel.simplisafe.state != "armed_away" }}'
     action:
-      - service: notify.jeffs_phone
+      - service: notify.jeff_and_jillians_phone
         data:
           title: Home Assistant
           message: The alarm is not armed. Are you away?
+
+  - alias: Doorbell - Notifications
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell_sensor
+      to: 'on'
+    action:
+      service: script.turn_on
+      entity_id: script.snapshot_door_and_send

@@ -80,7 +80,7 @@ automation:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == 'sunset' %}on{% else %}off{% endif %}
         entity_id: switch.living_room_switch
-      - service: notify.jeffs_phone
+      - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
           message: I am turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}.

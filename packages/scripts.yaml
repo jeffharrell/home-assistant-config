@@ -5,3 +5,43 @@ back_yard_speakers:
         entity_id: remote.family_room
         device: 34171929
         command: "Party"
+
+snapshot_door_and_send:
+  sequence:
+    - service: camera.snapshot
+      data:
+        entity_id:
+          - camera.front_door
+          - camera.front_door_2
+        filename: /tmp/{{ entity_id.entity_id }}.png
+    - service: notify.jeff_and_jillians_phone
+      data_template:
+        title: Home Assistant
+        message: Doorbell
+        data:
+          images:
+            - /tmp/camera.front_door.png
+            - /tmp/camera.front_door_2.png
+
+snapshot_cameras_and_send:
+  sequence:
+    - service: camera.snapshot
+      data:
+        entity_id:
+          - camera.front_door
+          - camera.front_door_2
+          - camera.family_room
+          - camera.living_room
+          - camera.back_yard
+        filename: /tmp/{{ entity_id.entity_id }}.png
+    - service: notify.jeff_and_jillians_phone
+      data_template:
+        title: Home Assistant
+        message: Alarm
+        data:
+          images:
+            - /tmp/camera.front_door.png
+            - /tmp/camera.front_door_2.png
+            - /tmp/camera.family_room.png
+            - /tmp/camera.living_room.png
+            - /tmp/camera.back_yard.png
