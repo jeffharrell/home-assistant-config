@@ -16,6 +16,8 @@ automation:
     initial_state: True
     hide_entity: True
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id: alarm_control_panel.simplisafe
     action:
