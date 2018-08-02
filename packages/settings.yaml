@@ -2,7 +2,6 @@ group:
   Settings:
     entities:
       - input_select.delay_timer
-      - input_select.log_level
   Batteries:
     entities:
       - sensor.garage_jeff_battery
@@ -32,18 +31,6 @@ homeassistant:
 
 
 input_select:
-  log_level:
-    name: Log level
-    options:
-      - Critical
-      - Fatal
-      - Error
-      - Warning
-      - Warn
-      - Info
-      - Debug
-      - Notset
-    initial: Error
   delay_timer:
     name: Turn lights off in
     options:
@@ -84,18 +71,7 @@ sensor:
 
 
 automation:
-  - alias: Log Level
-    initial_state: True
-    hide_entity: True
-    trigger:
-      platform: state
-      entity_id: input_select.log_level
-    action:
-      service: logger.set_level
-      data_template:
-        homeassistant.components: "{{ trigger.to_state.state|lower }}"
-
-  - alias: Delay lights off 
+  - alias: Delay lights off
     initial_state: True
     hide_entity: True
     trigger:
