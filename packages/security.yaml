@@ -23,9 +23,9 @@ automation:
       service: frontend.set_theme
       data_template:
         name: >
-          {% if states.alarm_control_panel.simplisafe.state == 'armed_home' %}
+          {% if states.alarm_control_panel.simplisafe.state == "armed_home" %}
             alarm
-          {% elif states.alarm_control_panel.simplisafe.state == 'armed_away' %}
+          {% elif states.alarm_control_panel.simplisafe.state == "armed_away" %}
             alarm
           {% else %}
             default
@@ -36,7 +36,7 @@ automation:
     trigger:
       platform: state
       entity_id: alarm_control_panel.simplisafe
-      to: 'armed_away'
+      to: "armed_away"
     action:
       - service: homeassistant.turn_off
         entity_id:
@@ -49,7 +49,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
+      value_template: "{{ states.alarm_control_panel.simplisafe.attributes.alarm != 'No Alert' }}"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -77,7 +77,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: '{{ states.alarm_control_panel.simplisafe.attributes.alarm != "No Alert" }}'
+      value_template: "{{ states.alarm_control_panel.simplisafe.attributes.alarm != 'No Alert' }}"
     action:
       - service: script.turn_on
         entity_id: script.snapshot_cameras_and_send
@@ -86,7 +86,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: '{{ (states.climate.meadowlands.attributes.away_mode == "on" or states.climate.meadowlands.attributes.hold_mode == "away") and states.alarm_control_panel.simplisafe.state != "armed_away" }}'
+      value_template: "{{ (states.climate.meadowlands.attributes.away_mode == 'on' or states.climate.meadowlands.attributes.hold_mode == 'away') and states.alarm_control_panel.simplisafe.state != 'armed_away' }}"
     action:
       - service: notify.jeff_and_jillians_phone
         data:
@@ -98,7 +98,7 @@ automation:
     trigger:
       platform: state
       entity_id: binary_sensor.doorbell_sensor
-      to: 'on'
+      to: "on"
     action:
       service: script.turn_on
       entity_id: script.snapshot_door_and_send

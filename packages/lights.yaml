@@ -71,31 +71,31 @@ automation:
         event: sunset
       # off
       - platform: time
-        at: '23:03:00'
+        at: "23:03:00"
     condition:
       condition: state
       entity_id: alarm_control_panel.simplisafe
-      state: 'armed_away'
+      state: "armed_away"
     action:
       - service_template: >
-          switch.turn_{% if trigger and trigger.event == 'sunset' %}on{% else %}off{% endif %}
+          switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
         entity_id: switch.living_room_switch
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
-          message: I am turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}.
+          message: I am turning the lights {% if trigger and trigger.event == "sunset" %}on while you are away{% else %}off{% endif %}.
 
   - alias: Lights - Turn on when coming home
     initial_state: True
     trigger:
       platform: state
       entity_id: alarm_control_panel.simplisafe
-      from: 'armed_away'
-      to: 'disarmed'
+      from: "armed_away"
+      to: "disarmed"
     action:
       - condition: sun
         after: sunset
-        after_offset: '00:30:00'
+        after_offset: "00:30:00"
       - service: homeassistant.turn_on
         entity_id:
           - switch.hallway_light_switch

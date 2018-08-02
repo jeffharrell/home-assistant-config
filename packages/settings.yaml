@@ -46,28 +46,28 @@ sensor:
   - platform: template
     sensors:
       garage_guest_battery:
-        value_template: '{% if states.zwave.guest_garage_door %}
+        value_template: "{% if states.zwave.guest_garage_door %}
           {{ states.zwave.guest_garage_door.attributes.battery_level }}
-        {% endif %}'
-        unit_of_measurement: '%'
+        {% endif %}"
+        unit_of_measurement: "%"
 
       garage_jillian_battery:
-        value_template: '{% if states.zwave.jillians_garage_door %}
+        value_template: "{% if states.zwave.jillians_garage_door %}
           {{ states.zwave.jillians_garage_door.attributes.battery_level }}
-        {% endif %}'
-        unit_of_measurement: '%'
+        {% endif %}"
+        unit_of_measurement: "%"
 
       garage_jeff_battery:
-        value_template: '{% if states.zwave.jeffs_garage_door %}
+        value_template: "{% if states.zwave.jeffs_garage_door %}
           {{ states.zwave.jeffs_garage_door.attributes.battery_level }}
-        {% endif %}'
-        unit_of_measurement: '%'
+        {% endif %}"
+        unit_of_measurement: "%"
 
       doorbell_battery:
-        value_template: '{% if states.zwave.doorbell %}
+        value_template: "{% if states.zwave.doorbell %}
           {{ states.zwave.doorbell.attributes.battery_level }}
-        {% endif %}'
-        unit_of_measurement: '%'
+        {% endif %}"
+        unit_of_measurement: "%"
 
 
 automation:

@@ -41,7 +41,7 @@ alert:
   garage_door_jeff:
     name: Jeff's garage is open
     entity_id: binary_sensor.jeffs_garage_door_sensor
-    state: 'on'
+    state: "on"
     repeat:
       - 30
       - 60
@@ -53,7 +53,7 @@ alert:
   garage_door_jillian:
     name: Jillian's garage is open
     entity_id: binary_sensor.jillians_garage_door_sensor
-    state: 'on'
+    state: "on"
     repeat:
       - 30
       - 60
@@ -65,7 +65,7 @@ alert:
   garage_door_guest:
     name: Guest garage is open
     entity_id: binary_sensor.guest_garage_door_sensor
-    state: 'on'
+    state: "on"
     repeat:
       - 30
       - 60

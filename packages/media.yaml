@@ -44,7 +44,7 @@ sensor:
     sensors:
       family_room_media:
         friendly_name: Family Room
-        value_template: '{{ states.remote.family_room.attributes.current_activity|replace("PowerOff", "Off") }}'
+        value_template: "{{ states.remote.family_room.attributes.current_activity|replace('PowerOff', 'Off') }}"
         icon_template: mdi:television
 
 
@@ -60,15 +60,15 @@ automation:
         data_template:
           entity_id: remote.family_room
           activity: >
-            {% if states.input_select.family_room_media.state == 'Apple TV' %}
+            {% if states.input_select.family_room_media.state == "Apple TV" %}
               21762413
-            {% elif states.input_select.family_room_media.state == 'DVD Player' %}
+            {% elif states.input_select.family_room_media.state == "DVD Player" %}
               21762603
-            {% elif states.input_select.family_room_media.state == 'Music' %}
+            {% elif states.input_select.family_room_media.state == "Music" %}
               18890244
-            {% elif states.input_select.family_room_media.state == 'Bluetooth' %}
+            {% elif states.input_select.family_room_media.state == "Bluetooth" %}
               22068322
-            {% elif states.input_select.family_room_media.state == 'Power Off' %}
+            {% elif states.input_select.family_room_media.state == "Power Off" %}
               -1
             {% endif %}
       - service: input_select.select_option
@@ -89,7 +89,7 @@ automation:
       data_template:
         entity_id: group.PlayOutside
         visible: >
-          {% if states.remote.family_room.attributes.current_activity == 'Music' %}
+          {% if states.remote.family_room.attributes.current_activity == "Music" %}
             True
           {% else %}
             False

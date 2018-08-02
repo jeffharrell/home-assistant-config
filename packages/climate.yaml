@@ -45,17 +45,17 @@ sensor:
   - platform: template
     sensors:
       climate_mode:
-        value_template: '{% if states.climate.meadowlands.attributes.mode == "Away" %}Away{% else %}{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% endif %}'
+        value_template: "{% if states.climate.meadowlands.attributes.mode == 'Away' %}Away{% else %}{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% endif %}"
 
       climate_operation:
-        value_template: '{{states.climate.meadowlands.attributes.operation}}'
+        value_template: "{{states.climate.meadowlands.attributes.operation}}"
 
       family_room_status:
         friendly_name: Family Room
-        value_template: '{{ states.sensor.family_room_temperature.state|round|int }}'
+        value_template: "{{ states.sensor.family_room_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
-          {%- if is_state('binary_sensor.family_room_occupancy', 'on') -%}
+          {%- if is_state("binary_sensor.family_room_occupancy", "on") -%}
             /local/thermometer-on.svg
           {%- else -%}
             /local/thermometer.svg
@@ -63,10 +63,10 @@ sensor:
 
       living_room_status:
         friendly_name: Living Room
-        value_template: '{{ states.sensor.living_room_temperature.state|round|int }}'
+        value_template: "{{ states.sensor.living_room_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
-          {%- if is_state('binary_sensor.living_room_occupancy', 'on') -%}
+          {%- if is_state("binary_sensor.living_room_occupancy", "on") -%}
             /local/thermometer-on.svg
           {%- else -%}
             /local/thermometer.svg
@@ -74,10 +74,10 @@ sensor:
 
       masons_room_status:
         friendly_name: Mason's Bedroom
-        value_template: '{{ states.sensor.masons_room_temperature.state|round|int }}'
+        value_template: "{{ states.sensor.masons_room_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
-          {%- if is_state('binary_sensor.masons_room_occupancy', 'on') -%}
+          {%- if is_state("binary_sensor.masons_room_occupancy", "on") -%}
             /local/thermometer-on.svg
           {%- else -%}
             /local/thermometer.svg
@@ -85,10 +85,10 @@ sensor:
 
       brinks_room_status:
         friendly_name: Brinkley's Bedroom
-        value_template: '{{ states.sensor.brinks_room_temperature.state|round|int }}'
+        value_template: "{{ states.sensor.brinks_room_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
-          {%- if is_state('binary_sensor.brinks_room_occupancy', 'on') -%}
+          {%- if is_state("binary_sensor.brinks_room_occupancy", "on") -%}
             /local/thermometer-on.svg
           {%- else -%}
             /local/thermometer.svg
@@ -96,10 +96,10 @@ sensor:
 
       master_bedroom_status:
         friendly_name: Master Bedroom
-        value_template: '{{ states.sensor.master_bedroom_temperature.state|round|int }}'
+        value_template: "{{ states.sensor.master_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
-          {%- if is_state('binary_sensor.master_bedroom_occupancy', 'on') -%}
+          {%- if is_state("binary_sensor.master_bedroom_occupancy", "on") -%}
             /local/thermometer-on.svg
           {%- else -%}
             /local/thermometer.svg
@@ -112,11 +112,11 @@ automation:
     trigger:
       platform: state
       entity_id: switch.house_fan_switch
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
     action:
       - condition: template
-        value_template: '{{ states.climate.meadowlands.attributes.operation_mode == "cool" }}'
+        value_template: "{{ states.climate.meadowlands.attributes.operation_mode == 'cool' }}"
       - service: climate.set_temperature
         data:
           entity_id: climate.meadowlands
@@ -128,11 +128,11 @@ automation:
     trigger:
       - platform: state
         entity_id: switch.house_fan_switch
-        from: 'on'
-        to: 'off'
+        from: "on"
+        to: "off"
       - platform: state
         entity_id: alarm_control_panel.simplisafe
-        from: 'armed_away'
+        from: "armed_away"
     action:
       - service: climate.ecobee_resume_program
         data:
