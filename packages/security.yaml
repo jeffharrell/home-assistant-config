@@ -9,7 +9,6 @@ camera:
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
-  - platform: skybell
 
 automation:
   - alias: Alarm - Status changes theme
