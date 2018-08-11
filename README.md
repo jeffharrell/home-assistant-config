@@ -47,6 +47,8 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather and tied into automations.
 
+- **Alarm:** [SimpliSafe](https://simplisafe.com/) is connected as my home security system. It's limited in what you can do with it in Home Assistant, meaning you can only arm/disarm/check the status, but I was able to tie it into some useful automations.
+
 
 `7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR. 
 
