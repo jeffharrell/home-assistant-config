@@ -52,3 +52,28 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 `7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR. 
 
+
+## Automations
+
+The benefit of home automation is getting to *automate* repetitve or convenient things and make your life easier. Here's some of what I have my house configured to do:
+
+** Convenience **
+- Turn on lights if I come home after the sun has set
+- Turn on a light scene for the morning and disable the alarm
+- Turn off all lights at night and arm the alarm
+- Notify me if I left a garage door open
+- Notify me if someone is at my front door
+
+** Security **
+- Turns on all lights and sends me pictures if the alarm is triggered
+- Turns on the inside lights if the alarm is set to away and the sun goes down
+- Remind me if I left the house and didn't arm the alarm
+
+** Climate **
+- Disable the HVAC if the house fan is turned on
+- Notify me if the AC is on, but outside is cooler than inside
+
+** Outside **
+- Run a scene for the landcape lights
+- Toggle the fountain based on sun
+ 
