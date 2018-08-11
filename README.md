@@ -26,9 +26,13 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY). Instant on / off capability.
 
-- **Garage Door Sensors:** ~The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.~ The door sensors have been replaced with [Z-wave Garage Door Tilt Sensors](https://www.amazon.com/gp/product/B01MRZB0NT/) which are more reliable.
+- **Garage Door Sensors:** ~The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.~ The door sensors have been replaced with [Z-Wave Garage Door Tilt Sensors](https://www.amazon.com/gp/product/B01MRZB0NT/) which are more reliable.
 
 - **Doorbell:** I'm using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic relay switch that's connected to my existing doorbell magnet. This causes it to trigger a Z-Wave event when rung that I can tie into my automations.
+
+- **Energy Monitoring:** For fun I have a [Aeotec Home Energy Meter](https://www.amazon.com/gp/product/B00XD8WZX6/) connected to my main circuit breaker box so that I can monitor my home's energy consumption and solar production.
+
+- **Landscaping:** I'm using a few [GE Z-Wave Plus Smart Outdoor Module](https://www.amazon.com/gp/product/B06W9NWFM3/) to control my outside landscape lighting and fountain. They are supposed to be weather-proof so I'm okay having them exposed.
 
 
 `4`, `5` – The remainder of the devices communicate over some form of HTTP/TCP/MQTT. 
