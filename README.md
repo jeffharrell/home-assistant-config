@@ -55,7 +55,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 ## Automations
 
-The benefit of home automation is getting to *automate* repetitve or convenient things and make your life easier. Here's some of what I have my house configured to do:
+The benefit of home automation is getting to automate repetitive or convenient things and make your life easier. Here's some of what I have my house configured to do:
 
 **Convenience**
 - Turn on lights if I come home after the sun has set
