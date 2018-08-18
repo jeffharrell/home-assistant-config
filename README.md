@@ -1,6 +1,6 @@
 # Home Automation
 
-A few years ago I started a project to automate my house and have finally settled on a solution which works for me. If you're just getting started with home automation I recommend you try out something like [SmartThings](https://www.smartthings.com/) or [Wink](https://www.wink.com/) as they provide a complete package. If you're willing to dig a bit deeper and roll up your sleeves, read on.
+A few years ago I started a project to automate my house and have finally settled on a solution which works for me that uses [Home Assistant](https://home-assistant.io/). Details below.
 
 
 ## Principles 
@@ -16,19 +16,23 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 ![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
-`1` – My home network is controlled by the open source application [Home Assistant](https://home-assistant.io/). Other options were explored like SmartThings, HABmin, and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, is highly customizable, and a good looking design for it's apps.
+`1` – My home network is controlled by [Home Assistant](https://home-assistant.io/). Other options were explored like SmartThings, HABmin, and Domoticz, but this is the one which worked for me. It has a vibrant open source community, frequent updates, is highly customizable, and a good looking design for it's apps.
 
 `2` – Home Assistant is running in a Docker container on a [Synology NAS DS716+II](https://www.amazon.com/Synology-DS716-II-Storage-DiskStation/dp/B01EMPW5Z6/). The NAS is not externally accessible from the internet and if you wish to connect to it remotely you need to VPN into the local network. Internal to the local network all traffic is served over SSL.
 
-`3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through an [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) plugged into the Synology NAS. Z-Wave devices are low power and help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices.
+`3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through an [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) that's plugged into the Synology NAS. Z-Wave devices are low power and help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices.
 
-- **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/gp/product/B006LQFHN2/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster.
+- **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/New-Model-Wireless-Lighting-Wall/dp/B01MUCZA1C/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster. Make sure to get the newer "Plus" versions of them as they will report state changes faster. 
 
 - **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY). Instant on / off capability.
 
-- **Garage Door Sensors:** ~The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.~ The door sensors have been replaced with [Z-wave Garage Door Tilt Sensors](https://www.amazon.com/gp/product/B01MRZB0NT/) which are more reliable.
+- **Garage Door Sensors:** ~The door sensors are using [Ecolink Z-Wave Sensors](https://www.amazon.com/Ecolink-Intelligent-Technology-Operated-DWZWAVE2-ECO/dp/B00HPIYJWU/). I'm a little obsessive about if I left my garage door open so these help a lot, but can be a little flakey sometimes and report open. I need to fix their placement.~ The door sensors have been replaced with [Z-Wave Garage Door Tilt Sensors](https://www.amazon.com/gp/product/B01MRZB0NT/) which are more reliable.
 
-- **Doorbell:** This was a fun one. I found out about dry contact sensors and ended up using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic relay switch that's connected to my existing doorbell magnet. This causes it to trigger a Z-Wave event when rung. Win!
+- **Doorbell:** I'm using an [Aoetec Dry Contact Sensor](https://www.amazon.com/gp/product/B0155HSUUY/) with a magnetic relay switch that's connected to my existing doorbell magnet. This causes it to trigger a Z-Wave event when rung that I can tie into my automations.
+
+- **Energy Monitoring:** For fun I have a [Aeotec Home Energy Meter](https://www.amazon.com/gp/product/B00XD8WZX6/) connected to my main circuit breaker box so that I can monitor my home's energy consumption and solar production.
+
+- **Landscaping:** I'm using a few [GE Z-Wave Plus Smart Outdoor Module](https://www.amazon.com/gp/product/B06W9NWFM3/) to control my outside landscape lighting and fountain. They are supposed to be weather-proof so I'm okay having them exposed.
 
 
 `4`, `5` – The remainder of the devices communicate over some form of HTTP/TCP/MQTT. 
@@ -43,6 +47,34 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather and tied into automations.
 
+- **Alarm:** [SimpliSafe](https://simplisafe.com/) is connected as my home security system. It's limited in what you can do with it in Home Assistant, meaning you can only arm/disarm/check the status, but I was able to tie it into some useful automations.
+
 
 `7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR. 
 
+
+## Automations
+
+The benefit of home automation is getting to automate repetitive or convenient things and make your life easier. Here's some of what I have my house configured to do:
+
+**Convenience**
+- Turn on lights if I come home after the sun has set
+- Turn on a light scene for the morning and disable the alarm
+- Turn on a light scene when we're watching a movie and the sun starts to go down
+- Turn off all lights at night and arm the alarm
+- Notify me if I left a garage door open
+- Notify me if someone is at my front door
+
+**Security**
+- Turns on all lights and sends me pictures if the alarm is triggered
+- Turns on the inside lights if the alarm is set to away and the sun goes down
+- Remind me if I left the house and didn't arm the alarm
+
+**Climate**
+- Disable the HVAC if the house fan is turned on
+- Notify me if the AC is on, but outside is cooler than inside
+
+**Outside**
+- Run a scene for the landcape lights
+- Toggle the fountain based on sun
+ 
