@@ -19,6 +19,10 @@ homeassistant:
     security: !include packages/security.yaml
   whitelist_external_dirs:
     - /tmp
+  auth_providers:
+    - type: homeassistant
+
+auth:
 
 config:
 

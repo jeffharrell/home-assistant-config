@@ -4,6 +4,12 @@ alarm_control_panel:
     password: !secret simplisafe_pass
 
 
+abode:
+  username: !secret abode_user
+  password: !secret abode_pass
+  name: Abode Alarm System
+
+
 camera:
   - platform: synology
     url: !secret synology_url
@@ -86,9 +92,9 @@ automation:
     initial_state: True
     trigger:
       - platform: template
-        value_template: "{{ (states.climate.meadowlands.attributes.away_mode == 'on' }}"
+        value_template: "{{ states.climate.meadowlands.attributes.away_mode == 'on' }}"
       - platform: template
-        value_template: "{{ (states.climate.meadowlands.attributes.hold_mode == 'away' }}"
+        value_template: "{{ states.climate.meadowlands.attributes.hold_mode == 'away' }}"
     action:
       - condition: template
         value_template: "{{ states.alarm_control_panel.simplisafe.state != 'armed_away' }}"

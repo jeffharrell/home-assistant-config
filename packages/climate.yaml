@@ -48,7 +48,7 @@ sensor:
         value_template: "{% if states.climate.meadowlands.attributes.mode == 'Away' %}Away{% else %}{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% endif %}"
 
       climate_operation:
-        value_template: "{{states.climate.meadowlands.attributes.operation}}"
+        value_template: "{{ states.climate.meadowlands.attributes.operation }}"
 
       family_room_status:
         friendly_name: Family Room

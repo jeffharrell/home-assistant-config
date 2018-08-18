@@ -1,5 +1,3 @@
 server_host: localhost
 base_url: !secret base_url
-use_x_forwarded_for: True
 api_password: !secret http_password
-trusted_networks: !secret http_trusted_networks
