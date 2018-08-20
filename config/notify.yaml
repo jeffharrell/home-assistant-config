@@ -23,3 +23,15 @@
   services:
     - service: jeffs_phone
     - service: jillians_phone
+
+- name: alexa_family_room
+  platform: command_line
+  command: "/config/scripts/alexa_wrapper.sh -d 'Family Room'"
+
+- name: alexa_master_bedroom
+  platform: command_line
+  command: "/config/scripts/alexa_wrapper.sh -d 'Master Bedroom'"
+
+- name: alexa_all
+  platform: command_line
+  command: "/config/scripts/alexa_wrapper.sh -d 'ALL'"

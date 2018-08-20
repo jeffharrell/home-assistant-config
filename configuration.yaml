@@ -14,7 +14,6 @@ homeassistant:
     landscaping: !include packages/landscaping.yaml
     energy: !include packages/energy.yaml
     weather: !include packages/weather.yaml
-    sensors: !include packages/sensors.yaml
     settings: !include packages/settings.yaml
     security: !include packages/security.yaml
   whitelist_external_dirs:

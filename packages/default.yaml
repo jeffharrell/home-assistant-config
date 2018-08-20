@@ -12,7 +12,7 @@ group:
     entities:
       - group.Weather
       - group.Landscaping
-      - group.Sensors
+      - group.Security
   tools:
     view: yes
     entities:

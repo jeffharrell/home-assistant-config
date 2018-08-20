@@ -1,3 +1,71 @@
+group:
+  Security:
+    entities:
+      - binary_sensor.family_room_doors
+      - binary_sensor.dining_room_window
+      - binary_sensor.living_room_window_left
+      - binary_sensor.living_room_window_right
+      - binary_sensor.kitchen_window
+      - binary_sensor.masons_window
+      - binary_sensor.brinks_window
+      - binary_sensor.guest_window
+      - binary_sensor.master_bedroom_window
+      - binary_sensor.master_bedroom_doors
+      - binary_sensor.jeffs_garage_door_sensor
+      - binary_sensor.jillians_garage_door_sensor
+      - binary_sensor.guest_garage_door_sensor
+
+
+homeassistant:
+  customize:
+    binary_sensor.family_room_doors:
+      device_class: door
+      icon: mdi:door
+    binary_sensor.dining_room_window:
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.living_room_window_left:
+      friendly_name: Living Room Window (L)
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.living_room_window_right:
+      friendly_name: Living Room Window (R)
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.kitchen_window:
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.masons_window:
+      friendly_name: Mason's Window
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.brinks_window:
+      friendly_name: Brink's Window
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.guest_window:
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.master_bedroom_window:
+      device_class: window
+      icon: mdi:window-closed
+    binary_sensor.master_bedroom_doors:
+      device_class: door
+      icon: mdi:door
+    binary_sensor.guest_garage_door_sensor:
+      friendly_name: Guest Garage Door
+      device_class: opening
+      icon: mdi:garage
+    binary_sensor.jeffs_garage_door_sensor:
+      friendly_name: Jeff's Garage Door
+      device_class: opening
+      icon: mdi:garage
+    binary_sensor.jillians_garage_door_sensor:
+      friendly_name: Jillian's Garage Door
+      device_class: opening
+      icon: mdi:garage
+
+
 alarm_control_panel:
   - platform: simplisafe
     username: !secret simplisafe_user
@@ -7,7 +75,12 @@ alarm_control_panel:
 abode:
   username: !secret abode_user
   password: !secret abode_pass
-  name: Abode Alarm System
+  name: Abode
+
+
+skybell:
+  username: !secret skybell_user
+  password: !secret skybell_pass
 
 
 camera:
@@ -15,6 +88,7 @@ camera:
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
+
 
 automation:
   - alias: Alarm - Status changes theme
@@ -55,7 +129,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: "{{ states.alarm_control_panel.simplisafe.attributes.alarm != 'No Alert' }}"
+      value_template: "{{ states.alarm_control_panel.simplisafe.state == 'triggered' }}"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -83,7 +157,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: "{{ states.alarm_control_panel.simplisafe.attributes.alarm != 'No Alert' }}"
+      value_template: "{{ states.alarm_control_panel.simplisafe.state == 'triggered' }}"
     action:
       - service: script.turn_on
         entity_id: script.snapshot_cameras_and_send
@@ -112,3 +186,41 @@ automation:
     action:
       service: script.turn_on
       entity_id: script.snapshot_door_and_send
+
+
+alert:
+  garage_door_jeff:
+    name: Jeff's garage is open
+    entity_id: binary_sensor.jeffs_garage_door_sensor
+    state: "on"
+    repeat:
+      - 30
+      - 60
+    can_acknowledge: True
+    skip_first: True
+    notifiers:
+      - jeff_and_jillians_phone
+
+  garage_door_jillian:
+    name: Jillian's garage is open
+    entity_id: binary_sensor.jillians_garage_door_sensor
+    state: "on"
+    repeat:
+      - 30
+      - 60
+    can_acknowledge: True
+    skip_first: True
+    notifiers:
+      - jeff_and_jillians_phone
+
+  garage_door_guest:
+    name: Guest garage is open
+    entity_id: binary_sensor.guest_garage_door_sensor
+    state: "on"
+    repeat:
+      - 30
+      - 60
+    can_acknowledge: True
+    skip_first: True
+    notifiers:
+      - jeff_and_jillians_phone

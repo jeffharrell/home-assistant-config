@@ -2,13 +2,13 @@ group:
   Settings:
     entities:
       - input_select.delay_timer
+      - switch.skybell_front_door_do_not_disturb
   Batteries:
     entities:
       - sensor.garage_jeff_battery
       - sensor.garage_jillian_battery
       - sensor.garage_guest_battery
       - sensor.doorbell_battery
-
 
 homeassistant:
   customize:
@@ -28,6 +28,15 @@ homeassistant:
     sensor.doorbell_battery:
       friendly_name: Doorbell
       icon: mdi:battery
+    switch.skybell_front_door_do_not_disturb:
+      friendly_name: Mute Doorbell
+      icon: mdi:bell
+
+
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
 
 
 input_select:
