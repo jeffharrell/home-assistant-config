@@ -3,7 +3,7 @@
 A few years ago I started a project to automate my house and have finally settled on a solution which works for me that uses [Home Assistant](https://home-assistant.io/). Details below.
 
 
-## Principles 
+## Principles
 
 Before I get started I want to call out a few concepts I used in my setup:
 
@@ -12,7 +12,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 2. **Devices should look and behave like a normal device.** More of a personal preference here, but I want my light switches to look and behave like normal light switches. That applies to every household device. I shouldn't be required to use my phone to turn something on and vistors shouldn't notice that anything is out of the ordinary.
 
 
-## Setup 
+## Setup
 
 ![Network Diagram](https://jeffharrell.github.io/home-assistant-config/HomeNetworkDiagram.svg)
 
@@ -22,7 +22,7 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 `3`, `6` – The majority of my home network communicates over [Z-Wave](https://en.wikipedia.org/wiki/Z-Wave) through an [Aoetec Z-Stick](https://www.amazon.com/Aeotec-Aeon-Labs-ZW090-Stick/dp/B00X0AWA6E/) that's plugged into the Synology NAS. Z-Wave devices are low power and help me stick to the principle of communication on my local network. Plus, they tend to look and feel like normal devices.
 
-- **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/New-Model-Wireless-Lighting-Wall/dp/B01MUCZA1C/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster. Make sure to get the newer "Plus" versions of them as they will report state changes faster. 
+- **Light Switches:** All light switches are wired up with [GE Smart Dimmer Z-Wave Switches](https://www.amazon.com/New-Model-Wireless-Lighting-Wall/dp/B01MUCZA1C/). The dimmer switches are a little more flexible than standard switches and can be customized through the Z-Wave parameters to either not dim or dim slower/faster. Make sure to get the newer "Plus" versions of them as they will report state changes faster.
 
 - **House Fan:** The house fan is controlled using a [GE Z-Wave Receptacle Outlet](https://www.amazon.com/gp/product/B0013V1SRY). Instant on / off capability.
 
@@ -47,10 +47,10 @@ Before I get started I want to call out a few concepts I used in my setup:
 
 - **Weather:** [Dark Sky](https://darksky.net/) is used for outside weather and tied into automations.
 
-- **Alarm:** [SimpliSafe](https://simplisafe.com/) is connected as my home security system. It's limited in what you can do with it in Home Assistant, meaning you can only arm/disarm/check the status, but I was able to tie it into some useful automations.
+- **Alarm:** [Abode](https://goabode.com/) is connected as my home security system.
 
 
-`7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR. 
+`7` – [Plex](https://www.plex.tv/) is used to stream movies locally and as an OTA DVR.
 
 
 ## Automations
@@ -69,6 +69,7 @@ The benefit of home automation is getting to automate repetitive or convenient t
 - Turns on all lights and sends me pictures if the alarm is triggered
 - Turns on the inside lights if the alarm is set to away and the sun goes down
 - Remind me if I left the house and didn't arm the alarm
+- Tells alexa to speak the status of my home alarm when it changes
 
 **Climate**
 - Disable the HVAC if the house fan is turned on
@@ -77,4 +78,4 @@ The benefit of home automation is getting to automate repetitive or convenient t
 **Outside**
 - Run a scene for the landcape lights
 - Toggle the fountain based on sun
- 
+

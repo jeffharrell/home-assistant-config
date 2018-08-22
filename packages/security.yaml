@@ -66,12 +66,6 @@ homeassistant:
       icon: mdi:garage
 
 
-alarm_control_panel:
-  - platform: simplisafe
-    username: !secret simplisafe_user
-    password: !secret simplisafe_pass
-
-
 abode:
   username: !secret abode_user
   password: !secret abode_pass
@@ -98,24 +92,43 @@ automation:
       - platform: homeassistant
         event: start
       - platform: state
-        entity_id: alarm_control_panel.simplisafe
+        entity_id: alarm_control_panel.abode
     action:
       service: frontend.set_theme
       data_template:
         name: >
-          {% if states.alarm_control_panel.simplisafe.state == "armed_home" %}
+          {% if states.alarm_control_panel.abode.state == "armed_home" %}
             alarm
-          {% elif states.alarm_control_panel.simplisafe.state == "armed_away" %}
+          {% elif states.alarm_control_panel.abode.state == "armed_away" %}
             alarm
           {% else %}
             default
+          {% endif %}
+
+  - alias: Alarm - Speak Status
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.abode
+    action:
+      service: media_player.alexa_tts
+      data_template:
+        entity_id: media_player.master_bedroom
+        message: >
+          {% if states.alarm_control_panel.abode.state == "armed_home" %}
+            Alarm armed... Home.
+          {% elif states.alarm_control_panel.abode.state == "armed_away" %}
+            Please exit now.
+          {% elif states.alarm_control_panel.abode.state == "disarmed" %}
+            Alarm Off
           {% endif %}
 
   - alias: Alarm - Away mode lights off
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.simplisafe
+      entity_id: alarm_control_panel.abode
       to: "armed_away"
     action:
       - service: homeassistant.turn_off
@@ -129,7 +142,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: "{{ states.alarm_control_panel.simplisafe.state == 'triggered' }}"
+      value_template: "{{ states.alarm_control_panel.abode.state == 'triggered' }}"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -157,7 +170,7 @@ automation:
     initial_state: True
     trigger:
       platform: template
-      value_template: "{{ states.alarm_control_panel.simplisafe.state == 'triggered' }}"
+      value_template: "{{ states.alarm_control_panel.abode.state == 'triggered' }}"
     action:
       - service: script.turn_on
         entity_id: script.snapshot_cameras_and_send
@@ -171,7 +184,7 @@ automation:
         value_template: "{{ states.climate.meadowlands.attributes.hold_mode == 'away' }}"
     action:
       - condition: template
-        value_template: "{{ states.alarm_control_panel.simplisafe.state != 'armed_away' }}"
+        value_template: "{{ states.alarm_control_panel.abode.state != 'armed_away' }}"
       - service: notify.jeff_and_jillians_phone
         data:
           title: Home Assistant

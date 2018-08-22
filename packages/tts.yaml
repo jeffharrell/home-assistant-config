@@ -1,0 +1,15 @@
+
+media_player:
+  - platform: alexa
+    email: !secret alexa_email
+    password: !secret alexa_password
+    url: "amazon.com"
+
+
+script:
+  tts_family_room_climate:
+    sequence:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.family_room
+          message: "Temperature is {{ states('climate.meadowlands') }}."

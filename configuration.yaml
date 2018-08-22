@@ -15,7 +15,8 @@ homeassistant:
     energy: !include packages/energy.yaml
     weather: !include packages/weather.yaml
     settings: !include packages/settings.yaml
-    security: !include packages/security.yaml
+    homesecurity: !include packages/security.yaml
+    tts: !include packages/tts.yaml
   whitelist_external_dirs:
     - /tmp
   auth_providers:

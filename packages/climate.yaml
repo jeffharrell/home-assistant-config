@@ -130,9 +130,6 @@ automation:
         entity_id: switch.house_fan_switch
         from: "on"
         to: "off"
-      - platform: state
-        entity_id: alarm_control_panel.simplisafe
-        from: "armed_away"
     action:
       - service: climate.ecobee_resume_program
         data:

@@ -4,7 +4,6 @@ include:
     - light
     - climate
     - alarm_control_panel
-    - media_player
   entities:
     - binary_sensor.brinks_room_occupancy
     - binary_sensor.family_room_occupancy
