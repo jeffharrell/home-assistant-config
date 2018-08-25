@@ -1,6 +1,7 @@
 group:
   Security:
     entities:
+      - binary_sensor.front_door
       - binary_sensor.family_room_doors
       - binary_sensor.dining_room_window
       - binary_sensor.living_room_window_left
@@ -11,6 +12,7 @@ group:
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
       - binary_sensor.master_bedroom_doors
+      - binary_sensor.laundry_room_door
       - binary_sensor.jeffs_garage_door_sensor
       - binary_sensor.jillians_garage_door_sensor
       - binary_sensor.guest_garage_door_sensor
@@ -18,6 +20,9 @@ group:
 
 homeassistant:
   customize:
+    binary_sensor.front_door:
+      device_class: door
+      icon: mdi:door
     binary_sensor.family_room_doors:
       device_class: door
       icon: mdi:door
@@ -50,6 +55,9 @@ homeassistant:
       device_class: window
       icon: mdi:window-closed
     binary_sensor.master_bedroom_doors:
+      device_class: door
+      icon: mdi:door
+    binary_sensor.laundry_room_door:
       device_class: door
       icon: mdi:door
     binary_sensor.guest_garage_door_sensor:
@@ -119,7 +127,7 @@ automation:
           {% if states.alarm_control_panel.abode.state == "armed_home" %}
             Alarm armed... Home.
           {% elif states.alarm_control_panel.abode.state == "armed_away" %}
-            Please exit now.
+            Alarm armed... Away
           {% elif states.alarm_control_panel.abode.state == "disarmed" %}
             Alarm Off
           {% endif %}
@@ -141,8 +149,8 @@ automation:
   - alias: Alarm - Alert lighting
     initial_state: True
     trigger:
-      platform: template
-      value_template: "{{ states.alarm_control_panel.abode.state == 'triggered' }}"
+      platform: event
+      event_type: abode_alarm
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -169,8 +177,8 @@ automation:
   - alias: Alarm - Alert Pics
     initial_state: True
     trigger:
-      platform: template
-      value_template: "{{ states.alarm_control_panel.abode.state == 'triggered' }}"
+      platform: event
+      event_type: abode_alarm
     action:
       - service: script.turn_on
         entity_id: script.snapshot_cameras_and_send
@@ -189,6 +197,18 @@ automation:
         data:
           title: Home Assistant
           message: The alarm is not armed. Are you away?
+
+  - alias: Alarm - Fault
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: event
+      event_type: abode_panel_fault
+    action:
+      - service: notify.jeffs_phone
+        data_template:
+          title: Home Assistant
+          message: "The alarm faulted. device_name: {{ device_name }}, device_type: {{ device_type }}, event_name: {{ event_name }}, event_type: {{ event_type }}."
 
   - alias: Doorbell - Notifications
     initial_state: True

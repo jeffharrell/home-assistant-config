@@ -33,7 +33,7 @@ input_select:
       - Select
       - Power Off
       - Apple TV
-      - DVD Player
+      - Fire TV
       - Music
       - Bluetooth
     initial: Select
@@ -62,7 +62,7 @@ automation:
           activity: >
             {% if states.input_select.family_room_media.state == "Apple TV" %}
               21762413
-            {% elif states.input_select.family_room_media.state == "DVD Player" %}
+            {% elif states.input_select.family_room_media.state == "Fire TV" %}
               21762603
             {% elif states.input_select.family_room_media.state == "Music" %}
               18890244

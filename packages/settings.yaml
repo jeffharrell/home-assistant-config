@@ -3,12 +3,7 @@ group:
     entities:
       - input_select.delay_timer
       - switch.skybell_front_door_do_not_disturb
-  Batteries:
-    entities:
-      - sensor.garage_jeff_battery
-      - sensor.garage_jillian_battery
-      - sensor.garage_guest_battery
-      - sensor.doorbell_battery
+
 
 homeassistant:
   customize:
@@ -16,21 +11,11 @@ homeassistant:
       friendly_name: Automations
       control: hidden
       hidden: false
-    sensor.garage_guest_battery:
-      friendly_name: Guest Garage Door
-      icon: mdi:battery
-    sensor.garage_jeff_battery:
-      friendly_name: Jeff's Garage Door
-      icon: mdi:battery
-    sensor.garage_jillian_battery:
-      friendly_name: Jillian's Garage Door
-      icon: mdi:battery
-    sensor.doorbell_battery:
-      friendly_name: Doorbell
-      icon: mdi:battery
     switch.skybell_front_door_do_not_disturb:
       friendly_name: Mute Doorbell
       icon: mdi:bell
+    input_select.delay_timer:
+      icon: mdi:lightbulb
 
 
 switch:
@@ -51,36 +36,8 @@ input_select:
       - "2:00"
 
 
-sensor:
-  - platform: template
-    sensors:
-      garage_guest_battery:
-        value_template: "{% if states.zwave.guest_garage_door %}
-          {{ states.zwave.guest_garage_door.attributes.battery_level }}
-        {% endif %}"
-        unit_of_measurement: "%"
-
-      garage_jillian_battery:
-        value_template: "{% if states.zwave.jillians_garage_door %}
-          {{ states.zwave.jillians_garage_door.attributes.battery_level }}
-        {% endif %}"
-        unit_of_measurement: "%"
-
-      garage_jeff_battery:
-        value_template: "{% if states.zwave.jeffs_garage_door %}
-          {{ states.zwave.jeffs_garage_door.attributes.battery_level }}
-        {% endif %}"
-        unit_of_measurement: "%"
-
-      doorbell_battery:
-        value_template: "{% if states.zwave.doorbell %}
-          {{ states.zwave.doorbell.attributes.battery_level }}
-        {% endif %}"
-        unit_of_measurement: "%"
-
-
 automation:
-  - alias: Delay lights off
+  - alias: Settings - Delay lights off
     initial_state: True
     hide_entity: True
     trigger:
@@ -97,3 +54,13 @@ automation:
         data:
           entity_id: input_select.delay_timer
           option: Select
+
+  - alias: Settings - Reset at midnight
+    initial_state: True
+    trigger:
+      platform: time
+      at: "00:00:00"
+    action:
+      - service: homeassistant.turn_off
+        entity_id:
+          - switch.skybell_front_door_do_not_disturb
