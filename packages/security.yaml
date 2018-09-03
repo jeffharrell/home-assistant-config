@@ -208,7 +208,7 @@ automation:
       - service: notify.jeffs_phone
         data_template:
           title: Home Assistant
-          message: "The alarm faulted. device_name: {{ device_name }}, device_type: {{ device_type }}, event_name: {{ event_name }}, event_type: {{ event_type }}."
+          message: "The alarm faulted: {{ trigger.event.data }}"
 
   - alias: Doorbell - Notifications
     initial_state: True
