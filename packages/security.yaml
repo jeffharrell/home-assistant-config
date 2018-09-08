@@ -113,26 +113,39 @@ automation:
             default
           {% endif %}
 
-  - alias: Alarm - Speak Status
+  - alias: Alarm - Say status
     initial_state: True
-    hide_entity: False
     trigger:
       - platform: state
         entity_id: alarm_control_panel.abode
     action:
-      service: media_player.alexa_tts
-      data_template:
-        entity_id: media_player.master_bedroom
-        message: >
-          {% if states.alarm_control_panel.abode.state == "armed_home" %}
-            Alarm armed... Home.
-          {% elif states.alarm_control_panel.abode.state == "armed_away" %}
-            Alarm armed... Away
-          {% elif states.alarm_control_panel.abode.state == "disarmed" %}
-            Alarm Off
-          {% endif %}
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id:
+            - media_player.master_bedroom
+            - media_player.family_room
+            - media_player.living_room
+          message: >
+            {% set status = states.alarm_control_panel.abode.state %}
+            {% set isOpened = states.group.Security.state %}
+            {%- if status == "armed_home" -%}
+              Alarm armed... Home
+            {%- elif status == "armed_away" -%}
+              Alarm armed... Away
+            {%- elif status == "disarmed" -%}
+              Alarm Off
+            {%- endif -%}
+            {%- if isOpened == "on" and status != "disarmed" -%}
+              ... Warning... The following are open:
+              {%- for entity_id in states.group.Security.attributes.entity_id -%}
+                {% set parts = entity_id.split('.') %}
+                {%- if states(entity_id) == 'on' -%}
+                  ... {{ states[parts[0]][parts[1]].name }}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
 
-  - alias: Alarm - Away mode lights off
+  - alias: Alarm - Turn house off
     initial_state: True
     trigger:
       platform: state
@@ -148,6 +161,7 @@ automation:
 
   - alias: Alarm - Alert lighting
     initial_state: True
+    hide_entity: True
     trigger:
       platform: event
       event_type: abode_alarm
@@ -176,6 +190,7 @@ automation:
 
   - alias: Alarm - Alert Pics
     initial_state: True
+    hide_entity: True
     trigger:
       platform: event
       event_type: abode_alarm
