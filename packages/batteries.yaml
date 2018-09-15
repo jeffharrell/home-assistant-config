@@ -1,5 +1,6 @@
 group:
-  Batteries:
+  batteries:
+    name: Batteries
     entities:
       - sensor.garage_jeff_battery
       - sensor.garage_jillian_battery

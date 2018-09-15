@@ -1,5 +1,6 @@
 group:
-  Climate:
+  climate:
+    name: Climate
     entities:
       - sensor.climate_mode
       - switch.house_fan_switch

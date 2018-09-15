@@ -1,5 +1,6 @@
 group:
-  Weather:
+  weather:
+    name: Weather
     entities:
       - sensor.outdoor_forecast
       - sensor.outdoor_temperature

@@ -1,5 +1,6 @@
 group:
-  Lights:
+  lights:
+    name: Lights
     entities:
       - light.family_room_lights_level
       - light.dining_room_lights_level

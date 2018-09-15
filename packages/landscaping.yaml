@@ -1,5 +1,6 @@
 group:
-  Landscaping:
+  landscaping:
+    name: Landscaping
     control: hidden
     entities:
       - switch.front_yard_switch
@@ -61,7 +62,7 @@ automation:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunrise" %}off{% else %}on{% endif %}
         entity_id:
-          - switch.front_yard_switch
+          switch.front_yard_switch
 
   - alias: Landscape - Fountain
     initial_state: True
@@ -76,4 +77,4 @@ automation:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}off{% else %}on{% endif %}
         entity_id:
-          - switch.fountain
+          switch.fountain

@@ -48,9 +48,4 @@ script: !include packages/scripts.yaml
 sun:
 
 logger:
-  default: warn
-  logs:
-    homeassistant.components.notify.smtp: error
-    homeassistant.components.alarm_control_panel: error
-    homeassistant.components.sensor.darksky: error
-    homeassistant.helpers.entity: error
+  default: error

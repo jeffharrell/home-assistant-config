@@ -1,5 +1,6 @@
 group:
-  Scenes:
+  scenes:
+    name: Scenes
     entities:
       - scene.good_morning
       - scene.dinner_time
