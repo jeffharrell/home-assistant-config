@@ -39,10 +39,8 @@ homeassistant:
       friendly_name: Mason's Bedroom
     light.kitchen_lights_1_level:
       hidden: true
-      emulated_hue_hidden: true
     light.kitchen_lights_2_level:
       hidden: true
-      emulated_hue_hidden: true
     switch.guest_room_switch:
       friendly_name: Guest Bedroom
       icon: mdi:lightbulb
