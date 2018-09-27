@@ -1,5 +1,6 @@
 group:
-  Scenes:
+  scenes:
+    name: Scenes
     entities:
       - scene.good_morning
       - scene.dinner_time
@@ -15,7 +16,6 @@ homeassistant:
       icon: mdi:food-variant
     scene.good_morning:
       icon: mdi:brightness-5
-      emulated_hue_hidden: true
     scene.good_night:
       icon: mdi:brightness-2
 

@@ -1,7 +1,18 @@
-type: alexa
 expose_by_default: true
 exposed_domains:
-- switch
-- light
-- scene
-- script
+  - switch
+  - light
+  - scene
+entities:
+  scene.good_morning:
+    hidden: true
+  light.kitchen_lights_1_level:
+    hidden: true
+  light.kitchen_lights_2_level:
+    hidden: true
+  switch.front_landscape:
+    hidden: true
+  switch.back_landscape:
+    hidden: true
+  switch.fountain:
+    hidden: true

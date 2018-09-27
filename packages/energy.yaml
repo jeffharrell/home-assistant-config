@@ -1,5 +1,6 @@
 group:
-  Energy:
+  energy:
+    name: Energy
     entities:
       - sensor.home_energy_meter_power
       - sensor.home_energy_meter_energy_3

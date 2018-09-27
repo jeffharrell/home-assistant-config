@@ -3,23 +3,23 @@ group:
     name: Inside
     view: yes
     entities:
-      - group.Lights
-      - group.Media
-      - group.Climate
-      - group.Scenes
+      - group.lights
+      - group.media
+      - group.climate
+      - group.scenes
   outside:
     view: yes
     entities:
-      - group.Weather
-      - group.Landscaping
-      - group.Security
+      - group.weather
+      - group.landscaping
+      - group.security
   tools:
     view: yes
     entities:
       - alert.garage_door_guest
       - alert.garage_door_jeff
       - alert.garage_door_jillian
-      - group.Settings
-      - group.Energy
-      - group.Batteries
+      - group.settings
+      - group.energy
+      - group.batteries
       - group.all_automations

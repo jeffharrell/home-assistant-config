@@ -1,10 +1,12 @@
 group:
-  Media:
+  media:
+    name: Media
     entities:
       - sensor.family_room_media
       - input_select.family_room_media
-      - group.PlayOutside
-  PlayOutside:
+      - group.outside_speakers
+  outside_speakers:
+    name: Play Outside
     entities:
       - script.back_yard_speakers
 
@@ -13,8 +15,7 @@ homeassistant:
   customize:
     input_select.family_room_media:
       icon: mdi:remote
-    group.PlayOutside:
-      friendly_name: Play Outside
+    group.outside_speakers:
       icon: mdi:speaker
       visible: False
       assumed_state: False
@@ -34,7 +35,7 @@ input_select:
       - Power Off
       - Apple TV
       - Fire TV
-      - Music
+      - Speakers
       - Bluetooth
     initial: Select
 
@@ -63,8 +64,8 @@ automation:
             {% if states.input_select.family_room_media.state == "Apple TV" %}
               21762413
             {% elif states.input_select.family_room_media.state == "Fire TV" %}
-              21762603
-            {% elif states.input_select.family_room_media.state == "Music" %}
+              35169619
+            {% elif states.input_select.family_room_media.state == "Speakers" %}
               18890244
             {% elif states.input_select.family_room_media.state == "Bluetooth" %}
               22068322
@@ -87,9 +88,9 @@ automation:
     action:
       service: group.set_visibility
       data_template:
-        entity_id: group.PlayOutside
+        entity_id: group.outside_speakers
         visible: >
-          {% if states.remote.family_room.attributes.current_activity == "Music" %}
+          {% if states.remote.family_room.attributes.current_activity == "Speakers" %}
             True
           {% else %}
             False

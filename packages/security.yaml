@@ -1,5 +1,6 @@
 group:
-  Security:
+  security:
+    name: Security
     entities:
       - binary_sensor.front_door
       - binary_sensor.family_room_doors
@@ -121,10 +122,7 @@ automation:
     action:
       - service: media_player.alexa_tts
         data_template:
-          entity_id:
-            - media_player.master_bedroom
-            - media_player.family_room
-            - media_player.living_room
+          entity_id: media_player.master_bedroom
           message: >
             {% set status = states.alarm_control_panel.abode.state %}
             {% set isOpened = states.group.Security.state %}
@@ -202,9 +200,9 @@ automation:
     initial_state: True
     trigger:
       - platform: template
-        value_template: "{{ states.climate.meadowlands.attributes.away_mode == 'on' }}"
+        value_template: "{{ states.climate.home.attributes.away_mode == 'on' }}"
       - platform: template
-        value_template: "{{ states.climate.meadowlands.attributes.hold_mode == 'away' }}"
+        value_template: "{{ states.climate.home.attributes.hold_mode == 'away' }}"
     action:
       - condition: template
         value_template: "{{ states.alarm_control_panel.abode.state != 'armed_away' }}"

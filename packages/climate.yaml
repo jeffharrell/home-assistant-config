@@ -1,5 +1,6 @@
 group:
-  Climate:
+  climate:
+    name: Climate
     entities:
       - sensor.climate_mode
       - switch.house_fan_switch
@@ -19,9 +20,9 @@ homeassistant:
     sensor.climate_mode:
       friendly_name: Mode
       icon: mdi:thermostat
-    sensor.meadowlands_temperature:
+    sensor.home_temperature:
       hidden: true
-    sensor.meadowlands_humidity:
+    sensor.home_humidity:
       hidden: true
     switch.house_fan_switch:
       friendly_name: House Fan
@@ -42,10 +43,10 @@ sensor:
   - platform: template
     sensors:
       climate_mode:
-        value_template: "{% if states.climate.meadowlands.attributes.mode == 'Away' %}Away{% else %}{{states.climate.meadowlands.attributes.operation_mode|capitalize}}{% endif %}"
+        value_template: "{% if states.climate.home.attributes.mode == 'Away' %}Away{% else %}{{ states.climate.home.attributes.operation_mode|capitalize }}{% endif %}"
 
       climate_operation:
-        value_template: "{{ states.climate.meadowlands.attributes.operation }}"
+        value_template: "{{ states.climate.home.attributes.operation }}"
 
       family_room_status:
         friendly_name: Family Room
@@ -102,10 +103,10 @@ automation:
       to: "on"
     action:
       - condition: template
-        value_template: "{{ states.climate.meadowlands.attributes.operation_mode == 'cool' }}"
+        value_template: "{{ states.climate.home.attributes.operation_mode == 'cool' }}"
       - service: climate.set_temperature
         data:
-          entity_id: climate.meadowlands
+          entity_id: climate.home
           temperature: 80
 
   - alias: Climate – Resume thermostat
@@ -119,4 +120,4 @@ automation:
     action:
       - service: climate.ecobee_resume_program
         data:
-          entity_id: climate.meadowlands
+          entity_id: climate.home
