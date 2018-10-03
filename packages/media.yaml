@@ -77,6 +77,29 @@ automation:
           entity_id: input_select.family_room_media
           option: Select
 
+  - alias: Media - Lights on at sunset
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunset
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: remote.family_room
+          state: "on"
+        - condition: state
+          entity_id: group.family_room_lights_all
+          state: "off"
+    action:
+      - service: homeassistant.turn_on
+        entity_id:
+          - scene.movie_time
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.family_room
+          message: I'm turning on Movie Time for you.
+
   - alias: Media - Show outside speaker controls
     initial_state: True
     hide_entity: True

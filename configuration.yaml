@@ -48,4 +48,6 @@ script: !include packages/scripts.yaml
 sun:
 
 logger:
-  default: error
+  default: critical
+  logs:
+    homeassistant.components: error

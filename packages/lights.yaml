@@ -1,14 +1,21 @@
 group:
-  lights:
-    name: Lights
+  family_room_lights_all:
     entities:
       - light.family_room_lights_level
-      - light.dining_room_lights_level
-      - switch.living_room_switch
       - light.Kitchen
       - light.island_lights_level
       - switch.kitchen_cabinets_switch
       - light.pantry_light_level
+  lights:
+    name: Lights
+    entities:
+      - light.family_room_lights_level
+      - light.island_lights_level
+      - light.Kitchen
+      - switch.kitchen_cabinets_switch
+      - light.pantry_light_level
+      - light.dining_room_lights_level
+      - switch.living_room_switch
       - switch.entryway_light_switch
       - switch.hallway_light_switch
       - switch.guest_room_switch
@@ -91,9 +98,14 @@ automation:
       entity_id: alarm_control_panel.abode
       from: "armed_away"
       to: "disarmed"
+    condition:
+      condition: sun
+      after: sunset
     action:
-      - condition: sun
-        after: sunset
       - service: homeassistant.turn_on
         entity_id:
           - switch.hallway_light_switch
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.master_bedroom
+          message: Welcome home. I turned the lights on for you.
