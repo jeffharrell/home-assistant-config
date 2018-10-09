@@ -67,7 +67,7 @@ scene:
 
   - name: Good Night
     entities:
-      group.Lights: off
+      group.lights: off
       switch.back_yard_switch: off
       switch.house_fan_switch: off
       remote.family_room:

@@ -152,7 +152,7 @@ automation:
     action:
       - service: homeassistant.turn_off
         entity_id:
-          - group.Lights
+          - group.lights
           - switch.back_yard_switch
           - switch.house_fan_switch
           - remote.family_room

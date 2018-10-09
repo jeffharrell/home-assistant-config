@@ -50,7 +50,7 @@ automation:
       - delay: "{{ trigger.to_state.state }}"
       - service: homeassistant.turn_off
         entity_id:
-          - group.Lights
+          - group.lights
       - service: input_select.select_option
         data:
           entity_id: input_select.delay_timer
