@@ -195,6 +195,21 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.snapshot_cameras_and_send
+        data:
+          variables:
+            message: "Alarm"
+      - delay: "00:01:00"
+      - service: script.turn_on
+        entity_id: script.snapshot_cameras_and_send
+        data:
+          variables:
+            message: "Alarm (more)"
+      - delay: "00:01:00"
+      - service: script.turn_on
+        entity_id: script.snapshot_cameras_and_send
+        data:
+          variables:
+            message: "Alarm (even more)"
 
   - alias: Alarm - Reminder
     initial_state: True

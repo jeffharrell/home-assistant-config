@@ -34,7 +34,7 @@ snapshot_cameras_and_send:
     - service: notify.jeff_and_jillians_phone
       data_template:
         title: Home Assistant
-        message: Alarm
+        message: "{{ message }}"
         data:
           images:
             - /tmp/camera.front_door.png

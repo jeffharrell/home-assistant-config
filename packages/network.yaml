@@ -1,0 +1,18 @@
+group:
+  network:
+    name: Network
+    entities:
+      - binary_sensor.internet
+
+
+homeassistant:
+  customize:
+    binary_sensor.internet:
+      friendly_name: Internet
+      icon: mdi:access-point-network
+
+
+binary_sensor:
+  - platform: ping
+    name: internet
+    host: 8.8.8.8

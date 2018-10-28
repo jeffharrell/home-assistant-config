@@ -21,5 +21,6 @@ group:
       - alert.garage_door_jillian
       - group.settings
       - group.energy
+      - group.network
       - group.batteries
       - group.all_automations

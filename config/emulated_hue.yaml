@@ -3,6 +3,7 @@ exposed_domains:
   - switch
   - light
   - scene
+  - script
 entities:
   scene.good_morning:
     hidden: true
