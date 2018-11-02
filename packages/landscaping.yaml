@@ -78,3 +78,20 @@ automation:
           switch.turn_{% if trigger and trigger.event == "sunset" %}off{% else %}on{% endif %}
         entity_id:
           switch.fountain
+
+  - alias: Landscape - Back door light
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.family_room_doors
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.master_bedroom_doors
+        to: "on"
+    condition:
+      condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+    action:
+      - service: homeassistant.turn_on
+        entity_id: switch.back_yard_switch
