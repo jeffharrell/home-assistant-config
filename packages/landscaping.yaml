@@ -89,9 +89,14 @@ automation:
         entity_id: binary_sensor.master_bedroom_doors
         to: "on"
     condition:
-      condition: state
-      entity_id: sun.sun
-      state: "below_horizon"
+      condition: or
+      conditions:
+        - condition: sun
+          after: sunrise
+          after_offset: "-01:00:00"
+        - condition: sun
+          after: sunset
+          after_offset: "01:00:00"
     action:
       - service: homeassistant.turn_on
         entity_id: switch.back_yard_switch
