@@ -92,11 +92,11 @@ automation:
       condition: or
       conditions:
         - condition: sun
-          after: sunrise
-          after_offset: "-01:00:00"
+          before: sunrise
+          before_offset: "1:00:00"
         - condition: sun
           after: sunset
-          after_offset: "01:00:00"
+          after_offset: "-1:00:00"
     action:
       - service: homeassistant.turn_on
         entity_id: switch.back_yard_switch
