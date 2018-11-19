@@ -83,7 +83,7 @@ automation:
       platform: sun
       event: sunset
     condition:
-      condition: or
+      condition: and
       conditions:
         - condition: state
           entity_id: remote.family_room
@@ -98,7 +98,7 @@ automation:
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.family_room
-          message: I'm turning on Movie Time for you.
+          message: The sun is going dow. I'm turning on the lights for you.
 
   - alias: Media - Show outside speaker controls
     initial_state: True
