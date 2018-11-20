@@ -21,12 +21,11 @@ homeassistant:
     weather: !include packages/weather.yaml
   whitelist_external_dirs:
     - /tmp
-  auth_providers:
-    - type: homeassistant
-
-auth:
 
 config:
+
+logger:
+  default: error
 
 http: !include config/http.yaml
 
@@ -47,8 +46,3 @@ zwave: !include config/zwave.yaml
 script: !include packages/scripts.yaml
 
 sun:
-
-logger:
-  default: critical
-  logs:
-    homeassistant.components: error
