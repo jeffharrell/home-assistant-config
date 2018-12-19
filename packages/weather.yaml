@@ -10,6 +10,8 @@ group:
 sensor:
   - platform: darksky
     api_key: !secret darksky_api_key
+    forecast:
+      - 0
     monitored_conditions:
       - temperature
       - temperature_high
@@ -26,7 +28,7 @@ sensor:
 
       outdoor_temperature_high:
         friendly_name: High
-        value_template: "{{ states.sensor.dark_sky_daytime_high_temperature.state|round|int }}"
+        value_template: "{{ states.sensor.dark_sky_daytime_high_temperature_0.state|round|int }}"
         unit_of_measurement: "°F"
         icon_template: mdi:thermometer
 

@@ -98,7 +98,7 @@ automation:
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.family_room
-          message: The sun is going dow. I'm turning on the lights for you.
+          message: The sun is going down. I'm turning on the lights for you.
 
   - alias: Media - Show outside speaker controls
     initial_state: True
