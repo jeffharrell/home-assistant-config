@@ -13,20 +13,3 @@ script:
         data_template:
           entity_id: media_player.family_room
           message: "Temperature in the house is {{ state_attr('climate.home', 'current_temperature') }}."
-
-  tts_weather_wear_shorts:
-    sequence:
-      - service: media_player.alexa_tts
-        data_template:
-          entity_id: media_player.master_bedroom
-          message: >
-            {% set current = states('sensor.dark_sky_temperature') %}
-            {% set high = states('sensor.dark_sky_daytime_high_temperature') %}
-            {%- if high >= '75' -%}
-              Yes... you can wear shorts today.
-            {%- else -%}
-              No... it's too cold to wear shorts today.
-            {%- endif -%}
-            {%- if current <= '65' -%}
-              ... You might want to put on a hoodie though.
-            {%- endif -%}

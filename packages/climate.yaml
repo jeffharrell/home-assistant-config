@@ -7,8 +7,9 @@ group:
       - sensor.family_room_status
       - sensor.living_room_status
       - sensor.masons_room_status
+      - sensor.brinks_room_status
       - sensor.master_bedroom_status
-
+      - sensor.guest_bedroom_status
 
 homeassistant:
   customize:
@@ -81,9 +82,31 @@ sensor:
             /local/thermometer.svg
           {%- endif -%}
 
+      brinks_room_status:
+        friendly_name: Brink's Bedroom
+        value_template: "{{ states.sensor.brinks_room_temperature.state|round|int }}"
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state("binary_sensor.masons_room_occupancy", "on") -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
       master_bedroom_status:
         friendly_name: Master Bedroom
         value_template: "{{ states.sensor.master_bedroom_temperature.state|round|int }}"
+        unit_of_measurement: °F
+        entity_picture_template: >
+          {%- if is_state("binary_sensor.master_bedroom_occupancy", "on") -%}
+            /local/thermometer-on.svg
+          {%- else -%}
+            /local/thermometer.svg
+          {%- endif -%}
+
+      master_bedroom_status:
+        friendly_name: Guest Bedroom
+        value_template: "{{ states.sensor.guest_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: >
           {%- if is_state("binary_sensor.master_bedroom_occupancy", "on") -%}

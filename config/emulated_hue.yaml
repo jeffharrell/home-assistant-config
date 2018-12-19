@@ -17,3 +17,11 @@ entities:
     hidden: true
   switch.fountain:
     hidden: true
+  script.back_yard_speakers:
+    hidden: true
+  script.snapshot_door_and_send:
+    hidden: true
+  script.snapshot_cameras_and_send:
+    hidden: true
+  script.snapshot_cameras_and_send:
+    hidden: true
