@@ -77,9 +77,7 @@ automation:
       - service_template: >
           {%- if trigger and trigger.event == "sunset" -%}
             switch.turn_off
-          {%- elif 'rain' in sensor.outdoor_forecast -%}
-            switch.turn_off
-          {%- elif 'wind' in sensor.outdoor_forecast -%}
+          {%- elif states.sensor.outdoor_forecast.state|lower|regex_search('wind|rain') -%}
             switch.turn_off
           {%- else -%}
             switch.turn_on
@@ -87,7 +85,7 @@ automation:
         entity_id:
           switch.fountain
       - condition: template
-        value_template: "{{ 'rain' in sensor.outdoor_forecast or 'wind' in sensor.outdoor_forecast }}"
+        value_template: "{{ states.sensor.outdoor_forecast.state|lower|regex_search('wind|rain') }}"
       - service: notify.jeffs_phone
         data_template:
           title: Home Assistant

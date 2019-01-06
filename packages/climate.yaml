@@ -104,7 +104,7 @@ sensor:
             /local/thermometer.svg
           {%- endif -%}
 
-      master_bedroom_status:
+      guest_bedroom_status:
         friendly_name: Guest Bedroom
         value_template: "{{ states.sensor.guest_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F

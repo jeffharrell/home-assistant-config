@@ -23,5 +23,3 @@ entities:
     hidden: true
   script.snapshot_cameras_and_send:
     hidden: true
-  script.snapshot_cameras_and_send:
-    hidden: true

@@ -67,13 +67,13 @@ automation:
       # try to heal the node
       - service: zwave.heal_node
         data_template:
-          node_id: {{ states[trigger.to_state.domain][trigger.to_state.object_id].attributes.node_id }}
+          node_id: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].attributes.node_id }}"
       # wait to make sure it updates
       - delay: "00:00:60"
       # now check it again
       - condition: template
-        entity_id: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
+        value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
       # notify if still dead
       - service: notify.jeffs_phone
         data_template:
-          message: "A zwave node is marked as dead: {{ trigger.entity_id }}."
+          message: "A zwave node is marked as dead and I could not fix it: {{ trigger.entity_id }}."

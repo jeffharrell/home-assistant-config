@@ -248,6 +248,18 @@ automation:
       service: script.turn_on
       entity_id: script.snapshot_door_and_send
 
+  - alias: Doorbell - Skybell offline
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: template
+      value_template: "{{ states.switch.skybell_front_door_do_not_disturb.attributes.status != 'up' }}"
+    action:
+      - service: notify.jeffs_phone
+        data_template:
+          title: Home Assistant
+          message: "Skybell is no longer showing as up. Status: {{ states.switch.skybell_front_door_do_not_disturb.attributes.status }}"
+
 
 alert:
   garage_door_jeff:
