@@ -94,7 +94,7 @@ camera:
 
 
 automation:
-  - alias: Alarm - Status changes theme
+  - alias: Alarm - Theme change
     initial_state: True
     hide_entity: True
     trigger:
@@ -260,40 +260,19 @@ automation:
           title: Home Assistant
           message: "Skybell is no longer showing as up. Status: {{ states.switch.skybell_front_door_do_not_disturb.attributes.status }}"
 
-
-alert:
-  garage_door_jeff:
-    name: Jeff's garage is open
-    entity_id: binary_sensor.jeffs_garage_door_sensor
-    state: "on"
-    repeat:
-      - 30
-      - 60
-    can_acknowledge: True
-    skip_first: True
-    notifiers:
-      - jeff_and_jillians_phone
-
-  garage_door_jillian:
-    name: Jillian's garage is open
-    entity_id: binary_sensor.jillians_garage_door_sensor
-    state: "on"
-    repeat:
-      - 30
-      - 60
-    can_acknowledge: True
-    skip_first: True
-    notifiers:
-      - jeff_and_jillians_phone
-
-  garage_door_guest:
-    name: Guest garage is open
-    entity_id: binary_sensor.guest_garage_door_sensor
-    state: "on"
-    repeat:
-      - 30
-      - 60
-    can_acknowledge: True
-    skip_first: True
-    notifiers:
-      - jeff_and_jillians_phone
+  - alias: Garage - Door open
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id:
+        - binary_sensor.jeffs_garage_door_sensor
+        - binary_sensor.jillians_garage_door_sensor
+        - binary_sensor.guest_garage_door_sensor
+      to: "open"
+      for:
+        minutes: 30
+    action:
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Home Assistant
+          message: "{{ trigger.entity_id|capitalize|replace('_sensor')|replace('_', ' ') }} is open."
