@@ -122,7 +122,7 @@ automation:
     action:
       - service: media_player.alexa_tts
         data_template:
-          entity_id: media_player.master_bedroom
+          entity_id: group.alexas
           message: >
             {% set status = states.alarm_control_panel.abode.state %}
             {% set isOpened = states.group.Security.state %}
