@@ -125,12 +125,16 @@ automation:
       from: "off"
       to: "on"
     action:
-      - condition: template
-        value_template: "{{ states.climate.home.attributes.operation_mode == 'cool' }}"
+      # change the thermostat to a value higher/lower
       - service: climate.set_temperature
-        data:
+        data_template:
           entity_id: climate.home
-          temperature: 80
+          temperature: >
+            {% if states.climate.home.attributes.operation_mode == 'cool' %}
+              80
+            {% else %}
+              60
+            {% endif %}
 
   - alias: Climate – Resume thermostat
     initial_state: True
