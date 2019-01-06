@@ -50,3 +50,30 @@ sensor:
           {{ states.zwave.doorbell.attributes.battery_level }}
         {% endif %}"
         unit_of_measurement: "%"
+
+
+automation:
+  - alias: zwave - Dead sensors
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id:
+          - zwave.front_landscape
+          - zwave.back_landscape
+          - zwave.fountain
+          - zwave.doorbell
+        to: "dead"
+    action:
+      # try to heal the node
+      - service: zwave.heal_node
+        data_template:
+          node_id: {{ states[trigger.to_state.domain][trigger.to_state.object_id].attributes.node_id }}
+      # wait to make sure it updates
+      - delay: "00:00:60"
+      # now check it again
+      - condition: template
+        entity_id: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
+      # notify if still dead
+      - service: notify.jeffs_phone
+        data_template:
+          message: "A zwave node is marked as dead: {{ trigger.entity_id }}."

@@ -75,9 +75,24 @@ automation:
         event: sunset
     action:
       - service_template: >
-          switch.turn_{% if trigger and trigger.event == "sunset" %}off{% else %}on{% endif %}
+          {%- if trigger and trigger.event == "sunset" -%}
+            switch.turn_off
+          {%- elif 'rain' in sensor.outdoor_forecast -%}
+            switch.turn_off
+          {%- elif 'wind' in sensor.outdoor_forecast -%}
+            switch.turn_off
+          {%- else -%}
+            switch.turn_on
+          {%- endif -%}
         entity_id:
           switch.fountain
+      - condition: template
+        value_template: "{{ 'rain' in sensor.outdoor_forecast or 'wind' in sensor.outdoor_forecast }}"
+      - service: notify.jeffs_phone
+        data_template:
+          title: Home Assistant
+          message: I am skipping turning on the fountain due to the weather today.
+
 
   - alias: Landscape - Back door light
     initial_state: True

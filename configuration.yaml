@@ -6,7 +6,6 @@ homeassistant:
   unit_system: !secret units
   time_zone: !secret time_zone
   packages:
-    batteries: !include packages/batteries.yaml
     climate: !include packages/climate.yaml
     default: !include packages/default.yaml
     energy: !include packages/energy.yaml
@@ -15,6 +14,7 @@ homeassistant:
     lights: !include packages/lights.yaml
     media: !include packages/media.yaml
     network: !include packages/network.yaml
+    sensors: !include packages/sensors.yaml
     scenes: !include packages/scenes.yaml
     settings: !include packages/settings.yaml
     tts: !include packages/tts.yaml
