@@ -2,17 +2,25 @@ automation:
   - alias: Zwave - Low battery
     initial_state: True
     trigger:
-      - platform: template
-        value_template: >
-          {% for zwave in states.zwave if zwave.attributes.battery_level %}
-            {%- if zwave.attributes.battery_level | int < 20 -%}
-              {{ true }}
-            {%- endif -%}
-          {%- endfor -%}
+      platform: time
+      at: "18:00:00"
+    condition:
+      condition: template
+      value_template: >
+        {% for zwave in states.zwave if zwave.attributes.battery_level %}
+          {%- if zwave.attributes.battery_level|int < 20 -%}
+            {{ true }}
+          {%- endif -%}
+        {%- endfor -%}
     action:
       - service: notify.jeffs_phone
         data_template:
-          message: "{{ trigger.to_state.attributes.friendly_name }} needs new batteries."
+          message: >
+            {% for zwave in states.zwave if zwave.attributes.battery_level %}
+              {%- if zwave.attributes.battery_level|int < 20 -%}
+                {{ zwave.attributes.friendly_name }} sensor needs new batteries.
+              {%- endif -%}
+            {%- endfor -%}
 
   - alias: Zwave - Dead sensor
     initial_state: True
@@ -25,6 +33,10 @@ automation:
           - zwave.doorbell
         to: "dead"
     action:
+      # notify it's dead
+      - service: notify.jeffs_phone
+        data_template:
+          message: "A zwave node is marked as dead. Trying to heal: {{ trigger.entity_id }}."
       # try to heal the node
       - service: zwave.heal_node
         data_template:
@@ -37,4 +49,4 @@ automation:
       # notify if still dead
       - service: notify.jeffs_phone
         data_template:
-          message: "A zwave node is marked as dead and I could not fix it: {{ trigger.entity_id }}."
+          message: "I could not heal the zwave node: {{ trigger.entity_id }}."
