@@ -1,6 +1,6 @@
 # Home Automation
 
-A few years ago I started a project to automate my house and have finally settled on a solution which works for me that uses [Home Assistant](https://home-assistant.io/). Details below.
+A few years ago I started a project to automate my house—because I'm a nerd—and have finally settled on a solution which works for me that uses [Home Assistant](https://home-assistant.io/). Details below.
 
 
 ## Principles
