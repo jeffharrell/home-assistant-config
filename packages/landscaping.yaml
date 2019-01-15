@@ -47,7 +47,6 @@ automation:
           - switch.front_landscape
           - switch.back_landscape
 
-
   - alias: Landscape - Front door light
     initial_state: True
     trigger:
@@ -84,13 +83,6 @@ automation:
           {%- endif -%}
         entity_id:
           switch.fountain
-      - condition: template
-        value_template: "{{ states.sensor.outdoor_forecast.state|lower|regex_search('wind|rain') }}"
-      - service: notify.jeffs_phone
-        data_template:
-          title: Home Assistant
-          message: I am skipping turning on the fountain due to the weather today.
-
 
   - alias: Landscape - Back door light
     initial_state: True

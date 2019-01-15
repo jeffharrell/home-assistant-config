@@ -73,3 +73,13 @@ scene:
       remote.family_room:
         state: off
       alarm_control_panel.abode: "armed_home"
+
+  - name: I'm Leaving
+    entities:
+      group.lights: off
+      switch.back_yard_switch: off
+      switch.house_fan_switch: off
+      remote.family_room:
+        state: off
+      alarm_control_panel.abode: "armed_away"
+

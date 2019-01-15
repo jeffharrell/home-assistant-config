@@ -33,20 +33,16 @@ automation:
           - zwave.doorbell
         to: "dead"
     action:
-      # notify it's dead
       - service: notify.jeffs_phone
         data_template:
           message: "A zwave node is marked as dead. Trying to heal: {{ trigger.entity_id }}."
-      # try to heal the node
-      - service: zwave.heal_node
+      - delay: "00:00:60"
+      - service: zwave.test_node
         data_template:
           node_id: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].attributes.node_id }}"
-      # wait to make sure it updates
       - delay: "00:00:60"
-      # now check it again
       - condition: template
         value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
-      # notify if still dead
       - service: notify.jeffs_phone
         data_template:
           message: "I could not heal the zwave node: {{ trigger.entity_id }}."
