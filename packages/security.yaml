@@ -238,26 +238,6 @@ automation:
           title: Home Assistant
           message: "The alarm faulted: {{ trigger.event.data }}"
 
-  - alias: Alarm - Camera offline
-    initial_state: True
-    hide_entity: True
-    trigger:
-      - platform: template
-        value_template: "{{ states.switch.skybell_front_door_do_not_disturb.attributes.status != 'up' }}"
-      - platform: template
-        value_template: "{{ states.camera.front_door == None }}"
-      - platform: template
-        value_template: "{{ states.camera.family_room == None }}"
-      - platform: template
-        value_template: "{{ states.camera.living_room == None }}"
-      - platform: template
-        value_template: "{{ states.camera.back_yard == None }}"
-    action:
-      - service: notify.jeffs_phone
-        data_template:
-          title: Home Assistant
-          message: "{{ trigger.entity_id }} appears offline."
-
   - alias: Doorbell - Notifications
     initial_state: True
     trigger:

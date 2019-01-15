@@ -9,13 +9,13 @@ homeassistant:
     climate: !include packages/climate.yaml
     default: !include packages/default.yaml
     energy: !include packages/energy.yaml
-    homesecurity: !include packages/security.yaml
+    health: !include packages/health.yaml
     landscaping: !include packages/landscaping.yaml
     lights: !include packages/lights.yaml
     media: !include packages/media.yaml
     network: !include packages/network.yaml
-    sensors: !include packages/sensors.yaml
     scenes: !include packages/scenes.yaml
+    security: !include packages/security.yaml
     settings: !include packages/settings.yaml
     tts: !include packages/tts.yaml
     weather: !include packages/weather.yaml

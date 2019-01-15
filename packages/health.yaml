@@ -1,9 +1,21 @@
 automation:
-  - alias: Zwave - Low battery
+  - alias: Health - Camera offline
+    initial_state: True
+    hide_entity: True
+    trigger:
+      - platform: template
+        value_template: "{{ states.switch.skybell_front_door_do_not_disturb.attributes.status != 'up' }}"
+    action:
+      - service: notify.jeffs_phone
+        data_template:
+          title: Home Assistant
+          message: "{{ trigger.to_state.attributes.friendly_name }} appears offline."
+
+  - alias: Health - Low battery check
     initial_state: True
     trigger:
       platform: time
-      at: "18:00:00"
+      at: "00:00:00"
     condition:
       condition: template
       value_template: >
@@ -22,7 +34,7 @@ automation:
               {%- endif -%}
             {%- endfor -%}
 
-  - alias: Zwave - Dead sensor
+  - alias: Health - Dead sensor check
     initial_state: True
     trigger:
       - platform: state
@@ -35,7 +47,7 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          message: "A zwave node is marked as dead. Trying to heal: {{ trigger.entity_id }}."
+          message: "A zwave node is marked as dead. Trying to heal: {{ trigger.to_state.attributes.friendly_name }}."
       - delay: "00:00:60"
       - service: zwave.test_node
         data_template:
@@ -45,4 +57,4 @@ automation:
         value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
       - service: notify.jeffs_phone
         data_template:
-          message: "I could not heal the zwave node: {{ trigger.entity_id }}."
+          message: "I could not heal the zwave node: {{ trigger.to_state.attributes.friendly_name }}."
