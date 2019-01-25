@@ -1,3 +1,5 @@
 exclude:
   domains:
+    - zwave
     - camera
+    - sun

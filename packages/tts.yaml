@@ -10,6 +10,10 @@ media_player:
     email: !secret alexa_email
     password: !secret alexa_password
     url: "amazon.com"
+    include_devices:
+      - "Family Room"
+      - "Living Room"
+      - "Master Bedroom"
 
 
 script:

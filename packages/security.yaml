@@ -78,12 +78,7 @@ homeassistant:
 abode:
   username: !secret abode_user
   password: !secret abode_pass
-  name: Abode
-
-
-skybell:
-  username: !secret skybell_user
-  password: !secret skybell_pass
+  name: Alarm
 
 
 camera:

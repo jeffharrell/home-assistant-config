@@ -1,27 +1,3 @@
-homeassistant:
-  name: Home
-  latitude: !secret latitude
-  longitude: !secret longitude
-  elevation: !secret elevation
-  unit_system: !secret units
-  time_zone: !secret time_zone
-  packages:
-    climate: !include packages/climate.yaml
-    default: !include packages/default.yaml
-    energy: !include packages/energy.yaml
-    health: !include packages/health.yaml
-    landscaping: !include packages/landscaping.yaml
-    lights: !include packages/lights.yaml
-    media: !include packages/media.yaml
-    network: !include packages/network.yaml
-    scenes: !include packages/scenes.yaml
-    security: !include packages/security.yaml
-    settings: !include packages/settings.yaml
-    tts: !include packages/tts.yaml
-    weather: !include packages/weather.yaml
-  whitelist_external_dirs:
-    - /tmp
-
 config:
 
 logger:
@@ -46,3 +22,27 @@ zwave: !include config/zwave.yaml
 script: !include packages/scripts.yaml
 
 sun:
+
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: !secret units
+  time_zone: !secret time_zone
+  packages:
+    climate: !include packages/climate.yaml
+    default: !include packages/default.yaml
+    energy: !include packages/energy.yaml
+    health: !include packages/health.yaml
+    landscaping: !include packages/landscaping.yaml
+    lights: !include packages/lights.yaml
+    media: !include packages/media.yaml
+    network: !include packages/network.yaml
+    scenes: !include packages/scenes.yaml
+    security: !include packages/security.yaml
+    settings: !include packages/settings.yaml
+    tts: !include packages/tts.yaml
+    weather: !include packages/weather.yaml
+  whitelist_external_dirs:
+    - /tmp

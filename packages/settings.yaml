@@ -3,7 +3,7 @@ group:
     name: Settings
     entities:
       - input_select.delay_timer
-      - switch.skybell_front_door_do_not_disturb
+      # - switch.skybell_front_door_do_not_disturb
 
 
 homeassistant:
@@ -19,10 +19,15 @@ homeassistant:
       icon: mdi:lightbulb
 
 
-switch:
-  - platform: skybell
-    monitored_conditions:
-      - do_not_disturb
+# skybell:
+#   username: !secret skybell_user
+#   password: !secret skybell_pass
+
+
+# switch:
+#   - platform: skybell
+#     monitored_conditions:
+#       - do_not_disturb
 
 
 input_select:
