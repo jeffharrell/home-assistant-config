@@ -1,29 +1,3 @@
-group:
-  energy:
-    name: Energy
-    entities:
-      - sensor.home_energy_meter_power
-      - sensor.home_energy_meter_energy_3
-      - sensor.home_energy_meter_current
-      - sensor.home_energy_meter_voltage
-
-
-homeassistant:
-  customize:
-    sensor.home_energy_meter_current:
-      friendly_name: Current
-      icon: mdi:current-ac
-    sensor.home_energy_meter_energy_3:
-      friendly_name: Energy Used
-      icon: mdi:battery-charging
-    sensor.home_energy_meter_power:
-      friendly_name: Power Consumption
-      icon: mdi:power-socket-us
-    sensor.home_energy_meter_voltage:
-      friendly_name: Voltage
-      icon: mdi:flash
-
-
 automation:
   - alias: Energy - Reset meter
     initial_state: True

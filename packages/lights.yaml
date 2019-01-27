@@ -5,6 +5,7 @@ light:
       - light.kitchen_lights_1_level
       - light.kitchen_lights_2_level
 
+
 automation:
   - alias: Lights - Toggle when away
     initial_state: True

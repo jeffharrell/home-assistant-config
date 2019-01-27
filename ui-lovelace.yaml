@@ -170,17 +170,33 @@ views:
         show_header_toggle: false
         entities:
           - entity: input_select.delay_timer
-            name: "Turn off lights in"
+            name: "Lights Off Timer"
             icon: mdi:lightbulb
+          - entity: automation.doorbell_notifications
+            name: "Doorbell Notifications"
+          - entity: automation.alarm_say_status
+            name: "Speak Alarm Status"
+          - entity: automation.garage_door_open
+            name: "Garage Notifications"
+          - entity: automation.landscape_fountain
+            name: "Automate Fountain"
 
       - type: entities
         title: "Energy"
         show_header_toggle: false
         entities:
-          - sensor.home_energy_meter_power
-          - sensor.home_energy_meter_energy_3
-          - sensor.home_energy_meter_current
-          - sensor.home_energy_meter_voltage
+          - entity: sensor.home_energy_meter_power
+            name: "Power Consumption"
+            icon: mdi:power-socket-us
+          - entity: sensor.home_energy_meter_energy_3
+            name: "Energy Used"
+            icon: mdi:battery-charging
+          - entity: sensor.home_energy_meter_current
+            name: "Current"
+            icon: mdi:current-ac
+          - entity: sensor.home_energy_meter_voltage
+            name: "Voltage"
+            icon: mdi:flash
 
       - type: entities
         title: "Network"
@@ -189,34 +205,3 @@ views:
           - entity: binary_sensor.internet
             name: "Internet"
             icon: mdi:access-point-network
-
-      - type: entities
-        title: Automations
-        show_header_toggle: false
-        entities:
-          - automation.alarm_alert_lighting
-          - automation.alarm_alert_pics
-          - automation.alarm_fault
-          - automation.alarm_reminder
-          - automation.alarm_say_status
-          - automation.alarm_theme_change
-          - automation.alarm_turn_house_off
-          - automation.climate_house_fan_disables_hvac
-          - automation.climate_resume_thermostat
-          - automation.doorbell_notifications
-          - automation.energy_reset_meter
-          - automation.garage_door_open
-          - automation.health_camera_offline
-          - automation.health_dead_sensor_check
-          - automation.health_low_battery_check
-          - automation.landscape_back_door_light
-          - automation.landscape_fountain
-          - automation.landscape_front_door_light
-          - automation.landscape_lights
-          - automation.lights_toggle_when_away
-          - automation.lights_turn_on_when_coming_home
-          - automation.media_input_acts_as_remote
-          - automation.media_lights_on_at_sunset
-          - automation.media_show_outside_speaker_controls
-          - automation.settings_delay_lights_off
-          - automation.settings_reset_at_midnight

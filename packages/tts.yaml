@@ -1,4 +1,3 @@
-
 media_player:
   - platform: alexa
     email: !secret alexa_email
@@ -8,6 +7,7 @@ media_player:
       - "Family Room"
       - "Living Room"
       - "Master Bedroom"
+
 
 script:
   tts_home_climate:

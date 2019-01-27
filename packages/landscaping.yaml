@@ -1,4 +1,3 @@
-
 automation:
   - alias: Landscape - Lights
     initial_state: True
