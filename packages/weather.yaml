@@ -1,4 +1,18 @@
 sensor:
+  - platform: ambient_station
+    api_key: !secret ambient_weather_api_key
+    app_key: !secret ambient_weather_app_key
+    monitored_conditions:
+      - windspeedmph
+      - windgustmph
+      - humidity
+      - dewPoint
+      - tempf
+      - feelsLike
+      - uv
+      - solarradiation
+      - dailyrainin
+
   - platform: darksky
     api_key: !secret darksky_api_key
     forecast:

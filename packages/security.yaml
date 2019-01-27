@@ -3,11 +3,19 @@ abode:
   password: !secret abode_pass
   name: Alarm
 
+
 camera:
   - platform: synology
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
+
+
+homeassistant:
+    customize_glob:
+      "binary_sensor.*_garage_door_sensor":
+        device_class: opening
+
 
 automation:
   - alias: Alarm - Theme change

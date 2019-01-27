@@ -1,5 +1,9 @@
 title: Home
 
+resources:
+  - url: /local/simple-thermostat.min.js?v=1
+    type: module
+
 views:
   - title: "Inside"
     cards:

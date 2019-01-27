@@ -32,7 +32,7 @@ scene:
 
   - name: Good Morning
     entities:
-      alarm_control_panel.abode: "disarmed"
+      alarm_control_panel.alarm: "disarmed"
       switch.kitchen_cabinets_switch:
         state: on
       light.island_lights_level:
@@ -50,7 +50,7 @@ scene:
       switch.house_fan_switch: off
       remote.family_room:
         state: off
-      alarm_control_panel.abode: "armed_home"
+      alarm_control_panel.alarm: "armed_home"
 
   - name: I'm Leaving
     entities:
@@ -59,5 +59,5 @@ scene:
       switch.house_fan_switch: off
       remote.family_room:
         state: off
-      alarm_control_panel.abode: "armed_away"
+      alarm_control_panel.alarm: "armed_away"
 
