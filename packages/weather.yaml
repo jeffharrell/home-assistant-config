@@ -6,9 +6,7 @@ sensor:
       - windspeedmph
       - windgustmph
       - humidity
-      - dewPoint
       - tempf
-      - feelsLike
       - uv
       - solarradiation
       - dailyrainin
@@ -18,25 +16,10 @@ sensor:
     forecast:
       - 0
     monitored_conditions:
-      - temperature
-      - temperature_high
       - hourly_summary
-      - humidity
 
   - platform: template
     sensors:
-      outdoor_temperature:
-        friendly_name: Current
-        value_template: "{{ states.sensor.dark_sky_temperature.state|round|int }}"
-        unit_of_measurement: "°F"
-        icon_template: mdi:thermometer
-
-      outdoor_temperature_high:
-        friendly_name: High
-        value_template: "{{ states.sensor.dark_sky_daytime_high_temperature_0.state|round|int }}"
-        unit_of_measurement: "°F"
-        icon_template: mdi:thermometer
-
       outdoor_forecast:
         friendly_name: Forecast
         value_template: "{{ states.sensor.dark_sky_hourly_summary.state }}"

@@ -1,9 +1,5 @@
 title: Home
 
-resources:
-  - url: /local/simple-thermostat.min.js?v=1
-    type: module
-
 views:
   - title: "Inside"
     cards:
@@ -99,8 +95,11 @@ views:
         show_header_toggle: false
         entities:
           - sensor.outdoor_forecast
-          - sensor.outdoor_temperature
-          - sensor.outdoor_temperature_high
+          - sensor.temp
+          - entity: sensor.humidity
+            icon: mdi:water-percent
+          - entity: sensor.daily_rain
+            icon: mdi:water
 
       - type: entities
         title: "Landscape"
@@ -125,13 +124,16 @@ views:
       - type: entity-filter
         card:
           type: entities
-          title: "Warning"
+          title: "Security"
           show_header_toggle: false
         state_filter:
           - "on"
           - "off"
+          - "disarmed"
+          - "armed"
         show_empty: false
         entities:
+          - entity: alarm_control_panel.alarm
           - entity: binary_sensor.front_door
             icon: mdi:door
           - entity: binary_sensor.family_room_doors
