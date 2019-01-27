@@ -1,13 +1,12 @@
+skybell:
+  username: !secret skybell_user
+  password: !secret skybell_pass
 
-# skybell:
-#   username: !secret skybell_user
-#   password: !secret skybell_pass
 
-
-# switch:
-#   - platform: skybell
-#     monitored_conditions:
-#       - do_not_disturb
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
 
 
 input_select:

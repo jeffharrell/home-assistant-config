@@ -172,8 +172,10 @@ views:
           - entity: input_select.delay_timer
             name: "Lights Off Timer"
             icon: mdi:lightbulb
+          - entity: switch.skybell_front_door_do_not_disturb
+            name: "Mute Doorbell"
           - entity: automation.doorbell_notifications
-            name: "Doorbell Notifications"
+            name: "Doorbell Pictures"
           - entity: automation.alarm_say_status
             name: "Speak Alarm Status"
           - entity: automation.garage_door_open
