@@ -1,25 +1,3 @@
-group:
-  media:
-    name: Media
-    entities:
-      - sensor.family_room_media
-      - input_select.family_room_media
-      - group.outside_speakers
-  outside_speakers:
-    name: Play Outside
-    entities:
-      - script.back_yard_speakers
-
-
-homeassistant:
-  customize:
-    input_select.family_room_media:
-      icon: mdi:remote
-    group.outside_speakers:
-      icon: mdi:speaker
-      visible: False
-      assumed_state: False
-
 
 remote:
   - platform: harmony
@@ -44,9 +22,7 @@ sensor:
   - platform: template
     sensors:
       family_room_media:
-        friendly_name: Family Room
         value_template: "{{ states.remote.family_room.attributes.current_activity|replace('PowerOff', 'Off') }}"
-        icon_template: mdi:television
 
 
 automation:
@@ -76,45 +52,3 @@ automation:
         data_template:
           entity_id: input_select.family_room_media
           option: Select
-
-  - alias: Media - Lights on at sunset
-    initial_state: True
-    trigger:
-      platform: sun
-      event: sunset
-    condition:
-      condition: and
-      conditions:
-        - condition: state
-          entity_id: remote.family_room
-          state: "on"
-        - condition: state
-          entity_id: group.family_room_lights_all
-          state: "off"
-    action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - scene.movie_time
-      - service: media_player.alexa_tts
-        data_template:
-          entity_id: media_player.family_room
-          message: The sun is going down. I'm turning on the lights for you.
-
-  - alias: Media - Show outside speaker controls
-    initial_state: True
-    hide_entity: True
-    trigger:
-      - platform: homeassistant
-        event: start
-      - platform: state
-        entity_id: remote.family_room
-    action:
-      service: group.set_visibility
-      data_template:
-        entity_id: group.outside_speakers
-        visible: >
-          {% if states.remote.family_room.attributes.current_activity == "Speakers" %}
-            True
-          {% else %}
-            False
-          {% endif %}

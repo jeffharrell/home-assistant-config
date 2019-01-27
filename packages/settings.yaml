@@ -1,23 +1,3 @@
-group:
-  settings:
-    name: Settings
-    entities:
-      - input_select.delay_timer
-      # - switch.skybell_front_door_do_not_disturb
-
-
-homeassistant:
-  customize:
-    group.all_automations:
-      friendly_name: Automations
-      control: hidden
-      hidden: false
-    switch.skybell_front_door_do_not_disturb:
-      friendly_name: Mute Doorbell
-      icon: mdi:bell
-    input_select.delay_timer:
-      icon: mdi:lightbulb
-
 
 # skybell:
 #   username: !secret skybell_user
@@ -32,7 +12,6 @@ homeassistant:
 
 input_select:
   delay_timer:
-    name: Turn lights off in
     options:
       - "Select"
       - "0:15"

@@ -1,0 +1,222 @@
+title: Home
+
+views:
+  - title: "Inside"
+    cards:
+      - type: entities
+        title: "Lights"
+        show_header_toggle: true
+        entities:
+          - entity: light.family_room_lights_level
+            name: "Family Room"
+          - entity: light.island_lights_level
+            name: "Island"
+          - entity: light.kitchen
+            name: "Kitchen"
+          - entity: switch.kitchen_cabinets_switch
+            name: "Kitchen Cabinets"
+            icon: mdi:lightbulb
+          - entity: light.pantry_light_level
+            name: "Pantry"
+          - entity: light.dining_room_lights_level
+            name: "Dining Room"
+          - entity: switch.living_room_switch
+            name: "Living Room"
+            icon: mdi:lightbulb
+          - entity: switch.entryway_light_switch
+            name: "Entryway"
+            icon: mdi:lightbulb
+          - entity: switch.hallway_light_switch
+            name: "Hallway"
+            icon: mdi:lightbulb
+          - entity: switch.guest_room_switch
+            name: "Guest Bedroom"
+            icon: mdi:lightbulb
+          - entity: light.masons_room_level
+            name: "Mason's Bedroom"
+          - entity: light.master_bedroom_level
+            name: "Master Bedroom"
+
+      - type: entities
+        title: "Media"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.family_room_media
+            name: "Family Room"
+            icon: mdi:television
+          - entity: input_select.family_room_media
+            icon: mdi:remote
+
+      - type: conditional
+        conditions:
+          - entity: sensor.family_room_media
+            state: "Speakers"
+        card:
+          type: entities
+          entities:
+            - entity: script.back_yard_speakers
+              name: "Play Outside"
+              icon: mdi:speaker
+
+      - type: entities
+        title: "Climate"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.climate_mode
+            name: "Mode"
+          - entity: switch.house_fan_switch
+            name: "House Fan"
+            icon: mdi:fan
+          - sensor.family_room_status
+          - sensor.living_room_status
+          - sensor.masons_room_status
+          - sensor.brinks_room_status
+          - sensor.master_bedroom_status
+          - sensor.guest_bedroom_status
+
+      - type: entities
+        title: "Scenes"
+        show_header_toggle: false
+        entities:
+          - entity: scene.good_morning
+            icon: mdi:brightness-5
+          - entity: scene.movie_time
+            icon: mdi:movie
+          - entity: scene.dinner_time
+            icon: mdi:food-variant
+          - entity: scene.good_night
+            icon: mdi:brightness-2
+          - scene.i_m_leaving
+
+  - title: "Outside"
+    cards:
+      - type: entities
+        title: "Weather"
+        show_header_toggle: false
+        entities:
+          - sensor.outdoor_forecast
+          - sensor.outdoor_temperature
+          - sensor.outdoor_temperature_high
+
+      - type: entities
+        title: "Landscape"
+        show_header_toggle: false
+        entities:
+          - entity: switch.front_yard_switch
+            name: "Front Light"
+            icon: mdi:lightbulb
+          - entity: switch.back_yard_switch
+            name: "Back Light"
+            icon: mdi:lightbulb
+          - entity: switch.front_landscape
+            name: "Front Landscape"
+            icon: mdi:lightbulb
+          - entity: switch.back_landscape
+            name: "Back Landscape"
+            icon: mdi:lightbulb
+          - entity: switch.fountain
+            name: "Fountain"
+            icon: mdi:cup-water
+
+      - type: entity-filter
+        card:
+          type: entities
+          title: "Warning"
+          show_header_toggle: false
+        state_filter:
+          - "on"
+          - "off"
+        show_empty: false
+        entities:
+          - entity: binary_sensor.front_door
+            icon: mdi:door
+          - entity: binary_sensor.family_room_doors
+            icon: mdi:door
+          - entity: binary_sensor.dining_room_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.living_room_window_left
+            icon: mdi:window-closed
+          - entity: binary_sensor.living_room_window_right
+            icon: mdi:window-closed
+          - entity: binary_sensor.kitchen_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.masons_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.brinks_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.guest_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.master_bedroom_window
+            icon: mdi:window-closed
+          - entity: binary_sensor.master_bedroom_doors
+            icon: mdi:door
+          - entity: binary_sensor.laundry_room_door
+            icon: mdi:door
+          - entity: binary_sensor.jeffs_garage_door_sensor
+            name: "Jeff's Garage Door"
+            icon: mdi:garage
+          - entity: binary_sensor.jillians_garage_door_sensor
+            name: "Jillian's Garage Door"
+            icon: mdi:garage
+          - entity: binary_sensor.guest_garage_door_sensor
+            name: "Guest Garage Door"
+            icon: mdi:garage
+
+  - title: "Tools"
+    cards:
+
+      - type: entities
+        title: "Settings"
+        show_header_toggle: false
+        entities:
+          - entity: input_select.delay_timer
+            name: "Turn off lights in"
+            icon: mdi:lightbulb
+
+      - type: entities
+        title: "Energy"
+        show_header_toggle: false
+        entities:
+          - sensor.home_energy_meter_power
+          - sensor.home_energy_meter_energy_3
+          - sensor.home_energy_meter_current
+          - sensor.home_energy_meter_voltage
+
+      - type: entities
+        title: "Network"
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.internet
+            name: "Internet"
+            icon: mdi:access-point-network
+
+      - type: entities
+        title: Automations
+        show_header_toggle: false
+        entities:
+          - automation.alarm_alert_lighting
+          - automation.alarm_alert_pics
+          - automation.alarm_fault
+          - automation.alarm_reminder
+          - automation.alarm_say_status
+          - automation.alarm_theme_change
+          - automation.alarm_turn_house_off
+          - automation.climate_house_fan_disables_hvac
+          - automation.climate_resume_thermostat
+          - automation.doorbell_notifications
+          - automation.energy_reset_meter
+          - automation.garage_door_open
+          - automation.health_camera_offline
+          - automation.health_dead_sensor_check
+          - automation.health_low_battery_check
+          - automation.landscape_back_door_light
+          - automation.landscape_fountain
+          - automation.landscape_front_door_light
+          - automation.landscape_lights
+          - automation.lights_toggle_when_away
+          - automation.lights_turn_on_when_coming_home
+          - automation.media_input_acts_as_remote
+          - automation.media_lights_on_at_sunset
+          - automation.media_show_outside_speaker_controls
+          - automation.settings_delay_lights_off
+          - automation.settings_reset_at_midnight

@@ -3,6 +3,9 @@ config:
 logger:
   default: error
 
+lovelace:
+  mode: yaml
+
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
@@ -32,7 +35,6 @@ homeassistant:
   time_zone: !secret time_zone
   packages:
     climate: !include packages/climate.yaml
-    default: !include packages/default.yaml
     energy: !include packages/energy.yaml
     health: !include packages/health.yaml
     landscaping: !include packages/landscaping.yaml

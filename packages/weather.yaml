@@ -1,11 +1,6 @@
-group:
-  weather:
-    name: Weather
-    entities:
-      - sensor.outdoor_forecast
-      - sensor.outdoor_temperature
-      - sensor.outdoor_temperature_high
-
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
 
 sensor:
   - platform: darksky

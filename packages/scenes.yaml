@@ -1,25 +1,3 @@
-group:
-  scenes:
-    name: Scenes
-    entities:
-      - scene.good_morning
-      - scene.dinner_time
-      - scene.movie_time
-      - scene.good_night
-
-
-homeassistant:
-  customize:
-    scene.movie_time:
-      icon: mdi:movie
-    scene.dinner_time:
-      icon: mdi:food-variant
-    scene.good_morning:
-      icon: mdi:brightness-5
-    scene.good_night:
-      icon: mdi:brightness-2
-
-
 scene:
   - name: Movie Time
     entities:

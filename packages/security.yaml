@@ -1,92 +1,13 @@
-group:
-  security:
-    name: Security
-    entities:
-      - binary_sensor.front_door
-      - binary_sensor.family_room_doors
-      - binary_sensor.dining_room_window
-      - binary_sensor.living_room_window_left
-      - binary_sensor.living_room_window_right
-      - binary_sensor.kitchen_window
-      - binary_sensor.masons_window
-      - binary_sensor.brinks_window
-      - binary_sensor.guest_window
-      - binary_sensor.master_bedroom_window
-      - binary_sensor.master_bedroom_doors
-      - binary_sensor.laundry_room_door
-      - binary_sensor.jeffs_garage_door_sensor
-      - binary_sensor.jillians_garage_door_sensor
-      - binary_sensor.guest_garage_door_sensor
-
-
-homeassistant:
-  customize:
-    binary_sensor.front_door:
-      device_class: door
-      icon: mdi:door
-    binary_sensor.family_room_doors:
-      device_class: door
-      icon: mdi:door
-    binary_sensor.dining_room_window:
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.living_room_window_left:
-      friendly_name: Living Room Window (L)
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.living_room_window_right:
-      friendly_name: Living Room Window (R)
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.kitchen_window:
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.masons_window:
-      friendly_name: Mason's Window
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.brinks_window:
-      friendly_name: Brink's Window
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.guest_window:
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.master_bedroom_window:
-      device_class: window
-      icon: mdi:window-closed
-    binary_sensor.master_bedroom_doors:
-      device_class: door
-      icon: mdi:door
-    binary_sensor.laundry_room_door:
-      device_class: door
-      icon: mdi:door
-    binary_sensor.guest_garage_door_sensor:
-      friendly_name: Guest Garage Door
-      device_class: opening
-      icon: mdi:garage
-    binary_sensor.jeffs_garage_door_sensor:
-      friendly_name: Jeff's Garage Door
-      device_class: opening
-      icon: mdi:garage
-    binary_sensor.jillians_garage_door_sensor:
-      friendly_name: Jillian's Garage Door
-      device_class: opening
-      icon: mdi:garage
-
-
 abode:
   username: !secret abode_user
   password: !secret abode_pass
   name: Alarm
-
 
 camera:
   - platform: synology
     url: !secret synology_url
     username: !secret synology_user
     password: !secret synology_pass
-
 
 automation:
   - alias: Alarm - Theme change
