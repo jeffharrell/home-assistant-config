@@ -25,14 +25,14 @@ automation:
       - platform: homeassistant
         event: start
       - platform: state
-        entity_id: alarm_control_panel.abode
+        entity_id: alarm_control_panel.alarm
     action:
       service: frontend.set_theme
       data_template:
         name: >
-          {% if states.alarm_control_panel.abode.state == "armed_home" %}
+          {% if states.alarm_control_panel.alarm.state == "armed_home" %}
             alarm
-          {% elif states.alarm_control_panel.abode.state == "armed_away" %}
+          {% elif states.alarm_control_panel.alarm.state == "armed_away" %}
             alarm
           {% else %}
             default
@@ -42,13 +42,13 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: alarm_control_panel.abode
+        entity_id: alarm_control_panel.alarm
     action:
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.master_bedroom
           message: >
-            {% set status = states.alarm_control_panel.abode.state %}
+            {% set status = states.alarm_control_panel.alarm.state %}
             {% set isOpened = states.group.Security.state %}
             {%- if status == "armed_home" -%}
               Alarm armed... Home
@@ -71,7 +71,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.abode
+      entity_id: alarm_control_panel.alarm
       to: "armed_away"
     action:
       - service: homeassistant.turn_off
@@ -144,7 +144,7 @@ automation:
         value_template: "{{ states.climate.home.attributes.hold_mode == 'away' }}"
     action:
       - condition: template
-        value_template: "{{ states.alarm_control_panel.abode.state != 'armed_away' }}"
+        value_template: "{{ states.alarm_control_panel.alarm.state != 'armed_away' }}"
       - service: notify.jeff_and_jillians_phone
         data:
           title: Home Assistant
@@ -182,9 +182,9 @@ automation:
         - binary_sensor.guest_garage_door_sensor
       to: "on"
       for:
-        minutes: 15
+        minutes: 5
     action:
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
-          message: "{{ trigger.entity_id|capitalize|replace('_sensor')|replace('_', ' ') }} is open."
+          message: "{{ trigger.to_state.attributes.friendly_name }} is open."
