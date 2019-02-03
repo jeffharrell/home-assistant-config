@@ -8,34 +8,22 @@ views:
         show_header_toggle: true
         entities:
           - entity: light.family_room_lights_level
-            name: "Family Room"
           - entity: light.island_lights_level
-            name: "Island"
           - entity: light.kitchen
-            name: "Kitchen"
           - entity: switch.kitchen_cabinets_switch
-            name: "Kitchen Cabinets"
             icon: mdi:lightbulb
           - entity: light.pantry_light_level
-            name: "Pantry"
           - entity: light.dining_room_lights_level
-            name: "Dining Room"
           - entity: switch.living_room_switch
-            name: "Living Room"
             icon: mdi:lightbulb
           - entity: switch.entryway_light_switch
-            name: "Entryway"
             icon: mdi:lightbulb
           - entity: switch.hallway_light_switch
-            name: "Hallway"
             icon: mdi:lightbulb
           - entity: switch.guest_room_switch
-            name: "Guest Bedroom"
             icon: mdi:lightbulb
           - entity: light.masons_room_level
-            name: "Mason's Bedroom"
           - entity: light.master_bedroom_level
-            name: "Master Bedroom"
 
       - type: entities
         title: "Media"
@@ -65,7 +53,6 @@ views:
           - entity: sensor.climate_mode
             name: "Mode"
           - entity: switch.house_fan_switch
-            name: "House Fan"
             icon: mdi:fan
           - sensor.family_room_status
           - sensor.living_room_status
@@ -86,7 +73,8 @@ views:
             icon: mdi:food-variant
           - entity: scene.good_night
             icon: mdi:brightness-2
-          - scene.i_m_leaving
+          - entity: scene.i_m_leaving
+            icon: mdi:exit-run
 
   - title: "Outside"
     cards:
@@ -106,19 +94,14 @@ views:
         show_header_toggle: false
         entities:
           - entity: switch.front_yard_switch
-            name: "Front Light"
             icon: mdi:lightbulb
           - entity: switch.back_yard_switch
-            name: "Back Light"
             icon: mdi:lightbulb
           - entity: switch.front_landscape
-            name: "Front Landscape"
             icon: mdi:lightbulb
           - entity: switch.back_landscape
-            name: "Back Landscape"
             icon: mdi:lightbulb
           - entity: switch.fountain
-            name: "Fountain"
             icon: mdi:cup-water
 
       - type: entity-filter
@@ -159,13 +142,10 @@ views:
           - entity: binary_sensor.laundry_room_door
             icon: mdi:door
           - entity: binary_sensor.jeffs_garage_door_sensor
-            name: "Jeff's Garage Door"
             icon: mdi:garage
           - entity: binary_sensor.jillians_garage_door_sensor
-            name: "Jillian's Garage Door"
             icon: mdi:garage
           - entity: binary_sensor.guest_garage_door_sensor
-            name: "Guest Garage Door"
             icon: mdi:garage
 
   - title: "Tools"
@@ -194,16 +174,12 @@ views:
         show_header_toggle: false
         entities:
           - entity: sensor.home_energy_meter_power
-            name: "Power Consumption"
             icon: mdi:power-socket-us
           - entity: sensor.home_energy_meter_energy_3
-            name: "Energy Used"
             icon: mdi:battery-charging
           - entity: sensor.home_energy_meter_current
-            name: "Current"
             icon: mdi:current-ac
           - entity: sensor.home_energy_meter_voltage
-            name: "Voltage"
             icon: mdi:flash
 
       - type: entities
