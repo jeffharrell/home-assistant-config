@@ -1,16 +1,17 @@
-sensor:
-  - platform: ambient_station
-    api_key: !secret ambient_weather_api_key
-    app_key: !secret ambient_weather_app_key
-    monitored_conditions:
-      - windspeedmph
-      - windgustmph
-      - humidity
-      - tempf
-      - uv
-      - solarradiation
-      - dailyrainin
+ambient_station:
+  api_key: !secret ambient_weather_api_key
+  app_key: !secret ambient_weather_app_key
+  monitored_conditions:
+    - windspeedmph
+    - windgustmph
+    - humidity
+    - tempf
+    - uv
+    - solarradiation
+    - dailyrainin
+    - dewPoint
 
+sensor:
   - platform: darksky
     api_key: !secret darksky_api_key
     forecast:
@@ -24,13 +25,13 @@ sensor:
         friendly_name: Forecast
         value_template: "{{ states.sensor.dark_sky_hourly_summary.state }}"
         icon_template: >
-          {%- if "cloud" in states.sensor.dark_sky_hourly_summary.state -%}
+          {%- if "cloud" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-cloudy
-          {%- elif "fog" in states.sensor.dark_sky_hourly_summary.state -%}
+          {%- elif "fog" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-fog
-          {%- elif "rain" in states.sensor.dark_sky_hourly_summary.state -%}
+          {%- elif "rain" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-rainy
-          {%- elif "wind" in states.sensor.dark_sky_hourly_summary.state -%}
+          {%- elif "wind" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-windy
           {%- else -%}
             mdi:weather-sunny

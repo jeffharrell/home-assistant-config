@@ -82,11 +82,14 @@ views:
         title: "Weather"
         show_header_toggle: false
         entities:
-          - sensor.outdoor_forecast
-          - sensor.temp
-          - entity: sensor.humidity
+          - entity: sensor.outdoor_forecast
+          - entity: sensor.my_weather_station_temp
+            name: "Temperature"
+          - entity: sensor.my_weather_station_humidity
+            name: "Humidity"
             icon: mdi:water-percent
-          - entity: sensor.daily_rain
+          - entity: sensor.my_weather_station_daily_rain
+            name: "Rain"
             icon: mdi:water
 
       - type: entities
