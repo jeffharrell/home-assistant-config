@@ -1,7 +1,14 @@
 host: !secret influxdb_host
 exclude:
   domains:
+    - alert
     - automation
     - camera
+    - configurator
     - group
+    - persistent_notification
+    - scene
+    - script
     - zwave
+    - alarm_control_panel
+    - input_select

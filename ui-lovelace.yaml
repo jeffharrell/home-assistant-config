@@ -83,12 +83,14 @@ views:
         show_header_toggle: false
         entities:
           - entity: sensor.outdoor_forecast
-          - entity: sensor.my_weather_station_temp
+            name: "Forecast"
+          - entity: sensor.outside_temp
             name: "Temperature"
-          - entity: sensor.my_weather_station_humidity
+            secondary_info: last-changed
+          - entity: sensor.outside_humidity
             name: "Humidity"
             icon: mdi:water-percent
-          - entity: sensor.my_weather_station_daily_rain
+          - entity: sensor.outside_rain_daily
             name: "Rain"
             icon: mdi:water
 

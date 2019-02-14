@@ -1,17 +1,59 @@
-ambient_station:
-  api_key: !secret ambient_weather_api_key
-  app_key: !secret ambient_weather_app_key
-  monitored_conditions:
-    - windspeedmph
-    - windgustmph
-    - humidity
-    - tempf
-    - uv
-    - solarradiation
-    - dailyrainin
-    - dewPoint
-
 sensor:
+  - platform: scrape
+    name: outside_update_time
+    resource: !secret ambient_weather_url
+    select: "[name='CurrTime']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_temp
+    unit_of_measurement: "°F"
+    resource: !secret ambient_weather_url
+    select: "[name='outTemp']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_humidity
+    unit_of_measurement: "%"
+    resource: !secret ambient_weather_url
+    select: "[name='outHumi']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_wind_speed
+    unit_of_measurement: "mph"
+    resource: !secret ambient_weather_url
+    select: "[name='avgwind']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_wind_gust
+    unit_of_measurement: "mph"
+    resource: !secret ambient_weather_url
+    select: "[name='gustspeed']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_uv
+    unit_of_measurement: "Index"
+    resource: !secret ambient_weather_url
+    select: "[name='uvi']"
+    attribute: value
+    scan_interval: 300
+
+  - platform: scrape
+    name: outside_rain_daily
+    unit_of_measurement: "In"
+    resource: !secret ambient_weather_url
+    select: "[name='rainofdaily']"
+    attribute: value
+    scan_interval: 300
+
   - platform: darksky
     api_key: !secret darksky_api_key
     forecast:
@@ -22,7 +64,6 @@ sensor:
   - platform: template
     sensors:
       outdoor_forecast:
-        friendly_name: Forecast
         value_template: "{{ states.sensor.dark_sky_hourly_summary.state }}"
         icon_template: >
           {%- if "cloud" in states.sensor.dark_sky_hourly_summary.state|lower -%}
