@@ -1,12 +1,12 @@
-media_player:
-  - platform: alexa
-    email: !secret alexa_email
-    password: !secret alexa_password
-    url: "amazon.com"
-    include_devices:
-      - "Family Room"
-      - "Living Room"
-      - "Master Bedroom"
+alexa_media:
+  accounts:
+    - email: !secret alexa_email
+      password: !secret alexa_password
+      url: "amazon.com"
+      include_devices:
+        - "Family Room"
+        - "Living Room"
+        - "Master Bedroom"
 
 
 script:

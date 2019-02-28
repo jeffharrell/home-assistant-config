@@ -7,6 +7,8 @@ exposed_domains:
 entities:
   scene.good_morning:
     hidden: true
+  scene.let_dog_out:
+    hidden: true
   light.kitchen_lights_1_level:
     hidden: true
   light.kitchen_lights_2_level:
@@ -22,4 +24,6 @@ entities:
   script.snapshot_door_and_send:
     hidden: true
   script.snapshot_cameras_and_send:
+    hidden: true
+  script.alarm_disarm_silently:
     hidden: true

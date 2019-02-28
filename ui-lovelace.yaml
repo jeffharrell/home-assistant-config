@@ -3,6 +3,16 @@ title: Home
 views:
   - title: "Inside"
     cards:
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "armed_home"
+        card:
+          type: entities
+          entities:
+            - entity: scene.let_dog_out
+              icon: mdi:dog-side
+
       - type: entities
         title: "Lights"
         show_header_toggle: true
