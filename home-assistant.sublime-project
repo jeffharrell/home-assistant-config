@@ -1,0 +1,31 @@
+{
+    "folders": [
+        {
+            "file_exclude_patterns": [
+                "zwave_device_config.yaml",
+                "*.sublime-project",
+                ".HA_VERSION",
+                "*.uuid",
+                "*.txt",
+                "*.pickle",
+                "*.conf",
+                "*.json",
+                "*.log",
+                "*.db*",
+                "*.xml",
+                "*.sqlite",
+                "*.bak"
+            ],
+            "folder_exclude_patterns": [
+                "deps"
+            ],
+            "path": "."
+        }
+    ],
+    "build_systems": [
+        {
+            "name": "List",
+            "shell_cmd": "ls -l"
+        }
+    ]
+}
