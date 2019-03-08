@@ -182,7 +182,7 @@ automation:
         - binary_sensor.guest_garage_door_sensor
       to: "on"
       for:
-        minutes: 5
+        minutes: 10
     action:
       - service: notify.jeff_and_jillians_phone
         data_template:

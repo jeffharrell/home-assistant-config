@@ -77,6 +77,9 @@ sensor:
             /local/thermometer.svg
           {%- endif -%}
 
+  - platform: awair
+    access_token: !secret awair_access_token
+
 
 automation:
   - alias: Climate - House fan disables HVAC

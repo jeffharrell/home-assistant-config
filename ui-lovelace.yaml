@@ -126,9 +126,9 @@ views:
           show_header_toggle: false
         state_filter:
           - "on"
-          - "off"
           - "disarmed"
-          - "armed"
+          - "armed_home"
+          - "armed_away"
         show_empty: false
         entities:
           - entity: alarm_control_panel.alarm
@@ -163,7 +163,7 @@ views:
           - entity: binary_sensor.guest_garage_door_sensor
             icon: mdi:garage
 
-  - title: "Tools"
+  - title: "Status"
     cards:
 
       - type: entities
