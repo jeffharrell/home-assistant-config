@@ -7,6 +7,7 @@ scene:
       light.kitchen_lights_2_level:
         state: on
         brightness: 40
+      light.dining_room_lights_level: off
       light.family_room_lights_level: off
       light.island_lights_level: off
       light.pantry_light_level: off
@@ -25,7 +26,7 @@ scene:
         brightness: 40
       light.dining_room_lights_level:
         state: on
-        brightness: 255
+        brightness: 200
       light.island_lights_level: off
       light.pantry_light_level: off
       switch.kitchen_cabinets_switch: off
@@ -38,6 +39,9 @@ scene:
       light.island_lights_level:
         state: on
         brightness: 127
+      light.dining_room_lights_level:
+        state: on
+        brightness: 90
       light.family_room_lights_level: off
       light.kitchen_lights_1_level: off
       light.kitchen_lights_2_level: off
