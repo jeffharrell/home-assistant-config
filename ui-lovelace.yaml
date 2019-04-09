@@ -204,3 +204,27 @@ views:
           - entity: binary_sensor.internet
             name: "Internet"
             icon: mdi:access-point-network
+
+      - type: entity-filter
+        entities:
+          - entity: binary_sensor.abode_gateway
+            name: "Abode Gateway"
+          - entity: binary_sensor.ambient_observer
+            name: "Ambient Weather Observer"
+          - entity: binary_sensor.awair
+            name: "Awair Glow"
+          - entity: binary_sensor.back_yard_camera
+            name: "Back Yard Camera"
+          - entity: binary_sensor.family_room_camera
+            name: "Family Room Camera"
+          - entity: binary_sensor.front_yard_camera
+            name: "Front Yard Camera"
+          - entity: binary_sensor.living_room_camera
+            name: "Living Room Camera"
+          - entity: binary_sensor.harmony_hub
+            name: "Harmony Hub"
+          - entity: binary_sensor.skybell
+            name: "Skybell"
+        state_filter:
+          - "off"
+        show_empty: false

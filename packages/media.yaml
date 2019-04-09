@@ -1,7 +1,7 @@
 remote:
   - platform: harmony
     name: Family Room
-    host: !secret harmony_host
+    host: !secret harmony_url
 
 
 input_select:

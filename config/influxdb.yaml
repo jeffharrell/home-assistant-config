@@ -1,4 +1,4 @@
-host: !secret influxdb_host
+host: !secret influxdb_url
 exclude:
   domains:
     - alert

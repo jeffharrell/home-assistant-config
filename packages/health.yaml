@@ -1,16 +1,4 @@
 automation:
-  - alias: Health - Camera offline
-    initial_state: True
-    hide_entity: True
-    trigger:
-      - platform: template
-        value_template: "{{ states.switch.skybell_front_door_do_not_disturb.attributes.status != 'up' }}"
-    action:
-      - service: notify.jeffs_phone
-        data_template:
-          title: Home Assistant
-          message: "{{ trigger.to_state.attributes.friendly_name }} appears offline."
-
   - alias: Health - Low battery check
     initial_state: True
     trigger:
