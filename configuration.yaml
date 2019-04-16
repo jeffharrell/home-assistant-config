@@ -38,7 +38,6 @@ homeassistant:
   packages:
     climate: !include packages/climate.yaml
     energy: !include packages/energy.yaml
-    health: !include packages/health.yaml
     landscaping: !include packages/landscaping.yaml
     lights: !include packages/lights.yaml
     media: !include packages/media.yaml
@@ -46,6 +45,7 @@ homeassistant:
     scenes: !include packages/scenes.yaml
     security: !include packages/security.yaml
     settings: !include packages/settings.yaml
+    system: !include packages/system.yaml
     tts: !include packages/tts.yaml
     weather: !include packages/weather.yaml
   whitelist_external_dirs:
