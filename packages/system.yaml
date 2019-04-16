@@ -1,5 +1,5 @@
 automation:
-  - alias: Health - Low battery check
+  - alias: System - Low battery check
     initial_state: True
     trigger:
       platform: time
@@ -22,7 +22,7 @@ automation:
               {%- endif -%}
             {%- endfor -%}
 
-  - alias: Health - Dead sensor check
+  - alias: System - Dead sensor check
     initial_state: True
     trigger:
       - platform: state
