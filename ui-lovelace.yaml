@@ -118,6 +118,8 @@ views:
             icon: mdi:lightbulb
           - entity: switch.fountain
             icon: mdi:cup-water
+          - entity: switch.pool_light
+            icon: mdi:pool
 
       - type: entity-filter
         card:

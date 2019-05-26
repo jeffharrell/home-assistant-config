@@ -17,6 +17,26 @@ homeassistant:
         device_class: opening
 
 
+group:
+  Security:
+    entities:
+      - binary_sensor.front_door
+      - binary_sensor.family_room_doors
+      - binary_sensor.dining_room_window
+      - binary_sensor.living_room_window_left
+      - binary_sensor.living_room_window_right
+      - binary_sensor.kitchen_window
+      - binary_sensor.masons_window
+      - binary_sensor.brinks_window
+      - binary_sensor.guest_window
+      - binary_sensor.master_bedroom_window
+      - binary_sensor.master_bedroom_doors
+      - binary_sensor.laundry_room_door
+      - binary_sensor.jeffs_garage_door_sensor
+      - binary_sensor.jillians_garage_door_sensor
+      - binary_sensor.guest_garage_door_sensor
+
+
 automation:
   - alias: Alarm - Theme change
     initial_state: True

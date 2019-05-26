@@ -31,6 +31,7 @@ automation:
           - zwave.back_landscape
           - zwave.fountain
           - zwave.doorbell
+          - zwave.pool_light
         to: "dead"
     action:
       - service: notify.jeffs_phone
