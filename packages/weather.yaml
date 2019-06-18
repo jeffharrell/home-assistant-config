@@ -1,12 +1,5 @@
 sensor:
   - platform: scrape
-    name: outside_update_time
-    resource: !secret ambient_weather_url
-    select: "[name='CurrTime']"
-    attribute: value
-    scan_interval: 300
-
-  - platform: scrape
     name: outside_temp
     unit_of_measurement: "°F"
     resource: !secret ambient_weather_url

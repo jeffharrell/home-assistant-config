@@ -66,8 +66,6 @@ automation:
           - binary_sensor.abode_gateway
           - binary_sensor.ambient_observer
         to: "off"
-        for:
-          seconds: 600
     action:
       - service: notify.jeffs_phone
         data_template:

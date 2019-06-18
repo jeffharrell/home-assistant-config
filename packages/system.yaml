@@ -36,7 +36,7 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          message: "A zwave node is marked as dead. Trying to heal: {{ trigger.to_state.attributes.friendly_name }}."
+          message: "A node is marked as dead. Trying to heal: {{ trigger.to_state.attributes.friendly_name }}."
       - delay: "00:00:60"
       - service: zwave.test_node
         data_template:
@@ -46,4 +46,4 @@ automation:
         value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
       - service: notify.jeffs_phone
         data_template:
-          message: "I could not heal the zwave node: {{ trigger.to_state.attributes.friendly_name }}."
+          message: "I could not heal the node: {{ trigger.to_state.attributes.friendly_name }}."

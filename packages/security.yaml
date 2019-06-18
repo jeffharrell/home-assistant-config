@@ -18,7 +18,7 @@ homeassistant:
 
 
 group:
-  Security:
+  security:
     entities:
       - binary_sensor.front_door
       - binary_sensor.family_room_doors
@@ -69,7 +69,7 @@ automation:
           entity_id: media_player.master_bedroom
           message: >
             {% set status = states.alarm_control_panel.alarm.state %}
-            {% set isOpened = states.group.Security.state %}
+            {% set isOpened = states.group.security.state %}
             {%- if status == "armed_home" -%}
               Alarm armed... Home
             {%- elif status == "armed_away" -%}
@@ -79,7 +79,7 @@ automation:
             {%- endif -%}
             {%- if isOpened == "on" and status != "disarmed" -%}
               ... Warning... The following are open:
-              {%- for entity_id in states.group.Security.attributes.entity_id -%}
+              {%- for entity_id in states.group.security.attributes.entity_id -%}
                 {% set parts = entity_id.split('.') %}
                 {%- if states(entity_id) == 'on' -%}
                   ... {{ states[parts[0]][parts[1]].name }}
