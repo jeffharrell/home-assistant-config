@@ -113,9 +113,9 @@ views:
           - entity: switch.back_yard_switch
             icon: mdi:lightbulb
           - entity: switch.front_landscape
-            icon: mdi:lightbulb
+            icon: mdi:flower-tulip
           - entity: switch.back_landscape
-            icon: mdi:lightbulb
+            icon: mdi:flower-tulip
           - entity: switch.fountain
             icon: mdi:cup-water
           - entity: switch.pool_light
