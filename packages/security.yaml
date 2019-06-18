@@ -168,7 +168,7 @@ automation:
       - service: notify.jeff_and_jillians_phone
         data:
           title: Home Assistant
-          message: The alarm is not armed. Are you away?
+          message: "Are you away? The alarm is not armed."
 
   - alias: Alarm - Fault
     initial_state: True
@@ -180,7 +180,7 @@ automation:
       - service: notify.jeffs_phone
         data_template:
           title: Home Assistant
-          message: "The alarm faulted: {{ trigger.event.data }}"
+          message: "Alarm {{ trigger.event.data.event_name }}"
 
   - alias: Doorbell - Notifications
     initial_state: True
@@ -207,4 +207,4 @@ automation:
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
-          message: "{{ trigger.to_state.attributes.friendly_name }} is open."
+          message: "{{ trigger.to_state.attributes.friendly_name }} was left open."

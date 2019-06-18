@@ -44,7 +44,7 @@ automation:
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
-          message: I am turning the lights {% if trigger and trigger.event == "sunset" %}on while you are away{% else %}off{% endif %}.
+          message: Turning the lights {% if trigger and trigger.event == "sunset" %}on while you are away{% else %}off{% endif %}.
 
   - alias: Lights - Turn on when coming home
     initial_state: True
