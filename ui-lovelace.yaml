@@ -33,6 +33,7 @@ views:
           - entity: switch.guest_room_switch
             icon: mdi:lightbulb
           - entity: light.masons_room_level
+          - entity: light.brinks_room
           - entity: light.master_bedroom_level
 
       - type: entities

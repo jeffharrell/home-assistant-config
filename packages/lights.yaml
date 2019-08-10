@@ -20,6 +20,7 @@ group:
         - switch.hallway_light_switch
         - switch.guest_room_switch
         - light.masons_room_level
+        - light.brinks_room
         - light.master_bedroom_level
 
 

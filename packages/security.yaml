@@ -127,6 +127,7 @@ automation:
           - light.dining_room_lights_level
           - light.master_bedroom_level
           - light.masons_room_level
+          - light.brinks_room
         data:
           brightness: 255
 
