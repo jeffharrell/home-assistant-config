@@ -64,9 +64,11 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
     action:
-      - service: media_player.alexa_tts
+      - service: notify.alexa_media
         data_template:
-          entity_id: media_player.master_bedroom
+          data:
+            type: tts
+          target: media_player.master_bedroom
           message: >
             {% set status = states.alarm_control_panel.alarm.state %}
             {% set isOpened = states.group.security.state %}

@@ -12,7 +12,27 @@ alexa_media:
 script:
   tts_home_climate:
     sequence:
-      - service: media_player.alexa_tts
+      - service: notify.alexa_media
         data_template:
-          entity_id: media_player.family_room
-          message: "Temperature in the house is {{ state_attr('climate.home', 'current_temperature') }}."
+          data:
+            type: tts
+          target: media_player.family_room
+          message: "The temperature in the house is {{ state_attr('climate.home', 'current_temperature') }}."
+
+  tts_windows_open:
+    sequence:
+      - service: notify.alexa_media
+        data_template:
+          data:
+            type: tts
+          target: media_player.master_bedroom
+          message: >
+            {%- if states.group.security.state == "on" -%}
+              The following are open:
+              {%- for entity_id in states.group.security.attributes.entity_id -%}
+                {% set parts = entity_id.split('.') %}
+                {%- if states(entity_id) == 'on' -%}
+                  ... {{ states[parts[0]][parts[1]].name }}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}

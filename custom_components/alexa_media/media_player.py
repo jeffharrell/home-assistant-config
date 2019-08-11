@@ -9,10 +9,10 @@ https://community.home-assistant.io/t/echo-devices-alexa-as-media-player-testers
 """
 import logging
 
+from typing import List  # noqa pylint: disable=unused-import
 import voluptuous as vol
 from homeassistant import util
-from homeassistant.components.media_player import (MEDIA_PLAYER_SCHEMA,
-                                                   MediaPlayerDevice)
+from homeassistant.components.media_player import (MediaPlayerDevice)
 from homeassistant.components.media_player.const import (
     DOMAIN,
     MEDIA_TYPE_MUSIC,
@@ -22,6 +22,7 @@ from homeassistant.components.media_player.const import (
     SUPPORT_PLAY_MEDIA,
     SUPPORT_PREVIOUS_TRACK,
     SUPPORT_SELECT_SOURCE,
+    SUPPORT_SHUFFLE_SET,
     SUPPORT_STOP,
     SUPPORT_TURN_OFF,
     SUPPORT_TURN_ON,
@@ -29,61 +30,33 @@ from homeassistant.components.media_player.const import (
     SUPPORT_VOLUME_SET)
 from homeassistant.const import (STATE_IDLE, STATE_PAUSED, STATE_PLAYING,
                                  STATE_STANDBY)
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.event import call_later
 from homeassistant.helpers.service import extract_entity_ids
 
-from .const import ATTR_MESSAGE, PLAY_SCAN_INTERVAL, SERVICE_ALEXA_TTS
+from .const import ATTR_MESSAGE, PLAY_SCAN_INTERVAL
 
 from . import (
-        DOMAIN as ALEXA_DOMAIN,
-        DATA_ALEXAMEDIA,
-        MIN_TIME_BETWEEN_SCANS, MIN_TIME_BETWEEN_FORCED_SCANS,
-        hide_email, hide_serial)
+    DOMAIN as ALEXA_DOMAIN,
+    DATA_ALEXAMEDIA,
+    MIN_TIME_BETWEEN_SCANS, MIN_TIME_BETWEEN_FORCED_SCANS,
+    hide_email, hide_serial)
 SUPPORT_ALEXA = (SUPPORT_PAUSE | SUPPORT_PREVIOUS_TRACK |
                  SUPPORT_NEXT_TRACK | SUPPORT_STOP |
                  SUPPORT_VOLUME_SET | SUPPORT_PLAY |
                  SUPPORT_PLAY_MEDIA | SUPPORT_TURN_OFF | SUPPORT_TURN_ON |
                  SUPPORT_VOLUME_MUTE | SUPPORT_PAUSE |
-                 SUPPORT_SELECT_SOURCE)
+                 SUPPORT_SELECT_SOURCE | SUPPORT_SHUFFLE_SET)
 _LOGGER = logging.getLogger(__name__)
 
 DEPENDENCIES = [ALEXA_DOMAIN]
-
-ALEXA_TTS_SCHEMA = MEDIA_PLAYER_SCHEMA.extend({
-    vol.Required(ATTR_MESSAGE): cv.string,
-})
 
 
 def setup_platform(hass, config, add_devices_callback,
                    discovery_info=None):
     """Set up the Alexa media player platform."""
-    def tts_handler(call):
-        for alexa in service_to_entities(call):
-            if call.service == SERVICE_ALEXA_TTS:
-                message = call.data.get(ATTR_MESSAGE)
-                alexa.send_tts(message)
-
-    def service_to_entities(call):
-        """Return the known devices that a service call mentions."""
-        entity_ids = extract_entity_ids(hass, call)
-        if entity_ids:
-            devices = []
-            for account, account_dict in (hass.data[DATA_ALEXAMEDIA]
-                                          ['accounts'].items()):
-                devices = devices + list(account_dict
-                                         ['entities']['media_player'].values())
-                _LOGGER.debug("Account: %s Devices: %s",
-                              hide_email(account),
-                              devices)
-            entities = [entity for entity in devices
-                        if entity.entity_id in entity_ids]
-        else:
-            entities = None
-
-        return entities
-
-    devices = []
+    devices = []  # type: List[AlexaClient]
     for account, account_dict in (hass.data[DATA_ALEXAMEDIA]
                                   ['accounts'].items()):
         for key, device in account_dict['devices']['media_player'].items():
@@ -98,9 +71,17 @@ def setup_platform(hass, config, add_devices_callback,
                  ['entities']
                  ['media_player'][key]) = alexa_client
     _LOGGER.debug("Adding %s", devices)
-    add_devices_callback(devices, True)
-    hass.services.register(DOMAIN, SERVICE_ALEXA_TTS, tts_handler,
-                           schema=ALEXA_TTS_SCHEMA)
+    try:
+        add_devices_callback(devices, True)
+    except HomeAssistantError as exception_:
+        message = exception_.message  # type: str
+        if message.startswith("Entity id already exists"):
+            _LOGGER.debug("Device already added: %s",
+                          message)
+        else:
+            _LOGGER.debug("Unable to add devices: %s : %s",
+                          devices,
+                          message)
 
 
 class AlexaClient(MediaPlayerDevice):
@@ -136,6 +117,7 @@ class AlexaClient(MediaPlayerDevice):
         self._available = None
         self._capabilities = []
         self._cluster_members = []
+        self._locale = None
         # Media
         self._session = None
         self._media_duration = None
@@ -150,8 +132,12 @@ class AlexaClient(MediaPlayerDevice):
         self._previous_volume = None
         self._source = None
         self._source_list = []
+        self._shuffle = None
+        self._repeat = None
         # Last Device
         self._last_called = None
+        # Do not Disturb state
+        self._dnd = None
         # Polling state
         self._should_poll = True
         self._last_update = 0
@@ -164,19 +150,83 @@ class AlexaClient(MediaPlayerDevice):
     def _handle_event(self, event):
         """Handle events.
 
-        Each MediaClient reports if it's the last_called MediaClient. All
-        devices on account update to handle starting music with other Alexas.
+        This will update last_called and player_state events.
+        Each MediaClient reports if it's the last_called MediaClient and will
+        listen for HA events to determine it is the last_called.
+        When polling instead of websockets, all devices on same account will
+        update to handle starting music with other devices. If websocket is on
+        only the updated alexa will update.
         Last_called events are only sent if it's a new device or timestamp.
+        Without polling, we must schedule the HA update manually.
+        https://developers.home-assistant.io/docs/en/entity_index.html#subscribing-to-updates
+        The difference between self.update and self.schedule_update_ha_state
+        is self.update will pull data from Amazon, while schedule_update
+        assumes the MediaClient state is already updated.
         """
-        if (event.data['last_called_change']['serialNumber'] ==
-                self.device_serial_number):
-            _LOGGER.debug("%s is last_called: %s", self.name,
-                          hide_serial(self.device_serial_number))
-            self._last_called = True
-        self._last_called = False
-        #  Without polling, we must schedule the HA update.
-        #  https://developers.home-assistant.io/docs/en/entity_index.html#subscribing-to-updates
-        self.schedule_update_ha_state(force_refresh=True)
+        if 'last_called_change' in event.data:
+            event_serial = event.data['last_called_change']['serialNumber']
+            if (event_serial == self.device_serial_number or
+                    any(item['serialNumber'] ==
+                        event_serial for item in self._app_device_list)):
+                _LOGGER.debug("%s is last_called: %s", self.name,
+                              hide_serial(self.device_serial_number))
+                self._last_called = True
+            else:
+                self._last_called = False
+            if (self.hass and self.schedule_update_ha_state):
+                email = self._login.email
+                force_refresh = not (self.hass.data[DATA_ALEXAMEDIA]
+                                     ['accounts'][email]['websocket'])
+                self.schedule_update_ha_state(force_refresh=force_refresh)
+        elif 'bluetooth_change' in event.data:
+            if (event.data['bluetooth_change']['deviceSerialNumber'] ==
+                    self.device_serial_number):
+                self._bluetooth_state = event.data['bluetooth_change']
+                self._source = self._get_source()
+                self._source_list = self._get_source_list()
+                if (self.hass and self.schedule_update_ha_state):
+                    self.schedule_update_ha_state()
+        elif 'player_state' in event.data:
+            player_state = event.data['player_state']
+            if (player_state['dopplerId']
+                    ['deviceSerialNumber'] == self.device_serial_number):
+                if 'audioPlayerState' in player_state:
+                    _LOGGER.debug("%s state update: %s",
+                                  self.name,
+                                  player_state['audioPlayerState'])
+                    self.update()  # refresh is necessary to pull all data
+                elif 'volumeSetting' in player_state:
+                    _LOGGER.debug("%s volume updated: %s",
+                                  self.name,
+                                  player_state['volumeSetting'])
+                    self._media_vol_level = player_state['volumeSetting']/100
+                    if (self.hass and self.schedule_update_ha_state):
+                        self.schedule_update_ha_state()
+                elif 'dopplerConnectionState' in player_state:
+                    self._available = (player_state['dopplerConnectionState']
+                                       == "ONLINE")
+                    if (self.hass and self.schedule_update_ha_state):
+                        self.schedule_update_ha_state()
+        if 'queue_state' in event.data:
+            queue_state = event.data['queue_state']
+            if (queue_state['dopplerId']
+                    ['deviceSerialNumber'] == self.device_serial_number):
+                if ('trackOrderChanged' in queue_state and
+                        not queue_state['trackOrderChanged'] and
+                        'loopMode' in queue_state):
+                    self._repeat = (queue_state['loopMode']
+                                    == 'LOOP_QUEUE')
+                    _LOGGER.debug("%s repeat updated to: %s %s",
+                                  self.name,
+                                  self._repeat,
+                                  queue_state['loopMode'])
+                elif 'playBackOrder' in queue_state:
+                    self._shuffle = (queue_state['playBackOrder']
+                                     == 'SHUFFLE_ALL')
+                    _LOGGER.debug("%s shuffle updated to: %s %s",
+                                  self.name,
+                                  self._shuffle,
+                                  queue_state['playBackOrder'])
 
     def _clear_media_details(self):
         """Set all Media Items to None."""
@@ -218,12 +268,15 @@ class AlexaClient(MediaPlayerDevice):
             self._device_family = device['deviceFamily']
             self._device_type = device['deviceType']
             self._device_serial_number = device['serialNumber']
+            self._app_device_list = device['appDeviceList']
             self._device_owner_customer_id = device['deviceOwnerCustomerId']
             self._software_version = device['softwareVersion']
             self._available = device['online']
             self._capabilities = device['capabilities']
             self._cluster_members = device['clusterMembers']
             self._bluetooth_state = device['bluetooth_state']
+            self._locale = device['locale'] if 'locale' in device else 'en-US'
+            self._dnd = device['dnd'] if 'dnd' in device else None
         if self._available is True:
             _LOGGER.debug("%s: Refreshing %s", self.account, self.name)
             self._source = self._get_source()
@@ -284,6 +337,15 @@ class AlexaClient(MediaPlayerDevice):
                                             None and 'mediaLength' in
                                             self._session['progress'])
                                         else None)
+            if self._session['transport'] is not None:
+                self._shuffle = (self._session['transport']
+                                 ['shuffle'] == "SELECTED"
+                                 if ('shuffle' in self._session['transport'])
+                                 else None)
+                self._repeat = (self._session['transport']
+                                ['repeat'] == "SELECTED"
+                                if ('repeat' in self._session['transport'])
+                                else None)
 
     @property
     def source(self):
@@ -318,24 +380,29 @@ class AlexaClient(MediaPlayerDevice):
         sources = []
         if self._bluetooth_state['pairedDeviceList'] is not None:
             for devices in self._bluetooth_state['pairedDeviceList']:
-                sources.append(devices['friendlyName'])
+                if (devices['profiles'] and
+                        'A2DP-SOURCE' in devices['profiles']):
+                    sources.append(devices['friendlyName'])
         return ['Local Speaker'] + sources
 
     def _get_last_called(self):
-        last_called_serial = (None if self.hass is None else
-                              (self.hass.data[DATA_ALEXAMEDIA]
-                               ['accounts']
-                               [self._login.email]
-                               ['last_called']
-                               ['serialNumber']))
+        try:
+            last_called_serial = (None if self.hass is None else
+                                  (self.hass.data[DATA_ALEXAMEDIA]
+                                   ['accounts']
+                                   [self._login.email]
+                                   ['last_called']
+                                   ['serialNumber']))
+        except TypeError:
+            last_called_serial = None
         _LOGGER.debug("%s: Last_called check: self: %s reported: %s",
                       self._device_name,
                       hide_serial(self._device_serial_number),
                       hide_serial(last_called_serial))
-        if (last_called_serial is not None and
-                self._device_serial_number == last_called_serial):
-            return True
-        return False
+        return (last_called_serial is not None and
+                (self._device_serial_number == last_called_serial or
+                 any(item['serialNumber'] ==
+                     last_called_serial for item in self._app_device_list)))
 
     @property
     def available(self):
@@ -390,8 +457,19 @@ class AlexaClient(MediaPlayerDevice):
         if (self._device is None or self.entity_id is None):
             # Device has not initialized yet
             return
-        self.refresh(no_throttle=True)
-        if self.state in [STATE_PLAYING]:
+        email = self._login.email
+        device = (self.hass.data[DATA_ALEXAMEDIA]
+                  ['accounts']
+                  [email]
+                  ['devices']
+                  ['media_player']
+                  [self.unique_id])
+        self.refresh(device,  # pylint: disable=unexpected-keyword-arg
+                     no_throttle=True)
+        if (self.state in [STATE_PLAYING] and
+                #  only enable polling if websocket not connected
+                (not self.hass.data[DATA_ALEXAMEDIA]
+                 ['accounts'][email]['websocket'])):
             self._should_poll = False  # disable polling since manual update
             if(self._last_update == 0 or util.dt.as_timestamp(util.utcnow()) -
                util.dt.as_timestamp(self._last_update)
@@ -402,11 +480,16 @@ class AlexaClient(MediaPlayerDevice):
                            self.schedule_update_ha_state(force_refresh=True))
         elif self._should_poll:  # Not playing, one last poll
             self._should_poll = False
-            _LOGGER.debug("Disabling polling and scheduling last update in 300"
-                          " seconds for %s",
-                          self.name)
-            call_later(self.hass, 300, lambda _:
-                       self.schedule_update_ha_state(force_refresh=True))
+            if not (self.hass.data[DATA_ALEXAMEDIA]
+                    ['accounts'][email]['websocket']):
+                _LOGGER.debug("Disabling polling and scheduling last update in"
+                              " 300 seconds for %s",
+                              self.name)
+                call_later(self.hass, 300, lambda _:
+                           self.schedule_update_ha_state(force_refresh=True))
+            else:
+                _LOGGER.debug("Disabling polling for %s",
+                              self.name)
         self._last_update = util.utcnow()
         self.schedule_update_ha_state()
 
@@ -458,6 +541,41 @@ class AlexaClient(MediaPlayerDevice):
         return self._device_family
 
     @property
+    def dnd_state(self):
+        """Return the Do Not Disturb state."""
+        return self._dnd
+
+    @dnd_state.setter
+    def dnd_state(self, state):
+        """Set the Do Not Disturb state."""
+        self._dnd = state
+
+    def set_shuffle(self, shuffle):
+        """Enable/disable shuffle mode."""
+        self.alexa_api.shuffle(shuffle)
+        self.shuffle_state = shuffle
+
+    @property
+    def shuffle_state(self):
+        """Return the Shuffle state."""
+        return self._shuffle
+
+    @shuffle_state.setter
+    def shuffle_state(self, state):
+        """Set the Shuffle state."""
+        self._shuffle = state
+
+    @property
+    def repeat_state(self):
+        """Return the Repeat state."""
+        return self._repeat
+
+    @repeat_state.setter
+    def repeat_state(self, state):
+        """Set the Repeat state."""
+        self._repeat = state
+
+    @property
     def supported_features(self):
         """Flag media player features that are supported."""
         return SUPPORT_ALEXA
@@ -468,7 +586,9 @@ class AlexaClient(MediaPlayerDevice):
             return
         self.alexa_api.set_volume(volume)
         self._media_vol_level = volume
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     @property
     def volume_level(self):
@@ -501,7 +621,9 @@ class AlexaClient(MediaPlayerDevice):
                 self.alexa_api.set_volume(self._previous_volume)
             else:
                 self.alexa_api.set_volume(50)
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     def media_play(self):
         """Send play command."""
@@ -509,7 +631,9 @@ class AlexaClient(MediaPlayerDevice):
                 and self.available):
             return
         self.alexa_api.play()
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     def media_pause(self):
         """Send pause command."""
@@ -517,7 +641,9 @@ class AlexaClient(MediaPlayerDevice):
                 and self.available):
             return
         self.alexa_api.pause()
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     def turn_off(self):
         """Turn the client off.
@@ -544,7 +670,9 @@ class AlexaClient(MediaPlayerDevice):
                 and self.available):
             return
         self.alexa_api.next()
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     def media_previous_track(self):
         """Send previous track command."""
@@ -552,7 +680,9 @@ class AlexaClient(MediaPlayerDevice):
                 and self.available):
             return
         self.alexa_api.previous()
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     def send_tts(self, message):
         """Send TTS to Device.
@@ -560,6 +690,18 @@ class AlexaClient(MediaPlayerDevice):
         NOTE: Does not work on WHA Groups.
         """
         self.alexa_api.send_tts(message, customer_id=self._customer_id)
+
+    def send_announcement(self, message, **kwargs):
+        """Send announcement to the media player."""
+        self.alexa_api.send_announcement(message,
+                                         customer_id=self._customer_id,
+                                         **kwargs)
+
+    def send_mobilepush(self, message, **kwargs):
+        """Send push to the media player's associated mobile devices."""
+        self.alexa_api.send_mobilepush(message,
+                                       customer_id=self._customer_id,
+                                       **kwargs)
 
     def play_media(self, media_type, media_id, enqueue=None, **kwargs):
         """Send the play_media command to the media player."""
@@ -575,7 +717,9 @@ class AlexaClient(MediaPlayerDevice):
         else:
             self.alexa_api.play_music(media_type, media_id,
                                       customer_id=self._customer_id, **kwargs)
-        self.update()
+        if not (self.hass.data[DATA_ALEXAMEDIA]
+                ['accounts'][self._login.email]['websocket']):
+            self.update()
 
     @property
     def device_state_attributes(self):

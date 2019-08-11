@@ -9,7 +9,7 @@ sensor:
         value_template: "{% if states.climate.home.attributes.preset_mode == 'away' %}Away{% else %}{{ states.climate.home.state|capitalize }}{% endif %}"
 
       climate_operation:
-        value_template: "{{ states.climate.home.attributes.hvac_action != "off" }}"
+        value_template: "{{ states.climate.home.attributes.hvac_action != 'off' }}"
 
       family_room_status:
         friendly_name: Family Room
