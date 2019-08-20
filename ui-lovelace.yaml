@@ -53,7 +53,7 @@ views:
         card:
           type: entities
           entities:
-            - entity: script.back_yard_speakers
+            - entity: script.back_yard_speakers_on
               name: "Play Outside"
               icon: mdi:speaker
 

@@ -177,8 +177,10 @@ automation:
     initial_state: True
     hide_entity: True
     trigger:
-      platform: event
-      event_type: abode_panel_fault
+      - platform: event
+        event_type: abode_panel_fault
+      - platform: event
+        event_type: abode_panel_restore
     action:
       - service: notify.jeffs_phone
         data_template:

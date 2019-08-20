@@ -3,13 +3,27 @@ ecobee:
 
 
 sensor:
+  - platform: awair
+    access_token: !secret awair_access_token
+
   - platform: template
     sensors:
       climate_mode:
-        value_template: "{% if states.climate.home.attributes.preset_mode == 'away' %}Away{% else %}{{ states.climate.home.state|capitalize }}{% endif %}"
+        value_template: >
+          {%- if states.climate.home.attributes.preset_mode == 'away' -%}
+            Away
+          {%- else -%}
+            {{ states.climate.home.state|capitalize }}
+          {%- endif -%}
 
       climate_operation:
-        value_template: "{{ states.climate.home.attributes.hvac_action != 'off' }}"
+        value_template: >
+          {% set operation = state_attr('climate.home', 'hvac_action') %}
+          {%- if operation == 'cooling' or operation == "heating" -%}
+            1
+          {%- else -%}
+            0
+          {%- endif -%}
 
       family_room_status:
         friendly_name: Family Room
@@ -77,39 +91,17 @@ sensor:
             /local/thermometer.svg
           {%- endif -%}
 
-  - platform: awair
-    access_token: !secret awair_access_token
-
 
 automation:
-  - alias: Climate - House fan disables HVAC
+  - alias: Climate - House Fan On/Off
     initial_state: True
     trigger:
       platform: state
       entity_id: switch.house_fan_switch
-      from: "off"
-      to: "on"
     action:
-      # change the thermostat to a value higher/lower
-      - service: climate.set_temperature
-        data_template:
-          entity_id: climate.home
-          temperature: >
-            {% if states.climate.home.state == 'cool' %}
-              80
-            {% else %}
-              60
-            {% endif %}
-
-  - alias: Climate – Resume thermostat
-    initial_state: True
-    hide_entity: True
-    trigger:
-      - platform: state
-        entity_id: switch.house_fan_switch
-        from: "on"
-        to: "off"
-    action:
-      - service: climate.ecobee_resume_program
-        data:
-          entity_id: climate.home
+      service_template: >
+        {%- if trigger and trigger.to_state.state == "on" -%}
+          script.house_fan_on
+        {%- else -%}
+          script.house_fan_off
+        {%- endif -%}
