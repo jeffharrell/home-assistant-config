@@ -2,52 +2,52 @@ binary_sensor:
   - platform: ping
     name: internet
     host: 8.8.8.8
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: living_room_camera
     host: !secret living_room_camera_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: family_room_camera
     host: !secret family_room_camera_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: front_yard_camera
     host: !secret front_yard_camera_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: back_yard_camera
     host: !secret back_yard_camera_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: awair
     host: !secret awair_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: harmony_hub
     host: !secret harmony_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: skybell
     host: !secret skybell_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: abode_gateway
     host: !secret abobe_gateway_url
-    scan_interval: 300
+    scan_interval: 120
 
   - platform: ping
     name: ambient_observer
     host: !secret ambient_observer_url
-    scan_interval: 300
+    scan_interval: 120
 
 
 automation:
@@ -66,6 +66,8 @@ automation:
           - binary_sensor.abode_gateway
           - binary_sensor.ambient_observer
         to: "off"
+        for:
+          minutes: 10
     action:
       - service: notify.jeffs_phone
         data_template:

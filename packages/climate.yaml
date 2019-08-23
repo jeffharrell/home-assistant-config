@@ -10,7 +10,7 @@ sensor:
     sensors:
       climate_mode:
         value_template: >
-          {%- if states.climate.home.attributes.preset_mode == 'away' -%}
+          {%- if states.climate.home.attributes.preset_mode|lower == 'away' -%}
             Away
           {%- else -%}
             {{ states.climate.home.state|capitalize }}
@@ -29,67 +29,37 @@ sensor:
         friendly_name: Family Room
         value_template: "{{ states.sensor.family_room_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.family_room_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.family_room_occupancy.state }}.svg
 
       living_room_status:
         friendly_name: Living Room
         value_template: "{{ states.sensor.living_room_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.living_room_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.living_room_occupancy.state }}.svg
 
       masons_room_status:
         friendly_name: Mason's Bedroom
         value_template: "{{ states.sensor.masons_room_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.masons_room_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.masons_room_occupancy.state }}.svg
 
       brinks_room_status:
         friendly_name: Brink's Bedroom
         value_template: "{{ states.sensor.brinks_room_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.masons_room_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.brinks_room_occupancy.state }}.svg
 
       master_bedroom_status:
         friendly_name: Master Bedroom
         value_template: "{{ states.sensor.master_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.master_bedroom_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.master_bedroom_occupancy.state }}.svg
 
       guest_bedroom_status:
         friendly_name: Guest Bedroom
         value_template: "{{ states.sensor.guest_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: >
-          {%- if is_state("binary_sensor.master_bedroom_occupancy", "on") -%}
-            /local/thermometer-on.svg
-          {%- else -%}
-            /local/thermometer.svg
-          {%- endif -%}
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.guest_bedroom_occupancy.state }}.svg
 
 
 automation:
