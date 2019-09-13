@@ -30,11 +30,11 @@ views:
             icon: mdi:lightbulb
           - entity: switch.hallway_light_switch
             icon: mdi:lightbulb
-          - entity: switch.guest_room_switch
-            icon: mdi:lightbulb
           - entity: light.masons_room_level
           - entity: light.brinks_room
           - entity: light.master_bedroom_level
+          - entity: switch.guest_room_switch
+            icon: mdi:lightbulb
 
       - type: entities
         title: "Media"

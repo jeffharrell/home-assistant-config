@@ -44,7 +44,7 @@ sensor:
         entity_picture_template: /local/thermometer-{{ states.binary_sensor.masons_room_occupancy.state }}.svg
 
       brinks_room_status:
-        friendly_name: Brink's Bedroom
+        friendly_name: Brinkley's Bedroom
         value_template: "{{ states.sensor.brinks_room_temperature.state|round|int }}"
         unit_of_measurement: °F
         entity_picture_template: /local/thermometer-{{ states.binary_sensor.brinks_room_occupancy.state }}.svg
