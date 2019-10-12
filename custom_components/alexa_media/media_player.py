@@ -10,28 +10,23 @@ https://community.home-assistant.io/t/echo-devices-alexa-as-media-player-testers
 import logging
 from typing import List  # noqa pylint: disable=unused-import
 
-import voluptuous as vol
-
 from homeassistant import util
 from homeassistant.components.media_player import MediaPlayerDevice
 from homeassistant.components.media_player.const import (
-    DOMAIN, MEDIA_TYPE_MUSIC, SUPPORT_NEXT_TRACK, SUPPORT_PAUSE, SUPPORT_PLAY,
+    MEDIA_TYPE_MUSIC, SUPPORT_NEXT_TRACK, SUPPORT_PAUSE, SUPPORT_PLAY,
     SUPPORT_PLAY_MEDIA, SUPPORT_PREVIOUS_TRACK, SUPPORT_SELECT_SOURCE,
     SUPPORT_SHUFFLE_SET, SUPPORT_STOP, SUPPORT_TURN_OFF, SUPPORT_TURN_ON,
     SUPPORT_VOLUME_MUTE, SUPPORT_VOLUME_SET)
 from homeassistant.const import (STATE_IDLE, STATE_PAUSED, STATE_PLAYING,
                                  STATE_STANDBY)
-from homeassistant.helpers import config_validation as cv
-from homeassistant.helpers.discovery import async_load_platform
 from homeassistant.helpers.event import async_call_later
-from homeassistant.helpers.service import extract_entity_ids
 
-from . import CONF_EMAIL, CONF_NAME, DATA_ALEXAMEDIA
+from . import CONF_EMAIL, DATA_ALEXAMEDIA
 from . import DOMAIN as ALEXA_DOMAIN
 from . import (MIN_TIME_BETWEEN_FORCED_SCANS, MIN_TIME_BETWEEN_SCANS,
                hide_email, hide_serial)
-from .const import ATTR_MESSAGE, PLAY_SCAN_INTERVAL
-from .helpers import add_devices, retry_async
+from .const import PLAY_SCAN_INTERVAL
+from .helpers import _catch_login_errors, add_devices, retry_async
 
 SUPPORT_ALEXA = (SUPPORT_PAUSE | SUPPORT_PREVIOUS_TRACK |
                  SUPPORT_NEXT_TRACK | SUPPORT_STOP |
@@ -49,7 +44,6 @@ async def async_setup_platform(hass, config, add_devices_callback,
                                discovery_info=None):
     """Set up the Alexa media player platform."""
     devices = []  # type: List[AlexaClient]
-    config = discovery_info['config']
     account = config[CONF_EMAIL]
     account_dict = hass.data[DATA_ALEXAMEDIA]['accounts'][account]
     for key, device in account_dict['devices']['media_player'].items():
@@ -73,6 +67,24 @@ async def async_setup_platform(hass, config, add_devices_callback,
     return await add_devices(hide_email(account),
                              devices,
                              add_devices_callback)
+
+
+async def async_setup_entry(hass, config_entry, async_add_devices):
+    """Set up the Alexa media player platform by config_entry."""
+    return await async_setup_platform(
+        hass,
+        config_entry.data,
+        async_add_devices,
+        discovery_info=None)
+
+
+async def async_unload_entry(hass, entry) -> bool:
+    """Unload a config entry."""
+    account = entry.data[CONF_EMAIL]
+    account_dict = hass.data[DATA_ALEXAMEDIA]['accounts'][account]
+    for device in account_dict['entities']['media_player'].values():
+        await device.async_remove()
+    return True
 
 
 class AlexaClient(MediaPlayerDevice):
@@ -133,17 +145,20 @@ class AlexaClient(MediaPlayerDevice):
         self._last_update = 0
 
     async def init(self, device):
-        from alexapy import AlexaAPI
-        self.auth = await AlexaAPI.get_authentication(self._login)
-        await self._set_authentication_details(self.auth)
+        """Initialize."""
         await self.refresh(device)
 
     async def async_added_to_hass(self):
         """Store register state change callback."""
         # Register event handler on bus
-        self.hass.bus.async_listen(('{}_{}'.format(ALEXA_DOMAIN,
-                                    hide_email(self._login.email)))[0:32],
-                                    self._handle_event)
+        self._listener = self.hass.bus.async_listen(
+            f'{ALEXA_DOMAIN}_{hide_email(self._login.email)}'[0:32],
+            self._handle_event)
+
+    async def async_will_remove_from_hass(self):
+        """Prepare to remove entity."""
+        # Register event handler on bus
+        self._listener()
 
     async def _handle_event(self, event):
         """Handle events.
@@ -161,11 +176,17 @@ class AlexaClient(MediaPlayerDevice):
         is self.update will pull data from Amazon, while schedule_update
         assumes the MediaClient state is already updated.
         """
+        try:
+            if not self.enabled:
+                return
+        except AttributeError:
+            pass
         if 'last_called_change' in event.data:
-            event_serial = event.data['last_called_change']['serialNumber']
-            if (event_serial == self.device_serial_number or
-                    any(item['serialNumber'] ==
-                        event_serial for item in self._app_device_list)):
+            event_serial = (event.data['last_called_change']['serialNumber']
+                            if event.data['last_called_change'] else None)
+            if (event_serial and (event_serial == self.device_serial_number or
+                any(item['serialNumber'] ==
+                    event_serial for item in self._app_device_list))):
                 _LOGGER.debug("%s is last_called: %s", self.name,
                               hide_serial(self.device_serial_number))
                 self._last_called = True
@@ -200,7 +221,8 @@ class AlexaClient(MediaPlayerDevice):
                     _LOGGER.debug("%s state update: %s",
                                   self.name,
                                   player_state['audioPlayerState'])
-                    await self.async_update()  # refresh is necessary to pull all data
+                    await self.async_update()
+                    # refresh is necessary to pull all data
                 elif 'volumeSetting' in player_state:
                     _LOGGER.debug("%s volume updated: %s",
                                   self.name,
@@ -256,6 +278,7 @@ class AlexaClient(MediaPlayerDevice):
         self._customer_name = auth['customerName']
 
     @util.Throttle(MIN_TIME_BETWEEN_SCANS, MIN_TIME_BETWEEN_FORCED_SCANS)
+    @_catch_login_errors
     async def refresh(self, device=None):
         """Refresh device data.
 
@@ -267,6 +290,7 @@ class AlexaClient(MediaPlayerDevice):
         device (json): A refreshed device json from Amazon. For efficiency,
                        an individual device does not refresh if it's reported
                        as offline.
+
         """
         if device is not None:
             self._device = device
@@ -282,15 +306,19 @@ class AlexaClient(MediaPlayerDevice):
             self._cluster_members = device['clusterMembers']
             self._bluetooth_state = device['bluetooth_state']
             self._locale = device['locale'] if 'locale' in device else 'en-US'
+            self._timezone = (device['timeZoneId']
+                              if 'timeZoneId' in device else 'UTC')
             self._dnd = device['dnd'] if 'dnd' in device else None
-        if self._available is True:
+            await self._set_authentication_details(device['auth_info'])
+        session = None
+        if self._available:
             _LOGGER.debug("%s: Refreshing %s", self.account, self.name)
-            self._source = await self._get_source()
-            self._source_list = await self._get_source_list()
+            if "PAIR_BT_SOURCE" in self._capabilities:
+                self._source = await self._get_source()
+                self._source_list = await self._get_source_list()
             self._last_called = await self._get_last_called()
-            session = await self.alexa_api.get_state()
-        else:
-            session = None
+            if "MUSIC_SKILL" in self._capabilities:
+                session = await self.alexa_api.get_state()
         await self._clear_media_details()
         # update the session if it exists; not doing relogin here
         if session is not None:
@@ -346,11 +374,15 @@ class AlexaClient(MediaPlayerDevice):
             if self._session['transport'] is not None:
                 self._shuffle = (self._session['transport']
                                  ['shuffle'] == "SELECTED"
-                                 if ('shuffle' in self._session['transport'])
+                                 if ('shuffle' in self._session['transport']
+                                     and self._session['transport']['shuffle']
+                                     != 'DISABLED')
                                  else None)
                 self._repeat = (self._session['transport']
                                 ['repeat'] == "SELECTED"
-                                if ('repeat' in self._session['transport'])
+                                if ('repeat' in self._session['transport']
+                                    and self._session['transport']['repeat']
+                                    != 'DISABLED')
                                 else None)
 
     @property
@@ -363,6 +395,7 @@ class AlexaClient(MediaPlayerDevice):
         """List of available input sources."""
         return self._source_list
 
+    @_catch_login_errors
     async def async_select_source(self, source):
         """Select input source."""
         if source == 'Local Speaker':
@@ -403,7 +436,7 @@ class AlexaClient(MediaPlayerDevice):
                                    [self._login.email]
                                    ['last_called']
                                    ['serialNumber']))
-        except TypeError:
+        except (TypeError, KeyError):
             last_called_serial = None
         _LOGGER.debug("%s: Last_called check: self: %s reported: %s",
                       self._device_name,
@@ -464,10 +497,17 @@ class AlexaClient(MediaPlayerDevice):
         every update. However, this quickly floods the network for every new
         device added. This should only call refresh() to call the AlexaAPI.
         """
+        try:
+            if not self.enabled:
+                return
+        except AttributeError:
+            pass
         if (self._device is None or self.entity_id is None):
             # Device has not initialized yet
             return
         email = self._login.email
+        if email not in self.hass.data[DATA_ALEXAMEDIA]['accounts']:
+            return
         device = (self.hass.data[DATA_ALEXAMEDIA]
                   ['accounts']
                   [email]
@@ -488,7 +528,7 @@ class AlexaClient(MediaPlayerDevice):
                               self.name, PLAY_SCAN_INTERVAL)
                 async_call_later(self.hass, PLAY_SCAN_INTERVAL, lambda _:
                                  self.async_schedule_update_ha_state(
-                                 force_refresh=True))
+                                    force_refresh=True))
         elif self._should_poll:  # Not playing, one last poll
             self._should_poll = False
             if not (self.hass.data[DATA_ALEXAMEDIA]
@@ -496,8 +536,11 @@ class AlexaClient(MediaPlayerDevice):
                 _LOGGER.debug("Disabling polling and scheduling last update in"
                               " 300 seconds for %s",
                               self.name)
-                async_call_later(self.hass, 300, lambda _:
-                           self.async_schedule_update_ha_state(
+                async_call_later(
+                    self.hass,
+                    300,
+                    lambda _:
+                        self.async_schedule_update_ha_state(
                             force_refresh=True))
             else:
                 _LOGGER.debug("Disabling polling for %s",
@@ -543,6 +586,11 @@ class AlexaClient(MediaPlayerDevice):
         return self._media_image_url
 
     @property
+    def media_image_remotely_accessible(self):
+        """Return whether image is accessible outside of the home network."""
+        return bool(self._media_image_url)
+
+    @property
     def media_title(self):
         """Return the title of current playing media."""
         return self._media_title
@@ -562,18 +610,19 @@ class AlexaClient(MediaPlayerDevice):
         """Set the Do Not Disturb state."""
         self._dnd = state
 
+    @_catch_login_errors
     async def async_set_shuffle(self, shuffle):
         """Enable/disable shuffle mode."""
         await self.alexa_api.shuffle(shuffle)
         self.shuffle_state = shuffle
 
     @property
-    def shuffle_state(self):
+    def shuffle(self):
         """Return the Shuffle state."""
         return self._shuffle
 
-    @shuffle_state.setter
-    def shuffle_state(self, state):
+    @shuffle.setter
+    def shuffle(self, state):
         """Set the Shuffle state."""
         self._shuffle = state
 
@@ -592,6 +641,7 @@ class AlexaClient(MediaPlayerDevice):
         """Flag media player features that are supported."""
         return SUPPORT_ALEXA
 
+    @_catch_login_errors
     async def async_set_volume_level(self, volume):
         """Set volume level, range 0..1."""
         if not self.available:
@@ -614,6 +664,7 @@ class AlexaClient(MediaPlayerDevice):
             return True
         return False
 
+    @_catch_login_errors
     async def async_mute_volume(self, mute):
         """Mute the volume.
 
@@ -637,6 +688,7 @@ class AlexaClient(MediaPlayerDevice):
                 ['accounts'][self._login.email]['websocket']):
             await self.async_update()
 
+    @_catch_login_errors
     async def async_media_play(self):
         """Send play command."""
         if not (self.state in [STATE_PLAYING, STATE_PAUSED]
@@ -647,6 +699,7 @@ class AlexaClient(MediaPlayerDevice):
                 ['accounts'][self._login.email]['websocket']):
             await self.async_update()
 
+    @_catch_login_errors
     async def async_media_pause(self):
         """Send pause command."""
         if not (self.state in [STATE_PLAYING, STATE_PAUSED]
@@ -657,6 +710,7 @@ class AlexaClient(MediaPlayerDevice):
                 ['accounts'][self._login.email]['websocket']):
             await self.async_update()
 
+    @_catch_login_errors
     async def async_turn_off(self):
         """Turn the client off.
 
@@ -667,6 +721,7 @@ class AlexaClient(MediaPlayerDevice):
         await self.async_media_pause()
         await self._clear_media_details()
 
+    @_catch_login_errors
     async def async_turn_on(self):
         """Turn the client on.
 
@@ -676,6 +731,7 @@ class AlexaClient(MediaPlayerDevice):
         self._should_poll = True
         await self.async_media_pause()
 
+    @_catch_login_errors
     async def async_media_next_track(self):
         """Send next track command."""
         if not (self.state in [STATE_PLAYING, STATE_PAUSED]
@@ -686,6 +742,7 @@ class AlexaClient(MediaPlayerDevice):
                 ['accounts'][self._login.email]['websocket']):
             await self.async_update()
 
+    @_catch_login_errors
     async def async_media_previous_track(self):
         """Send previous track command."""
         if not (self.state in [STATE_PLAYING, STATE_PAUSED]
@@ -696,6 +753,7 @@ class AlexaClient(MediaPlayerDevice):
                 ['accounts'][self._login.email]['websocket']):
             await self.async_update()
 
+    @_catch_login_errors
     async def async_send_tts(self, message):
         """Send TTS to Device.
 
@@ -703,18 +761,21 @@ class AlexaClient(MediaPlayerDevice):
         """
         await self.alexa_api.send_tts(message, customer_id=self._customer_id)
 
+    @_catch_login_errors
     async def async_send_announcement(self, message, **kwargs):
         """Send announcement to the media player."""
         await self.alexa_api.send_announcement(message,
                                                customer_id=self._customer_id,
                                                **kwargs)
 
+    @_catch_login_errors
     async def async_send_mobilepush(self, message, **kwargs):
         """Send push to the media player's associated mobile devices."""
         await self.alexa_api.send_mobilepush(message,
                                              customer_id=self._customer_id,
                                              **kwargs)
 
+    @_catch_login_errors
     async def async_play_media(self,
                                media_type, media_id, enqueue=None, **kwargs):
         """Send the play_media command to the media player."""
@@ -750,3 +811,16 @@ class AlexaClient(MediaPlayerDevice):
     def should_poll(self):
         """Return the polling state."""
         return self._should_poll
+
+    @property
+    def device_info(self):
+        """Return the device_info of the device."""
+        return {
+            'identifiers': {
+                (ALEXA_DOMAIN, self.unique_id)
+            },
+            'name': self.name,
+            'manufacturer': "Amazon",
+            'model': f"{self._device_family} {self._device_type}",
+            'sw_version': self._software_version,
+        }

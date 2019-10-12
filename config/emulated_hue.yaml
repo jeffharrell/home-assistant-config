@@ -19,7 +19,7 @@ entities:
     hidden: true
   switch.fountain:
     hidden: true
-  script.back_yard_speakers_on:
+  switch.skybell_front_door_do_not_disturb:
     hidden: true
   script.snapshot_door_and_send:
     hidden: true

@@ -63,9 +63,8 @@ automation:
         entity_id: binary_sensor.master_bedroom_doors
         to: "on"
     condition:
-      condition: state
-      entity_id: sun.sun
-      state: "below_horizon"
+      condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     action:
       - service: homeassistant.turn_on
         entity_id: switch.back_yard_switch

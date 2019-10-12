@@ -15,7 +15,7 @@ house_fan_on:
 
 house_fan_off:
   sequence:
-    - service: climate.ecobee_resume_program
+    - service: ecobee.resume_program
       data:
         entity_id: climate.home
 
