@@ -2,6 +2,7 @@ secrets.yaml
 zwave_device_config.yaml
 home-assistant.sublime-workspace
 deps/
+src/
 __pycache__
 .DS_Store
 .HA_VERSION
