@@ -30,9 +30,9 @@ views:
             icon: mdi:lightbulb
           - entity: switch.hallway
             icon: mdi:lightbulb
+          - entity: light.play_room
           - entity: switch.boys_bedroom
             icon: mdi:lightbulb
-          - entity: light.play_room
           - entity: light.master_bedroom
           - entity: light.guest_bedroom
 
