@@ -13,7 +13,7 @@ camera:
 
 homeassistant:
     customize_glob:
-      "binary_sensor.*_garage_door_sensor":
+      "binary_sensor.*_garage_door":
         device_class: opening
 
 
@@ -32,9 +32,9 @@ group:
       - binary_sensor.master_bedroom_window
       - binary_sensor.master_bedroom_doors
       - binary_sensor.laundry_room_door
-      - binary_sensor.jeffs_garage_door_sensor
-      - binary_sensor.jillians_garage_door_sensor
-      - binary_sensor.guest_garage_door_sensor
+      - binary_sensor.jeffs_garage_door
+      - binary_sensor.jillians_garage_door
+      - binary_sensor.guest_garage_door
 
 
 automation:
@@ -112,24 +112,24 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - switch.kitchen_cabinets_switch
-          - switch.living_room_switch
-          - switch.entryway_light_switch
-          - switch.hallway_light_switch
+          - switch.kitchen_cabinets
+          - switch.living_room
+          - switch.entryway
+          - switch.hallway
           - switch.back_yard_switch
           - switch.front_yard_switch
-          - switch.guest_room_switch
+          - switch.boys_bedroom
       - service: light.turn_on
         entity_id:
-          - light.kitchen_lights_1_level
-          - light.kitchen_lights_2_level
-          - light.island_lights_level
-          - light.family_room_lights_level
-          - light.pantry_light_level
-          - light.dining_room_lights_level
-          - light.master_bedroom_level
-          - light.masons_room_level
-          - light.brinks_room
+          - light.kitchen_1
+          - light.kitchen_2
+          - light.island
+          - light.family_room
+          - light.pantry
+          - light.dining_room
+          - light.master_bedroom
+          - light.guest_bedroom
+          - light.play_room
         data:
           brightness: 255
 
@@ -202,9 +202,9 @@ automation:
     trigger:
       platform: state
       entity_id:
-        - binary_sensor.jeffs_garage_door_sensor
-        - binary_sensor.jillians_garage_door_sensor
-        - binary_sensor.guest_garage_door_sensor
+        - binary_sensor.jeffs_garage_door
+        - binary_sensor.jillians_garage_door
+        - binary_sensor.guest_garage_door
       to: "on"
       for:
         minutes: 10

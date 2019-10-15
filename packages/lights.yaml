@@ -2,26 +2,26 @@ light:
   - platform: group
     name: Kitchen
     entities:
-      - light.kitchen_lights_1_level
-      - light.kitchen_lights_2_level
+      - light.kitchen_1
+      - light.kitchen_2
 
 
 group:
     lights:
       entities:
-        - light.family_room_lights_level
-        - light.island_lights_level
+        - light.family_room
+        - light.island
         - light.Kitchen
-        - switch.kitchen_cabinets_switch
-        - light.pantry_light_level
-        - light.dining_room_lights_level
-        - switch.living_room_switch
-        - switch.entryway_light_switch
-        - switch.hallway_light_switch
-        - switch.guest_room_switch
-        - light.masons_room_level
-        - light.brinks_room
-        - light.master_bedroom_level
+        - switch.kitchen_cabinets
+        - light.pantry
+        - light.dining_room
+        - switch.living_room
+        - switch.entryway
+        - switch.hallway
+        - switch.boys_bedroom
+        - light.guest_bedroom
+        - light.play_room
+        - light.master_bedroom
 
 
 automation:
@@ -41,7 +41,7 @@ automation:
     action:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
-        entity_id: switch.living_room_switch
+        entity_id: switch.living_room
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home Assistant
@@ -61,7 +61,7 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - switch.hallway_light_switch
+          - switch.hallway
       - service: notify.alexa_media
         data_template:
           data:

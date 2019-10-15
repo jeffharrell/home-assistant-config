@@ -1,51 +1,51 @@
 scene:
   - name: Movie Time
     entities:
-      light.kitchen_lights_1_level:
+      light.kitchen_1:
         state: on
         brightness: 40
-      light.kitchen_lights_2_level:
+      light.kitchen_2:
         state: on
         brightness: 40
-      light.dining_room_lights_level: off
-      light.family_room_lights_level: off
-      light.island_lights_level: off
-      light.pantry_light_level: off
-      switch.kitchen_cabinets_switch: off
+      light.dining_room: off
+      light.family_room: off
+      light.island: off
+      light.pantry: off
+      switch.kitchen_cabinets: off
 
   - name: Dinner Time
     entities:
-      light.kitchen_lights_1_level:
+      light.kitchen_1:
         state: on
         brightness: 120
-      light.kitchen_lights_2_level:
+      light.kitchen_2:
         state: on
         brightness: 120
-      light.family_room_lights_level:
+      light.family_room:
         state: on
         brightness: 40
-      light.dining_room_lights_level:
+      light.dining_room:
         state: on
         brightness: 200
-      light.island_lights_level: off
-      light.pantry_light_level: off
-      switch.kitchen_cabinets_switch: off
+      light.island: off
+      light.pantry: off
+      switch.kitchen_cabinets: off
 
   - name: Good Morning
     entities:
       alarm_control_panel.alarm: "disarmed"
-      switch.kitchen_cabinets_switch:
+      switch.kitchen_cabinets:
         state: on
-      light.island_lights_level:
+      light.island:
         state: on
         brightness: 127
-      light.dining_room_lights_level:
+      light.dining_room:
         state: on
         brightness: 90
-      light.family_room_lights_level: off
-      light.kitchen_lights_1_level: off
-      light.kitchen_lights_2_level: off
-      light.pantry_light_level: off
+      light.family_room: off
+      light.kitchen_1: off
+      light.kitchen_2: off
+      light.pantry: off
 
   - name: Good Night
     entities:

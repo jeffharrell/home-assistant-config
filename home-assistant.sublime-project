@@ -17,7 +17,8 @@
                 "*.bak"
             ],
             "folder_exclude_patterns": [
-                "deps"
+                "deps",
+                "src"
             ],
             "path": "."
         }

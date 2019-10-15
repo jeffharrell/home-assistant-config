@@ -37,17 +37,17 @@ sensor:
         unit_of_measurement: °F
         entity_picture_template: /local/thermometer-{{ states.binary_sensor.living_room_occupancy.state }}.svg
 
-      masons_room_status:
-        friendly_name: Mason's Bedroom
-        value_template: "{{ states.sensor.masons_room_temperature.state|round|int }}"
+      play_room_status:
+        friendly_name: Play Room
+        value_template: "{{ states.sensor.play_room_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.masons_room_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.play_room_occupancy.state }}.svg
 
-      brinks_room_status:
-        friendly_name: Brinkley's Bedroom
-        value_template: "{{ states.sensor.brinks_room_temperature.state|round|int }}"
+      boys_bedroom_status:
+        friendly_name: Boys' Bedroom
+        value_template: "{{ states.sensor.boys_bedroom_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.brinks_room_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.boys_bedroom_occupancy.state }}.svg
 
       master_bedroom_status:
         friendly_name: Master Bedroom

@@ -1,0 +1,21 @@
+smart_home:
+  filter:
+    include_domains:
+      - switch
+      - light
+      - script
+      - scene
+    exclude_entities:
+      - scene.good_morning
+      - scene.let_dog_out
+      - light.kitchen_1
+      - light.kitchen_2
+      - switch.front_landscape
+      - switch.back_landscape
+      - switch.fountain
+      - switch.skybell_front_door_do_not_disturb
+      - script.snapshot_door_and_send
+      - script.snapshot_cameras_and_send
+      - script.alarm_disarm_silently
+      - script.house_fan_on
+      - script.house_fan_off

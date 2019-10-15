@@ -1,3 +1,2 @@
 server_host: localhost
 base_url: !secret base_url
-api_password: !secret http_password

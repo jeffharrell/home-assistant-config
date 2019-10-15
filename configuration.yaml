@@ -6,6 +6,10 @@ logger:
 lovelace:
   mode: yaml
 
+api:
+
+alexa: !include config/alexa.yaml
+
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
@@ -18,13 +22,9 @@ influxdb: !include config/influxdb.yaml
 
 notify: !include config/notify.yaml
 
-emulated_hue: !include config/emulated_hue.yaml
-
 zwave: !include config/zwave.yaml
 
 script: !include packages/scripts.yaml
-
-system_health:
 
 sun:
 

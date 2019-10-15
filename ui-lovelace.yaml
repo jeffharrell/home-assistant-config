@@ -17,24 +17,24 @@ views:
         title: "Lights"
         show_header_toggle: true
         entities:
-          - entity: light.family_room_lights_level
-          - entity: light.island_lights_level
+          - entity: light.family_room
+          - entity: light.island
           - entity: light.kitchen
-          - entity: switch.kitchen_cabinets_switch
+          - entity: switch.kitchen_cabinets
             icon: mdi:lightbulb
-          - entity: light.pantry_light_level
-          - entity: light.dining_room_lights_level
-          - entity: switch.living_room_switch
+          - entity: light.pantry
+          - entity: light.dining_room
+          - entity: switch.living_room
             icon: mdi:lightbulb
-          - entity: switch.entryway_light_switch
+          - entity: switch.entryway
             icon: mdi:lightbulb
-          - entity: switch.hallway_light_switch
+          - entity: switch.hallway
             icon: mdi:lightbulb
-          - entity: light.masons_room_level
-          - entity: light.brinks_room
-          - entity: light.master_bedroom_level
-          - entity: switch.guest_room_switch
+          - entity: switch.boys_bedroom
             icon: mdi:lightbulb
+          - entity: light.play_room
+          - entity: light.master_bedroom
+          - entity: light.guest_bedroom
 
       - type: entities
         title: "Media"
@@ -67,8 +67,8 @@ views:
             icon: mdi:fan
           - sensor.family_room_status
           - sensor.living_room_status
-          - sensor.masons_room_status
-          - sensor.brinks_room_status
+          - sensor.play_room_status
+          - sensor.boys_bedroom_status
           - sensor.master_bedroom_status
           - sensor.guest_bedroom_status
 
@@ -159,11 +159,11 @@ views:
             icon: mdi:door
           - entity: binary_sensor.laundry_room_door
             icon: mdi:door
-          - entity: binary_sensor.jeffs_garage_door_sensor
+          - entity: binary_sensor.jeffs_garage_door
             icon: mdi:garage
-          - entity: binary_sensor.jillians_garage_door_sensor
+          - entity: binary_sensor.jillians_garage_door
             icon: mdi:garage
-          - entity: binary_sensor.guest_garage_door_sensor
+          - entity: binary_sensor.guest_garage_door
             icon: mdi:garage
 
   - title: "Status"
