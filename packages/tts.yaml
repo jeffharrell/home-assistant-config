@@ -4,9 +4,9 @@ alexa_media:
       password: !secret alexa_password
       url: "amazon.com"
       include_devices:
-        - "Family Room"
-        - "Living Room"
-        - "Master Bedroom"
+        - "Family Room Echo"
+        - "Living Room Echo"
+        - "Master Bedroom Echo"
 
 
 script:
@@ -16,7 +16,7 @@ script:
         data_template:
           data:
             type: tts
-          target: media_player.family_room
+          target: media_player.family_room_echo
           message: "The temperature in the house is {{ state_attr('climate.home', 'current_temperature') }}."
 
   tts_windows_open:
@@ -25,7 +25,7 @@ script:
         data_template:
           data:
             type: tts
-          target: media_player.master_bedroom
+          target: media_player.master_bedroom_echo
           message: >
             {%- if states.group.security.state == "on" -%}
               The following are open:

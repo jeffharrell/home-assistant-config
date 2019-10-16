@@ -65,6 +65,9 @@ automation:
       - service: notify.alexa_media
         data_template:
           data:
-            type: tts
-          target: media_player.master_bedroom
+            type: announce
+          target:
+            - media_player.master_bedroom_echo
+            - media_player.living_room_echo
+            - media_player.family_room_echo
           message: "Welcome home. I turned the lights on for you."

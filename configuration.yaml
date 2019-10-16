@@ -26,6 +26,8 @@ zwave: !include config/zwave.yaml
 
 script: !include packages/scripts.yaml
 
+system_health:
+
 sun:
 
 homeassistant:

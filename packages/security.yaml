@@ -68,7 +68,7 @@ automation:
         data_template:
           data:
             type: tts
-          target: media_player.master_bedroom
+          target: media_player.master_bedroom_echo
           message: >
             {% set status = states.alarm_control_panel.alarm.state %}
             {% set isOpened = states.group.security.state %}
