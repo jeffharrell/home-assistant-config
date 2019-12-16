@@ -33,7 +33,7 @@ scene:
 
   - name: Good Morning
     entities:
-      alarm_control_panel.alarm: "disarmed"
+      alarm_control_panel.abode_alarm: "disarmed"
       switch.kitchen_cabinets:
         state: on
       light.island:
@@ -54,7 +54,7 @@ scene:
       switch.house_fan_switch: off
       remote.family_room:
         state: off
-      alarm_control_panel.alarm: "armed_home"
+      alarm_control_panel.abode_alarm: "armed_home"
 
   - name: Let Dog Out
     entities:
@@ -68,5 +68,5 @@ scene:
       switch.house_fan_switch: off
       remote.family_room:
         state: off
-      alarm_control_panel.alarm: "armed_away"
+      alarm_control_panel.abode_alarm: "armed_away"
 

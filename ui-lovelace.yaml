@@ -5,7 +5,7 @@ views:
     cards:
       - type: conditional
         conditions:
-          - entity: alarm_control_panel.alarm
+          - entity: alarm_control_panel.abode_alarm
             state: "armed_home"
         card:
           type: entities
@@ -134,7 +134,7 @@ views:
           - "armed_away"
         show_empty: false
         entities:
-          - entity: alarm_control_panel.alarm
+          - entity: alarm_control_panel.abode_alarm
           - entity: binary_sensor.front_door
             icon: mdi:door
           - entity: binary_sensor.family_room_doors
@@ -227,3 +227,55 @@ views:
         state_filter:
           - "off"
         show_empty: false
+
+  # - title: "Home"
+  #   cards:
+
+  #     - type: markdown
+  #       content: >
+  #         # Home
+
+  #     - type: markdown
+  #       content: >
+  #         **{{ states.climate.home.attributes.current_temperature }}°** – Security system is armed. Garages are closed.
+
+  #     - type: markdown
+  #       content: >
+  #         ## Home Scenes
+
+  #     - type: vertical-stack
+  #       cards:
+  #         - type: horizontal-stack
+  #           cards:
+  #             - type: entity-button
+  #               name: Good morning
+  #               entity: scene.good_morning
+  #             - type: entity-button
+  #               name: Good night
+  #               entity: scene.good_night
+  #         - type: horizontal-stack
+  #           cards:
+  #             - type: entity-button
+  #               name: Lights off
+  #               entity: group.lights
+
+  #             - type: entity-button
+  #               name: Leave home
+  #               entity: scene.i_m_leaving
+
+  #     - type: markdown
+  #       content: >
+  #         ## Home Status
+
+  #     - type: vertical-stack
+  #       cards:
+  #         - type: sensor
+  #           entity: sensor.outside_temp
+  #           graph: line
+  #         - type: sensor
+  #           entity: sensor.home_energy_meter_power
+  #           icon: mdi:power-socket-us
+  #         - type: sensor
+  #           entity: sensor.home_energy_meter_energy_3
+  #           icon: mdi:battery-charging
+  #           graph: line

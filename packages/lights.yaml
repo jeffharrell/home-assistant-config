@@ -36,7 +36,7 @@ automation:
         at: "23:03:00"
     condition:
       condition: state
-      entity_id: alarm_control_panel.alarm
+      entity_id: alarm_control_panel.abode_alarm
       state: "armed_away"
     action:
       - service_template: >
@@ -51,7 +51,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.alarm
+      entity_id: alarm_control_panel.abode_alarm
       from: "armed_away"
       to: "disarmed"
     condition:

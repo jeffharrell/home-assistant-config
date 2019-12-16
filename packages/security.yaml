@@ -1,7 +1,6 @@
 abode:
   username: !secret abode_user
   password: !secret abode_pass
-  name: Alarm
 
 
 camera:
@@ -45,14 +44,14 @@ automation:
       - platform: homeassistant
         event: start
       - platform: state
-        entity_id: alarm_control_panel.alarm
+        entity_id: alarm_control_panel.abode_alarm
     action:
       service: frontend.set_theme
       data_template:
         name: >
-          {% if states.alarm_control_panel.alarm.state == "armed_home" %}
+          {% if states.alarm_control_panel.abode_alarm.state == "armed_home" %}
             alarm
-          {% elif states.alarm_control_panel.alarm.state == "armed_away" %}
+          {% elif states.alarm_control_panel.abode_alarm.state == "armed_away" %}
             alarm
           {% else %}
             default
@@ -62,7 +61,7 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: alarm_control_panel.alarm
+        entity_id: alarm_control_panel.abode_alarm
     action:
       - service: notify.alexa_media
         data_template:
@@ -70,7 +69,7 @@ automation:
             type: tts
           target: media_player.master_bedroom_echo
           message: >
-            {% set status = states.alarm_control_panel.alarm.state %}
+            {% set status = states.alarm_control_panel.abode_alarm.state %}
             {% set isOpened = states.group.security.state %}
             {%- if status == "armed_home" -%}
               Alarm armed... Home
@@ -93,7 +92,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.alarm
+      entity_id: alarm_control_panel.abode_alarm
       to: "armed_away"
     action:
       - service: homeassistant.turn_off
@@ -167,7 +166,7 @@ automation:
         value_template: "{{ states.climate.home.attributes.hold_mode == 'away' }}"
     action:
       - condition: template
-        value_template: "{{ states.alarm_control_panel.alarm.state != 'armed_away' }}"
+        value_template: "{{ states.alarm_control_panel.abode_alarm.state != 'armed_away' }}"
       - service: notify.jeff_and_jillians_phone
         data:
           title: Home Assistant
