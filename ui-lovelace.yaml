@@ -8,10 +8,14 @@ views:
           - entity: alarm_control_panel.abode_alarm
             state: "armed_home"
         card:
-          type: entities
-          entities:
-            - entity: scene.let_dog_out
-              icon: mdi:dog-side
+          type: entity-button
+          entity: script.alarm_disarm_silently
+          name: Let Dog Out
+          icon: mdi:dog-side
+          icon_height: 2em
+          tap_action:
+            action: call-service
+            service: script.alarm_disarm_silently
 
       - type: entities
         title: "Lights"

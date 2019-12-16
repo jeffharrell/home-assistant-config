@@ -56,11 +56,6 @@ scene:
         state: off
       alarm_control_panel.abode_alarm: "armed_home"
 
-  - name: Let Dog Out
-    entities:
-      script.alarm_disarm_silently:
-        state: true
-
   - name: I'm Leaving
     entities:
       group.lights: off
