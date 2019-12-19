@@ -37,11 +37,11 @@ sensor:
         unit_of_measurement: °F
         entity_picture_template: /local/thermometer-{{ states.binary_sensor.living_room_occupancy.state }}.svg
 
-      play_room_status:
+      playroom_status:
         friendly_name: Play Room
-        value_template: "{{ states.sensor.play_room_temperature.state|round|int }}"
+        value_template: "{{ states.sensor.playroom_temperature.state|round|int }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.play_room_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states.binary_sensor.playroom_occupancy.state }}.svg
 
       boys_bedroom_status:
         friendly_name: Boys' Bedroom

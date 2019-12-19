@@ -67,7 +67,7 @@ automation:
           - binary_sensor.ambient_observer
         to: "off"
         for:
-          minutes: 10
+          minutes: 30
     action:
       - service: notify.jeffs_phone
         data_template:
