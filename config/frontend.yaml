@@ -1,5 +1,116 @@
-javascript_version: latest
-
 themes:
   alarm:
-    primary-color: "red"
+    # Colors
+    text-color: '#555'
+    text-medium-color: '#666'
+    text-light-color: '#999'
+    accent-color: '#FCD735'
+    background-color: '#F7F8F9'
+    background-color-2: '#F4F5F6'
+    background-card-color: '#FFF'
+    border-color: '#E8E8E8'
+
+    # Header
+    primary-color: 'red'
+    text-primary-color: '#FFF'
+
+    # Left Menu
+    paper-listbox-background-color: 'var(--background-color)'
+
+    # UI
+    paper-card-header-color: 'var(--text-color)'
+    primary-background-color: 'var(--background-color)'
+
+    # Card
+    paper-card-background-color: 'var(--background-card-color)'
+    dark-primary-color: 'var(--text-color)'
+    primary-text-color: 'var(--text-color)'
+    paper-listbox-color: 'var(--text-color)'
+    light-primary-color: 'var(--text-light-color)'
+    secondary-text-color: 'var(--text-medium-color)'
+    disabled-text-color: 'var(--text-light-color)'
+    paper-dialog-button-color: 'var(--text-color)'
+    secondary-background-color: 'var(--background-color-2)'
+
+    # Icons
+    paper-item-icon-color: 'var(--text-light-color)'
+    paper-item-icon-active-color: 'var(--accent-color)'
+
+    # Switches
+    switch-checked-button-color: '#FFF'
+    switch-unchecked-button-color: '#FFF'
+    switch-checked-track-color: '#0077FF'
+    switch-unchecked-track-color: 'var(--disabled-text-color)'
+
+    # Slider
+    paper-slider-active-color: 'var(--accent-color)'
+    paper-slider-container-color: '#e5e7ea'
+    paper-slider-knob-color: 'var(--text-light-color)'
+    paper-slider-knob-start-color: 'var(--text-light-color)'
+
+    # Shadows
+    ha-card-box-shadow: 'inset 0px 0px 0px 1px var(--border-color)'
+
+    # HACS
+    hacs-badge-color: 'var(--accent-color)'
+    hacs-status-installed: 'var(--text-color)'
+    hacs-status-pending-restart: 'var(--text-light-color)'
+    hacs-status-pending-update: 'var(--accent-color)'
+
+  clear:
+    # Colors
+    text-color: '#555'
+    text-medium-color: '#666'
+    text-light-color: '#999'
+    accent-color: '#FCD735'
+    background-color: '#F7F8F9'
+    background-color-2: '#F4F5F6'
+    background-card-color: '#FFF'
+    border-color: '#E8E8E8'
+
+    # Header
+    primary-color: 'var(--text-color)'
+    text-primary-color: '#FFF'
+
+    # Left Menu
+    paper-listbox-background-color: 'var(--background-color)'
+
+    # UI
+    paper-card-header-color: 'var(--text-color)'
+    primary-background-color: 'var(--background-color)'
+
+    # Card
+    paper-card-background-color: 'var(--background-card-color)'
+    dark-primary-color: 'var(--text-color)'
+    primary-text-color: 'var(--text-color)'
+    paper-listbox-color: 'var(--text-color)'
+    light-primary-color: 'var(--text-light-color)'
+    secondary-text-color: 'var(--text-medium-color)'
+    disabled-text-color: 'var(--text-light-color)'
+    paper-dialog-button-color: 'var(--text-color)'
+    secondary-background-color: 'var(--background-color-2)'
+
+    # Icons
+    paper-item-icon-color: 'var(--text-light-color)'
+    paper-item-icon-active-color: 'var(--accent-color)'
+
+    # Switches
+    switch-checked-button-color: '#FFF'
+    switch-unchecked-button-color: '#FFF'
+    switch-checked-track-color: '#0077FF'
+    switch-unchecked-track-color: 'var(--disabled-text-color)'
+
+    # Slider
+    paper-slider-active-color: 'var(--accent-color)'
+    paper-slider-container-color: '#e5e7ea'
+    paper-slider-knob-color: 'var(--text-light-color)'
+    paper-slider-knob-start-color: 'var(--text-light-color)'
+
+    # Shadows
+    ha-card-box-shadow: 'inset 0px 0px 0px 1px var(--border-color)'
+
+    # HACS
+    hacs-badge-color: 'var(--accent-color)'
+    hacs-status-installed: 'var(--text-color)'
+    hacs-status-pending-restart: 'var(--text-light-color)'
+    hacs-status-pending-update: 'var(--accent-color)'

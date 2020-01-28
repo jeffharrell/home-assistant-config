@@ -5,6 +5,7 @@
                 "zwave_device_config.yaml",
                 "*.sublime-project",
                 ".HA_VERSION",
+                ".pip_progress",
                 "*.uuid",
                 "*.txt",
                 "*.pickle",

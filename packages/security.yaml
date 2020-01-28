@@ -37,26 +37,6 @@ group:
 
 
 automation:
-  - alias: Alarm - Theme change
-    initial_state: True
-    hide_entity: True
-    trigger:
-      - platform: homeassistant
-        event: start
-      - platform: state
-        entity_id: alarm_control_panel.abode_alarm
-    action:
-      service: frontend.set_theme
-      data_template:
-        name: >
-          {% if states.alarm_control_panel.abode_alarm.state == "armed_home" %}
-            alarm
-          {% elif states.alarm_control_panel.abode_alarm.state == "armed_away" %}
-            alarm
-          {% else %}
-            default
-          {% endif %}
-
   - alias: Alarm - Say status
     initial_state: True
     trigger:
