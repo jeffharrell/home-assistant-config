@@ -5,6 +5,7 @@ custom_header:
   options_hide: true
   footer_mode: false
 
+
 resources:
   - url: /community_plugin/custom-header/custom-header.js
     type: module
@@ -20,9 +21,9 @@ views:
               {{ states('sensor.outdoor_forecast') }} Currently {{ states('sensor.outside_temp')|round(0) }} °F.
 
               {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-                Alarm is armed home.
+                **Alarm is armed home.**
               {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
-                Alarm is armed away.
+                **Alarm is armed away.**
               {% else %}
                 Alarm is disarmed.
               {% endif %}
@@ -30,6 +31,9 @@ views:
               {% if is_state('group.security', 'on') %}
                 Doors or windows are open.
               {% endif %}
+
+          - type: picture
+            image: /local/photos/house.jpg
 
           - type: conditional
             conditions:

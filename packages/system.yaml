@@ -1,23 +1,14 @@
 automation:
-  - alias: Alarm - Theme change
+  - alias: System - Theme change
     initial_state: True
     hide_entity: True
     trigger:
       - platform: homeassistant
         event: start
-      - platform: state
-        entity_id: alarm_control_panel.abode_alarm
     action:
       service: frontend.set_theme
       data_template:
-        name: >
-          {% if states.alarm_control_panel.abode_alarm.state == "armed_home" %}
-            alarm
-          {% elif states.alarm_control_panel.abode_alarm.state == "armed_away" %}
-            alarm
-          {% else %}
-            clear
-          {% endif %}
+        name: clear
 
   - alias: System - Low battery check
     initial_state: True
