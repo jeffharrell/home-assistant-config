@@ -2,19 +2,24 @@ title: Home
 
 custom_header:
   compact_mode: true
-  options_hide: true
-  footer_mode: false
-
+  menu_dropdown: true
+  hide_help: true
+  hide_unused: true
+  hide_config: true
+  footer_mode: true
+  tab_indicator_color: transparent
+  header_css: "height: 90px;"
 
 resources:
-  - url: /community_plugin/custom-header/custom-header.js
-    type: module
+  - type: module
+    url: /local/community/custom-header/custom-header.js
 
 views:
   - title: "Home"
     cards:
 
       - type: vertical-stack
+        title: Home
         cards:
           - type: markdown
             content: >
