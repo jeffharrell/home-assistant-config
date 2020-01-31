@@ -10,10 +10,10 @@ sensor:
     sensors:
       climate_mode:
         value_template: >
-          {%- if states.climate.home.attributes.preset_mode|lower == 'away' -%}
+          {%- if state_attr('climate.home', 'preset_mode')|lower == 'away' -%}
             Away
           {%- else -%}
-            {{ states.climate.home.state|capitalize }}
+            {{ states('climate.home')|capitalize }}
           {%- endif -%}
 
       climate_operation:
@@ -26,40 +26,40 @@ sensor:
           {%- endif -%}
 
       family_room_status:
-        friendly_name: Family Room
-        value_template: "{{ states.sensor.family_room_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.family_room_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.family_room_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.family_room_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.family_room_occupancy') }}.svg
 
       living_room_status:
-        friendly_name: Living Room
-        value_template: "{{ states.sensor.living_room_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.living_room_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.living_room_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.living_room_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.living_room_occupancy') }}.svg
 
       playroom_status:
-        friendly_name: Play Room
-        value_template: "{{ states.sensor.playroom_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.playroom_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.playroom_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.playroom_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.playroom_occupancy') }}.svg
 
       boys_bedroom_status:
-        friendly_name: Boys' Bedroom
-        value_template: "{{ states.sensor.boys_bedroom_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.boys_bedroom_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.boys_bedroom_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.boys_bedroom_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.boys_bedroom_occupancy') }}.svg
 
       master_bedroom_status:
-        friendly_name: Master Bedroom
-        value_template: "{{ states.sensor.master_bedroom_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.master_bedroom_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.master_bedroom_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.master_bedroom_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.master_bedroom_occupancy') }}.svg
 
       guest_bedroom_status:
-        friendly_name: Guest Bedroom
-        value_template: "{{ states.sensor.guest_bedroom_temperature.state|round|int }}"
+        friendly_name_template: "{% if is_state('binary_sensor.guest_bedroom_occupancy', 'off') %}Not {% endif %}Occupied"
+        value_template: "{{ states('sensor.guest_bedroom_temperature')|round(0) }}"
         unit_of_measurement: °F
-        entity_picture_template: /local/thermometer-{{ states.binary_sensor.guest_bedroom_occupancy.state }}.svg
+        entity_picture_template: /local/thermometer-{{ states('binary_sensor.guest_bedroom_occupancy') }}.svg
 
 
 automation:

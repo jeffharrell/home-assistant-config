@@ -22,20 +22,10 @@ views:
         title: Home
         cards:
           - type: markdown
-            content: >
-              {{ states('sensor.outdoor_forecast') }} Currently {{ states('sensor.outside_temp')|round(0) }} °F.
-
-              {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-                **Alarm is armed home.**
-              {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
-                **Alarm is armed away.**
-              {% else %}
-                Alarm is disarmed.
-              {% endif %}
-
-              {% if is_state('group.security', 'on') %}
-                Doors or windows are open.
-              {% endif %}
+            content: >-
+              Currently {{ states('sensor.outside_temp')|round(0) }}°F
+              {% if states('sensor.outside_rain_daily')|float > 0 %} with {{ states('sensor.outside_rain_daily') }}" of rain{% endif %}.
+              {{ states('sensor.outdoor_forecast') }}
 
           - type: picture
             image: /local/photos/house.jpg
@@ -127,41 +117,86 @@ views:
                     service_data:
                       entity_id: scene.i_m_leaving
 
-  - title: "Inside"
+          - type: vertical-stack
+            title: "Security"
+            cards:
+              - type: markdown
+                content: >
+                  {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+                    Alarm is armed home.
+                  {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
+                    Alarm is armed away.
+                  {% else %}
+                    Alarm is disarmed.
+                  {% endif %}
+
+              - type: entity-filter
+                card:
+                  type: entities
+                  show_header_toggle: false
+                state_filter:
+                  - "on"
+                show_empty: false
+                entities:
+                  - entity: binary_sensor.front_door
+                    icon: mdi:door
+                  - entity: binary_sensor.family_room_doors
+                    icon: mdi:door
+                  - entity: binary_sensor.dining_room_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.living_room_window_left
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.living_room_window_right
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.kitchen_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.masons_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.brinks_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.guest_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.master_bedroom_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.master_bedroom_doors
+                    icon: mdi:door
+                  - entity: binary_sensor.laundry_room_door
+                    icon: mdi:door
+                  - entity: binary_sensor.jeffs_garage_door
+                    icon: mdi:garage
+                  - entity: binary_sensor.jillians_garage_door
+                    icon: mdi:garage
+                  - entity: binary_sensor.guest_garage_door
+                    icon: mdi:garage
+
+
+  - title: "Rooms"
     cards:
       - type: entities
-        title: "Lights"
+        title: "Kitchen"
         show_header_toggle: false
         entities:
-          - entity: light.family_room
-          - entity: light.island
           - entity: light.kitchen
+            name: Lights
           - entity: switch.kitchen_cabinets
             icon: mdi:lightbulb
+          - entity: light.island
           - entity: light.pantry
-          - entity: light.dining_room
-          - entity: switch.living_room
-            icon: mdi:lightbulb
-          - entity: switch.entryway
-            icon: mdi:lightbulb
-          - entity: switch.hallway
-            icon: mdi:lightbulb
-          - entity: light.play_room
-          - entity: switch.boys_bedroom
-            icon: mdi:lightbulb
-          - entity: light.master_bedroom
-          - entity: light.guest_bedroom
 
-
-      # - type: entities
-      #   title: "Media"
-      #   show_header_toggle: false
-      #   entities:
-      #     - entity: sensor.family_room_media
-      #       name: "Family Room"
-      #       icon: mdi:television
-      #     - entity: input_select.family_room_media
-      #       icon: mdi:remote
+      - type: entities
+        title: "Family Room"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.family_room_status
+          - type: picture-entity
+            entity: camera.family_room
+          - entity: light.family_room
+            name: "Lights"
+          - entity: sensor.family_room_media
+            name: "TV"
+            icon: mdi:television
+          - entity: input_select.family_room_media
+            icon: mdi:remote
 
       - type: conditional
         conditions:
@@ -175,36 +210,65 @@ views:
               icon: mdi:speaker
 
       - type: entities
-        title: "Climate"
+        title: "Living Room"
         show_header_toggle: false
         entities:
+          - entity: sensor.living_room_status
+          - entity: switch.living_room
+            name: Lights
+            icon: mdi:lightbulb
+          - entity: light.dining_room
+
+      - type: entities
+        title: "Entryway"
+        show_header_toggle: false
+        entities:
+          - entity: switch.entryway
+            name: Chandelier
+            icon: mdi:lightbulb
+          - entity: switch.hallway
+            icon: mdi:lightbulb
+          - entity: sensor.climate_mode
+            name: "HVAC"
           - entity: switch.house_fan_switch
             icon: mdi:fan
-          - entity: sensor.climate_mode
-            name: "Mode"
-          - sensor.family_room_status
-          - sensor.living_room_status
-          - sensor.playroom_status
-          - sensor.boys_bedroom_status
-          - sensor.master_bedroom_status
-          - sensor.guest_bedroom_status
+
+      - type: entities
+        title: "Boys' Bedroom"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.boys_bedroom_status
+          - entity: switch.boys_bedroom
+            name: Light
+            icon: mdi:lightbulb
+
+      - type: entities
+        title: "Master Bedroom"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.master_bedroom_status
+          - entity: light.master_bedroom
+            name: Light
+
+      - type: entities
+        title: "Play Room"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.playroom_status
+          - entity: light.play_room
+            name: Light
+
+      - type: entities
+        title: "Guest Bedroom"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.guest_bedroom_status
+          - entity: light.guest_bedroom
+            name: Light
+
 
   - title: "Outside"
     cards:
-      - type: entities
-        title: "Weather"
-        show_header_toggle: false
-        entities:
-
-          - entity: sensor.outside_temp
-            name: "Temperature"
-          - entity: sensor.outside_humidity
-            name: "Humidity"
-            icon: mdi:water-percent
-          - entity: sensor.outside_rain_daily
-            name: "Rain"
-            icon: mdi:water
-
       - type: entities
         title: "Landscape"
         show_header_toggle: false
@@ -223,59 +287,3 @@ views:
             icon: mdi:cup-water
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
-
-      - type: vertical-stack
-        cards:
-          - type: entity-filter
-            card:
-              type: entities
-              title: "Security"
-              show_header_toggle: false
-            state_filter:
-              - "on"
-              - "disarmed"
-              - "armed_home"
-              - "armed_away"
-            show_empty: false
-            entities:
-              - entity: alarm_control_panel.abode_alarm
-              - entity: binary_sensor.front_door
-                icon: mdi:door
-              - entity: binary_sensor.family_room_doors
-                icon: mdi:door
-              - entity: binary_sensor.dining_room_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.living_room_window_left
-                icon: mdi:window-closed
-              - entity: binary_sensor.living_room_window_right
-                icon: mdi:window-closed
-              - entity: binary_sensor.kitchen_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.masons_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.brinks_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.guest_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.master_bedroom_window
-                icon: mdi:window-closed
-              - entity: binary_sensor.master_bedroom_doors
-                icon: mdi:door
-              - entity: binary_sensor.laundry_room_door
-                icon: mdi:door
-              - entity: binary_sensor.jeffs_garage_door
-                icon: mdi:garage
-              - entity: binary_sensor.jillians_garage_door
-                icon: mdi:garage
-              - entity: binary_sensor.guest_garage_door
-                icon: mdi:garage
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: automation.doorbell_notifications
-                name: "Doorbell Pictures"
-              - entity: automation.alarm_say_status
-                name: "Speak Alarm Status"
-              - entity: automation.garage_door_open
-                name: "Garage Notifications"
