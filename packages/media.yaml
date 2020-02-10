@@ -27,7 +27,6 @@ sensor:
 automation:
   - alias: Media - Input acts as remote
     initial_state: True
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.family_room_media

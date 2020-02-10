@@ -1,7 +1,6 @@
 automation:
   - alias: Energy - Reset meter
     initial_state: True
-    hide_entity: True
     trigger:
       platform: time
       at: "00:00:00"

@@ -11,8 +11,17 @@ custom_header:
   header_css: "height: 90px;"
 
 resources:
-  - type: module
-    url: /local/community/custom-header/custom-header.js
+  - url: /local/community/custom-header/custom-header.js
+    type: module
+  - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
+    type: module
+
+styles:
+  divider: &divider_style
+    height: 1px
+    width: 100%
+    margin: 1em auto
+    background: "var(--border-color)"
 
 views:
   - title: "Home"
@@ -23,8 +32,8 @@ views:
         cards:
           - type: markdown
             content: >-
-              Currently {{ states('sensor.outside_temp')|round(0) }}°F
-              {% if states('sensor.outside_rain_daily')|float > 0 %} with {{ states('sensor.outside_rain_daily') }}" of rain{% endif %}.
+              Outside {{ states('sensor.outside_temp')|round(0) }}°F.
+              {% if states('sensor.outside_rain_daily')|float > 0 %}It's rained {{ states('sensor.outside_rain_daily') }}" today. {% endif %}
               {{ states('sensor.outdoor_forecast') }}
 
           - type: picture
@@ -42,7 +51,7 @@ views:
                   entity: script.alarm_disarm_silently
                   name: Let Dog Out
                   icon: mdi:dog-side
-                  icon_height: 2em
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: script.alarm_disarm_silently
@@ -51,7 +60,7 @@ views:
                   entity: scene.good_morning
                   name: Good Morning
                   icon: mdi:brightness-5
-                  icon_height: 2em
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
@@ -68,9 +77,9 @@ views:
               cards:
                 - type: entity-button
                   entity: scene.dinner_time
-                  name: Dinner Lights
-                  icon: mdi:food-variant
-                  icon_height: 2em
+                  name: Dinner
+                  icon: mdi:food-fork-drink
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
@@ -79,9 +88,9 @@ views:
 
                 - type: entity-button
                   entity: scene.movie_time
-                  name: Movie Lights
+                  name: Movie
                   icon: mdi:movie
-                  icon_height: 2em
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
@@ -99,7 +108,7 @@ views:
                   entity: scene.good_night
                   name: Good Night
                   icon: mdi:brightness-2
-                  icon_height: 2em
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
@@ -110,7 +119,7 @@ views:
                   entity: scene.i_m_leaving
                   name: I'm Leaving
                   icon: mdi:exit-run
-                  icon_height: 2em
+                  icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
@@ -170,102 +179,87 @@ views:
                     icon: mdi:garage
 
 
-  - title: "Rooms"
+  - title: "Inside"
     cards:
       - type: entities
-        title: "Kitchen"
+        title: "Family Room"
         show_header_toggle: false
         entities:
+          - type: custom:multiple-entity-row
+            entity: light.family_room
+            icon: mdi:lightbulb
+            toggle: true
+            primary:
+              entity: sensor.family_room_status
+              name: false
           - entity: light.kitchen
-            name: Lights
           - entity: switch.kitchen_cabinets
+            name: Cabinets
             icon: mdi:lightbulb
           - entity: light.island
           - entity: light.pantry
 
       - type: entities
-        title: "Family Room"
-        show_header_toggle: false
-        entities:
-          - entity: sensor.family_room_status
-          - type: picture-entity
-            entity: camera.family_room
-          - entity: light.family_room
-            name: "Lights"
-          - entity: sensor.family_room_media
-            name: "TV"
-            icon: mdi:television
-          - entity: input_select.family_room_media
-            icon: mdi:remote
-
-      - type: conditional
-        conditions:
-          - entity: sensor.family_room_media
-            state: "Speakers"
-        card:
-          type: entities
-          entities:
-            - entity: script.back_yard_speakers_on
-              name: "Play Outside"
-              icon: mdi:speaker
-
-      - type: entities
         title: "Living Room"
         show_header_toggle: false
         entities:
-          - entity: sensor.living_room_status
-          - entity: switch.living_room
-            name: Lights
+          - type: custom:multiple-entity-row
+            entity: switch.living_room
             icon: mdi:lightbulb
+            toggle: true
+            primary:
+              entity: sensor.living_room_status
+              name: false
           - entity: light.dining_room
-
-      - type: entities
-        title: "Entryway"
-        show_header_toggle: false
-        entities:
           - entity: switch.entryway
-            name: Chandelier
             icon: mdi:lightbulb
           - entity: switch.hallway
             icon: mdi:lightbulb
+
+      - type: entities
+        title: "Bedrooms"
+        show_header_toggle: false
+        entities:
+          - type: custom:multiple-entity-row
+            entity: light.master_bedroom
+            name: Master
+            toggle: true
+            primary:
+              entity: sensor.master_bedroom_status
+              name: false
+          - type: custom:multiple-entity-row
+            entity: switch.boys_bedroom
+            name: Boys'
+            icon: mdi:lightbulb
+            toggle: true
+            primary:
+              entity: sensor.boys_bedroom_status
+              name: false
+          - type: custom:multiple-entity-row
+            entity: light.play_room
+            name: Playroom
+            toggle: true
+            primary:
+              entity: sensor.playroom_status
+              name: false
+          - type: custom:multiple-entity-row
+            entity: light.guest_bedroom
+            name: Guest
+            toggle: true
+            primary:
+              entity: sensor.guest_bedroom_status
+              name: false
+
+      - type: entities
+        title: House
+        show_header_toggle: false
+        entities:
           - entity: sensor.climate_mode
+            icon: mdi:radiator
             name: "HVAC"
           - entity: switch.house_fan_switch
             icon: mdi:fan
-
-      - type: entities
-        title: "Boys' Bedroom"
-        show_header_toggle: false
-        entities:
-          - entity: sensor.boys_bedroom_status
-          - entity: switch.boys_bedroom
-            name: Light
-            icon: mdi:lightbulb
-
-      - type: entities
-        title: "Master Bedroom"
-        show_header_toggle: false
-        entities:
-          - entity: sensor.master_bedroom_status
-          - entity: light.master_bedroom
-            name: Light
-
-      - type: entities
-        title: "Play Room"
-        show_header_toggle: false
-        entities:
-          - entity: sensor.playroom_status
-          - entity: light.play_room
-            name: Light
-
-      - type: entities
-        title: "Guest Bedroom"
-        show_header_toggle: false
-        entities:
-          - entity: sensor.guest_bedroom_status
-          - entity: light.guest_bedroom
-            name: Light
-
+            name: Fan
 
   - title: "Outside"
     cards:
@@ -285,5 +279,10 @@ views:
             icon: mdi:pool
           - entity: switch.fountain
             icon: mdi:cup-water
+          - type: divider
+            style: *divider_style
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
+          - entity: script.back_yard_speakers_on
+            name: "Play Outside"
+            icon: mdi:speaker

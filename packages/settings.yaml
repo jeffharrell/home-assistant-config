@@ -23,7 +23,6 @@ input_select:
 automation:
   - alias: Settings - Delay lights off
     initial_state: True
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.delay_timer

@@ -84,7 +84,6 @@ automation:
 
   - alias: Alarm - Alert lighting
     initial_state: True
-    hide_entity: True
     trigger:
       platform: event
       event_type: abode_alarm
@@ -114,7 +113,6 @@ automation:
 
   - alias: Alarm - Alert Pics
     initial_state: True
-    hide_entity: True
     trigger:
       platform: event
       event_type: abode_alarm
@@ -154,7 +152,6 @@ automation:
 
   - alias: Alarm - Fault
     initial_state: True
-    hide_entity: True
     trigger:
       - platform: event
         event_type: abode_panel_fault

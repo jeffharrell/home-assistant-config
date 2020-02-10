@@ -1,7 +1,6 @@
 automation:
   - alias: System - Theme change
     initial_state: True
-    hide_entity: True
     trigger:
       - platform: homeassistant
         event: start
