@@ -117,7 +117,7 @@ views:
 
                 - type: entity-button
                   entity: scene.i_m_leaving
-                  name: I'm Leaving
+                  name: Away
                   icon: mdi:exit-run
                   icon_height: 1.5em
                   tap_action:
@@ -183,6 +183,7 @@ views:
     cards:
       - type: entities
         title: "Family Room"
+        state_color: true
         show_header_toggle: false
         entities:
           - type: custom:multiple-entity-row
@@ -201,6 +202,7 @@ views:
 
       - type: entities
         title: "Living Room"
+        state_color: true
         show_header_toggle: false
         entities:
           - type: custom:multiple-entity-row
@@ -218,6 +220,7 @@ views:
 
       - type: entities
         title: "Bedrooms"
+        state_color: true
         show_header_toggle: false
         entities:
           - type: custom:multiple-entity-row
@@ -229,7 +232,7 @@ views:
               name: false
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
-            name: Boys'
+            name: Kids
             icon: mdi:lightbulb
             toggle: true
             primary:
@@ -252,6 +255,7 @@ views:
 
       - type: entities
         title: House
+        state_color: true
         show_header_toggle: false
         entities:
           - entity: sensor.climate_mode
@@ -264,7 +268,24 @@ views:
   - title: "Outside"
     cards:
       - type: entities
+        title: "Weather"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - entity: sensor.outside_temp
+            name: Temperature
+          - entity: sensor.outside_humidity
+            name: Humidity
+            icon: mdi:water-percent
+          - entity: sensor.outside_uv
+            name: UV
+            icon: mdi:weather-sunny
+          - entity: sensor.outside_wind_speed
+            name: Wind
+            icon: mdi:weather-windy
+      - type: entities
         title: "Landscape"
+        state_color: false
         show_header_toggle: false
         entities:
           - entity: switch.front_yard_switch

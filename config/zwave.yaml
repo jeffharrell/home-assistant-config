@@ -4,31 +4,31 @@ polling_interval: 30000
 device_config:
   light.family_room:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.island:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.kitchen_1:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.kitchen_2:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.guest_bedroom:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.master_bedroom:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 1
   light.pantry:
     refresh_value: True
-    delay: 5
+    delay: 4
     polling_intensity: 2
   switch.entryway:
     polling_intensity: 2
