@@ -73,3 +73,14 @@ alarm_disarm_silently:
     - service: automation.turn_on
       data:
         entity_id: automation.alarm_say_status
+
+good_morning:
+  sequence:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    - service: scene.turn_on
+      data:
+        entity_id: scene.good_morning

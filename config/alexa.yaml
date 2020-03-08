@@ -17,5 +17,6 @@ smart_home:
       - script.snapshot_door_and_send
       - script.snapshot_cameras_and_send
       - script.alarm_disarm_silently
+      - script.good_morning
       - script.house_fan_on
       - script.house_fan_off

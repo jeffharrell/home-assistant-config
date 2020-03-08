@@ -16,13 +16,6 @@ resources:
   - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
 
-styles:
-  divider: &divider_style
-    height: 1px
-    width: 100%
-    margin: 1em auto
-    background: "var(--border-color)"
-
 views:
   - title: "Home"
     cards:
@@ -57,7 +50,7 @@ views:
                     service: script.alarm_disarm_silently
 
                 - type: entity-button
-                  entity: scene.good_morning
+                  entity: script.good_morning
                   name: Good Morning
                   icon: mdi:brightness-5
                   icon_height: 1.5em
@@ -116,7 +109,7 @@ views:
                       entity_id: scene.good_night
 
                 - type: entity-button
-                  entity: scene.i_m_leaving
+                  entity: scene.away
                   name: Away
                   icon: mdi:exit-run
                   icon_height: 1.5em
@@ -124,7 +117,7 @@ views:
                     action: call-service
                     service: scene.turn_on
                     service_data:
-                      entity_id: scene.i_m_leaving
+                      entity_id: scene.away
 
           - type: vertical-stack
             title: "Security"
@@ -296,12 +289,12 @@ views:
             icon: mdi:flower-tulip
           - entity: switch.back_landscape
             icon: mdi:flower-tulip
-          - entity: switch.pool_light
-            icon: mdi:pool
           - entity: switch.fountain
             icon: mdi:cup-water
-          - type: divider
-            style: *divider_style
+          - entity: switch.pool_light
+            icon: mdi:pool
+
+          - type: section
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
           - entity: script.back_yard_speakers_on
