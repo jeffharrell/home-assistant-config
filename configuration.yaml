@@ -12,8 +12,6 @@ frontend: !include config/frontend.yaml
 
 lovelace: !include config/lovelace.yaml
 
-recorder: !include config/recorder.yaml
-
 influxdb: !include config/influxdb.yaml
 
 notify: !include config/notify.yaml
