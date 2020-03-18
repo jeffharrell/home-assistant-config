@@ -4,49 +4,12 @@ remote:
     host: !secret harmony_url
 
 
-input_select:
-  family_room_media:
-    name: Input
-    options:
-      - Select
-      - Power Off
-      - Apple TV
-      - Fire TV
-      - Speakers
-      - Bluetooth
-    initial: Select
-
-
-sensor:
-  - platform: template
-    sensors:
-      family_room_media:
-        value_template: "{{ states.remote.family_room.attributes.current_activity|replace('PowerOff', 'Off') }}"
-
-
-automation:
-  - alias: Media - Input acts as remote
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: input_select.family_room_media
-    action:
-      - service: remote.turn_on
-        data_template:
-          entity_id: remote.family_room
-          activity: >
-            {% if states.input_select.family_room_media.state == "Apple TV" %}
-              21762413
-            {% elif states.input_select.family_room_media.state == "Fire TV" %}
-              35169619
-            {% elif states.input_select.family_room_media.state == "Speakers" %}
-              18890244
-            {% elif states.input_select.family_room_media.state == "Bluetooth" %}
-              22068322
-            {% elif states.input_select.family_room_media.state == "Power Off" %}
-              -1
-            {% endif %}
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.family_room_media
-          option: Select
+alexa_media:
+  accounts:
+    - email: !secret alexa_email
+      password: !secret alexa_password
+      url: "amazon.com"
+      include_devices:
+        - "Family Room Echo"
+        - "Living Room Echo"
+        - "Master Bedroom Echo"
