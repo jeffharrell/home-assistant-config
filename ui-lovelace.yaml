@@ -23,12 +23,6 @@ views:
       - type: vertical-stack
         title: Home
         cards:
-          - type: markdown
-            content: >-
-              Outside {{ states('sensor.outside_temp')|round(0) }}°F.
-              {% if states('sensor.outside_rain_daily')|float > 0 %}It's rained {{ states('sensor.outside_rain_daily') }}" today. {% endif %}
-              {{ states('sensor.outdoor_forecast') }}
-
           - type: picture
             image: /local/photos/house.jpg
 
@@ -38,7 +32,6 @@ views:
                 state: "armed_home"
             card:
               type: horizontal-stack
-              title: Scenes
               cards:
                 - type: entity-button
                   entity: script.alarm_disarm_silently
@@ -56,9 +49,9 @@ views:
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: scene.turn_on
+                    service: script.turn_on
                     service_data:
-                      entity_id: scene.good_morning
+                      entity_id: script.good_morning
 
           - type: conditional
             conditions:
@@ -66,7 +59,6 @@ views:
                 state: "disarmed"
             card:
               type: horizontal-stack
-              title: Scenes
               cards:
                 - type: entity-button
                   entity: scene.dinner_time
@@ -119,17 +111,20 @@ views:
                     service_data:
                       entity_id: scene.away
 
+
           - type: vertical-stack
-            title: "Security"
+            title: "Status"
             cards:
               - type: markdown
                 content: >
+                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {% if states('sensor.outside_rain_daily')|float > 0 %}It's rained {{ states('sensor.outside_rain_daily') }}" today.{% endif %} {{ states('sensor.outdoor_forecast') }}
+
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-                    Alarm is armed home.
+                    <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
-                    Alarm is armed away.
+                    <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% else %}
-                    Alarm is disarmed.
+                    <ha-icon icon="mdi:shield-outline"></ha-icon> Alarm is disarmed
                   {% endif %}
 
               - type: entity-filter
@@ -175,36 +170,32 @@ views:
   - title: "Inside"
     cards:
       - type: entities
-        title: "Family Room"
+        title: "House"
         state_color: true
         show_header_toggle: false
         entities:
           - type: custom:multiple-entity-row
-            entity: light.family_room
-            icon: mdi:lightbulb
-            toggle: true
-            primary:
-              entity: sensor.family_room_status
-              name: false
+            entity: climate.home
+            name: Climate
+            show_state: false
+            entities:
+              - attribute: current_temperature
+                name: Temperature
+                unit: '°F'
+              - entity: climate.home
+                name: Mode
+          - entity: switch.house_fan_switch
+            icon: mdi:fan
+            name: Fan
+          - type: section
+          - entity: light.family_room
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
             name: Cabinets
             icon: mdi:lightbulb
           - entity: light.island
-          - entity: light.pantry
-
-      - type: entities
-        title: "Living Room"
-        state_color: true
-        show_header_toggle: false
-        entities:
-          - type: custom:multiple-entity-row
-            entity: switch.living_room
+          - entity: switch.living_room
             icon: mdi:lightbulb
-            toggle: true
-            primary:
-              entity: sensor.living_room_status
-              name: false
           - entity: light.dining_room
           - entity: switch.entryway
             icon: mdi:lightbulb
@@ -220,43 +211,32 @@ views:
             entity: light.master_bedroom
             name: Master
             toggle: true
-            primary:
-              entity: sensor.master_bedroom_status
-              name: false
+            entities:
+              - entity: sensor.master_bedroom_status
+                name: false
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
             name: Kids
             icon: mdi:lightbulb
             toggle: true
-            primary:
-              entity: sensor.boys_bedroom_status
-              name: false
+            entities:
+              - entity: sensor.boys_bedroom_status
+                name: false
           - type: custom:multiple-entity-row
             entity: light.play_room
             name: Playroom
             toggle: true
-            primary:
-              entity: sensor.playroom_status
-              name: false
+            entities:
+              - entity: sensor.playroom_status
+                name: false
           - type: custom:multiple-entity-row
             entity: light.guest_bedroom
             name: Guest
             toggle: true
-            primary:
-              entity: sensor.guest_bedroom_status
-              name: false
+            entities:
+              - entity: sensor.guest_bedroom_status
+                name: false
 
-      - type: entities
-        title: House
-        state_color: true
-        show_header_toggle: false
-        entities:
-          - entity: sensor.climate_mode
-            icon: mdi:radiator
-            name: "HVAC"
-          - entity: switch.house_fan_switch
-            icon: mdi:fan
-            name: Fan
 
   - title: "Outside"
     cards:
@@ -289,14 +269,15 @@ views:
             icon: mdi:flower-tulip
           - entity: switch.back_landscape
             icon: mdi:flower-tulip
-          - entity: switch.fountain
-            icon: mdi:cup-water
           - entity: switch.pool_light
             icon: mdi:pool
+          - entity: switch.fountain
+            icon: mdi:cup-water
 
           - type: section
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
+            icon: mdi:timer
           - entity: script.back_yard_speakers_on
             name: "Play Outside"
             icon: mdi:speaker

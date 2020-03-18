@@ -7,7 +7,7 @@ automation:
     action:
       service: frontend.set_theme
       data_template:
-        name: clear
+        name: home
 
   - alias: System - Low battery check
     initial_state: True

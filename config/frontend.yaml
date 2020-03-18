@@ -1,5 +1,5 @@
 themes:
-  clear:
+  home:
     # Colors
     text-color: '#555'
     text-medium-color: '#666'

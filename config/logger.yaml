@@ -1,0 +1,12 @@
+default: warning
+logs:
+  homeassistant.setup: error
+  homeassistant.loader: error
+  homeassistant.helpers.entity: error
+  homeassistant.components.switch: error
+  homeassistant.components.sensor: error
+  homeassistant.components.scrape.sensor: error
+  homeassistant.components.binary_sensor: error
+  homeassistant.components.abode.config_flow: error
+  skybellpy: error
+  pyecobee: error

@@ -1,18 +1,16 @@
 config:
 
-logger:
-  default: error
-
-lovelace:
-  mode: yaml
-
 api:
+
+logger: !include config/logger.yaml
 
 alexa: !include config/alexa.yaml
 
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
+
+lovelace: !include config/lovelace.yaml
 
 history: !include config/history.yaml
 
