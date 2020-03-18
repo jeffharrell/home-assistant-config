@@ -117,8 +117,12 @@ views:
             cards:
               - type: markdown
                 content: >
-                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {% if states('sensor.outside_rain_daily')|float > 0 %}It's rained {{ states('sensor.outside_rain_daily') }}" today.{% endif %} {{ states('sensor.outdoor_forecast') }}
+                  <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {{ states('sensor.outdoor_forecast') }}
 
+                  {% if states('sensor.outside_rain_daily')|float > 0 %}
+                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
+
+                  {% endif %}
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
