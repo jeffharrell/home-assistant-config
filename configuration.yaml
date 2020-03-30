@@ -42,7 +42,6 @@ homeassistant:
     security: !include packages/security.yaml
     settings: !include packages/settings.yaml
     system: !include packages/system.yaml
-    tts: !include packages/tts.yaml
     weather: !include packages/weather.yaml
   whitelist_external_dirs:
     - /tmp

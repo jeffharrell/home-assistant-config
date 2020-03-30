@@ -80,7 +80,7 @@ good_morning:
       data:
         entity_id: alarm_control_panel.abode_alarm
     - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+      value_template: '{{ state_attr("sun.sun", "elevation") < -1 }}'
     - service: scene.turn_on
       data:
         entity_id: scene.good_morning

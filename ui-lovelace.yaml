@@ -120,7 +120,7 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_rain_daily')|float > 0 %}
-                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
+                    <ha-icon icon="mdi:umbrella-outline"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
 
                   {% endif %}
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
@@ -209,7 +209,7 @@ views:
       - type: entities
         title: "Bedrooms"
         state_color: true
-        show_header_toggle: false
+        show_header_toggle: true
         entities:
           - type: custom:multiple-entity-row
             entity: light.master_bedroom
