@@ -22,6 +22,7 @@ group:
         - light.guest_bedroom
         - light.play_room
         - light.master_bedroom
+        - switch.back_yard_switch
 
 
 automation:
@@ -71,3 +72,18 @@ automation:
             - media_player.living_room_echo
             - media_player.family_room_echo
           message: "Welcome home. I turned the lights on for you."
+
+  - alias: Lights - Turn off after sunrise
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: '+01:00:00'
+    condition:
+      condition: state
+      entity_id: group.lights
+      state: "on"
+    action:
+      - service: homeassistant.turn_off
+        entity_id:
+          - group.lights

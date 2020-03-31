@@ -10,6 +10,7 @@ __pycache__
 .HA_VERSION
 .storage
 .uuid
+.pip_progress
 *.txt
 *.pickle
 *.conf
