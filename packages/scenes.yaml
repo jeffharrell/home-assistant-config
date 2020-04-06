@@ -38,9 +38,7 @@ scene:
       light.island:
         state: on
         brightness: 127
-      light.dining_room:
-        state: on
-        brightness: 90
+      light.dining_room: off
       light.family_room: off
       light.kitchen_1: off
       light.kitchen_2: off

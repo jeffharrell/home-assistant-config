@@ -1,8 +1,3 @@
-abode:
-  username: !secret abode_user
-  password: !secret abode_pass
-
-
 camera:
   - platform: synology
     url: !secret synology_url

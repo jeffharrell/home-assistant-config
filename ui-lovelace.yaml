@@ -1,20 +1,19 @@
 title: Home
 
 custom_header:
-  compact_mode: true
   menu_dropdown: true
   hide_help: true
   hide_unused: true
   hide_config: true
-  footer_mode: true
   tab_indicator_color: transparent
-  header_css: "height: 90px;"
+  exceptions:
+    - conditions:
+        user_agent: Mobile
+      config:
+        compact_mode: true
+        footer_mode: true
+        header_css: "height: 90px;"
 
-resources:
-  - url: /local/community/custom-header/custom-header.js
-    type: module
-  - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
-    type: module
 
 views:
   - title: "Home"
@@ -120,15 +119,13 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_rain_daily')|float > 0 %}
-                    <ha-icon icon="mdi:umbrella-outline"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
+                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
 
                   {% endif %}
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
-                  {% else %}
-                    <ha-icon icon="mdi:shield-outline"></ha-icon> Alarm is disarmed
                   {% endif %}
 
               - type: entity-filter
@@ -176,22 +173,8 @@ views:
       - type: entities
         title: "House"
         state_color: true
-        show_header_toggle: false
+        show_header_toggle: true
         entities:
-          - type: custom:multiple-entity-row
-            entity: climate.home
-            name: Climate
-            show_state: false
-            entities:
-              - attribute: current_temperature
-                name: Temperature
-                unit: '°F'
-              - entity: climate.home
-                name: Mode
-          - entity: switch.house_fan_switch
-            icon: mdi:fan
-            name: Fan
-          - type: section
           - entity: light.family_room
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
@@ -205,6 +188,21 @@ views:
             icon: mdi:lightbulb
           - entity: switch.hallway
             icon: mdi:lightbulb
+          - type: section
+          - type: custom:multiple-entity-row
+            entity: climate.home
+            name: Climate
+            show_state: false
+            state_color: false
+            entities:
+              - attribute: current_temperature
+                name: Temperature
+                unit: '°F'
+              - entity: climate.home
+                name: Mode
+          - entity: switch.house_fan_switch
+            icon: mdi:fan
+            name: Fan
 
       - type: entities
         title: "Bedrooms"

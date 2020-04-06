@@ -78,12 +78,12 @@ automation:
     trigger:
       platform: sun
       event: sunrise
-      offset: '+01:00:00'
     condition:
       condition: state
       entity_id: group.lights
       state: "on"
     action:
+      - delay: "{% if states('sensor.outdoor_forecast')|regex_match('rain|cloud', ignorecase=True) %}02:00:00{% else %}01:00:00{% endif %}"
       - service: homeassistant.turn_off
         entity_id:
           - group.lights

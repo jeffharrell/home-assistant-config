@@ -64,7 +64,7 @@ sensor:
           {%- elif "fog" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-fog
           {%- elif "rain" in states.sensor.dark_sky_hourly_summary.state|lower -%}
-            mdi:weather-rainy
+            mdi:umbrella-outline
           {%- elif "wind" in states.sensor.dark_sky_hourly_summary.state|lower -%}
             mdi:weather-windy
           {%- else -%}
