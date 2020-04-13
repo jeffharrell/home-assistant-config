@@ -5,10 +5,10 @@ custom_header:
   hide_help: true
   hide_unused: true
   hide_config: true
-  tab_indicator_color: transparent
+  tab_indicator_color: "transparent"
   exceptions:
     - conditions:
-        user_agent: Mobile
+        user_agent: "Mobile"
       config:
         compact_mode: true
         footer_mode: true
@@ -20,7 +20,7 @@ views:
     cards:
 
       - type: vertical-stack
-        title: Home
+        title: "Home"
         cards:
           - type: picture
             image: /local/photos/house.jpg
@@ -34,7 +34,7 @@ views:
               cards:
                 - type: entity-button
                   entity: script.alarm_disarm_silently
-                  name: Let Dog Out
+                  name: "Let Dog Out"
                   icon: mdi:dog-side
                   icon_height: 1.5em
                   tap_action:
@@ -43,7 +43,7 @@ views:
 
                 - type: entity-button
                   entity: script.good_morning
-                  name: Good Morning
+                  name: "Good Morning"
                   icon: mdi:brightness-5
                   icon_height: 1.5em
                   tap_action:
@@ -61,7 +61,7 @@ views:
               cards:
                 - type: entity-button
                   entity: scene.dinner_time
-                  name: Dinner
+                  name: "Dinner"
                   icon: mdi:food-fork-drink
                   icon_height: 1.5em
                   tap_action:
@@ -72,7 +72,7 @@ views:
 
                 - type: entity-button
                   entity: scene.movie_time
-                  name: Movie
+                  name: "Movie"
                   icon: mdi:movie
                   icon_height: 1.5em
                   tap_action:
@@ -90,7 +90,7 @@ views:
               cards:
                 - type: entity-button
                   entity: scene.good_night
-                  name: Good Night
+                  name: "Good Night"
                   icon: mdi:brightness-2
                   icon_height: 1.5em
                   tap_action:
@@ -101,7 +101,7 @@ views:
 
                 - type: entity-button
                   entity: scene.away
-                  name: Away
+                  name: "Away"
                   icon: mdi:exit-run
                   icon_height: 1.5em
                   tap_action:
@@ -119,7 +119,7 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0) }}°F. {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_rain_daily')|float > 0 %}
-                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It has rained {{ states('sensor.outside_rain_daily') }}" today
+                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
 
                   {% endif %}
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
@@ -171,14 +171,14 @@ views:
   - title: "Inside"
     cards:
       - type: entities
-        title: "House"
+        title: "Lights"
         state_color: true
         show_header_toggle: true
         entities:
           - entity: light.family_room
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
-            name: Cabinets
+            name: "Cabinets"
             icon: mdi:lightbulb
           - entity: light.island
           - entity: switch.living_room
@@ -188,37 +188,14 @@ views:
             icon: mdi:lightbulb
           - entity: switch.hallway
             icon: mdi:lightbulb
-          - type: section
-          - type: custom:multiple-entity-row
-            entity: climate.home
-            name: Climate
-            show_state: false
-            state_color: false
-            entities:
-              - attribute: current_temperature
-                name: Temperature
-                unit: '°F'
-              - entity: climate.home
-                name: Mode
-          - entity: switch.house_fan_switch
-            icon: mdi:fan
-            name: Fan
-
-      - type: entities
-        title: "Bedrooms"
-        state_color: true
-        show_header_toggle: true
-        entities:
           - type: custom:multiple-entity-row
             entity: light.master_bedroom
-            name: Master
             toggle: true
             entities:
               - entity: sensor.master_bedroom_status
                 name: false
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
-            name: Kids
             icon: mdi:lightbulb
             toggle: true
             entities:
@@ -226,19 +203,47 @@ views:
                 name: false
           - type: custom:multiple-entity-row
             entity: light.play_room
-            name: Playroom
             toggle: true
             entities:
               - entity: sensor.playroom_status
                 name: false
           - type: custom:multiple-entity-row
             entity: light.guest_bedroom
-            name: Guest
             toggle: true
             entities:
               - entity: sensor.guest_bedroom_status
                 name: false
 
+      - type: entities
+        title: "Climate"
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - type: custom:multiple-entity-row
+            entity: climate.home
+            name: "Climate"
+            show_state: false
+            state_color: false
+            entities:
+              - attribute: current_temperature
+                name: "Temperature"
+                unit: "°F"
+              - entity: climate.home
+                name: "Mode"
+          - entity: switch.house_fan_switch
+            icon: mdi:fan
+            name: "Fan"
+
+      - type: entities
+        title: "Media"
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.family_room_media
+            icon: mdi:television
+            name: "Family Room"
+          - entity: input_select.family_room_media
+            name: "Input"
 
   - title: "Outside"
     cards:
@@ -248,15 +253,15 @@ views:
         show_header_toggle: false
         entities:
           - entity: sensor.outside_temp
-            name: Temperature
+            name: "Temperature"
           - entity: sensor.outside_humidity
-            name: Humidity
+            name: "Humidity"
             icon: mdi:water-percent
           - entity: sensor.outside_uv
-            name: UV
+            name: "UV"
             icon: mdi:weather-sunny
           - entity: sensor.outside_wind_speed
-            name: Wind
+            name: "Wind"
             icon: mdi:weather-windy
       - type: entities
         title: "Landscape"

@@ -1,4 +1,4 @@
-back_yard_speakers_on:
+media_audio_backyard_zone_on:
   sequence:
     - service: remote.send_command
       data:
@@ -6,14 +6,21 @@ back_yard_speakers_on:
         device: 34171929
         command: "Party"
 
-house_fan_on:
+media_audio_backyard_zone_off:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.family_room
+        activity: -1
+
+hvac_windows_open:
   sequence:
     - service: climate.set_preset_mode
       data:
         entity_id: climate.home
         preset_mode: "smart1"
 
-house_fan_off:
+hvac_windows_closed:
   sequence:
     - service: ecobee.resume_program
       data:

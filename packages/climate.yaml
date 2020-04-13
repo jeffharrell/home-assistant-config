@@ -71,7 +71,26 @@ automation:
     action:
       service_template: >
         {%- if trigger and trigger.to_state.state == "on" -%}
-          script.house_fan_on
+          script.hvac_windows_open
         {%- else -%}
-          script.house_fan_off
+          script.hvac_windows_closed
         {%- endif -%}
+        
+  - alias: Climate - Windows Open
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: group.windows
+        to: "on"
+        for: "00:05:00"
+      - platform: state
+        entity_id: group.windows
+        to: "off"
+    action:
+      service_template: >
+        {%- if trigger and trigger.to_state.state == "on" -%}
+          script.hvac_windows_open
+        {%- else -%}
+          script.hvac_windows_closed
+        {%- endif -%}
+    

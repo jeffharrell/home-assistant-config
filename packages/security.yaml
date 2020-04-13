@@ -12,27 +12,36 @@ homeassistant:
 
 
 group:
-  security:
+  doors:
     entities:
-      - binary_sensor.front_door
       - binary_sensor.family_room_doors
+      - binary_sensor.master_bedroom_doors
+      - binary_sensor.laundry_room_door
+  windows:
+    entities:
       - binary_sensor.dining_room_window
       - binary_sensor.living_room_window_left
       - binary_sensor.living_room_window_right
       - binary_sensor.kitchen_window
-      - binary_sensor.masons_window
-      - binary_sensor.brinks_window
+      - binary_sensor.boys_window
+      - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
-      - binary_sensor.master_bedroom_doors
-      - binary_sensor.laundry_room_door
+  entrances:
+    entities:
+      - binary_sensor.front_door
       - binary_sensor.jeffs_garage_door
       - binary_sensor.jillians_garage_door
       - binary_sensor.guest_garage_door
+  security:
+    entities:
+      - group.doors
+      - group.windows
+      - group.entrances
 
 
 automation:
-  - alias: Alarm - Say status
+  - alias: Security - Say status
     initial_state: True
     trigger:
       - platform: state
@@ -44,8 +53,8 @@ automation:
             type: tts
           target: media_player.master_bedroom_echo
           message: >
-            {% set status = states.alarm_control_panel.abode_alarm.state %}
-            {% set isOpened = states.group.security.state %}
+            {% set status = states("alarm_control_panel.abode_alarm") %}
+            
             {%- if status == "armed_home" -%}
               Alarm armed... Home
             {%- elif status == "armed_away" -%}
@@ -53,17 +62,17 @@ automation:
             {%- elif status == "disarmed" -%}
               Alarm Off
             {%- endif -%}
-            {%- if isOpened == "on" and status != "disarmed" -%}
+            
+            {%- if is_state("group.security", "on") and status != "disarmed" -%}
               ... Warning... The following are open:
-              {%- for entity_id in states.group.security.attributes.entity_id -%}
-                {% set parts = entity_id.split('.') %}
-                {%- if states(entity_id) == 'on' -%}
-                  ... {{ states[parts[0]][parts[1]].name }}
+              {% for entity in expand("group.security") %}
+                {%- if entity.state == "on" -%}
+                  ... {{ entity.name }}
                 {%- endif -%}
-              {%- endfor -%}
+              {% endfor %}
             {%- endif -%}
 
-  - alias: Alarm - Turn house off
+  - alias: Security - Turn house off
     initial_state: True
     trigger:
       platform: state
@@ -76,7 +85,7 @@ automation:
           - switch.house_fan_switch
           - remote.family_room
 
-  - alias: Alarm - Alert lighting
+  - alias: Security - Alert lighting
     initial_state: True
     trigger:
       platform: event
@@ -105,7 +114,7 @@ automation:
         data:
           brightness: 255
 
-  - alias: Alarm - Alert Pics
+  - alias: Security - Alert Pics
     initial_state: True
     trigger:
       platform: event
@@ -129,7 +138,7 @@ automation:
           variables:
             message: "Alarm (3/3)"
 
-  - alias: Alarm - Reminder
+  - alias: Security - Reminder
     initial_state: True
     trigger:
       - platform: template
@@ -144,7 +153,7 @@ automation:
           title: Home Assistant
           message: "Are you away? The alarm is not armed."
 
-  - alias: Alarm - Fault
+  - alias: Security - Fault
     initial_state: True
     trigger:
       - platform: event
@@ -157,7 +166,7 @@ automation:
           title: Home Assistant
           message: "Alarm {{ trigger.event.data.event_name }}"
 
-  - alias: Doorbell - Notifications
+  - alias: Security - Doorbell Notifications
     initial_state: True
     trigger:
       platform: state
@@ -167,7 +176,7 @@ automation:
       service: script.turn_on
       entity_id: script.snapshot_door_and_send
 
-  - alias: Garage - Door open
+  - alias: Security - Door open
     initial_state: True
     trigger:
       platform: state
@@ -183,3 +192,4 @@ automation:
         data_template:
           title: Home Assistant
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
+  
