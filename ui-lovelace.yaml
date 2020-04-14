@@ -148,9 +148,9 @@ views:
                     icon: mdi:window-closed
                   - entity: binary_sensor.kitchen_window
                     icon: mdi:window-closed
-                  - entity: binary_sensor.masons_window
+                  - entity: binary_sensor.boys_window
                     icon: mdi:window-closed
-                  - entity: binary_sensor.brinks_window
+                  - entity: binary_sensor.playroom_window
                     icon: mdi:window-closed
                   - entity: binary_sensor.guest_window
                     icon: mdi:window-closed

@@ -7,22 +7,22 @@ light:
 
 
 group:
-    lights:
-      entities:
-        - light.family_room
-        - light.island
-        - light.Kitchen
-        - switch.kitchen_cabinets
-        - light.pantry
-        - light.dining_room
-        - switch.living_room
-        - switch.entryway
-        - switch.hallway
-        - switch.boys_bedroom
-        - light.guest_bedroom
-        - light.play_room
-        - light.master_bedroom
-        - switch.back_yard_switch
+  lights:
+    entities:
+      - light.family_room
+      - light.island
+      - light.Kitchen
+      - light.pantry
+      - light.dining_room
+      - light.guest_bedroom
+      - light.play_room
+      - light.master_bedroom
+      - switch.kitchen_cabinets
+      - switch.living_room
+      - switch.entryway
+      - switch.hallway
+      - switch.boys_bedroom
+      - switch.back_yard_switch
 
 
 automation:

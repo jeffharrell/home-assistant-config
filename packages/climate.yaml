@@ -63,29 +63,27 @@ sensor:
 
 
 automation:
-  - alias: Climate - House Fan On/Off
+  - alias: Climate - House Fan On
     initial_state: True
     trigger:
       platform: state
       entity_id: switch.house_fan_switch
+      to: "on"
+      from: "off"
     action:
-      service_template: >
-        {%- if trigger and trigger.to_state.state == "on" -%}
-          script.hvac_windows_open
-        {%- else -%}
-          script.hvac_windows_closed
-        {%- endif -%}
-        
+      service: script.hvac_windows_open
+
   - alias: Climate - Windows Open
     initial_state: True
     trigger:
       - platform: state
-        entity_id: group.windows
+        entity_id: group.doors_and_windows
         to: "on"
         for: "00:05:00"
       - platform: state
-        entity_id: group.windows
+        entity_id: group.doors_and_windows
         to: "off"
+        from: "on"
     action:
       service_template: >
         {%- if trigger and trigger.to_state.state == "on" -%}
