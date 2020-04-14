@@ -34,12 +34,13 @@ automation:
         event: sunset
       # off
       - platform: time
-        at: "23:03:00"
+        at: "22:00:00"
     condition:
       condition: state
       entity_id: alarm_control_panel.abode_alarm
       state: "armed_away"
     action:
+      - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
         entity_id: switch.living_room
