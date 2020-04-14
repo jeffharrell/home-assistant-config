@@ -5,3 +5,5 @@ resources:
     type: module
   - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
+  - url: /local/community/lovelace-auto-entities/auto-entities.js
+    type: module

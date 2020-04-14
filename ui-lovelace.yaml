@@ -128,45 +128,16 @@ views:
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
 
-              - type: entity-filter
+              - type: 'custom:auto-entities'
                 card:
                   type: entities
                   show_header_toggle: false
-                state_filter:
-                  - "on"
-                show_empty: false
-                entities:
-                  - entity: binary_sensor.front_door
-                    icon: mdi:door
-                  - entity: binary_sensor.family_room_doors
-                    icon: mdi:door
-                  - entity: binary_sensor.dining_room_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.living_room_window_left
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.living_room_window_right
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.kitchen_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.boys_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.playroom_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.guest_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.master_bedroom_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.master_bedroom_doors
-                    icon: mdi:door
-                  - entity: binary_sensor.laundry_room_door
-                    icon: mdi:door
-                  - entity: binary_sensor.jeffs_garage_door
-                    icon: mdi:garage
-                  - entity: binary_sensor.jillians_garage_door
-                    icon: mdi:garage
-                  - entity: binary_sensor.guest_garage_door
-                    icon: mdi:garage
-
+                filter:
+                  include:
+                    - group: group.doors_and_windows
+                    - group: group.entrances
+                  exclude:
+                    - state: "off"
 
   - title: "Inside"
     cards:
