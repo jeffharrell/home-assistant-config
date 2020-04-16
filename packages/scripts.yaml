@@ -1,18 +1,3 @@
-media_audio_backyard_zone_on:
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.family_room
-        device: 34171929
-        command: "Party"
-
-media_audio_backyard_zone_off:
-  sequence:
-    - service: remote.turn_on
-      data:
-        entity_id: remote.family_room
-        activity: -1
-
 hvac_windows_open:
   sequence:
     - service: climate.set_preset_mode

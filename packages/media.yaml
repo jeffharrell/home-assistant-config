@@ -19,13 +19,14 @@ input_select:
   family_room_media:
     name: "Input"
     options:
-      - "Select"
+      - "Select One"
       - "Power Off"
       - "Apple TV"
       - "Fire TV"
       - "Speakers"
+      - "Speakers Outside"
       - "Bluetooth"
-    initial: "Select"
+    initial: "Select One"
 
 
 sensor:
@@ -52,6 +53,8 @@ automation:
               35169619
             {% elif is_state("input_select.family_room_media", "Speakers") %}
               18890244
+            {% elif is_state("input_select.family_room_media", "Speakers Outside") %}
+              44120137
             {% elif is_state("input_select.family_room_media", "Bluetooth") %}
               22068322
             {% elif is_state("input_select.family_room_media", "Power Off") %}
@@ -60,4 +63,4 @@ automation:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.family_room_media
-          option: "Select"
+          option: "Select One"
