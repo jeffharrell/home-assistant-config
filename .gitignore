@@ -4,7 +4,7 @@ home-assistant.sublime-workspace
 deps/
 src/
 www/community/
-custom_components/hacs/
+custom_components/
 __pycache__
 .DS_Store
 .HA_VERSION
