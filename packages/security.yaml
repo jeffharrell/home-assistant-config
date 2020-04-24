@@ -62,11 +62,11 @@ automation:
             
             {%- if is_state("group.security", "on") and status != "disarmed" -%}
               ... Warning... The following are open:
-              {% for entity in expand("group.security") %}
+              {%- for entity in expand("group.security") -%}
                 {%- if entity.state == "on" -%}
                   ... {{ entity.name }}
                 {%- endif -%}
-              {% endfor %}
+              {%- endfor -%}
             {%- endif -%}
 
   - alias: Security - Turn house off
