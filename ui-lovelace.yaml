@@ -138,6 +138,7 @@ views:
                     - group: group.entrances
                   exclude:
                     - state: "off"
+                show_empty: false
 
   - title: "Inside"
     cards:
@@ -186,6 +187,17 @@ views:
                 name: false
 
       - type: entities
+        title: "Media"
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.family_room_media
+            icon: mdi:television
+            name: "Family Room"
+          - entity: input_select.family_room_media
+            name: "Input"
+
+      - type: entities
         title: "Climate"
         state_color: true
         show_header_toggle: false
@@ -205,17 +217,6 @@ views:
             icon: mdi:fan
             name: "Fan"
 
-      - type: entities
-        title: "Media"
-        state_color: true
-        show_header_toggle: false
-        entities:
-          - entity: sensor.family_room_media
-            icon: mdi:television
-            name: "Family Room"
-          - entity: input_select.family_room_media
-            name: "Input"
-            
   - title: "Outside"
     cards:
       - type: entities
