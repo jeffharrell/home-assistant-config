@@ -1,9 +1,9 @@
 mode: yaml
 
 resources:
-  - url: /local/community/custom-header/custom-header.js
+  - url:  /hacsfiles/custom-header/custom-header.js
     type: module
-  - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
+  - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
-  - url: /local/community/lovelace-auto-entities/auto-entities.js
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module

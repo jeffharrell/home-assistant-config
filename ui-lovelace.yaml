@@ -174,7 +174,7 @@ views:
               - entity: sensor.boys_bedroom_status
                 name: false
           - type: custom:multiple-entity-row
-            entity: light.play_room
+            entity: light.zipato_bulb
             toggle: true
             entities:
               - entity: sensor.playroom_status

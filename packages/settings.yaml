@@ -9,7 +9,6 @@ switch:
       - do_not_disturb
 
 
-
 automation:
   - alias: Settings - Reset at midnight
     initial_state: True

@@ -135,21 +135,6 @@ automation:
           variables:
             message: "Alarm (3/3)"
 
-  - alias: Security - Reminder
-    initial_state: True
-    trigger:
-      - platform: template
-        value_template: "{{ is_state_attr('climate.home', 'away_mode', 'on') }}"
-      - platform: template
-        value_template: "{{ is_state_attr('climate.home', 'hold_mode', 'away') }}"
-    action:
-      - condition: template
-        value_template: "{{ states('alarm_control_panel.abode_alarm') != 'armed_away' }}"
-      - service: notify.jeff_and_jillians_phone
-        data:
-          title: Home Assistant
-          message: "Are you away? The alarm is not armed."
-
   - alias: Security - Fault
     initial_state: True
     trigger:
