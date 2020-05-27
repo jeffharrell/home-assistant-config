@@ -219,22 +219,17 @@ views:
 
   - title: "Outside"
     cards:
-      - type: entities
+      - type: glance
         title: "Weather"
-        state_color: false
-        show_header_toggle: false
+        show_name: false
         entities:
           - entity: sensor.outside_temp
-            name: "Temperature"
           - entity: sensor.outside_humidity
-            name: "Humidity"
             icon: mdi:water-percent
-          - entity: sensor.outside_uv
-            name: "UV"
-            icon: mdi:weather-sunny
           - entity: sensor.outside_wind_speed
-            name: "Wind"
             icon: mdi:weather-windy
+          - entity: sensor.outside_uv
+            icon: mdi:weather-sunny
       - type: entities
         title: "Landscape"
         state_color: false
