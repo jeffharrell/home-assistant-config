@@ -1,16 +1,3 @@
-camera:
-  - platform: synology
-    url: !secret synology_url
-    username: !secret synology_user
-    password: !secret synology_pass
-
-
-homeassistant:
-    customize_glob:
-      "binary_sensor.*_garage_door":
-        device_class: opening
-
-
 group:
   doors_and_windows:
     entities:
@@ -37,6 +24,19 @@ group:
       - group.entrances
 
 
+homeassistant:
+    customize_glob:
+      "binary_sensor.*_garage_door":
+        device_class: opening
+
+
+camera:
+  - platform: synology
+    url: !secret synology_url
+    username: !secret synology_user
+    password: !secret synology_pass
+
+
 automation:
   - alias: Security - Say status
     initial_state: True
@@ -51,7 +51,7 @@ automation:
           target: media_player.master_bedroom_echo
           message: >
             {% set status = states("alarm_control_panel.abode_alarm") %}
-            
+
             {%- if status == "armed_home" -%}
               Alarm armed... Home
             {%- elif status == "armed_away" -%}
@@ -59,7 +59,7 @@ automation:
             {%- elif status == "disarmed" -%}
               Alarm Off
             {%- endif -%}
-            
+
             {%- if is_state("group.security", "on") and status != "disarmed" -%}
               ... Warning... The following are open:
               {%- for entity in expand("group.security") -%}
@@ -174,4 +174,52 @@ automation:
         data_template:
           title: Home Assistant
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
-  
+
+
+script:
+  snapshot_door_and_send:
+    sequence:
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.front_door
+          filename: /tmp/{{ entity_id.entity_id }}.png
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Home Assistant
+          message: Doorbell
+          data:
+            images:
+              - /tmp/camera.front_door.png
+
+  snapshot_cameras_and_send:
+    sequence:
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.front_door
+            - camera.family_room
+            - camera.living_room
+            - camera.back_yard
+          filename: /tmp/{{ entity_id.entity_id }}.png
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Home Assistant
+          message: "{{ message }}"
+          data:
+            images:
+              - /tmp/camera.front_door.png
+              - /tmp/camera.family_room.png
+              - /tmp/camera.living_room.png
+              - /tmp/camera.back_yard.png
+
+  good_morning:
+    sequence:
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          entity_id: alarm_control_panel.abode_alarm
+      - condition: template
+        value_template: '{{ state_attr("sun.sun", "elevation") < 2 }}'
+      - service: scene.turn_on
+        data:
+          entity_id: scene.good_morning

@@ -1,10 +1,6 @@
 title: Home
 
 custom_header:
-  menu_dropdown: true
-  hide_help: true
-  hide_unused: true
-  hide_config: true
   tab_indicator_color: "transparent"
   exceptions:
     - conditions:
@@ -12,6 +8,8 @@ custom_header:
       config:
         compact_mode: true
         footer_mode: true
+        options_hide: true
+        reverse_button_direction: true
         header_css: "height: 90px;"
 
 

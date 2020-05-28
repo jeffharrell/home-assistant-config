@@ -1,4 +1,3 @@
 server_host: localhost
-base_url: !secret base_url
 ip_ban_enabled: true
 login_attempts_threshold: 4

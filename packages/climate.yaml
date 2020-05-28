@@ -91,4 +91,18 @@ automation:
         {%- else -%}
           script.hvac_windows_closed
         {%- endif -%}
-    
+
+
+script:
+  hvac_windows_open:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.home
+          preset_mode: "smart1"
+
+  hvac_windows_closed:
+    sequence:
+      - service: ecobee.resume_program
+        data:
+          entity_id: climate.home
