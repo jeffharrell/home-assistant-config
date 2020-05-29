@@ -1,7 +1,3 @@
-ecobee:
-  api_key: !secret ecobee_api_key
-
-
 sensor:
   - platform: awair
     access_token: !secret awair_access_token

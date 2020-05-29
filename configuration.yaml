@@ -14,6 +14,8 @@ config:
 
 api:
 
+scene: !include scenes.yaml
+
 logger: !include config/logger.yaml
 
 http: !include config/http.yaml
@@ -27,8 +29,6 @@ influxdb: !include config/influxdb.yaml
 notify: !include config/notify.yaml
 
 zwave: !include config/zwave.yaml
-
-scene: !include scenes.yaml
 
 system_health:
 

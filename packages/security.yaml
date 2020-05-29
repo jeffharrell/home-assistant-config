@@ -213,6 +213,25 @@ script:
               - /tmp/camera.living_room.png
               - /tmp/camera.back_yard.png
 
+  alarm_disarm_silently:
+    sequence:
+      - service: automation.turn_off
+        data:
+          entity_id: automation.security_say_status
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          entity_id: alarm_control_panel.abode_alarm
+      - delay:
+          minutes: 30
+      - service: alarm_control_panel.alarm_arm_home
+        data:
+          entity_id: alarm_control_panel.abode_alarm
+      - delay:
+          minutes: 5
+      - service: automation.turn_on
+        data:
+          entity_id: automation.security_say_status
+
   good_morning:
     sequence:
       - service: alarm_control_panel.alarm_disarm
