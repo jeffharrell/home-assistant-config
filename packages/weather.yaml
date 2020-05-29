@@ -33,7 +33,7 @@ sensor:
 
   - platform: scrape
     name: outside_uv
-    unit_of_measurement: "Index"
+    unit_of_measurement: "UV Index"
     resource: !secret ambient_weather_url
     select: "[name='uvi']"
     attribute: value
