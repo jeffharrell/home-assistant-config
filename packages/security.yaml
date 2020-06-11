@@ -43,6 +43,16 @@ automation:
     trigger:
       - platform: state
         entity_id: alarm_control_panel.abode_alarm
+        to: "armed_home"
+      - platform: state
+        entity_id: alarm_control_panel.abode_alarm
+        to: "armed_away"
+      - platform: state
+        entity_id: alarm_control_panel.abode_alarm
+        to: "disarmed"
+    condition:
+      condition: template
+      value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
       - service: notify.alexa_media
         data_template:

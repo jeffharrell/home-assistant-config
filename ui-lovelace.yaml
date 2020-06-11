@@ -136,6 +136,7 @@ views:
                     - group: group.entrances
                   exclude:
                     - state: "off"
+                    - state: "unavailable"
                 show_empty: false
 
   - title: "Inside"

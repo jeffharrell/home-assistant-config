@@ -9,6 +9,7 @@ __pycache__
 .DS_Store
 .HA_VERSION
 .storage
+.cloud
 .uuid
 .pip_progress
 *.txt

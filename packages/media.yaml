@@ -19,8 +19,8 @@ alexa:
         - script.snapshot_cameras_and_send
         - script.alarm_disarm_silently
         - script.good_morning
-        - script.house_fan_on
-        - script.house_fan_off
+        - script.hvac_windows_open
+        - script.hvac_windows_closed
 
 
 alexa_media:
