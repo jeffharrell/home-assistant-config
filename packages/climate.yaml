@@ -1,7 +1,4 @@
 sensor:
-  - platform: awair
-    access_token: !secret awair_access_token
-
   - platform: template
     sensors:
       climate_mode:

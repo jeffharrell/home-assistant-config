@@ -46,7 +46,7 @@ automation:
         entity_id: switch.living_room
       - service: notify.jeff_and_jillians_phone
         data_template:
-          title: Home Assistant
+          title: Home
           message: Turning the lights {% if trigger and trigger.event == "sunset" %}on while you are away{% else %}off{% endif %}.
 
   - alias: Lights - Turn on when coming home

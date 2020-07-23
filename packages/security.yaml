@@ -155,7 +155,7 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          title: Home Assistant
+          title: Home
           message: "Alarm {{ trigger.event.data.event_name }}"
 
   - alias: Security - Doorbell Notifications
@@ -182,7 +182,7 @@ automation:
     action:
       - service: notify.jeff_and_jillians_phone
         data_template:
-          title: Home Assistant
+          title: Home
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
 
 
@@ -196,7 +196,7 @@ script:
           filename: /tmp/{{ entity_id.entity_id }}.png
       - service: notify.jeff_and_jillians_phone
         data_template:
-          title: Home Assistant
+          title: Home
           message: Doorbell
           data:
             images:
@@ -214,7 +214,7 @@ script:
           filename: /tmp/{{ entity_id.entity_id }}.png
       - service: notify.jeff_and_jillians_phone
         data_template:
-          title: Home Assistant
+          title: Home
           message: "{{ message }}"
           data:
             images:
