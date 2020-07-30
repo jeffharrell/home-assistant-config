@@ -53,6 +53,7 @@ sensor:
       - 0
     monitored_conditions:
       - hourly_summary
+      - temperature_low
 
   - platform: template
     sensors:
@@ -70,3 +71,17 @@ sensor:
           {%- else -%}
             mdi:weather-sunny
           {%- endif %}
+
+
+automation:
+  - alias: Weather - Freezing temperature
+    initial_state: True
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.dark_sky_overnight_low_temperature_0d
+      below: 33
+    action:
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Home
+          message: "Cover the plants! Todays low temperature is {{ states('sensor.dark_sky_overnight_low_temperature_0d') }}°F."

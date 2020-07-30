@@ -156,7 +156,7 @@ automation:
       - service: notify.jeffs_phone
         data_template:
           title: Home
-          message: "Alarm {{ trigger.event.data.event_name }}"
+          message: "Alarm Fault: {{ trigger.event.data.event_name }}"
 
   - alias: Security - Doorbell Notifications
     initial_state: True
@@ -165,8 +165,10 @@ automation:
       entity_id: binary_sensor.doorbell_sensor
       to: "on"
     action:
-      service: script.turn_on
-      entity_id: script.snapshot_door_and_send
+      - service: script.turn_on
+        entity_id: script.snapshot_door_and_send
+      - delay:
+          seconds: 30
 
   - alias: Security - Door open
     initial_state: True
@@ -179,6 +181,7 @@ automation:
       to: "on"
       for:
         minutes: 10
+    mode: parallel
     action:
       - service: notify.jeff_and_jillians_phone
         data_template:

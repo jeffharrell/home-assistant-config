@@ -6,7 +6,7 @@ homeassistant:
   unit_system: !secret units
   time_zone: !secret time_zone
   packages: !include_dir_named packages/
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /tmp
 
 

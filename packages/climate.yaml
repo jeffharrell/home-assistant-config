@@ -69,10 +69,12 @@ automation:
   - alias: Climate - Windows Open
     initial_state: True
     trigger:
+      # on
       - platform: state
         entity_id: group.doors_and_windows
         to: "on"
         for: "00:05:00"
+      # off
       - platform: state
         entity_id: group.doors_and_windows
         to: "off"
