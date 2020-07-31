@@ -1,3 +1,9 @@
+camera:
+  # workaround for camera reload issues on home tab
+  - platform: local_file
+    name: home
+    file_path: /config/www/cameras/camera.front_door.png
+
 automation:
   - alias: System - Theme change
     initial_state: True
@@ -8,6 +14,15 @@ automation:
       service: frontend.set_theme
       data_template:
         name: home
+
+  - alias: System - Save image for home UI
+    initial_state: True
+    trigger:
+      platform: time_pattern
+      minutes: "/5"
+    action:
+      - service: script.turn_on
+        entity_id: script.snapshot_door_and_save
 
   - alias: System - Low battery check
     initial_state: True

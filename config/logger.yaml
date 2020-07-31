@@ -9,4 +9,6 @@ logs:
   homeassistant.components.binary_sensor: error
   homeassistant.components.abode.config_flow: error
   skybellpy: error
+  abodepy: error
   pyecobee: error
+  slixmpp: error

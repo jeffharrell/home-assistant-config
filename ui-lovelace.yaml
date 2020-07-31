@@ -21,9 +21,18 @@ views:
         title: "Home"
         cards:
           - type: picture-entity
-            entity: camera.front_door
+            entity: camera.home
             show_name: false
             show_state: false
+            tap_action: none
+            double_tap_action: none
+            hold_action: none
+            style: |
+              .type-picture-entity, hui-image {
+                display: block;
+                min-height: 212px !important;
+                background: transparent;
+              }
 
           - type: conditional
             conditions:

@@ -190,6 +190,14 @@ automation:
 
 
 script:
+  snapshot_door_and_save:
+    sequence:
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.front_door
+          filename: /config/www/cameras/{{ entity_id.entity_id }}.png
+
   snapshot_door_and_send:
     sequence:
       - service: camera.snapshot
