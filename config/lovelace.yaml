@@ -9,3 +9,5 @@ resources:
     type: module
   - url: /hacsfiles/lovelace-card-mod/card-mod.js
     type: module
+  - url: /hacsfiles/refreshable-picture-card/refreshable-picture-card.js
+    type: module

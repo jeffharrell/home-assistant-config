@@ -1,11 +1,5 @@
-camera:
-  # workaround for camera reload issues on home tab
-  - platform: local_file
-    name: home
-    file_path: /config/www/cameras/camera.front_door.png
-
 automation:
-  - alias: System - Theme change
+  - alias: System - UI theme change
     initial_state: True
     trigger:
       - platform: homeassistant
@@ -15,11 +9,11 @@ automation:
       data_template:
         name: home
 
-  - alias: System - Save image for home UI
+  - alias: System - UI home image
     initial_state: True
     trigger:
       platform: time_pattern
-      minutes: "/5"
+      minutes: "/2"
     action:
       - service: script.turn_on
         entity_id: script.snapshot_door_and_save
