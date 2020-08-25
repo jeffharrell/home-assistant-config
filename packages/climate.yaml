@@ -64,28 +64,23 @@ automation:
       to: "on"
       from: "off"
     action:
-      service: script.hvac_windows_open
+      - service: script.hvac_windows_open
+      - delay: "00:00:30"
+      - wait_template: "{{ is_state('switch.house_fan_switch', 'off') }}"
+      - service: script.hvac_windows_closed
 
   - alias: Climate - Windows Open
     initial_state: True
     trigger:
-      # on
       - platform: state
         entity_id: group.doors_and_windows
         to: "on"
         for: "00:05:00"
-      # off
-      - platform: state
-        entity_id: group.doors_and_windows
-        to: "off"
-        from: "on"
     action:
-      service_template: >
-        {%- if trigger and trigger.to_state.state == "on" -%}
-          script.hvac_windows_open
-        {%- else -%}
-          script.hvac_windows_closed
-        {%- endif -%}
+      - service: script.hvac_windows_open
+      - delay: "00:00:30"
+      - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
+      - service: script.hvac_windows_closed
 
 
 script:
