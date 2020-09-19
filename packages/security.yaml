@@ -127,23 +127,15 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      - service: script.turn_on
-        entity_id: script.snapshot_cameras_and_send
-        data:
-          variables:
-            message: "Alarm (1/3)"
-      - delay: "00:01:00"
-      - service: script.turn_on
-        entity_id: script.snapshot_cameras_and_send
-        data:
-          variables:
-            message: "Alarm (2/3)"
-      - delay: "00:01:00"
-      - service: script.turn_on
-        entity_id: script.snapshot_cameras_and_send
-        data:
-          variables:
-            message: "Alarm (3/3)"
+      repeat:
+          count: 3
+          sequence:
+            - service: script.turn_on
+              entity_id: script.snapshot_cameras_and_send
+              data_template:
+                variables:
+                  message: "Alarm ({{ repeat.interval }})"
+            - delay: "00:01:00"
 
   - alias: Security - Fault
     initial_state: True
@@ -194,17 +186,15 @@ script:
     sequence:
       - service: camera.snapshot
         data:
-          entity_id:
-            - camera.front_door
-          filename: /config/www/cameras/{{ entity_id.entity_id }}.png
+          entity_id: camera.front_door
+          filename: /config/www/cameras/house.png
 
   snapshot_door_and_send:
     sequence:
       - service: camera.snapshot
         data:
-          entity_id:
-            - camera.front_door
-          filename: /tmp/{{ entity_id.entity_id }}.png
+          entity_id: camera.front_door
+          filename: /tmp/camera.front_door.png
       - service: notify.jeff_and_jillians_phone
         data_template:
           title: Home
@@ -235,6 +225,7 @@ script:
               - /tmp/camera.back_yard.png
 
   alarm_disarm_silently:
+    mode: restart
     sequence:
       - service: automation.turn_off
         data:
@@ -242,13 +233,11 @@ script:
       - service: alarm_control_panel.alarm_disarm
         data:
           entity_id: alarm_control_panel.abode_alarm
-      - delay:
-          minutes: 30
+      - delay: "00:30:00"
       - service: alarm_control_panel.alarm_arm_home
         data:
           entity_id: alarm_control_panel.abode_alarm
-      - delay:
-          minutes: 5
+      - delay: "00:01:00"
       - service: automation.turn_on
         data:
           entity_id: automation.security_say_status

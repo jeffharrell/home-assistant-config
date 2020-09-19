@@ -5,6 +5,7 @@ homeassistant:
   elevation: !secret elevation
   unit_system: !secret units
   time_zone: !secret time_zone
+  external_url: !secret external_url
   packages: !include_dir_named packages/
   allowlist_external_dirs:
     - /tmp

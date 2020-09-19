@@ -1,10 +1,5 @@
 binary_sensor:
   - platform: ping
-    name: internet
-    host: 8.8.8.8
-    scan_interval: 120
-
-  - platform: ping
     name: living_room_camera
     host: !secret living_room_camera_url
     scan_interval: 120

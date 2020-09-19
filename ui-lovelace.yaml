@@ -20,9 +20,10 @@ views:
       - type: vertical-stack
         title: "Home"
         cards:
+          # House Pic
           - type: 'custom:refreshable-picture-card'
             update_interval: 120
-            static_picture: /local/cameras/camera.front_door.png
+            static_picture: /local/cameras/house.png
             style: |
               .type-custom-refreshable-picture-card p,
               .type-custom-refreshable-picture-card br {
@@ -33,6 +34,7 @@ views:
                 border-radius: var(--ha-card-border-radius, 4px);
               }
 
+          # Actions - Alarm is on
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
@@ -60,63 +62,84 @@ views:
                     service_data:
                       entity_id: script.good_morning
 
+          # Actions - Alarm is off temporarily
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
+              - entity: script.alarm_disarm_silently
+                state: "on"
             card:
               type: horizontal-stack
               cards:
                 - type: entity-button
-                  entity: scene.dinner_time
-                  name: "Dinner"
-                  icon: mdi:food-fork-drink
+                  entity: script.alarm_disarm_silently
+                  name: "Alarm Will Automatically Arm"
+                  icon: mdi:timer
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: scene.turn_on
+                    confirmation:
+                      text: "Are you sure you want to leave the alarm off?"
+                    service: script.turn_off
                     service_data:
-                      entity_id: scene.dinner_time
+                      entity_id: script.alarm_disarm_silently
 
-                - type: entity-button
-                  entity: scene.movie_time
-                  name: "Movie"
-                  icon: mdi:movie
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: scene.turn_on
-                    service_data:
-                      entity_id: scene.movie_time
-
+          # Actions - Alarm is off
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
+              - entity: script.alarm_disarm_silently
+                state_not: "on"
             card:
-              type: horizontal-stack
+              type: vertical-stack
               cards:
-                - type: entity-button
-                  entity: scene.good_night
-                  name: "Good Night"
-                  icon: mdi:brightness-2
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: scene.turn_on
-                    service_data:
-                      entity_id: scene.good_night
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: scene.dinner_time
+                      name: "Dinner"
+                      icon: mdi:food-fork-drink
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.dinner_time
+                    - type: entity-button
+                      entity: scene.movie_time
+                      name: "Movie"
+                      icon: mdi:movie
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.movie_time
 
-                - type: entity-button
-                  entity: scene.away
-                  name: "Away"
-                  icon: mdi:exit-run
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: scene.turn_on
-                    service_data:
-                      entity_id: scene.away
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: scene.good_night
+                      name: "Good Night"
+                      icon: mdi:brightness-2
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.good_night
+                    - type: entity-button
+                      entity: scene.away
+                      name: "Away"
+                      icon: mdi:exit-run
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.away
 
 
           - type: vertical-stack

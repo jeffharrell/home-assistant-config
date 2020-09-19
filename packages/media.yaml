@@ -23,17 +23,6 @@ alexa:
         - script.hvac_windows_closed
 
 
-alexa_media:
-  accounts:
-    - email: !secret alexa_email
-      password: !secret alexa_password
-      url: "amazon.com"
-      include_devices:
-        - "Family Room Echo"
-        - "Living Room Echo"
-        - "Master Bedroom Echo"
-
-
 remote:
   - platform: harmony
     name: Family Room
