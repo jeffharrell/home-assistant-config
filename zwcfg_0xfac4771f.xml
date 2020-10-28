@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Driver xmlns="http://code.google.com/p/open-zwave/" version="3" home_id="0xfac4771f" node_id="1" api_capabilities="0" controller_capabilities="8" poll_interval="30000" poll_interval_between="true">
 	<Node id="1" name="" location="" basic="2" generic="2" specific="1" type="Static PC Controller" listening="true" frequentListening="false" beaming="true" routing="false" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="86" name="Aeotec">
+		<Manufacturer id="86" name="AEON Labs">
 			<Product type="101" id="5a" name="ZW090 Z-Stick Gen5 US" />
 		</Manufacturer>
 		<CommandClasses>
@@ -12,7 +12,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="3" name="pantry_light" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -22,8 +22,8 @@
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
 				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="2" min="0" max="255" value="0" />
-				<Value type="button" genre="user" instance="1" index="1" label="Up" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="button" genre="user" instance="1" index="2" label="Down" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
@@ -122,7 +122,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="5" name="island_lights" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -131,7 +131,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="49" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -232,7 +232,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="6" name="kitchen_lights_2" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -241,7 +241,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="16" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -341,8 +341,8 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="7" name="k" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+	<Node id="7" name="kitchen_lights_1" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -351,7 +351,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="255" value="16" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -452,7 +452,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="8" name="family_room_ligh" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -562,7 +562,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="9" name="back_yard" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="5257" id="3533" name="45609 On/Off Relay Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -584,13 +584,14 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="Night Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>In night-light mode the LED on the switch will turn ON when the switch is turned OFF.</Help>
-					<Item label="No" value="0" />
-					<Item label="Yes" value="1" />
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Sets when the LED on the switch is lit.</Help>
+					<Item label="LED on when light off" value="0" />
+					<Item label="LED on when light on" value="1" />
+					<Item label="LED always off" value="2" />
 				</Value>
 				<Value type="list" genre="config" instance="1" index="4" label="Invert Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>Change the top of the switch to OFF and the bottom of the switch to ON. Note: If you invert the switches and also install the product upside down, remember the load will now be controlled by the right, not the left switch.</Help>
+					<Help>Change the top of the switch to OFF and the bottom of the switch to ON.</Help>
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
@@ -649,7 +650,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="10" name="living_room" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4952" id="3032" name="12722 On/Off Relay Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -671,13 +672,14 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="Night Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>In night-light mode the LED on the switch will turn ON when the switch is turned OFF.</Help>
-					<Item label="No" value="0" />
-					<Item label="Yes" value="1" />
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Sets when the LED on the switch is lit.</Help>
+					<Item label="LED on when light off" value="0" />
+					<Item label="LED on when light on" value="1" />
+					<Item label="LED always off" value="2" />
 				</Value>
 				<Value type="list" genre="config" instance="1" index="4" label="Invert Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>Change the top of the switch to OFF and the bottom of the switch to ON. Note: If you invert the switches and also install the product upside down, remember the load will now be controlled by the right, not the left switch.</Help>
+					<Help>Change the top of the switch to OFF and the bottom of the switch to ON.</Help>
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
@@ -736,7 +738,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="14" name="entryway_light" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="5257" id="3533" name="45609 On/Off Relay Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -758,13 +760,14 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="Night Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>In night-light mode the LED on the switch will turn ON when the switch is turned OFF.</Help>
-					<Item label="No" value="0" />
-					<Item label="Yes" value="1" />
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Sets when the LED on the switch is lit.</Help>
+					<Item label="LED on when light off" value="0" />
+					<Item label="LED on when light on" value="1" />
+					<Item label="LED always off" value="2" />
 				</Value>
 				<Value type="list" genre="config" instance="1" index="4" label="Invert Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>Change the top of the switch to OFF and the bottom of the switch to ON. Note: If you invert the switches and also install the product upside down, remember the load will now be controlled by the right, not the left switch.</Help>
+					<Help>Change the top of the switch to OFF and the bottom of the switch to ON.</Help>
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
@@ -823,7 +826,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="15" name="hallway_light" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="5257" id="3533" name="45609 On/Off Relay Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -832,7 +835,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="1" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -845,13 +848,14 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="Night Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>In night-light mode the LED on the switch will turn ON when the switch is turned OFF.</Help>
-					<Item label="No" value="0" />
-					<Item label="Yes" value="1" />
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Sets when the LED on the switch is lit.</Help>
+					<Item label="LED on when light off" value="0" />
+					<Item label="LED on when light on" value="1" />
+					<Item label="LED always off" value="2" />
 				</Value>
 				<Value type="list" genre="config" instance="1" index="4" label="Invert Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>Change the top of the switch to OFF and the bottom of the switch to ON. Note: If you invert the switches and also install the product upside down, remember the load will now be controlled by the right, not the left switch.</Help>
+					<Help>Change the top of the switch to OFF and the bottom of the switch to ON.</Help>
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
@@ -910,7 +914,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="16" name="kitchen_cabinets" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4952" id="3032" name="12722 On/Off Relay Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -932,13 +936,14 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="Night Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>In night-light mode the LED on the switch will turn ON when the switch is turned OFF.</Help>
-					<Item label="No" value="0" />
-					<Item label="Yes" value="1" />
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Sets when the LED on the switch is lit.</Help>
+					<Item label="LED on when light off" value="0" />
+					<Item label="LED on when light on" value="1" />
+					<Item label="LED always off" value="2" />
 				</Value>
 				<Value type="list" genre="config" instance="1" index="4" label="Invert Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Help>Change the top of the switch to OFF and the bottom of the switch to ON. Note: If you invert the switches and also install the product upside down, remember the load will now be controlled by the right, not the left switch.</Help>
+					<Help>Change the top of the switch to OFF and the bottom of the switch to ON.</Help>
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
@@ -996,150 +1001,23 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="19" name="doorbell" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3078" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
-		<Manufacturer id="86" name="Aeotec">
-			<Product type="102" id="61" name="ZW097 Dry Contact Sensor Gen5" />
+	<Node id="19" name="" location="" basic="4" generic="7" specific="1" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Probe">
+		<Manufacturer id="0" name="">
+			<Product type="0" id="0" name="" />
 		</Manufacturer>
 		<CommandClasses>
-			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" setasreport="true">
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
 				<Instance index="1" />
 				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
-			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
+			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-				<SensorMap index="0" type="46" />
-				<SensorMap index="0" type="62" />
-				<SensorMap index="0" type="209" />
-			</CommandClass>
-			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1" request_flags="4" after_mark="true" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="94" name="COMMAND_CLASS_ZWAVEPLUS_INFO" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="system" instance="1" index="0" label="ZWave+ Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
-				<Value type="short" genre="system" instance="1" index="1" label="InstallerIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3078" />
-				<Value type="short" genre="system" instance="1" index="2" label="UserIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3078" />
-			</CommandClass>
-			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="1" label="Sensor Binary Report" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
-					<Help>Which value of the Sensor Binary Report will be sent when the door is Opened/Closed</Help>
-					<Item label="Open: 0xFF, Close: 0x00" value="0" />
-					<Item label="Open: 0x00, Close: 0xFF" value="1" />
-				</Value>
-				<Value type="list" genre="config" instance="1" index="2" label="Wakeup at Poweron" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="1" size="1">
-					<Help>Enable/disable wake up 10 minutes when re-power on the Sensor. Default setting: Enable</Help>
-					<Item label="Disable" value="0" />
-					<Item label="Enable" value="1" />
-				</Value>
-				<Value type="list" genre="config" instance="1" index="3" label="Basic Set Report" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
-					<Help>Which value of the Basic Set will be sent when the door is Opened/Closed</Help>
-					<Item label="Open: 0xFF, Close: 0x00" value="0" />
-					<Item label="Open: 0x00, Close: 0xFF" value="1" />
-				</Value>
-				<Value type="byte" genre="config" instance="1" index="39" label="Set the low battery value" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="10" max="50" value="10">
-					<Help>10% to 50%</Help>
-				</Value>
-				<Value type="int" genre="config" instance="1" index="111" label="Interval time of battery report" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2147483647" value="0">
-					<Help>Set the interval time of battery report. Value=0, disable the battery report for a interval time. Value=1 to 0x7FFFFFFF, the interval time of battery report is set. Note: 1, if the value is less than 10, the time unit is second. If the value is more than 10, the time unit is 4 minutes, which means if the value is more than 10 and less than 240, the interval time is 4 minutes. If the value is more than 240 and less than 480, the interval is 8 minutes. 2, if the current battery report falls below the low battery value (configurable parameter 39), it will send battery report=0xFF.</Help>
-				</Value>
-				<Value type="list" genre="config" instance="1" index="121" label="Report Type" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="65535" vindex="1" size="4">
-					<Help>Configure which sensor report will be sent when the sensor is Opened/Closed</Help>
-					<Item label="Disabled" value="0" />
-					<Item label="Basic Set" value="256" />
-					<Item label="Sensor Binary Report" value="16" />
-					<Item label="Basic Set and Sensor Binary Report" value="272" />
-				</Value>
-				<Value type="list" genre="config" instance="1" index="255" label="Reset To Factory Defaults" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="1" size="4">
-					<Help>Reset to factory defaults</Help>
-					<Item label="Reset to factory default setting" value="0" />
-					<Item label="Normal" value="1" />
-					<Item label="Reset to factory default setting and removed from the z-wave network" value="1431655765" />
-				</Value>
-			</CommandClass>
-			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="3" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="254" />
-			</CommandClass>
-			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="system" instance="1" index="0" label="Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="byte" genre="system" instance="1" index="1" label="Timeout" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="button" genre="system" instance="1" index="2" label="Set Powerlevel" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="byte" genre="system" instance="1" index="3" label="Test Node" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="list" genre="system" instance="1" index="4" label="Test Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="5" label="Frame Count" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-				<Value type="button" genre="system" instance="1" index="6" label="Test" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="button" genre="system" instance="1" index="7" label="Report" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="list" genre="system" instance="1" index="8" label="Test Status" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Failed" value="0" />
-					<Item label="Success" value="1" />
-					<Item label="In Progress" value="2" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-			</CommandClass>
-			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
-			</CommandClass>
-			<CommandClass id="130" name="COMMAND_CLASS_HAIL" version="1" request_flags="4" after_mark="true" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
-				<Value type="int" genre="system" instance="1" index="1" label="Minimum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
-				<Value type="int" genre="system" instance="1" index="2" label="Maximum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="16777215" />
-				<Value type="int" genre="system" instance="1" index="3" label="Default Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" />
-				<Value type="int" genre="system" instance="1" index="4" label="Wake-up Interval Step" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="240" />
-			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Associations num_groups="1">
-					<Group index="1" max_associations="5" label="Lifeline" auto="true">
-						<Node id="1" />
-					</Group>
-				</Associations>
-			</CommandClass>
-			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="3" />
-				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.05" />
-				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1.05" />
+				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>
 	<Node id="20" name="house_fan" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4952" id="3031" name="12721 Lighting Control Duplex Receptacle" />
 		</Manufacturer>
 		<CommandClasses>
@@ -1229,230 +1107,38 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="21" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="14a" name="Ecolink">
-			<Product type="4" id="3" name="Garage Door Tilt Sensor" />
+	<Node id="21" name="" location="" basic="4" generic="7" specific="1" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Probe">
+		<Manufacturer id="0" name="">
+			<Product type="0" id="0" name="" />
 		</Manufacturer>
 		<CommandClasses>
-			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" innif="true" setasreport="true">
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
 				<Instance index="1" />
 				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
-			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
+			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-				<SensorMap index="0" type="255" />
-			</CommandClass>
-			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="94" name="COMMAND_CLASS_ZWAVEPLUS_INFO" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="system" instance="1" index="0" label="ZWave+ Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
-				<Value type="short" genre="system" instance="1" index="1" label="InstallerIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3079" />
-				<Value type="short" genre="system" instance="1" index="2" label="UserIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3072" />
-			</CommandClass>
-			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="223" label="Fault restore" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
-					<Help>Enable/Disable Basic Sets of 0x00 on a fault restore to nodes in Group 2</Help>
-					<Item label="Disable" value="0" />
-					<Item label="Enable" value="255" />
-				</Value>
-			</CommandClass>
-			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="5" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="23" />
-				<Value type="byte" genre="user" instance="1" index="10" label="Burglar" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="11" label="Power Management" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-			</CommandClass>
-			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="system" instance="1" index="0" label="Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="byte" genre="system" instance="1" index="1" label="Timeout" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="button" genre="system" instance="1" index="2" label="Set Powerlevel" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="byte" genre="system" instance="1" index="3" label="Test Node" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="list" genre="system" instance="1" index="4" label="Test Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="5" label="Frame Count" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-				<Value type="button" genre="system" instance="1" index="6" label="Test" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="button" genre="system" instance="1" index="7" label="Report" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="list" genre="system" instance="1" index="8" label="Test Status" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Failed" value="0" />
-					<Item label="Success" value="1" />
-					<Item label="In Progress" value="2" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-			</CommandClass>
-			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
-			</CommandClass>
-			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="1" label="Minimum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
-				<Value type="int" genre="system" instance="1" index="2" label="Maximum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="604800" />
-				<Value type="int" genre="system" instance="1" index="3" label="Default Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="4" label="Wake-up Interval Step" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="200" />
-			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Associations num_groups="2">
-					<Group index="1" max_associations="5" label="Lifeline" auto="true">
-						<Node id="1" />
-					</Group>
-					<Group index="2" max_associations="5" label="Basic Report" auto="false" />
-				</Associations>
-			</CommandClass>
-			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="6" />
-				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.05" />
-				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="10.01" />
+				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="23" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="14a" name="Ecolink">
-			<Product type="4" id="3" name="Garage Door Tilt Sensor" />
+	<Node id="23" name="" location="" basic="4" generic="7" specific="1" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
+		<Manufacturer id="0" name="">
+			<Product type="0" id="0" name="" />
 		</Manufacturer>
 		<CommandClasses>
-			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" innif="true" setasreport="true">
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
 				<Instance index="1" />
 				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
-			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
+			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-				<SensorMap index="0" type="255" />
-			</CommandClass>
-			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="94" name="COMMAND_CLASS_ZWAVEPLUS_INFO" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="system" instance="1" index="0" label="ZWave+ Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
-				<Value type="short" genre="system" instance="1" index="1" label="InstallerIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3079" />
-				<Value type="short" genre="system" instance="1" index="2" label="UserIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3072" />
-			</CommandClass>
-			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="223" label="Fault restore" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
-					<Help>Enable/Disable Basic Sets of 0x00 on a fault restore to nodes in Group 2</Help>
-					<Item label="Disable" value="0" />
-					<Item label="Enable" value="255" />
-				</Value>
-			</CommandClass>
-			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="5" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="23" />
-				<Value type="byte" genre="user" instance="1" index="10" label="Burglar" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="11" label="Power Management" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-			</CommandClass>
-			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="system" instance="1" index="0" label="Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="byte" genre="system" instance="1" index="1" label="Timeout" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="button" genre="system" instance="1" index="2" label="Set Powerlevel" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="byte" genre="system" instance="1" index="3" label="Test Node" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="list" genre="system" instance="1" index="4" label="Test Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="5" label="Frame Count" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-				<Value type="button" genre="system" instance="1" index="6" label="Test" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="button" genre="system" instance="1" index="7" label="Report" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="list" genre="system" instance="1" index="8" label="Test Status" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Failed" value="0" />
-					<Item label="Success" value="1" />
-					<Item label="In Progress" value="2" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-			</CommandClass>
-			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
-			</CommandClass>
-			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="1" label="Minimum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
-				<Value type="int" genre="system" instance="1" index="2" label="Maximum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="604800" />
-				<Value type="int" genre="system" instance="1" index="3" label="Default Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="4" label="Wake-up Interval Step" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="200" />
-			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Associations num_groups="2">
-					<Group index="1" max_associations="5" label="Lifeline" auto="true">
-						<Node id="1" />
-					</Group>
-					<Group index="2" max_associations="5" label="Basic Report" auto="false" />
-				</Associations>
-			</CommandClass>
-			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="6" />
-				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.05" />
-				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="10.01" />
+				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>
 	<Node id="26" name="" location="" basic="4" generic="17" specific="1" roletype="5" devicetype="1536" nodetype="0" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3038" name="14294 In-Wall Smart Dimmer" />
 		</Manufacturer>
 		<CommandClasses>
@@ -1466,7 +1152,6 @@
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="system" instance="1" index="5" label="Dimming Duration" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1505,19 +1190,19 @@
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="7" label="Z-Wave Command Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="7" label="Z-Wave Command Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="8" label="Z-Wave Command Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
 					<Help>This value indicates in 10 millisecond resolution, how often the dim level will change. For example, if you set this parameter to 1, then every 10ms the dim level will change. If you set it to 255, then every 2.55 seconds the dim level will change.</Help>
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="9" label="Local Control Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="9" label="Local Control Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="10" label="Local Control Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
 					<Help>This value indicates in 10 millisecond resolution, how often the dim level will change. For example, if you set this parameter to 1, then every 10ms the dim level will change. If you set it to 255, then every 2.55 seconds the dim level will change.</Help>
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="11" label="ALL ON/ALL OFF Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="11" label="ALL ON/ALL OFF Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="12" label="ALL ON/ALL OFF Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
@@ -1586,7 +1271,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="27" name="master_bedroom" location="" basic="4" generic="17" specific="1" type="Multilevel Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4944" id="3031" name="12724 3-Way Dimmer Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -1603,7 +1288,7 @@
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="system" instance="1" index="0" label="Switch All" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
+				<Value type="list" genre="system" instance="1" index="0" label="Switch All" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="3" size="1">
 					<Item label="Disabled" value="0" />
 					<Item label="Off Enabled" value="1" />
 					<Item label="On Enabled" value="2" />
@@ -1612,7 +1297,7 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="2" size="1">
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
 					<Help>Sets when the LED on the switch is lit.</Help>
 					<Item label="LED on when light off" value="0" />
 					<Item label="LED on when light on" value="1" />
@@ -1695,119 +1380,23 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="29" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="14a" name="Ecolink">
-			<Product type="4" id="3" name="Garage Door Tilt Sensor" />
+	<Node id="29" name="" location="" basic="4" generic="7" specific="1" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="NodeInfo">
+		<Manufacturer id="0" name="">
+			<Product type="0" id="0" name="" />
 		</Manufacturer>
 		<CommandClasses>
-			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" innif="true" setasreport="true">
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
 				<Instance index="1" />
 				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
-			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
+			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
-				<SensorMap index="0" type="255" />
-			</CommandClass>
-			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="94" name="COMMAND_CLASS_ZWAVEPLUS_INFO" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="system" instance="1" index="0" label="ZWave+ Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
-				<Value type="short" genre="system" instance="1" index="1" label="InstallerIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3079" />
-				<Value type="short" genre="system" instance="1" index="2" label="UserIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="3072" />
-			</CommandClass>
-			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="223" label="Fault restore" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
-					<Help>Enable/Disable Basic Sets of 0x00 on a fault restore to nodes in Group 2</Help>
-					<Item label="Disable" value="0" />
-					<Item label="Enable" value="255" />
-				</Value>
-			</CommandClass>
-			<CommandClass id="113" name="COMMAND_CLASS_ALARM" version="5" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="23" />
-				<Value type="byte" genre="user" instance="1" index="10" label="Burglar" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="11" label="Power Management" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-			</CommandClass>
-			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-			</CommandClass>
-			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="list" genre="system" instance="1" index="0" label="Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="byte" genre="system" instance="1" index="1" label="Timeout" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="button" genre="system" instance="1" index="2" label="Set Powerlevel" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="byte" genre="system" instance="1" index="3" label="Test Node" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="list" genre="system" instance="1" index="4" label="Test Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Normal" value="0" />
-					<Item label="-1dB" value="1" />
-					<Item label="-2dB" value="2" />
-					<Item label="-3dB" value="3" />
-					<Item label="-4dB" value="4" />
-					<Item label="-5dB" value="5" />
-					<Item label="-6dB" value="6" />
-					<Item label="-7dB" value="7" />
-					<Item label="-8dB" value="8" />
-					<Item label="-9dB" value="9" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="5" label="Frame Count" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-				<Value type="button" genre="system" instance="1" index="6" label="Test" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="button" genre="system" instance="1" index="7" label="Report" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="list" genre="system" instance="1" index="8" label="Test Status" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
-					<Item label="Failed" value="0" />
-					<Item label="Success" value="1" />
-					<Item label="In Progress" value="2" />
-				</Value>
-				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
-			</CommandClass>
-			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
-			</CommandClass>
-			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
-				<Instance index="1" />
-				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="1" label="Minimum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
-				<Value type="int" genre="system" instance="1" index="2" label="Maximum Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="604800" />
-				<Value type="int" genre="system" instance="1" index="3" label="Default Wake-up Interval" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="14400" />
-				<Value type="int" genre="system" instance="1" index="4" label="Wake-up Interval Step" units="Seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="200" />
-			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Associations num_groups="2">
-					<Group index="1" max_associations="5" label="Lifeline" auto="true">
-						<Node id="1" />
-					</Group>
-					<Group index="2" max_associations="5" label="Basic Report" auto="false" />
-				</Associations>
-			</CommandClass>
-			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
-				<Instance index="1" />
-				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="6" />
-				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.05" />
-				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="10.01" />
+				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>
 	<Node id="31" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4f50" id="3032" name="14284 Outdoor Smart Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -1903,7 +1492,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="32" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4f50" id="3032" name="14284 Outdoor Smart Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -1999,7 +1588,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="33" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4f50" id="3032" name="14284 Outdoor Smart Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -2109,7 +1698,6 @@
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="system" instance="1" index="5" label="Dimming Duration" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2209,7 +1797,7 @@
 				</Value>
 				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
 			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="6" innif="true">
+			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
 				<Associations num_groups="3">
 					<Group index="1" max_associations="5" label="Lifeline" auto="true">
@@ -2228,7 +1816,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="35" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="63" name="GE">
+		<Manufacturer id="63" name="Jasco Products">
 			<Product type="4952" id="3036" name="14291 In-Wall Smart Switch" />
 		</Manufacturer>
 		<CommandClasses>
@@ -2237,7 +1825,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2338,7 +1926,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="36" name="" location="" basic="4" generic="49" specific="1" roletype="5" devicetype="4096" nodetype="0" type="Simple Meter" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="86" name="Aeotec">
+		<Manufacturer id="86" name="AEON Labs">
 			<Product type="102" id="5f" name="ZW095 Home Energy Meter Gen5" />
 		</Manufacturer>
 		<CommandClasses>
@@ -2351,34 +1939,28 @@
 				<Instance index="1" />
 				<Instance index="2" endpoint="1" />
 				<Instance index="3" endpoint="2" />
-				<Value type="decimal" genre="user" instance="1" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.857" />
-				<Value type="decimal" genre="user" instance="1" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.857" />
+				<Value type="decimal" genre="user" instance="1" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.530" />
+				<Value type="decimal" genre="user" instance="1" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.530" />
 				<Value type="int" genre="user" instance="1" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="10" />
-				<Value type="decimal" genre="user" instance="1" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="-61.772" />
-				<Value type="decimal" genre="user" instance="1" index="9" label="Previous Reading" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="int" genre="user" instance="1" index="10" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="256" />
-				<Value type="decimal" genre="user" instance="1" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="105.495" />
-				<Value type="decimal" genre="user" instance="1" index="17" label="Previous Reading" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1692727.553" />
-				<Value type="int" genre="user" instance="1" index="18" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="1348" />
-				<Value type="decimal" genre="user" instance="1" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="2.269" />
-				<Value type="decimal" genre="user" instance="1" index="21" label="Previous Reading" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="int" genre="user" instance="1" index="22" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="16384" />
+				<Value type="decimal" genre="user" instance="1" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="488.030" />
+				<Value type="decimal" genre="user" instance="1" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="105.763" />
+				<Value type="decimal" genre="user" instance="1" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="5.300" />
 				<Value type="bool" genre="user" instance="1" index="32" label="Exporting" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 				<Value type="button" genre="system" instance="1" index="33" label="Reset" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="decimal" genre="user" instance="2" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="decimal" genre="user" instance="2" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="int" genre="user" instance="2" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" />
-				<Value type="decimal" genre="user" instance="2" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="297.700" />
-				<Value type="decimal" genre="user" instance="2" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="87.146" />
-				<Value type="decimal" genre="user" instance="2" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="11.165" />
+				<Value type="decimal" genre="user" instance="2" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.074" />
+				<Value type="decimal" genre="user" instance="2" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="7.407" />
+				<Value type="int" genre="user" instance="2" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="65535" />
+				<Value type="decimal" genre="user" instance="2" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="166.077" />
+				<Value type="decimal" genre="user" instance="2" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="87.311" />
+				<Value type="decimal" genre="user" instance="2" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1.936" />
 				<Value type="bool" genre="user" instance="2" index="32" label="Exporting" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 				<Value type="button" genre="system" instance="2" index="33" label="Reset" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
-				<Value type="decimal" genre="user" instance="3" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="decimal" genre="user" instance="3" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.000" />
-				<Value type="int" genre="user" instance="3" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="5" />
-				<Value type="decimal" genre="user" instance="3" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="2105.473" />
-				<Value type="decimal" genre="user" instance="3" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="123.414" />
-				<Value type="decimal" genre="user" instance="3" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="17.257" />
+				<Value type="decimal" genre="user" instance="3" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="5.419" />
+				<Value type="decimal" genre="user" instance="3" index="1" label="Previous Reading" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.417" />
+				<Value type="int" genre="user" instance="3" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="65535" />
+				<Value type="decimal" genre="user" instance="3" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1101.643" />
+				<Value type="decimal" genre="user" instance="3" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="123.725" />
+				<Value type="decimal" genre="user" instance="3" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="9.003" />
 				<Value type="bool" genre="user" instance="3" index="32" label="Exporting" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 				<Value type="button" genre="system" instance="3" index="33" label="Reset" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 			</CommandClass>
@@ -2443,10 +2025,10 @@
 				<Value type="button" genre="config" instance="1" index="100" label="Reset #101-103" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" affects="101,102,103">
 					<Help>Reset to default parameters number 101-103. Any value other then 0 will initiate this reset.</Help>
 				</Value>
-				<Value type="int" genre="config" instance="1" index="101" label="Group 1 Reports" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="15">
+				<Value type="int" genre="config" instance="1" index="101" label="Group 1 Reports" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2">
 					<Help>Which reports need to send in group1. Format is as follows: Byte 1 (msb): Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kVar) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for kVar) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for kVar) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for KVah) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for KVah) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for KVah) at the group time interval (Clamp 1) Byte 2: Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for A) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for A) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for A) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for V) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for V) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for V) at the group time interval (Clamp 1) Byte 3: Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kWh) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for kWh) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for kWh) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for Watt) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for Watt) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for Watt) at the group time interval (Clamp 1) Byte 4 (lsb): Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kVar) at the group time interval (Whole HEM) Bit 4: Auto Send Meter Report (for KVah) at the group time interval (Whole HEM) Bit 3: Auto Send Meter Report (for A) at the group time interval (Whole HEM) Bit 2: Auto Send Meter Report (for V) at the group time interval (Whole HEM) Bit 1: Auto Send Meter Report (for Watt) at the group time interval (Whole HEM) Bit 0: Auto Send Meter Report (for kWh) at the group time interval (Whole HEM)</Help>
 				</Value>
-				<Value type="int" genre="config" instance="1" index="102" label="Group 2 Reports" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0">
+				<Value type="int" genre="config" instance="1" index="102" label="Group 2 Reports" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="1">
 					<Help>Which reports need to send in group2. Format is as follows: Byte 1 (msb): Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kVar) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for kVar) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for kVar) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for KVah) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for KVah) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for KVah) at the group time interval (Clamp 1) Byte 2: Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for A) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for A) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for A) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for V) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for V) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for V) at the group time interval (Clamp 1) Byte 3: Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kWh) at the group time interval (Clamp 3) Bit 4: Auto Send Meter Report (for kWh) at the group time interval (Clamp 2) Bit 3: Auto Send Meter Report (for kWh) at the group time interval (Clamp 1) Bit 2: Auto Send Meter Report (for Watt) at the group time interval (Clamp 3) Bit 1: Auto Send Meter Report (for Watt) at the group time interval (Clamp 2) Bit 0: Auto Send Meter Report (for Watt) at the group time interval (Clamp 1) Byte 4 (lsb): Bit 7: Reserved Bit 6: Reserved Bit 5: Auto Send Meter Report (for kVar) at the group time interval (Whole HEM) Bit 4: Auto Send Meter Report (for KVah) at the group time interval (Whole HEM) Bit 3: Auto Send Meter Report (for A) at the group time interval (Whole HEM) Bit 2: Auto Send Meter Report (for V) at the group time interval (Whole HEM) Bit 1: Auto Send Meter Report (for Watt) at the group time interval (Whole HEM) Bit 0: Auto Send Meter Report (for kWh) at the group time interval (Whole HEM)</Help>
 				</Value>
 				<Value type="int" genre="config" instance="1" index="103" label="Group 3 Reports" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0">
@@ -2455,13 +2037,13 @@
 				<Value type="button" genre="config" instance="1" index="110" label="Reset #111-113" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" affects="111,112,113">
 					<Help>Reset to default parameters number 111-113</Help>
 				</Value>
-				<Value type="int" genre="config" instance="1" index="111" label="Group 1 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="10">
+				<Value type="int" genre="config" instance="1" index="111" label="Group 1 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="5">
 					<Help>The interval of sending report group 1.</Help>
 				</Value>
-				<Value type="int" genre="config" instance="1" index="112" label="Group 2 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="20">
+				<Value type="int" genre="config" instance="1" index="112" label="Group 2 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="120">
 					<Help>The interval of sending report group 2</Help>
 				</Value>
-				<Value type="int" genre="config" instance="1" index="113" label="Group 3 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="30">
+				<Value type="int" genre="config" instance="1" index="113" label="Group 3 Interval" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="120">
 					<Help>The interval of sending report group 3</Help>
 				</Value>
 				<Value type="list" genre="config" instance="1" index="200" label="Partner ID" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
@@ -2539,7 +2121,7 @@
 		</CommandClasses>
 	</Node>
 	<Node id="39" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
-		<Manufacturer id="39" name="Honeywell">
+		<Manufacturer id="39" name="Asia Heading">
 			<Product type="4952" id="3037" name="Unknown: type=4952, id=3037" />
 		</Manufacturer>
 		<CommandClasses>
@@ -2653,12 +2235,11 @@
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="system" instance="1" index="5" label="Dimming Duration" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
 			</CommandClass>
 			<CommandClass id="51" name="COMMAND_CLASS_COLOR" version="1" request_flags="2" innif="true" colorchannels="28">
 				<Instance index="1" />
-				<Value type="string" genre="user" instance="1" index="0" label="Color" units="#RRGGBB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="#00FF00" />
-				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="4" size="0">
+				<Value type="string" genre="user" instance="1" index="0" label="Color" units="#RRGGBB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="#000000" />
+				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="18">
 					<Item label="Off" value="0" />
 					<Item label="Cool White" value="1" />
 					<Item label="Warm White" value="2" />
@@ -2761,17 +2342,15 @@
 			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
 				<Associations num_groups="1">
-					<Group index="1" max_associations="5" label="Lifeline" auto="true">
-						<Node id="1" />
-					</Group>
+					<Group index="1" max_associations="5" label="Lifeline" auto="true" />
 					<Group index="2" max_associations="5" label="Retransmit" auto="false" />
 				</Associations>
 			</CommandClass>
-			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
+			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="6" innif="true">
 				<Instance index="1" />
-				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="3" />
-				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.54" />
-				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1.05" />
+				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="Unknown" />
+				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="Unknown" />
+				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="Unknown" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>
@@ -2790,7 +2369,6 @@
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="system" instance="1" index="5" label="Dimming Duration" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2818,7 +2396,7 @@
 			</CommandClass>
 			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="2" size="1">
+				<Value type="list" genre="config" instance="1" index="3" label="LED Light" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
 					<Help>Sets when the LED on the switch is lit.</Help>
 					<Item label="LED on when light off" value="0" />
 					<Item label="LED on when light on" value="1" />
@@ -2829,19 +2407,19 @@
 					<Item label="No" value="0" />
 					<Item label="Yes" value="1" />
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="7" label="Z-Wave Command Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="7" label="Z-Wave Command Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="8" label="Z-Wave Command Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
 					<Help>This value indicates in 10 millisecond resolution, how often the dim level will change. For example, if you set this parameter to 1, then every 10ms the dim level will change. If you set it to 255, then every 2.55 seconds the dim level will change.</Help>
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="9" label="Local Control Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="9" label="Local Control Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="10" label="Local Control Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
 					<Help>This value indicates in 10 millisecond resolution, how often the dim level will change. For example, if you set this parameter to 1, then every 10ms the dim level will change. If you set it to 255, then every 2.55 seconds the dim level will change.</Help>
 				</Value>
-				<Value type="byte" genre="config" instance="1" index="11" label="ALL ON/ALL OFF Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="10">
+				<Value type="byte" genre="config" instance="1" index="11" label="ALL ON/ALL OFF Dim Step" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="99" value="1">
 					<Help>Indicates how many levels the dimmer will change for each dimming step.</Help>
 				</Value>
 				<Value type="short" genre="config" instance="1" index="12" label="ALL ON/ALL OFF Dim Rate" units="x 10 milliseconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="3">
@@ -2926,12 +2504,11 @@
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<Value type="byte" genre="system" instance="1" index="4" label="Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="system" instance="1" index="5" label="Dimming Duration" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
 			</CommandClass>
 			<CommandClass id="51" name="COMMAND_CLASS_COLOR" version="1" request_flags="2" innif="true" colorchannels="28">
 				<Instance index="1" />
 				<Value type="string" genre="user" instance="1" index="0" label="Color" units="#RRGGBB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="#00FF00" />
-				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="4" size="0">
+				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="4" size="18">
 					<Item label="Off" value="0" />
 					<Item label="Cool White" value="1" />
 					<Item label="Warm White" value="2" />
@@ -3056,9 +2633,9 @@
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" mapping="38">
 				<Instance index="1" />
 			</CommandClass>
-			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" request_flags="4" innif="true">
+			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="2" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -3076,7 +2653,7 @@
 			<CommandClass id="51" name="COMMAND_CLASS_COLOR" version="1" request_flags="2" innif="true" colorchannels="15">
 				<Instance index="1" />
 				<Value type="string" genre="user" instance="1" index="0" label="Color" units="#RRGGBBWWCW" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="#000000FF00" />
-				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="2" size="0">
+				<Value type="list" genre="user" instance="1" index="1" label="Color Index" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="2" size="18">
 					<Item label="Off" value="0" />
 					<Item label="Cool White" value="1" />
 					<Item label="Warm White" value="2" />
@@ -3157,7 +2734,7 @@
 				</Value>
 				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
 			</CommandClass>
-			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
+			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="6" innif="true">
 				<Instance index="1" />
 				<Associations num_groups="1">
 					<Group index="1" max_associations="5" label="Report" auto="true">
@@ -3285,6 +2862,166 @@
 				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="3" />
 				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="6.04" />
 				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="5.53" />
+			</CommandClass>
+		</CommandClasses>
+	</Node>
+	<Node id="46" name="" location="" basic="4" generic="16" specific="1" roletype="5" devicetype="1792" nodetype="0" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+		<Manufacturer id="27a" name="Zooz">
+			<Product type="101" id="d" name="ZEN15 Power Switch" />
+		</Manufacturer>
+		<CommandClasses>
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" mapping="37">
+				<Instance index="1" />
+			</CommandClass>
+			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+			</CommandClass>
+			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="list" genre="system" instance="1" index="0" label="Switch All" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="3" size="1">
+					<Item label="Disabled" value="0" />
+					<Item label="Off Enabled" value="1" />
+					<Item label="On Enabled" value="2" />
+					<Item label="On and Off Enabled" value="255" />
+				</Value>
+			</CommandClass>
+			<CommandClass id="43" name="COMMAND_CLASS_SCENE_ACTIVATION" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+			</CommandClass>
+			<CommandClass id="50" name="COMMAND_CLASS_METER" version="3" request_flags="2" innif="true">
+				<Instance index="1" />
+				<Value type="decimal" genre="user" instance="1" index="0" label="Energy" units="kWh" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="2.798" />
+				<Value type="decimal" genre="user" instance="1" index="1" label="Previous Reading" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="2.798" />
+				<Value type="int" genre="user" instance="1" index="2" label="Interval" units="seconds" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="134" />
+				<Value type="decimal" genre="user" instance="1" index="8" label="Power" units="W" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.874" />
+				<Value type="decimal" genre="user" instance="1" index="16" label="Voltage" units="V" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="123.802" />
+				<Value type="decimal" genre="user" instance="1" index="20" label="Current" units="A" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.016" />
+				<Value type="bool" genre="user" instance="1" index="32" label="Exporting" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="button" genre="system" instance="1" index="33" label="Reset" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+			</CommandClass>
+			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+			</CommandClass>
+			<CommandClass id="94" name="COMMAND_CLASS_ZWAVEPLUS_INFO" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="byte" genre="system" instance="1" index="0" label="ZWave+ Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="1" />
+				<Value type="short" genre="system" instance="1" index="1" label="InstallerIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="1792" />
+				<Value type="short" genre="system" instance="1" index="2" label="UserIcon" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="1792" />
+			</CommandClass>
+			<CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="list" genre="config" instance="1" index="20" label="Overload Protection" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="1" size="1">
+					<Help>Overload protection.</Help>
+					<Item label="Disabled" value="0" />
+					<Item label="Enabled" value="1" />
+				</Value>
+				<Value type="list" genre="config" instance="1" index="21" label="On/Off Status Recovery After Power Failure" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="0" size="1">
+					<Help>Choose the recovery state for your Power Switch if power outage occurs.</Help>
+					<Item label="Previous state" value="0" />
+					<Item label="ON" value="1" />
+					<Item label="OFF" value="2" />
+				</Value>
+				<Value type="list" genre="config" instance="1" index="24" label="On/Off Status Change Notifications" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="2" vindex="1" size="1">
+					<Help>Send On/Off Status Change Notifications</Help>
+					<Item label="Disabled" value="0" />
+					<Item label="Sends notification if status is changed manually or remotely" value="1" />
+					<Item label="Sends notification ONLY if status is changed manually" value="2" />
+				</Value>
+				<Value type="list" genre="config" instance="1" index="27" label="LED Indicator Control" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="1" vindex="0" size="1">
+					<Help>0 - LED indicator will display power consumption whenever the device is plugged in. 1 - LED indicator will display the level of power consumption for 5 seconds only whenever the device is turned on or off</Help>
+					<Item label="Display whenever the device is plugged in (Default)" value="0" />
+					<Item label="Display power consumption for 5 seconds" value="1" />
+				</Value>
+				<Value type="short" genre="config" instance="1" index="151" label="Power Report Value Threshold" units="watts" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="65535" value="0">
+					<Help>Number of Watts the appliance needs to go over for the change to be reported</Help>
+				</Value>
+				<Value type="int" genre="config" instance="1" index="152" label="Power Report Percentage Threshold" units="%" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="1" max="255" value="10">
+					<Help>Percentage in power usage change the appliance needs to go over for the event to be reported (Default 10)</Help>
+				</Value>
+				<Value type="int" genre="config" instance="1" index="171" label="Power Report Frequency" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="5" max="2678400" value="0">
+					<Help>Number of seconds</Help>
+				</Value>
+				<Value type="int" genre="config" instance="1" index="172" label="Energy Report Frequency" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="5" max="2678400" value="0">
+					<Help>Number of seconds</Help>
+				</Value>
+				<Value type="int" genre="config" instance="1" index="173" label="Voltage Report Frequency" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="5" max="2678400" value="0">
+					<Help>Number of seconds</Help>
+				</Value>
+				<Value type="int" genre="config" instance="1" index="174" label="Electricity Report Frequency" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="5" max="2678400" value="0">
+					<Help>Number of seconds</Help>
+				</Value>
+			</CommandClass>
+			<CommandClass id="114" name="COMMAND_CLASS_MANUFACTURER_SPECIFIC" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+			</CommandClass>
+			<CommandClass id="115" name="COMMAND_CLASS_POWERLEVEL" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="list" genre="system" instance="1" index="0" label="Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
+					<Item label="Normal" value="0" />
+					<Item label="-1dB" value="1" />
+					<Item label="-2dB" value="2" />
+					<Item label="-3dB" value="3" />
+					<Item label="-4dB" value="4" />
+					<Item label="-5dB" value="5" />
+					<Item label="-6dB" value="6" />
+					<Item label="-7dB" value="7" />
+					<Item label="-8dB" value="8" />
+					<Item label="-9dB" value="9" />
+				</Value>
+				<Value type="byte" genre="system" instance="1" index="1" label="Timeout" units="seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="button" genre="system" instance="1" index="2" label="Set Powerlevel" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="byte" genre="system" instance="1" index="3" label="Test Node" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="list" genre="system" instance="1" index="4" label="Test Powerlevel" units="dB" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
+					<Item label="Normal" value="0" />
+					<Item label="-1dB" value="1" />
+					<Item label="-2dB" value="2" />
+					<Item label="-3dB" value="3" />
+					<Item label="-4dB" value="4" />
+					<Item label="-5dB" value="5" />
+					<Item label="-6dB" value="6" />
+					<Item label="-7dB" value="7" />
+					<Item label="-8dB" value="8" />
+					<Item label="-9dB" value="9" />
+				</Value>
+				<Value type="short" genre="system" instance="1" index="5" label="Frame Count" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
+				<Value type="button" genre="system" instance="1" index="6" label="Test" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="button" genre="system" instance="1" index="7" label="Report" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
+				<Value type="list" genre="system" instance="1" index="8" label="Test Status" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" vindex="0" size="1">
+					<Item label="Failed" value="0" />
+					<Item label="Success" value="1" />
+					<Item label="In Progress" value="2" />
+				</Value>
+				<Value type="short" genre="system" instance="1" index="9" label="Acked Frames" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-32768" max="32767" value="0" />
+			</CommandClass>
+			<CommandClass id="133" name="COMMAND_CLASS_ASSOCIATION" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Associations num_groups="1">
+					<Group index="1" max_associations="5" label="Lifeline" auto="true">
+						<Node id="1" />
+					</Group>
+				</Associations>
+			</CommandClass>
+			<CommandClass id="134" name="COMMAND_CLASS_VERSION" version="1" request_flags="4" innif="true">
+				<Instance index="1" />
+				<Value type="string" genre="system" instance="1" index="0" label="Library Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="3" />
+				<Value type="string" genre="system" instance="1" index="1" label="Protocol Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="4.38" />
+				<Value type="string" genre="system" instance="1" index="2" label="Application Version" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="1.04" />
+			</CommandClass>
+		</CommandClasses>
+	</Node>
+	<Node id="47" name="" location="" basic="4" generic="7" specific="1" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="WakeUp">
+		<Manufacturer id="0" name="">
+			<Product type="0" id="0" name="" />
+		</Manufacturer>
+		<CommandClasses>
+			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1">
+				<Instance index="1" />
+				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+			</CommandClass>
+			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="1" request_flags="2">
+				<Instance index="1" />
+				<Value type="int" genre="system" instance="1" index="0" label="Wake-up Interval" units="Seconds" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3600" />
 			</CommandClass>
 		</CommandClasses>
 	</Node>

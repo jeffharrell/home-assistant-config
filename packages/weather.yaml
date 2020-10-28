@@ -47,6 +47,14 @@ sensor:
     attribute: value
     scan_interval: 300
 
+  - platform: scrape
+    name: outside_pm25
+    unit_of_measurement: "µg/m3"
+    resource: !secret ambient_weather_url
+    select: "[name='pm25']"
+    attribute: value
+    scan_interval: 300
+
   - platform: darksky
     api_key: !secret darksky_api_key
     forecast:

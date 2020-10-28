@@ -20,26 +20,6 @@ binary_sensor:
     scan_interval: 120
 
   - platform: ping
-    name: awair
-    host: !secret awair_url
-    scan_interval: 120
-
-  - platform: ping
-    name: harmony_hub
-    host: !secret harmony_url
-    scan_interval: 120
-
-  - platform: ping
-    name: skybell
-    host: !secret skybell_url
-    scan_interval: 120
-
-  - platform: ping
-    name: abode_gateway
-    host: !secret abobe_gateway_url
-    scan_interval: 120
-
-  - platform: ping
     name: ambient_observer
     host: !secret ambient_observer_url
     scan_interval: 120
@@ -55,10 +35,6 @@ automation:
           - binary_sensor.family_room_camera
           - binary_sensor.front_yard_camera
           - binary_sensor.back_yard_camera
-          - binary_sensor.awair
-          - binary_sensor.harmony_hub
-          - binary_sensor.skybell
-          - binary_sensor.abode_gateway
           - binary_sensor.ambient_observer
         to: "off"
         for:

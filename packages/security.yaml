@@ -30,13 +30,6 @@ homeassistant:
         device_class: opening
 
 
-camera:
-  - platform: synology
-    url: !secret synology_url
-    username: !secret synology_user
-    password: !secret synology_pass
-
-
 automation:
   - alias: Security - Say status
     initial_state: True
