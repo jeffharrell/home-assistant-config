@@ -5,38 +5,3 @@ binary_sensor:
         friendly_name: "Washer"
         value_template: >-
           {{ states('sensor.washer_power')|int > 2 }}
-      dryer:
-        friendly_name: "Dryer"
-        value_template: >-
-          {{ states('sensor.dryer_burglar')|int == 3 }}
-
-automation:
-  - alias: Appliance - Washer on
-    initial_state: False
-    trigger:
-      platform: state
-      entity_id: binary_sensor.washer
-      to: "on"
-      for: "00:00:30"
-    mode: single
-    action:
-      - service: notify.jeffs_phone
-        data:
-          title: Home
-          message: "Washer is on."
-      - delay: "00:05:00"
-      
-  - alias: Appliance - Dryer on
-    initial_state: False
-    trigger:
-      platform: state
-      entity_id: binary_sensor.dryer
-      to: "on"
-      for: "00:00:30"
-    mode: single
-    action:
-      - service: notify.jeffs_phone
-        data:
-          title: Home
-          message: "Dryer is on."
-      - delay: "00:05:00"
