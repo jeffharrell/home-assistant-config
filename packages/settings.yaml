@@ -1,14 +1,3 @@
-skybell:
-  username: !secret skybell_user
-  password: !secret skybell_pass
-
-
-switch:
-  - platform: skybell
-    monitored_conditions:
-      - do_not_disturb
-
-
 automation:
   - alias: Settings - Reset at midnight
     initial_state: True
@@ -21,6 +10,3 @@ automation:
           - automation.security_doorbell_notifications
           - automation.security_say_status
           - automation.security_door_open
-      - service: homeassistant.turn_off
-        entity_id:
-          - switch.skybell_front_door_do_not_disturb
