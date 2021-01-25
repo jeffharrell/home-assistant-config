@@ -64,14 +64,9 @@ automation:
       - service: homeassistant.turn_on
         entity_id:
           - switch.hallway
-      - service: notify.alexa_media
+      - service: tts.google_translate_say
+        entity_id: "all"
         data_template:
-          data:
-            type: announce
-          target:
-            - media_player.master_bedroom_echo
-            - media_player.living_room_echo
-            - media_player.family_room_echo
           message: "Welcome home. I turned the lights on for you."
 
   - alias: Lights - Turn off after sunrise

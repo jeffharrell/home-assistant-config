@@ -47,11 +47,10 @@ automation:
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: notify.alexa_media
+      - service: tts.google_translate_say
+        entity_id: media_player.master_bedroom_speaker
         data_template:
-          data:
-            type: tts
-          target: media_player.master_bedroom_echo
+          cache: false
           message: >
             {% set status = states("alarm_control_panel.abode_alarm") %}
 

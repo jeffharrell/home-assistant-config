@@ -1,26 +1,42 @@
-alexa:
-  smart_home:
-    filter:
-      include_domains:
-        - switch
-        - light
-        - script
-        - scene
-      exclude_entities:
-        - scene.good_morning
-        - scene.let_dog_out
-        - light.kitchen_1
-        - light.kitchen_2
-        - switch.front_landscape
-        - switch.back_landscape
-        - switch.fountain
-        - switch.skybell_front_door_do_not_disturb
-        - script.snapshot_door_and_send
-        - script.snapshot_cameras_and_send
-        - script.alarm_disarm_silently
-        - script.good_morning
-        - script.hvac_windows_open
-        - script.hvac_windows_closed
+google_assistant:
+  project_id: !secret google_assistant_id
+  service_account: !include ../google_assistant_key.json
+  report_state: true
+  expose_by_default: true
+  exposed_domains:
+    - switch
+    - light
+    - script
+    - scene
+  entity_config:
+    scene.good_morning:
+      expose: false
+    scene.let_dog_out:
+      expose: false
+    light.kitchen_1:
+      expose: false
+    light.kitchen_2:
+      expose: false
+    switch.front_landscape:
+      expose: false
+    switch.back_landscape:
+      expose: false
+    switch.fountain:
+      expose: false
+    sensor.washer_power:
+      expose: false
+    script.snapshot_door_and_send:
+      expose: false
+    script.snapshot_cameras_and_send:
+      expose: false
+    script.alarm_disarm_silently:
+      expose: false
+    script.good_morning:
+      expose: false
+    script.hvac_windows_open:
+      expose: false
+    script.hvac_windows_closed:
+      expose: false
 
 
 remote:

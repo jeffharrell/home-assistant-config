@@ -10,7 +10,6 @@ homeassistant:
   allowlist_external_dirs:
     - /tmp
 
-
 config:
 
 api:
