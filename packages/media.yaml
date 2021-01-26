@@ -1,43 +1,3 @@
-google_assistant:
-  project_id: !secret google_assistant_id
-  service_account: !include ../google_assistant_key.json
-  report_state: true
-  expose_by_default: true
-  exposed_domains:
-    - switch
-    - light
-    - script
-    - scene
-  entity_config:
-    scene.good_morning:
-      expose: false
-    scene.let_dog_out:
-      expose: false
-    light.kitchen_1:
-      expose: false
-    light.kitchen_2:
-      expose: false
-    switch.front_landscape:
-      expose: false
-    switch.back_landscape:
-      expose: false
-    switch.fountain:
-      expose: false
-    sensor.washer_power:
-      expose: false
-    script.snapshot_door_and_send:
-      expose: false
-    script.snapshot_cameras_and_send:
-      expose: false
-    script.alarm_disarm_silently:
-      expose: false
-    script.good_morning:
-      expose: false
-    script.hvac_windows_open:
-      expose: false
-    script.hvac_windows_closed:
-      expose: false
-
 
 remote:
   - platform: harmony
@@ -52,9 +12,8 @@ input_select:
       - "Select One"
       - "Power Off"
       - "Apple TV"
-      - "Fire TV"
+      - "Chromecast"
       - "Speakers"
-      - "Speakers Outside"
       - "Bluetooth"
     initial: "Select One"
 
@@ -79,12 +38,10 @@ automation:
           activity: >
             {% if is_state("input_select.family_room_media", "Apple TV") %}
               21762413
-            {% elif is_state("input_select.family_room_media", "Fire TV") %}
-              35169619
+            {% elif is_state("input_select.family_room_media", "Chromecast") %}
+              47442815
             {% elif is_state("input_select.family_room_media", "Speakers") %}
               18890244
-            {% elif is_state("input_select.family_room_media", "Speakers Outside") %}
-              44120137
             {% elif is_state("input_select.family_room_media", "Bluetooth") %}
               22068322
             {% elif is_state("input_select.family_room_media", "Power Off") %}

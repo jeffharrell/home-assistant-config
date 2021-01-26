@@ -1,0 +1,38 @@
+project_id: !secret google_assistant_id
+service_account: !include ../google_assistant_key.json
+report_state: true
+expose_by_default: true
+exposed_domains:
+  - switch
+  - light
+  - script
+  - scene
+entity_config:
+  scene.good_morning:
+    expose: false
+  scene.let_dog_out:
+    expose: false
+  light.kitchen_1:
+    expose: false
+  light.kitchen_2:
+    expose: false
+  switch.front_landscape:
+    expose: false
+  switch.back_landscape:
+    expose: false
+  switch.fountain:
+    expose: false
+  script.snapshot_door_and_save:
+    expose: false
+  script.snapshot_door_and_send:
+    expose: false
+  script.snapshot_cameras_and_send:
+    expose: false
+  script.alarm_disarm_silently:
+    expose: false
+  script.good_morning:
+    expose: false
+  script.hvac_windows_open:
+    expose: false
+  script.hvac_windows_closed:
+    expose: false
