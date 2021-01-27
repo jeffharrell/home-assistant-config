@@ -64,7 +64,7 @@ automation:
       - service: homeassistant.turn_on
         entity_id:
           - switch.hallway
-      - service: tts.google_translate_say
+      - service: tts.google_say
         entity_id: "all"
         data_template:
           message: "Welcome home. I turned the lights on for you."

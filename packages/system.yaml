@@ -1,6 +1,11 @@
 tts:
-  - platform: google_translate
+  - platform: google_cloud
+    key_file: google_cloud_key.json
     base_url: !secret external_url
+    voice: en-US-Standard-J
+    text_type: ssml
+    cache: false
+    service_name: google_say
 
 
 automation:
