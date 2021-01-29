@@ -50,20 +50,17 @@ automation:
       - service: tts.google_say
         entity_id: media_player.master_bedroom_speaker
         data_template:
-          cache: false
           message: >
             {% set status = states("alarm_control_panel.abode_alarm") %}
 
             {%- if status == "armed_home" -%}
-              Alarm armed... Home
-            {%- elif status == "armed_away" -%}
-              Alarm armed... Away
+              The alarm is now armed
             {%- elif status == "disarmed" -%}
-              Alarm Off
+              Turning the alarm off
             {%- endif -%}
 
             {%- if is_state("group.security", "on") and status != "disarmed" -%}
-              ... Warning... The following are open:
+              Warning – The following are open:
               {%- for entity in expand("group.security") -%}
                 {%- if entity.state == "on" -%}
                   ... {{ entity.name }}
