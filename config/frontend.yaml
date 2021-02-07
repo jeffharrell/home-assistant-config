@@ -1,5 +1,31 @@
 themes:
   home:
+    card-mod-theme: home
+    header-height: 0;
+    card-mod-root: |
+      app-header {
+        top: auto;
+        bottom: 0;
+        height: 90px;
+        transform: translate3d(0, 0, 0) !important;
+      }
+
+      app-toolbar {
+        transform: translate3d(0px, 0px, 0px) !important;
+      }
+
+      ha-tabs {
+        --paper-tabs-selection-bar-color: transparent !important;
+      }
+
+      #view {
+        top: -90px;
+      }
+
+      mwc-icon-button[slot="trigger"] > ha-svg-icon {
+        display: none;
+      }
+
     # Colors
     text-color: '#555'
     text-medium-color: '#666'

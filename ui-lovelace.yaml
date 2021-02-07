@@ -1,18 +1,5 @@
 title: "Home"
 
-custom_header:
-  tab_indicator_color: "transparent"
-  exceptions:
-    - conditions:
-        user_agent: "Mobile"
-      config:
-        compact_mode: true
-        footer_mode: true
-        options_hide: true
-        reverse_button_direction: true
-        header_css: "height: 90px;"
-
-
 views:
   - title: "Home"
     cards:
