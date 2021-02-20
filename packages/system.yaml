@@ -1,11 +1,24 @@
+# node 42
+# range extender - living room
+
+# node 40
+# range extender - master bedroom
+
+# node 36
+# home energy meter
+
 tts:
   - platform: google_cloud
+    service_name: google_say
     key_file: google_cloud_key.json
     base_url: !secret external_url
-    voice: en-US-Standard-J
+    voice: en-US-Wavenet-C
     text_type: ssml
+    speed: 1.1
+    pitch: 4.0
     cache: false
-    service_name: google_say
+    profiles:
+      - medium-bluetooth-speaker-class-device
 
 
 automation:
@@ -42,9 +55,8 @@ automation:
           {%- endif -%}
         {%- endfor -%}
     action:
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: >
             {% for zwave in states.zwave if zwave.attributes.battery_level %}
               {%- if zwave.attributes.battery_level|int < 20 -%}
@@ -64,9 +76,8 @@ automation:
           - zwave.pool_light
         to: "dead"
     action:
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "{{ trigger.to_state.attributes.friendly_name }} is dead. Let me heal it..."
       - delay: "00:00:60"
       - service: zwave.test_node
@@ -75,7 +86,6 @@ automation:
       - delay: "00:00:60"
       - condition: template
         value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "No luck. {{ trigger.to_state.attributes.friendly_name }} is marked as dead."

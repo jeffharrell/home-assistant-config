@@ -3,23 +3,25 @@ themes:
     card-mod-theme: home
     header-height: 0;
     card-mod-root: |
-      app-header {
-        top: auto;
-        bottom: 0;
-        height: 90px;
-        transform: translate3d(0, 0, 0) !important;
-      }
+      @media only screen and (hover: none) and (pointer: coarse) {
+        app-header {
+          top: auto;
+          bottom: 0;
+          height: 90px;
+          transform: translate3d(0, 0, 0) !important;
+        }
 
-      app-toolbar {
-        transform: translate3d(0px, 0px, 0px) !important;
+        app-toolbar {
+          transform: translate3d(0px, 0px, 0px) !important;
+        }
+
+        #view {
+          top: -90px;
+        }
       }
 
       ha-tabs {
         --paper-tabs-selection-bar-color: transparent !important;
-      }
-
-      #view {
-        top: -90px;
       }
 
       mwc-icon-button[slot="trigger"] > ha-svg-icon {

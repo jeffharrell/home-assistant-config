@@ -1,3 +1,15 @@
+# node 51
+# doorbell
+
+# node 50
+# guest garage door
+
+# node 29
+# jeffs garage door
+
+# node 21
+# jillians garage door
+
 group:
   doors_and_windows:
     entities:
@@ -54,13 +66,13 @@ automation:
             {% set status = states("alarm_control_panel.abode_alarm") %}
 
             {%- if status == "armed_home" -%}
-              The alarm is now armed
+              The alarm is armed
             {%- elif status == "disarmed" -%}
               Turning the alarm off
             {%- endif -%}
 
             {%- if is_state("group.security", "on") and status != "disarmed" -%}
-              Warning – The following are open:
+              Warning – The following are open:
               {%- for entity in expand("group.security") -%}
                 {%- if entity.state == "on" -%}
                   ... {{ entity.name }}
@@ -134,9 +146,8 @@ automation:
       - platform: event
         event_type: abode_panel_restore
     action:
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "Alarm Fault: {{ trigger.event.data.event_name }}"
 
   - alias: Security - Doorbell Notifications
@@ -164,9 +175,8 @@ automation:
         minutes: 10
     mode: parallel
     action:
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
 
 
@@ -184,34 +194,59 @@ script:
         data:
           entity_id: camera.front_door
           filename: /tmp/camera.front_door.png
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: Home
-          message: Doorbell
+          message: "Doorbell"
           data:
-            images:
-              - /tmp/camera.front_door.png
+            file:
+              path: /tmp/camera.front_door.png
 
   snapshot_cameras_and_send:
     sequence:
       - service: camera.snapshot
         data:
-          entity_id:
-            - camera.front_door
-            - camera.family_room
-            - camera.living_room
-            - camera.back_yard
-          filename: /tmp/{{ entity_id.entity_id }}.png
-      - service: notify.jeff_and_jillians_phone
+          entity_id: camera.front_door
+          filename: /tmp/camera.front_door.png
+      - service: notify.slack
         data_template:
-          title: Home
           message: "{{ message }}"
           data:
-            images:
-              - /tmp/camera.front_door.png
-              - /tmp/camera.family_room.png
-              - /tmp/camera.living_room.png
-              - /tmp/camera.back_yard.png
+            file:
+              path: /tmp/camera.front_door.png
+
+      - service: camera.snapshot
+        data:
+          entity_id: camera.family_room
+          filename: /tmp/camera.family_room.png
+      - service: notify.slack
+        data_template:
+          message: ""
+          data:
+            file:
+              path: /tmp/camera.family_room.png
+
+      - service: camera.snapshot
+        data:
+          entity_id: camera.living_room
+          filename: /tmp/camera.living_room.png
+      - service: notify.slack
+        data_template:
+          message: ""
+          data:
+            file:
+              path: /tmp/camera.living_room.png
+
+      - service: camera.snapshot
+        data:
+          entity_id: camera.back_yard
+          filename: /tmp/camera.back_yard.png
+      - service: notify.slack
+        data_template:
+          message: ""
+          data:
+            file:
+              path: /tmp/camera.back_yard.png
+
 
   alarm_disarm_silently:
     mode: restart

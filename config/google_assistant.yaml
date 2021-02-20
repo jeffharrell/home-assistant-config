@@ -8,6 +8,12 @@ exposed_domains:
   - script
   - scene
 entity_config:
+  scene.movie_lights:
+    aliases:
+      - MOVIE_TIME
+  scene.dinner_lights:
+    aliases:
+      - DINNER_TIME
   scene.good_morning:
     expose: false
   scene.let_dog_out:
@@ -21,6 +27,16 @@ entity_config:
   switch.back_landscape:
     expose: false
   switch.fountain:
+    expose: false
+  switch.family_room_chromecast:
+    expose: false
+  switch.family_room_apple_tv:
+    expose: false
+  switch.family_room_bluetooth:
+    expose: false
+  switch.family_room_speakers:
+    expose: false
+  switch.zooz_plug:
     expose: false
   script.snapshot_door_and_save:
     expose: false

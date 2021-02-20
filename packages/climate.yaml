@@ -1,3 +1,6 @@
+# node 20
+# house fan
+
 sensor:
   - platform: template
     sensors:
@@ -78,9 +81,8 @@ automation:
         for: "00:30:00"
     action:
       - service: script.hvac_windows_open
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "HVAC disabled since a window was left open."
       - delay: "00:00:10"
       - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"

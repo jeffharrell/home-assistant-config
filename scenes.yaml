@@ -1,4 +1,4 @@
-- name: Movie Time
+- name: Movie Lights
   entities:
     light.kitchen_1:
       state: on
@@ -12,7 +12,7 @@
     light.pantry: off
     switch.kitchen_cabinets: off
 
-- name: Dinner Time
+- name: Dinner Lights
   entities:
     light.kitchen_1:
       state: on

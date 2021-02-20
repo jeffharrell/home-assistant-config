@@ -89,7 +89,6 @@ automation:
       entity_id: sensor.dark_sky_overnight_low_temperature_0d
       below: 33
     action:
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: Home
           message: "Cover the plants! Todays low temperature is {{ states('sensor.dark_sky_overnight_low_temperature_0d') }}°F."

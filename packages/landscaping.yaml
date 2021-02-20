@@ -1,3 +1,6 @@
+# node 33
+# fountain
+
 automation:
   - alias: Landscape - Lights
     initial_state: True
