@@ -85,7 +85,7 @@ views:
                 - type: horizontal-stack
                   cards:
                     - type: entity-button
-                      entity: scene.dinner_time
+                      entity: scene.dinner_lights
                       name: "Dinner"
                       icon: mdi:food-fork-drink
                       icon_height: 1.5em
@@ -93,9 +93,9 @@ views:
                         action: call-service
                         service: scene.turn_on
                         service_data:
-                          entity_id: scene.dinner_time
+                          entity_id: scene.dinner_lights
                     - type: entity-button
-                      entity: scene.movie_time
+                      entity: scene.movie_lights
                       name: "Movie"
                       icon: mdi:movie
                       icon_height: 1.5em
@@ -103,7 +103,7 @@ views:
                         action: call-service
                         service: scene.turn_on
                         service_data:
-                          entity_id: scene.movie_time
+                          entity_id: scene.movie_lights
 
                 - type: horizontal-stack
                   cards:
@@ -273,6 +273,7 @@ views:
           - entity: switch.fountain
             icon: mdi:cup-water
           - type: section
+          - entity: automation.landscape_back_door_light
+            name: "Automate Back Lights"
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
-            icon: mdi:timer-outline

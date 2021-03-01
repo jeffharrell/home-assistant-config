@@ -24,8 +24,14 @@ entity_config:
     expose: false
   switch.front_landscape:
     expose: false
+  switch.front_yard_switch:
+    aliases:
+      - FRONT_LIGHTS
   switch.back_landscape:
     expose: false
+  switch.back_yard_switch:
+    aliases:
+      - BACK_LIGHTS
   switch.fountain:
     expose: false
   switch.family_room_chromecast:

@@ -1,12 +1,13 @@
 automation:
-  - alias: Settings - Reset at midnight
+  - alias: Settings - Reset each day
     initial_state: True
     trigger:
       platform: time
-      at: "00:00:00"
+      at: "04:00:00"
     action:
       - service: homeassistant.turn_on
         entity_id:
           - automation.security_doorbell_notifications
           - automation.security_say_status
           - automation.security_door_open
+          - automation.landscape_back_door_light
