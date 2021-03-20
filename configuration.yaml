@@ -28,8 +28,6 @@ influxdb: !include config/influxdb.yaml
 
 notify: !include config/notify.yaml
 
-zwave: !include config/zwave.yaml
-
 google_assistant: !include config/google_assistant.yaml
 
 system_health:

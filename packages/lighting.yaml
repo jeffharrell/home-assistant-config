@@ -46,7 +46,7 @@ group:
       - light.family_room
       # node 34
       - light.dining_room
-      # node
+      # node 10
       - switch.living_room
       # node 14
       - switch.entryway

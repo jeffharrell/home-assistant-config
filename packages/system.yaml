@@ -49,43 +49,39 @@ automation:
     condition:
       condition: template
       value_template: >
-        {% for zwave in states.zwave if zwave.attributes.battery_level %}
-          {%- if zwave.attributes.battery_level|int < 20 -%}
+        {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
+          {%- if (battery.state|int < 100) -%}
             {{ true }}
-          {%- endif -%}
-        {%- endfor -%}
+          {% endif %}
+        {% endfor %}
     action:
       - service: notify.slack
         data_template:
           message: >
-            {% for zwave in states.zwave if zwave.attributes.battery_level %}
-              {%- if zwave.attributes.battery_level|int < 20 -%}
-                {{ zwave.attributes.friendly_name }} needs new batteries.
-              {%- endif -%}
-            {%- endfor -%}
+            Warning! 
+            {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
+              {%- if (battery.state|int < 100) -%}
+                - {{ battery.attributes.friendly_name }} battery is low. 
+              {% endif %}
+            {% endfor %}
 
-  - alias: System - Dead sensor check
+  - alias: System - Refresh old zwave nodes
     initial_state: True
     trigger:
-      - platform: state
-        entity_id:
-          - zwave.front_landscape
-          - zwave.back_landscape
-          - zwave.fountain
-          - zwave.doorbell
-          - zwave.pool_light
-        to: "dead"
+      platform: time_pattern
+      minutes: "/5"
     action:
-      - service: notify.slack
-        data_template:
-          message: "{{ trigger.to_state.attributes.friendly_name }} is dead. Let me heal it..."
-      - delay: "00:00:60"
-      - service: zwave.test_node
-        data_template:
-          node_id: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].attributes.node_id }}"
-      - delay: "00:00:60"
-      - condition: template
-        value_template: "{{ states[trigger.to_state.domain][trigger.to_state.object_id].state == 'dead' }}"
-      - service: notify.slack
-        data_template:
-          message: "No luck. {{ trigger.to_state.attributes.friendly_name }} is marked as dead."
+      - service: zwave_js.refresh_value
+        data:
+          entity_id:
+            - light.family_room
+            - light.island
+            - light.kitchen_1
+            - light.kitchen_2
+            - light.master_bedroom
+            - light.pantry
+            - switch.entryway
+            - switch.hallway
+            - switch.kitchen_cabinets
+            - switch.living_room
+          refresh_all_values: false

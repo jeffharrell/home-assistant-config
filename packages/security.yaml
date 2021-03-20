@@ -30,6 +30,7 @@ group:
       - binary_sensor.jeffs_garage_door
       - binary_sensor.jillians_garage_door
       - binary_sensor.guest_garage_door
+      - binary_sensor.garage_side_door
   security:
     entities:
       - group.doors_and_windows
@@ -246,7 +247,6 @@ script:
           data:
             file:
               path: /tmp/camera.back_yard.png
-
 
   alarm_disarm_silently:
     mode: restart
