@@ -1,15 +1,3 @@
-# node 51
-# doorbell
-
-# node 50
-# guest garage door
-
-# node 29
-# jeffs garage door
-
-# node 21
-# jillians garage door
-
 group:
   doors_and_windows:
     entities:

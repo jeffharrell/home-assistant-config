@@ -34,7 +34,7 @@ automation:
             {% elif is_state("input_select.family_room_media", "Chromecast") %}
               47442815
             {% elif is_state("input_select.family_room_media", "Speakers") %}
-              18890244
+              47873866
             {% elif is_state("input_select.family_room_media", "Bluetooth") %}
               22068322
             {% elif is_state("input_select.family_room_media", "Power Off") %}

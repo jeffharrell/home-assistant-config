@@ -4,6 +4,7 @@ home-assistant.sublime-workspace
 deps/
 src/
 www/community/
+www/cameras/
 custom_components/
 __pycache__
 .DS_Store

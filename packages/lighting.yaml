@@ -2,57 +2,38 @@ light:
   - platform: group
     name: Kitchen
     entities:
-      # node 7
       - light.kitchen_1
-      # node 6
       - light.kitchen_2
 
 
 group:
   landscape_lights:
     entities:
-      # node 32
       - switch.back_landscape
-      # node 31
       - switch.front_landscape
-      # node 45
       - switch.front_yard_switch
-      # node 39
       - switch.pool_light
   bedroom_lights:
     entities:
-      # node 35
       - switch.boys_bedroom
-      # node 26
       - light.guest_bedroom
-      # node 27
       - light.master_bedroom
-      # node 41
       - light.play_room
   kitchen_lights:
     entities:
       - light.Kitchen
-      # node 5
       - light.island
-      # node 16
       - switch.kitchen_cabinets
-      # node 3
       - light.pantry
   lights:
     entities:
       - group.bedroom_lights
       - group.kitchen_lights
-      # node 8
       - light.family_room
-      # node 34
       - light.dining_room
-      # node 10
       - switch.living_room
-      # node 14
       - switch.entryway
-      # node 15
       - switch.hallway
-      # node 9
       - switch.back_yard_switch
 
 
@@ -112,3 +93,17 @@ automation:
       - service: homeassistant.turn_off
         entity_id:
           - group.lights
+
+  - alias: Lights - Playroom light toggles bulb
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: light.play_room
+        to: "on"
+      - platform: state
+        entity_id: light.play_room
+        to: "off"
+    action:
+      - service_template: >
+          light.turn_{% if trigger and trigger.to_state.state == "on" %}on{% else %}off{% endif %}
+        entity_id: light.zipato_bulb

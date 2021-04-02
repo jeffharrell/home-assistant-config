@@ -1,10 +1,10 @@
-automation:
-  - alias: Energy - Reset meter
-    initial_state: True
-    trigger:
-      platform: time
-      at: "00:00:00"
-    action:
-      - service: zwave.reset_node_meters
-        data:
-          node_id: 36
+# automation:
+#   - alias: Energy - Reset meter
+#     initial_state: True
+#     trigger:
+#       platform: time
+#       at: "00:00:00"
+#     action:
+#       - service: zwave.reset_node_meters
+#         data:
+#           node_id: 36

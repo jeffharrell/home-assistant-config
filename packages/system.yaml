@@ -1,12 +1,3 @@
-# node 42
-# range extender - living room
-
-# node 40
-# range extender - master bedroom
-
-# node 36
-# home energy meter
-
 tts:
   - platform: google_cloud
     service_name: google_say
@@ -58,10 +49,10 @@ automation:
       - service: notify.slack
         data_template:
           message: >
-            Warning! 
+            Warning!
             {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
               {%- if (battery.state|int < 100) -%}
-                - {{ battery.attributes.friendly_name }} battery is low. 
+                - {{ battery.attributes.friendly_name }} battery is low.
               {% endif %}
             {% endfor %}
 

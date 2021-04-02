@@ -11,15 +11,16 @@ views:
           - type: 'custom:refreshable-picture-card'
             update_interval: 120
             static_picture: /local/cameras/house.png
-            style: |
-              .type-custom-refreshable-picture-card p,
-              .type-custom-refreshable-picture-card br {
-                display: none;
-              }
-              .type-custom-refreshable-picture-card .thePic {
-                width: 100% !important;
-                border-radius: var(--ha-card-border-radius, 4px);
-              }
+            card_mod:
+              style: |
+                .type-custom-refreshable-picture-card p,
+                .type-custom-refreshable-picture-card br {
+                  display: none;
+                }
+                .type-custom-refreshable-picture-card .thePic {
+                  width: 100% !important;
+                  border-radius: var(--ha-card-border-radius, 4px);
+                }
 
           # Actions - Alarm is on
           - type: conditional
@@ -199,7 +200,7 @@ views:
               - entity: sensor.boys_bedroom_status
                 name: false
           - type: custom:multiple-entity-row
-            entity: light.zipato_bulb
+            entity: light.play_room
             toggle: true
             entities:
               - entity: sensor.playroom_status
