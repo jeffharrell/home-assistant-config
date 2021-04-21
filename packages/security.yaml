@@ -124,7 +124,7 @@ automation:
               entity_id: script.snapshot_cameras_and_send
               data_template:
                 variables:
-                  message: "Alarm ({{ repeat.interval }})"
+                  message: "Alarm!!!"
             - delay: "00:01:00"
 
   - alias: Security - Fault
