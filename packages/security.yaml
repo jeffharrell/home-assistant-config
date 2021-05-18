@@ -55,9 +55,9 @@ automation:
             {% set status = states("alarm_control_panel.abode_alarm") %}
 
             {%- if status == "armed_home" -%}
-              The alarm is armed
+              Alarm armed
             {%- elif status == "disarmed" -%}
-              Turning the alarm off
+              Alarm off
             {%- endif -%}
 
             {%- if is_state("group.security", "on") and status != "disarmed" -%}
