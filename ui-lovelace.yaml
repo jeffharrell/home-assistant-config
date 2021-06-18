@@ -236,7 +236,7 @@ views:
               - attribute: current_temperature
                 name: "Temperature"
                 unit: "°F"
-              - entity: climate.home
+              - attribute: preset_mode
                 name: "Mode"
           - entity: switch.house_fan_switch
             icon: mdi:fan
