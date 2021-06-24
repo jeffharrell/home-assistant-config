@@ -54,7 +54,7 @@ entity_config:
     expose: false
   script.good_morning:
     expose: false
-  script.hvac_windows_open:
+  script.hvac_disable:
     expose: false
-  script.hvac_windows_closed:
+  script.hvac_resume:
     expose: false

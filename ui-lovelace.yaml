@@ -173,19 +173,39 @@ views:
         state_color: true
         show_header_toggle: true
         entities:
-          - entity: light.family_room
+          # Family Room Area
+          - type: custom:multiple-entity-row
+            entity: light.family_room
+            icon: mdi:lightbulb
+            toggle: true
+            entities:
+              - entity: sensor.family_room_status
+                name: false
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
             name: "Cabinets"
             icon: mdi:lightbulb
           - entity: light.island
-          - entity: switch.living_room
+
+          - type: divider
+
+          # Living Room Area
+          - type: custom:multiple-entity-row
+            entity: switch.living_room
             icon: mdi:lightbulb
+            toggle: true
+            entities:
+              - entity: sensor.living_room_status
+                name: false
           - entity: light.dining_room
           - entity: switch.entryway
             icon: mdi:lightbulb
           - entity: switch.hallway
             icon: mdi:lightbulb
+
+          - type: divider
+
+          # Bedrooms
           - type: custom:multiple-entity-row
             entity: light.master_bedroom
             toggle: true
