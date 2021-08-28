@@ -57,18 +57,22 @@ automation:
             {% set status = states("alarm_control_panel.abode_alarm") %}
 
             {%- if status == "armed_home" -%}
-              Alarm armed
-            {%- elif status == "disarmed" -%}
-              Alarm off
-            {%- endif -%}
+              Alarm armed...
 
-            {%- if is_state("group.security", "on") and status != "disarmed" -%}
-              Warning – The following are open:
-              {%- for entity in expand("group.security") -%}
-                {%- if entity.state == "on" -%}
-                  ... {{ entity.name }}
-                {%- endif -%}
-              {%- endfor -%}
+              {%- if is_state("group.security", "on") -%}
+                Warning – The following are open:
+                {%- for entity in expand("group.security") -%}
+                  {%- if entity.state == "on" -%}
+                    ... {{ entity.name }}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- elif status == "disarmed" -%}
+              Alarm off...
+
+              {%- if is_state('sensor.air_quality', 'moderate') or is_state('sensor.air_quality', 'unhealthy') -%}
+                Warning – The air quality is {{ states('sensor.air_quality') }}
+              {%- endif -%}
             {%- endif -%}
 
   - alias: Security - Turn house off
