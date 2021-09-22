@@ -79,15 +79,6 @@ sensor:
           {%- else -%}
             mdi:weather-sunny
           {%- endif %}
-      air_quality:
-        value_template: >
-          {%- if states('sensor.outside_pm25')|float > 35.4 -%}
-            unhealthy
-          {%- elif states('sensor.outside_pm25')|float > 12 -%}
-            moderate
-          {%- else -%}
-            good
-          {%- endif %}
 
 
 automation:

@@ -67,12 +67,6 @@ automation:
                   {%- endif -%}
                 {%- endfor -%}
               {%- endif -%}
-            {%- elif status == "disarmed" -%}
-              Alarm off...
-
-              {%- if is_state('sensor.air_quality', 'moderate') or is_state('sensor.air_quality', 'unhealthy') -%}
-                Warning – The air quality is {{ states('sensor.air_quality') }}
-              {%- endif -%}
             {%- endif -%}
 
   - alias: Security - Turn house off
@@ -109,7 +103,6 @@ automation:
           - light.kitchen_2
           - light.island
           - light.family_room
-          - light.pantry
           - light.dining_room
           - light.master_bedroom
           - light.guest_bedroom

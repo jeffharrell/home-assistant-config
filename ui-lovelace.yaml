@@ -147,8 +147,8 @@ views:
                     <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
 
                   {% endif %}
-                  {% if states('sensor.air_quality') != 'good' %}
-                    <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_quality') }}
+                  {% if states('sensor.air_pollution_level') != 'good' %}
+                    <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
 
                   {% endif %}
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
@@ -265,6 +265,10 @@ views:
           - entity: switch.house_fan_switch
             icon: mdi:fan
             name: "Fan"
+          - type: section
+          - entity: automation.climate_windows_open
+            state_color: false
+            name: Turn off when windows open
 
   - title: "Outside"
     cards:
