@@ -12,6 +12,7 @@
                 "*.conf",
                 "*.json",
                 "*.log",
+                "home-assistant.log.*",
                 "*.db*",
                 "*.xml",
                 "*.sqlite",
@@ -22,12 +23,6 @@
                 "src"
             ],
             "path": "."
-        }
-    ],
-    "build_systems": [
-        {
-            "name": "List",
-            "shell_cmd": "ls -l"
         }
     ]
 }

@@ -32,7 +32,7 @@ group:
       - light.family_room
       - light.dining_room
       - switch.living_room
-      - switch.entryway
+      - light.entryway
       - switch.hallway
       - switch.back_yard_switch
 

@@ -96,7 +96,7 @@ views:
                         service_data:
                           entity_id: scene.dinner_lights
                     - type: entity-button
-                      entity: scene.movie_lights
+                      entity: scene.mood_lights
                       name: "Movie"
                       icon: mdi:movie
                       icon_height: 1.5em
@@ -104,7 +104,7 @@ views:
                         action: call-service
                         service: scene.turn_on
                         service_data:
-                          entity_id: scene.movie_lights
+                          entity_id: scene.mood_lights
 
                 - type: horizontal-stack
                   cards:
@@ -202,8 +202,7 @@ views:
               - entity: sensor.living_room_status
                 name: false
           - entity: light.dining_room
-          - entity: switch.entryway
-            icon: mdi:lightbulb
+          - entity: light.entryway
           - entity: switch.hallway
             icon: mdi:lightbulb
 

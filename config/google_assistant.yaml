@@ -8,9 +8,10 @@ exposed_domains:
   - script
   - scene
 entity_config:
-  scene.movie_lights:
+  scene.mood_lights:
     aliases:
       - MOVIE_TIME
+      - MOVIE_LIGHTS
   scene.dinner_lights:
     aliases:
       - DINNER_TIME

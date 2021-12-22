@@ -1,3 +1,6 @@
+extra_module_url:
+  - /hacsfiles/lovelace-card-mod/card-mod.js
+
 themes:
   home:
     card-mod-theme: home

@@ -1,4 +1,4 @@
-- name: Movie Lights
+- name: Mood Lights
   entities:
     light.kitchen_1:
       state: on

@@ -71,7 +71,6 @@ automation:
             - light.kitchen_2
             - light.master_bedroom
             - light.pantry
-            - switch.entryway
             - switch.hallway
             - switch.kitchen_cabinets
             - switch.living_room

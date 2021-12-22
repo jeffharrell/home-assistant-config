@@ -82,6 +82,17 @@ automation:
           - switch.house_fan_switch
           - remote.family_room
 
+
+  - alias: Security - Log Events
+    initial_state: True
+    trigger:
+      platform: event
+      event_type: abode_alarm
+    action:
+      - service: notify.slack
+        data_template:
+          message: "Alarm Event: {{ trigger.event.data|tojson }}"
+
   - alias: Security - Alert lighting
     initial_state: True
     trigger:
