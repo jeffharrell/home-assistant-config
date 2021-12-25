@@ -6,6 +6,7 @@ src/
 www/community/
 www/cameras/
 custom_components/
+blueprints/
 __pycache__
 .DS_Store
 .HA_VERSION
@@ -17,7 +18,7 @@ __pycache__
 *.pickle
 *.conf
 *.json
-*.log
+*.log*
 *.db*
 *.xml
 *.sqlite

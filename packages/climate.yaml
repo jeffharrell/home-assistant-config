@@ -55,8 +55,9 @@ automation:
       condition: template
       value_template: "{{ is_state('switch.house_fan_switch', 'on') }}"
     action:
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "House fan is running with the HVAC on!"
 
   - alias: Climate - House Fan with Dryer Running
@@ -74,8 +75,9 @@ automation:
       condition: template
       value_template: "{{ is_state('switch.house_fan_switch', 'on') and is_state('sensor.dryer', 'on') and is_state('binary_sensor.guest_window', 'on') }}"
     action:
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "House fan is running with the dryer on!"
 
   - alias: Climate - Windows Open
@@ -87,8 +89,9 @@ automation:
         for: "00:30:00"
     action:
       - service: script.hvac_disable
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "HVAC disabled since a window was left open."
       - delay: "00:00:10"
       - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
@@ -103,8 +106,9 @@ automation:
         for: "12:00:00"
     action:
       - service: script.hvac_disable
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "HVAC set to away mode."
       - delay: "00:00:10"
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"

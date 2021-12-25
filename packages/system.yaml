@@ -46,8 +46,9 @@ automation:
           {% endif %}
         {% endfor %}
     action:
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: >
             Warning!
             {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}

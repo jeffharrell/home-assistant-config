@@ -26,6 +26,10 @@ lovelace: !include config/lovelace.yaml
 
 influxdb: !include config/influxdb.yaml
 
+ios:
+
+mobile_app:
+
 notify: !include config/notify.yaml
 
 google_assistant: !include config/google_assistant.yaml

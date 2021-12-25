@@ -4,3 +4,9 @@
   default_channel: "#general"
   username: Home
   icon: ":house:"
+
+- name: phones
+  platform: group
+  services:
+    - service: mobile_app_jeffs_iphone
+    - service: mobile_app_jillians_iphone

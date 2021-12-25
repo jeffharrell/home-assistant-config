@@ -56,9 +56,10 @@ automation:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
         entity_id: switch.living_room
-      - service: notify.slack
+      - service: notify.phones
         data_template:
-          message: Turning the lights {% if trigger and trigger.event == "sunset" %}on while you are away{% else %}off{% endif %}.
+          title: "Home"
+          message: "Turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}."
 
   - alias: Lights - Turn on when coming home
     initial_state: True

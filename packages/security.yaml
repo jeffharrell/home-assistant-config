@@ -89,9 +89,21 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      - service: notify.slack
+      - service: notify.phones
+        data:
+          title: "Home"
+          message: "Alarm Event! See logs."
+          data:
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+
+      - service: system_log.write
         data_template:
           message: "Alarm Event: {{ trigger.event.data|tojson }}"
+          level: error
 
   - alias: Security - Alert lighting
     initial_state: True
@@ -127,15 +139,11 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      repeat:
-          count: 3
-          sequence:
-            - service: script.turn_on
-              entity_id: script.snapshot_cameras_and_send
-              data_template:
-                variables:
-                  message: "Alarm!!!"
-            - delay: "00:01:00"
+      - service: script.turn_on
+        entity_id: script.snapshot_cameras_and_send
+        data_template:
+          variables:
+            message: "Alarm!!!"
 
   - alias: Security - Fault
     initial_state: True
@@ -145,9 +153,21 @@ automation:
       - platform: event
         event_type: abode_panel_restore
     action:
-      - service: notify.slack
+      - service: notify.phones
+        data:
+          title: "Home"
+          message: "Alarm Fault! See logs."
+          data:
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+
+      - service: system_log.write
         data_template:
           message: "Alarm Fault: {{ trigger.event.data.event_name }}"
+          level: error
 
   - alias: Security - Doorbell Notifications
     initial_state: True
@@ -174,8 +194,9 @@ automation:
         minutes: 10
     mode: parallel
     action:
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
 
 
@@ -189,62 +210,24 @@ script:
 
   snapshot_door_and_send:
     sequence:
-      - service: camera.snapshot
-        data:
-          entity_id: camera.front_door
-          filename: /tmp/camera.front_door.png
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "Doorbell"
           data:
-            file:
-              path: /tmp/camera.front_door.png
+            entity_id: camera.front_door
+            url: "/lovelace-cameras/0" 
 
   snapshot_cameras_and_send:
     sequence:
-      - service: camera.snapshot
-        data:
-          entity_id: camera.front_door
-          filename: /tmp/camera.front_door.png
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Home"
           message: "{{ message }}"
           data:
-            file:
-              path: /tmp/camera.front_door.png
+            entity_id: camera.front_door
+            url: "/lovelace-cameras/0"
 
-      - service: camera.snapshot
-        data:
-          entity_id: camera.family_room
-          filename: /tmp/camera.family_room.png
-      - service: notify.slack
-        data_template:
-          message: ""
-          data:
-            file:
-              path: /tmp/camera.family_room.png
-
-      - service: camera.snapshot
-        data:
-          entity_id: camera.living_room
-          filename: /tmp/camera.living_room.png
-      - service: notify.slack
-        data_template:
-          message: ""
-          data:
-            file:
-              path: /tmp/camera.living_room.png
-
-      - service: camera.snapshot
-        data:
-          entity_id: camera.back_yard
-          filename: /tmp/camera.back_yard.png
-      - service: notify.slack
-        data_template:
-          message: ""
-          data:
-            file:
-              path: /tmp/camera.back_yard.png
 
   alarm_disarm_silently:
     mode: restart
