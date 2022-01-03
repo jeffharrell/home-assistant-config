@@ -83,28 +83,6 @@ automation:
           - remote.family_room
 
 
-  - alias: Security - Log Events
-    initial_state: True
-    trigger:
-      platform: event
-      event_type: abode_alarm
-    action:
-      - service: notify.phones
-        data:
-          title: "Home"
-          message: "Alarm Event! See logs."
-          data:
-            push:
-              sound:
-                name: "default"
-                critical: 1
-                volume: 1
-
-      - service: system_log.write
-        data_template:
-          message: "Alarm Event: {{ trigger.event.data|tojson }}"
-          level: error
-
   - alias: Security - Alert lighting
     initial_state: True
     trigger:
@@ -133,17 +111,28 @@ automation:
         data:
           brightness: 255
 
-  - alias: Security - Alert Pics
+  - alias: Security - Alert
     initial_state: True
     trigger:
       platform: event
       event_type: abode_alarm
     action:
-      - service: script.turn_on
-        entity_id: script.snapshot_cameras_and_send
+      - service: notify.phones
         data_template:
-          variables:
-            message: "Alarm!!!"
+          title: "Home"
+          message: "Alarm alert!"
+          data:
+            entity_id: camera.front_door
+            url: "/lovelace-cameras/0"
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+      - service: system_log.write
+        data_template:
+          message: "Alarm: {{ trigger.event.data }}"
+          level: error
 
   - alias: Security - Fault
     initial_state: True
@@ -156,8 +145,9 @@ automation:
       - service: notify.phones
         data:
           title: "Home"
-          message: "Alarm Fault! See logs."
+          message: "Alarm Fault: {{ trigger.event.data.event_name }}"
           data:
+            url: "/config/logs"
             push:
               sound:
                 name: "default"
@@ -166,18 +156,23 @@ automation:
 
       - service: system_log.write
         data_template:
-          message: "Alarm Fault: {{ trigger.event.data.event_name }}"
+          message: "Alarm Fault: {{ trigger.event.data }}"
           level: error
 
-  - alias: Security - Doorbell Notifications
+  - alias: Security - Doorbell notifications
     initial_state: True
     trigger:
       platform: state
       entity_id: binary_sensor.doorbell_sensor
       to: "on"
     action:
-      - service: script.turn_on
-        entity_id: script.snapshot_door_and_send
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Doorbell"
+          data:
+            entity_id: camera.front_door
+            url: "/lovelace-cameras/0"
       - delay:
           seconds: 30
 
@@ -197,7 +192,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "{{ trigger.to_state.attributes.friendly_name }} was left open."
+          message: "{{ trigger.to_state.attributes.friendly_name }} was left open"
 
 
 script:
@@ -207,27 +202,6 @@ script:
         data:
           entity_id: camera.front_door
           filename: /config/www/cameras/house.png
-
-  snapshot_door_and_send:
-    sequence:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Doorbell"
-          data:
-            entity_id: camera.front_door
-            url: "/lovelace-cameras/0" 
-
-  snapshot_cameras_and_send:
-    sequence:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "{{ message }}"
-          data:
-            entity_id: camera.front_door
-            url: "/lovelace-cameras/0"
-
 
   alarm_disarm_silently:
     mode: restart
