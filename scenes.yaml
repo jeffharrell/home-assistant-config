@@ -6,6 +6,7 @@
     light.kitchen_2:
       state: on
       brightness: 40
+    light.entryway: off
     light.dining_room: off
     light.family_room: off
     light.island: off
@@ -23,9 +24,9 @@
     light.family_room:
       state: on
       brightness: 40
-    light.dining_room:
+    light.entryway:
       state: on
-      brightness: 200
+      brightness: 255
     light.island: off
     light.pantry: off
     switch.kitchen_cabinets: off
@@ -46,6 +47,8 @@
 - name: Good Night
   entities:
     group.lights: off
+    switch.front_yard_switch:
+      state: on
     switch.house_fan_switch: off
     remote.family_room:
       state: off
