@@ -6,7 +6,9 @@
     light.kitchen_2:
       state: on
       brightness: 40
-    light.entryway: off
+    light.entryway: 
+      state: off
+      brightness: 0
     light.dining_room: off
     light.family_room: off
     light.island: off

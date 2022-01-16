@@ -41,7 +41,7 @@ automation:
       condition: template
       value_template: >
         {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
-          {%- if (battery.state|int < 100) -%}
+          {%- if (battery.state|int(0) < 100) -%}
             {{ true }}
           {% endif %}
         {% endfor %}
@@ -52,7 +52,7 @@ automation:
           message: >
             Warning!
             {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
-              {%- if (battery.state|int < 100) -%}
+              {%- if (battery.state|int(0) < 100) -%}
                 - {{ battery.attributes.friendly_name }} battery is low.
               {% endif %}
             {% endfor %}
@@ -67,6 +67,7 @@ automation:
         data:
           entity_id:
             - light.family_room
+            - light.entryway
             - light.island
             - light.kitchen_1
             - light.kitchen_2

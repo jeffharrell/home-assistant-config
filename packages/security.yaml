@@ -145,18 +145,13 @@ automation:
       - service: notify.phones
         data:
           title: "Home"
-          message: "Alarm Fault: {{ trigger.event.data.event_name }}"
+          message: "Alarm Fault {{ trigger.event.data.event_name }}"
           data:
             url: "/config/logs"
-            push:
-              sound:
-                name: "default"
-                critical: 1
-                volume: 1
 
       - service: system_log.write
         data_template:
-          message: "Alarm Fault: {{ trigger.event.data }}"
+          message: "Alarm Fault {{ trigger.event.data }}"
           level: error
 
   - alias: Security - Doorbell notifications

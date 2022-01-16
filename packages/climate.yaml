@@ -7,27 +7,27 @@ sensor:
           {%- if operation == 'cooling' or operation == "heating" -%}1{%- else -%}0{%- endif -%}
 
       family_room_status:
-        value_template: "{{ states('sensor.family_room_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.family_room_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
       living_room_status:
-        value_template: "{{ states('sensor.living_room_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.living_room_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
       playroom_status:
-        value_template: "{{ states('sensor.playroom_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.playroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
       boys_bedroom_status:
-        value_template: "{{ states('sensor.boys_bedroom_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.boys_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
       master_bedroom_status:
-        value_template: "{{ states('sensor.master_bedroom_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.master_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
       guest_bedroom_status:
-        value_template: "{{ states('sensor.guest_bedroom_temperature')|round(0) }}"
+        value_template: "{{ states('sensor.guest_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
 
