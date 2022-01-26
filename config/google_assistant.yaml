@@ -45,8 +45,6 @@ entity_config:
     expose: false
   switch.zooz_plug:
     expose: false
-  script.snapshot_door_and_save:
-    expose: false
   script.snapshot_door_and_send:
     expose: false
   script.snapshot_cameras_and_send:

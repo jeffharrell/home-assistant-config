@@ -34,6 +34,8 @@ notify: !include config/notify.yaml
 
 google_assistant: !include config/google_assistant.yaml
 
+panel_custom: !include config/panel_custom.yaml
+
 system_health:
 
 sun:

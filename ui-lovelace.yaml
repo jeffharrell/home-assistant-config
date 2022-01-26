@@ -8,18 +8,26 @@ views:
         title: "Home"
         cards:
           # House Pic
-          - type: 'custom:refreshable-picture-card'
-            update_interval: 120
-            static_picture: /local/cameras/house.png
+          - type: picture-entity
+            entity: camera.front_door
+            show_name: false
+            show_state: false
+            tap_action: 
+              action: 'navigate'
+              navigation_path: '/lovelace-cameras/0'
             card_mod:
               style: |
-                .type-custom-refreshable-picture-card p,
-                .type-custom-refreshable-picture-card br {
-                  display: none;
-                }
-                .type-custom-refreshable-picture-card .thePic {
-                  width: 100% !important;
+                .type-picture-entity {
+                  background-color: rgb(85, 85, 85);
                   border-radius: var(--ha-card-border-radius, 4px);
+                  min-height: 280px;
+                  transition: none;
+                }
+
+                @media only screen and (hover: none) and (pointer: coarse) {
+                  .type-picture-entity {
+                    min-height: 215px !important;
+                  }
                 }
 
           # Actions - Alarm is on

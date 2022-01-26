@@ -23,15 +23,6 @@ automation:
       data_template:
         name: home
 
-  - alias: System - UI home image
-    initial_state: True
-    trigger:
-      platform: time_pattern
-      minutes: "/2"
-    action:
-      - service: script.turn_on
-        entity_id: script.snapshot_door_and_save
-
   - alias: System - Low battery check
     initial_state: True
     trigger:

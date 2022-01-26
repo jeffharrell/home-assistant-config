@@ -191,13 +191,6 @@ automation:
 
 
 script:
-  snapshot_door_and_save:
-    sequence:
-      - service: camera.snapshot
-        data:
-          entity_id: camera.front_door
-          filename: /config/www/cameras/house.png
-
   alarm_disarm_silently:
     mode: restart
     sequence:
