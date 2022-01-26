@@ -1,0 +1,19 @@
+- name: ha_app_server
+  sidebar_title: App Server
+  sidebar_icon: mdi:cog-transfer
+  js_url: /api/hassio/app/entrypoint.js
+  url_path: 'config/server_control'
+  embed_iframe: true
+  require_admin: true
+  config:
+    ingress: core_configurator
+
+- name: ha_logs
+  sidebar_title: Logs
+  sidebar_icon: mdi:math-log
+  js_url: /api/hassio/app/entrypoint.js
+  url_path: config/logs
+  embed_iframe: true
+  require_admin: true
+  config:
+    ingress: core_logs
