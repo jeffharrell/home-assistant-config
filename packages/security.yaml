@@ -161,6 +161,10 @@ automation:
       entity_id: binary_sensor.doorbell_sensor
       to: "on"
     action:
+      - service: camera.snapshot
+        data:
+          entity_id: camera.front_door
+          filename: "/config/www/cameras/doorbell.jpg"
       - service: notify.phones
         data_template:
           title: "Home"
@@ -188,6 +192,30 @@ automation:
         data_template:
           title: "Home"
           message: "{{ trigger.to_state.attributes.friendly_name }} was left open"
+
+  - alias: Security - Mailbox open
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id:
+        - binary_sensor.mailbox_motion
+      to: "on"
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id: camera.driveway
+          filename: "/config/www/cameras/mailbox.jpg"
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Mailbox was opened!"
+          data:
+            url: "/lovelace-cameras/0"
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
 
 
 script:

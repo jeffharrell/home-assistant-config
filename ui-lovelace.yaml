@@ -225,7 +225,6 @@ views:
                 name: false
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
-            icon: mdi:lightbulb
             toggle: true
             entities:
               - entity: sensor.boys_bedroom_status
