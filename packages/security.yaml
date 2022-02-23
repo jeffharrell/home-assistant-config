@@ -33,6 +33,15 @@ homeassistant:
         device_class: opening
 
 
+camera:
+  - platform: local_file
+    name: Latest Doorbell 
+    file_path: /config/www/cameras/doorbell.jpg
+  - platform: local_file
+    name: Latest Mailbox 
+    file_path: /config/www/cameras/mailbox.jpg
+
+
 automation:
   - alias: Security - Say status
     initial_state: True
@@ -175,7 +184,7 @@ automation:
       - delay:
           seconds: 30
 
-  - alias: Security - Door open
+  - alias: Security - Garage door open
     initial_state: True
     trigger:
       platform: state
@@ -195,11 +204,26 @@ automation:
 
   - alias: Security - Mailbox open
     initial_state: True
+    mode: single
     trigger:
-      platform: state
-      entity_id:
-        - binary_sensor.mailbox_motion
-      to: "on"
+      - platform: state
+        entity_id: binary_sensor.mailbox_motion
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.mailbox_general_purpose
+        to: "on"
+      - platform: numeric_state
+        entity_id: sensor.mailbox_illuminance
+        above: 200
+    # condition:
+    #   - condition: or
+    #     conditions:
+    #       # if the sun is down
+    #       - condition: template
+    #         value_template: "{{ states('sun.sun') == 'below_horizon' }}"
+    #       # or if the sun is up and sensor detected light (mailbox opened)
+    #       - condition: template
+    #         value_template: "{{ states('sun.sun') == 'above_horizon' and states('sensor.mailbox_illuminance')|int > 0 }}"
     action:
       - service: camera.snapshot
         data:
@@ -208,7 +232,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Mailbox was opened!"
+          message: "Mailbox motion detected!"
           data:
             url: "/lovelace-cameras/0"
             push:
@@ -216,6 +240,8 @@ automation:
                 name: "default"
                 critical: 1
                 volume: 1
+      - delay:
+          seconds: 30
 
 
 script:

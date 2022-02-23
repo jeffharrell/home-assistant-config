@@ -1,0 +1,53 @@
+title: "Home Cameras"
+
+views:
+  - title: "Home Cameras"
+    cards:
+      - type: grid
+        square: false
+        columns: 2
+        title: Latest Events
+        cards:
+          - type: picture-entity
+            entity: camera.latest_doorbell
+            name: Doorbell
+            show_state: false
+            tap_action:
+              action: url
+              url_path: /local/cameras/doorbell.jpg
+            hold_action:
+              action: none
+          - type: picture-entity
+            entity: camera.latest_mailbox
+            name: Mailbox
+            show_state: false
+            tap_action:
+              action: url
+              url_path: /local/cameras/mailbox.jpg
+            hold_action:
+              action: none
+      - type: grid
+        square: false
+        columns: 1
+        title: Live Cameras
+        cards:
+          - type: picture-entity
+            entity: camera.front_door
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.driveway
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.family_room
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.living_room
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.back_yard
+            show_state: false
+            show_name: false

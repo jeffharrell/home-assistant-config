@@ -5,6 +5,7 @@ deps/
 src/
 www/community/
 www/cameras/
+www/weather
 custom_components/
 blueprints/
 __pycache__

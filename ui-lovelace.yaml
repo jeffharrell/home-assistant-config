@@ -2,8 +2,8 @@ title: "Home"
 
 views:
   - title: "Home"
+    path: "home"
     cards:
-
       - type: vertical-stack
         title: "Home"
         cards:
@@ -179,6 +179,7 @@ views:
                 show_empty: false
 
   - title: "Inside"
+    path: "inside"
     cards:
       - type: entities
         title: "Lights"
@@ -277,6 +278,8 @@ views:
             name: Turn off when windows open
 
   - title: "Outside"
+    path: "outside"
+
     cards:
       - type: glance
         title: "Weather"
@@ -311,3 +314,56 @@ views:
             name: "Automate Back Lights"
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
+
+  - title: "Home Cameras"
+    path: "cameras"
+    visible: false
+    cards:
+      - type: grid
+        square: false
+        columns: 2
+        title: Latest Events
+        cards:
+          - type: picture-entity
+            entity: camera.latest_doorbell
+            name: Doorbell
+            show_state: false
+            tap_action:
+              action: url
+              url_path: /local/cameras/doorbell.jpg
+            hold_action:
+              action: none
+          - type: picture-entity
+            entity: camera.latest_mailbox
+            name: Mailbox
+            show_state: false
+            tap_action:
+              action: url
+              url_path: /local/cameras/mailbox.jpg
+            hold_action:
+              action: none
+      - type: grid
+        square: false
+        columns: 1
+        title: Live Cameras
+        cards:
+          - type: picture-entity
+            entity: camera.front_door
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.driveway
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.family_room
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.living_room
+            show_state: false
+            show_name: false
+          - type: picture-entity
+            entity: camera.back_yard
+            show_state: false
+            show_name: false

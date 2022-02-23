@@ -5,5 +5,12 @@ resources:
     type: module
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
-  - url: /hacsfiles/refreshable-picture-card/refreshable-picture-card.js
-    type: module
+
+dashboards:
+    lovelace-cameras:
+      mode: yaml
+      filename: ui-cameras.yaml
+      title: Home Cameras
+      icon: mdi:camera
+      show_in_sidebar: false
+      require_admin: false
