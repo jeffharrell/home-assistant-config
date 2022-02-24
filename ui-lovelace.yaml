@@ -14,7 +14,7 @@ views:
             show_state: false
             tap_action: 
               action: 'navigate'
-              navigation_path: '/lovelace-cameras/0'
+              navigation_path: '/lovelace/cameras'
             card_mod:
               style: |
                 .type-picture-entity {
@@ -305,6 +305,8 @@ views:
             icon: mdi:flower-tulip
           - entity: switch.back_landscape
             icon: mdi:flower-tulip
+          - entity: switch.garage_light
+            icon: mdi:garage
           - entity: switch.pool_light
             icon: mdi:pool
           - entity: switch.fountain
@@ -315,37 +317,37 @@ views:
           - entity: automation.landscape_fountain
             name: "Automate Fountain"
 
-  - title: "Home Cameras"
+  - title: "Cameras"
     path: "cameras"
     visible: false
     cards:
       - type: grid
         square: false
         columns: 2
-        title: Latest Events
+        title: "Latest Events"
         cards:
           - type: picture-entity
             entity: camera.latest_doorbell
-            name: Doorbell
+            name: "Doorbell"
             show_state: false
             tap_action:
               action: url
-              url_path: /local/cameras/doorbell.jpg
+              url_path: "/local/cameras/doorbell.jpg"
             hold_action:
               action: none
           - type: picture-entity
             entity: camera.latest_mailbox
-            name: Mailbox
+            name: "Mailbox"
             show_state: false
             tap_action:
               action: url
-              url_path: /local/cameras/mailbox.jpg
+              url_path: "/local/cameras/mailbox.jpg"
             hold_action:
               action: none
       - type: grid
         square: false
         columns: 1
-        title: Live Cameras
+        title: "Live Cameras"
         cards:
           - type: picture-entity
             entity: camera.front_door

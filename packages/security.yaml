@@ -132,7 +132,7 @@ automation:
           message: "Alarm alert!"
           data:
             entity_id: camera.front_door
-            url: "/lovelace-cameras/0"
+            url: "/lovelace/cameras"
             push:
               sound:
                 name: "default"
@@ -180,7 +180,7 @@ automation:
           message: "Doorbell"
           data:
             entity_id: camera.front_door
-            url: "/lovelace-cameras/0"
+            url: "/lovelace/cameras"
       - delay:
           seconds: 30
 
@@ -214,7 +214,7 @@ automation:
         to: "on"
       - platform: numeric_state
         entity_id: sensor.mailbox_illuminance
-        above: 200
+        above: 5
     # condition:
     #   - condition: or
     #     conditions:
@@ -234,7 +234,7 @@ automation:
           title: "Home"
           message: "Mailbox motion detected!"
           data:
-            url: "/lovelace-cameras/0"
+            url: "/lovelace/cameras"
             push:
               sound:
                 name: "default"

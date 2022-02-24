@@ -34,6 +34,7 @@ group:
       - switch.living_room
       - light.entryway
       - switch.hallway
+      - switch.garage_light
       - switch.back_yard_switch
 
 
