@@ -102,7 +102,6 @@ automation:
         entity_id:
           - switch.kitchen_cabinets
           - switch.living_room
-          - switch.entryway
           - switch.hallway
           - switch.back_yard_switch
           - switch.front_yard_switch
@@ -114,6 +113,7 @@ automation:
           - light.island
           - light.family_room
           - light.dining_room
+          - light.entryway
           - light.master_bedroom
           - light.guest_bedroom
           - light.play_room
@@ -182,7 +182,7 @@ automation:
             entity_id: camera.front_door
             url: "/lovelace/cameras"
       - delay:
-          seconds: 30
+          minutes: 1
 
   - alias: Security - Garage door open
     initial_state: True
@@ -209,21 +209,6 @@ automation:
       - platform: state
         entity_id: binary_sensor.mailbox_motion
         to: "on"
-      - platform: state
-        entity_id: binary_sensor.mailbox_general_purpose
-        to: "on"
-      - platform: numeric_state
-        entity_id: sensor.mailbox_illuminance
-        above: 5
-    # condition:
-    #   - condition: or
-    #     conditions:
-    #       # if the sun is down
-    #       - condition: template
-    #         value_template: "{{ states('sun.sun') == 'below_horizon' }}"
-    #       # or if the sun is up and sensor detected light (mailbox opened)
-    #       - condition: template
-    #         value_template: "{{ states('sun.sun') == 'above_horizon' and states('sensor.mailbox_illuminance')|int > 0 }}"
     action:
       - service: camera.snapshot
         data:
@@ -241,7 +226,7 @@ automation:
                 critical: 1
                 volume: 1
       - delay:
-          seconds: 30
+          minutes: 1
 
 
 script:
