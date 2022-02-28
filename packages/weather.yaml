@@ -66,15 +66,15 @@ sensor:
   - platform: template
     sensors:
       outdoor_forecast:
-        value_template: "{{ states.sensor.dark_sky_hourly_summary.state }}"
+        value_template: "{{ states('sensor.dark_sky_hourly_summary')|default('') }}"
         icon_template: >
-          {%- if "cloud" in states.sensor.dark_sky_hourly_summary.state|lower -%}
+          {%- if "cloud" in states('sensor.dark_sky_hourly_summary')|lower -%}
             mdi:weather-cloudy
-          {%- elif "fog" in states.sensor.dark_sky_hourly_summary.state|lower -%}
+          {%- elif "fog" in states('sensor.dark_sky_hourly_summary')|lower -%}
             mdi:weather-fog
-          {%- elif "rain" in states.sensor.dark_sky_hourly_summary.state|lower -%}
+          {%- elif "rain" in states('sensor.dark_sky_hourly_summary')|lower -%}
             mdi:umbrella-outline
-          {%- elif "wind" in states.sensor.dark_sky_hourly_summary.state|lower -%}
+          {%- elif "wind" in states('sensor.dark_sky_hourly_summary')|lower -%}
             mdi:weather-windy
           {%- else -%}
             mdi:weather-sunny
