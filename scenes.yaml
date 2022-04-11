@@ -23,12 +23,6 @@
     light.kitchen_2:
       state: on
       brightness: 120
-    light.family_room:
-      state: on
-      brightness: 40
-    light.entryway:
-      state: on
-      brightness: 255
     light.island: off
     light.pantry: off
     switch.kitchen_cabinets: off

@@ -94,15 +94,15 @@ views:
                 - type: horizontal-stack
                   cards:
                     - type: entity-button
-                      entity: scene.dinner_lights
+                      entity: script.dinner_lights
                       name: "Dinner"
                       icon: mdi:food-fork-drink
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: scene.turn_on
+                        service: script.turn_on
                         service_data:
-                          entity_id: scene.dinner_lights
+                          entity_id: script.dinner_lights
                     - type: entity-button
                       entity: scene.mood_lights
                       name: "Movie"
@@ -116,16 +116,36 @@ views:
 
                 - type: horizontal-stack
                   cards:
-                    - type: entity-button
-                      entity: scene.good_night
-                      name: "Good Night"
-                      icon: mdi:brightness-2
-                      icon_height: 1.5em
-                      tap_action:
-                        action: call-service
-                        service: scene.turn_on
-                        service_data:
-                          entity_id: scene.good_night
+                    - type: conditional
+                      conditions:
+                        - entity: sun.sun
+                          state: "above_horizon"
+                      card:
+                        type: entity-button
+                        entity: script.good_morning
+                        name: "Good Morning"
+                        icon: mdi:brightness-5
+                        icon_height: 1.5em
+                        tap_action:
+                          action: call-service
+                          service: script.turn_on
+                          service_data:
+                            entity_id: script.good_morning
+                    - type: conditional
+                      conditions:
+                        - entity: sun.sun
+                          state_not: "above_horizon"
+                      card:
+                        type: entity-button
+                        entity: scene.good_night
+                        name: "Good Night"
+                        icon: mdi:brightness-2
+                        icon_height: 1.5em
+                        tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.good_night
                     - type: entity-button
                       entity: scene.away
                       name: "Away"

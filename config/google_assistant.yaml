@@ -12,10 +12,12 @@ entity_config:
     aliases:
       - MOVIE_TIME
       - MOVIE_LIGHTS
-  scene.dinner_lights:
+  script.dinner_lights:
     aliases:
       - DINNER_TIME
   scene.good_morning:
+    expose: false
+  scene.dinner_lights:
     expose: false
   scene.let_dog_out:
     expose: false

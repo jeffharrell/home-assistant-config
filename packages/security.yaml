@@ -65,7 +65,9 @@ automation:
           message: >
             {% set status = states("alarm_control_panel.abode_alarm") %}
 
-            {%- if status == "armed_home" -%}
+            {%- if status == "disarmed" -%}
+              Alarm off
+            {%- elif status == "armed_home" -%}
               Alarm armed...
 
               {%- if is_state("group.security", "on") -%}
@@ -223,8 +225,8 @@ automation:
             push:
               sound:
                 name: "default"
-                critical: 1
-                volume: 1
+                critical: "{{ (states('sun.sun') == 'below_horizon')|int }}"
+                volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
       - delay:
           minutes: 1
 
