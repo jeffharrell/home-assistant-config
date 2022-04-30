@@ -45,6 +45,14 @@ entity_config:
     expose: false
   switch.family_room_speakers:
     expose: false
+  switch.garage_door_1:
+    expose: false
+  switch.garage_door_2:
+    expose: false
+  switch.garage_door_3:
+    expose: false
+  switch.garage_door_group:
+    expose: false
   switch.zooz_plug:
     expose: false
   script.snapshot_door_and_send:

@@ -15,10 +15,10 @@ group:
     entities:
       - binary_sensor.front_door
       - binary_sensor.laundry_room_door
-      - binary_sensor.jeffs_garage_door
-      - binary_sensor.jillians_garage_door
-      - binary_sensor.guest_garage_door
       - binary_sensor.garage_side_door
+      - binary_sensor.garage_door_1
+      - binary_sensor.garage_door_2
+      - binary_sensor.garage_door_3
   security:
     entities:
       - group.doors_and_windows
@@ -27,7 +27,7 @@ group:
 
 homeassistant:
     customize_glob:
-      "binary_sensor.*_garage_door":
+      "binary_sensor.garage_door_*":
         device_class: opening
       "binary_sensor.garage_side_door":
         device_class: opening
@@ -40,6 +40,50 @@ camera:
   - platform: local_file
     name: Latest Mailbox 
     file_path: /config/www/cameras/mailbox.jpg
+
+
+cover:
+  - platform: template
+    covers:
+        garage_door_1:
+            device_class: garage
+            unique_id: "garage_door_1"
+            value_template: "{{ is_state('binary_sensor.garage_door_1', 'on') }}"
+            open_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_1
+            close_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_1
+            stop_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_1
+        garage_door_2:
+            device_class: garage
+            unique_id: "garage_door_2"
+            value_template: "{{ is_state('binary_sensor.garage_door_2', 'on') }}"
+            open_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_2
+            close_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_2
+            stop_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_2
+        garage_door_3:
+            device_class: garage
+            unique_id: "garage_door_3"
+            value_template: "{{ is_state('binary_sensor.garage_door_3', 'on') }}"
+            open_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_3
+            close_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_3
+            stop_cover:
+                service: switch.turn_on
+                entity_id: switch.garage_door_3
 
 
 automation:
@@ -191,9 +235,9 @@ automation:
     trigger:
       platform: state
       entity_id:
-        - binary_sensor.jeffs_garage_door
-        - binary_sensor.jillians_garage_door
-        - binary_sensor.guest_garage_door
+        - binary_sensor.garage_door_1
+        - binary_sensor.garage_door_2
+        - binary_sensor.garage_door_3
       to: "on"
       for:
         minutes: 10

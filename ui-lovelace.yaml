@@ -169,7 +169,11 @@ views:
                   - sensor.outside_rain_daily
                   - alarm_control_panel.abode_alarm
                 content: >
-                  <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Outside {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
+                  <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
+
+                  {% if states('sensor.outside_uv')|int > 3 %}
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.dark_sky_uv_index') }} so wear sunscreen!
+                  {% endif %}
 
                   {% if states('sensor.outside_rain_daily')|float(0) %}
                     <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
@@ -312,6 +316,14 @@ views:
             icon: mdi:weather-windy
           - entity: sensor.outside_uv
             icon: mdi:weather-sunny
+      - type: entities
+        title: "Garages"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - entity: cover.garage_door_2
+          - entity: cover.garage_door_3
+          - entity: cover.garage_door_1
       - type: entities
         title: "Landscape"
         state_color: false
