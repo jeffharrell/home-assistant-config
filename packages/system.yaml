@@ -23,30 +23,20 @@ automation:
       data_template:
         name: home
 
-  # - alias: System - Low battery check
-  #   initial_state: True
-  #   trigger:
-  #     platform: time
-  #     at: "00:00:00"
-  #   condition:
-  #     condition: template
-  #     value_template: >
-  #       {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
-  #         {%- if (battery.state|int(0) < 100) -%}
-  #           {{ true }}
-  #         {% endif %}
-  #       {% endfor %}
-  #   action:
-  #     - service: notify.phones
-  #       data_template:
-  #         title: "Home"
-  #         message: >
-  #           Warning!
-  #           {% for battery in states.sensor if battery.attributes.device_class == 'battery' %}
-  #             {%- if (battery.state|int(0) < 100) -%}
-  #               - {{ battery.attributes.friendly_name }} battery is low.
-  #             {% endif %}
-  #           {% endfor %}
+  - alias: System - Settings reset each day
+    initial_state: True
+    trigger:
+      platform: time
+      at: "04:00:00"
+    action:
+      - service: homeassistant.turn_on
+        entity_id:
+          - automation.security_doorbell_notifications
+          - automation.security_mailbox_open
+          - automation.security_say_status
+          - automation.security_garage_door_open
+          - automation.landscape_back_door_light
+
 
   - alias: System - Reset speaker volumes
     initial_state: True
@@ -69,6 +59,7 @@ automation:
           entity_id: media_player.master_bedroom_speaker
         data:
           volume_level: 0.5
+
 
   - alias: System - Refresh non-zwave plus nodes
     initial_state: True

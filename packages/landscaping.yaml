@@ -1,5 +1,5 @@
 automation:
-  - alias: Landscape - Lights
+  - alias: Landscape - Lighting
     initial_state: True
     trigger:
       # on
@@ -15,22 +15,6 @@ automation:
         entity_id:
           - switch.front_landscape
           - switch.back_landscape
-
-  - alias: Landscape - Front door light
-    initial_state: True
-    trigger:
-      # on
-      - platform: time
-        at: "22:00:00"
-      # off
-      - platform: sun
-        event: sunrise
-        offset: "-00:30:00"
-    action:
-      - service_template: >
-          switch.turn_{% if trigger and trigger.event == "sunrise" %}off{% else %}on{% endif %}
-        entity_id:
-          switch.front_yard_switch
 
   - alias: Landscape - Fountain
     initial_state: True
@@ -50,6 +34,23 @@ automation:
           {%- endif -%}
         entity_id:
           switch.fountain
+
+  - alias: Landscape - Front door light
+    initial_state: True
+    trigger:
+      # on
+      - platform: time
+        at: "22:00:00"
+      # off
+      - platform: sun
+        event: sunrise
+        offset: "-00:30:00"
+    action:
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == "sunrise" %}off{% else %}on{% endif %}
+        entity_id:
+          switch.front_yard_switch
+
 
   - alias: Landscape - Back door light
     initial_state: True
