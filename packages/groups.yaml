@@ -1,0 +1,63 @@
+group:
+
+  # Lights
+  landscape_lights:
+    entities:
+      - switch.back_landscape
+      - switch.front_landscape
+      - switch.front_yard_switch
+      - switch.pool_light
+
+  bedroom_lights:
+    entities:
+      - switch.boys_bedroom
+      - light.guest_bedroom
+      - light.master_bedroom
+      - light.play_room
+
+  kitchen_lights:
+    entities:
+      - light.Kitchen
+      - light.island
+      - switch.kitchen_cabinets
+      - light.pantry
+
+  lights:
+    entities:
+      - group.bedroom_lights
+      - group.kitchen_lights
+      - light.family_room
+      - light.dining_room
+      - switch.living_room
+      - light.entryway
+      - switch.hallway
+      - switch.garage_light
+      - switch.back_yard_switch
+
+  # Doors and Windows
+  doors_and_windows:
+    entities:
+      - binary_sensor.family_room_doors
+      - binary_sensor.master_bedroom_doors
+      - binary_sensor.dining_room_window
+      - binary_sensor.living_room_window_left
+      - binary_sensor.living_room_window_right
+      - binary_sensor.kitchen_window
+      - binary_sensor.boys_window
+      - binary_sensor.playroom_window
+      - binary_sensor.guest_window
+      - binary_sensor.master_bedroom_window
+
+  entrances:
+    entities:
+      - binary_sensor.front_door
+      - binary_sensor.laundry_room_door
+      - binary_sensor.garage_side_door
+      - binary_sensor.garage_door_1
+      - binary_sensor.garage_door_2
+      - binary_sensor.garage_door_3
+      
+  security:
+    entities:
+      - group.doors_and_windows
+      - group.entrances

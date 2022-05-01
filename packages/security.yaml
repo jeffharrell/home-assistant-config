@@ -1,31 +1,5 @@
-group:
-  doors_and_windows:
-    entities:
-      - binary_sensor.family_room_doors
-      - binary_sensor.master_bedroom_doors
-      - binary_sensor.dining_room_window
-      - binary_sensor.living_room_window_left
-      - binary_sensor.living_room_window_right
-      - binary_sensor.kitchen_window
-      - binary_sensor.boys_window
-      - binary_sensor.playroom_window
-      - binary_sensor.guest_window
-      - binary_sensor.master_bedroom_window
-  entrances:
-    entities:
-      - binary_sensor.front_door
-      - binary_sensor.laundry_room_door
-      - binary_sensor.garage_side_door
-      - binary_sensor.garage_door_1
-      - binary_sensor.garage_door_2
-      - binary_sensor.garage_door_3
-  security:
-    entities:
-      - group.doors_and_windows
-      - group.entrances
-
-
 homeassistant:
+
     customize_glob:
       "binary_sensor.garage_door_*":
         device_class: opening
@@ -34,6 +8,7 @@ homeassistant:
 
 
 camera:
+
   - platform: local_file
     name: Latest Doorbell 
     file_path: /config/www/cameras/doorbell.jpg
@@ -43,8 +18,10 @@ camera:
 
 
 cover:
+
   - platform: template
     covers:
+
         garage_door_1:
             device_class: garage
             unique_id: "garage_door_1"
@@ -58,6 +35,7 @@ cover:
             stop_cover:
                 service: switch.turn_on
                 entity_id: switch.garage_door_1
+
         garage_door_2:
             device_class: garage
             unique_id: "garage_door_2"
@@ -71,6 +49,7 @@ cover:
             stop_cover:
                 service: switch.turn_on
                 entity_id: switch.garage_door_2
+
         garage_door_3:
             device_class: garage
             unique_id: "garage_door_3"
@@ -87,6 +66,7 @@ cover:
 
 
 automation:
+  
   - alias: Security - Say status
     initial_state: True
     trigger:
@@ -273,34 +253,3 @@ automation:
                 volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
       - delay:
           minutes: 1
-
-
-script:
-  alarm_disarm_silently:
-    mode: restart
-    sequence:
-      - service: automation.turn_off
-        data:
-          entity_id: automation.security_say_status
-      - service: alarm_control_panel.alarm_disarm
-        data:
-          entity_id: alarm_control_panel.abode_alarm
-      - delay: "00:30:00"
-      - service: alarm_control_panel.alarm_arm_home
-        data:
-          entity_id: alarm_control_panel.abode_alarm
-      - delay: "00:01:00"
-      - service: automation.turn_on
-        data:
-          entity_id: automation.security_say_status
-
-  good_morning:
-    sequence:
-      - service: alarm_control_panel.alarm_disarm
-        data:
-          entity_id: alarm_control_panel.abode_alarm
-      - condition: template
-        value_template: '{{ state_attr("sun.sun", "elevation") < 2 }}'
-      - service: scene.turn_on
-        data:
-          entity_id: scene.good_morning

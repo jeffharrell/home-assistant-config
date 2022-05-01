@@ -1,4 +1,5 @@
 tts:
+
   - platform: google_cloud
     service_name: google_say
     key_file: google_cloud_key.json
@@ -13,6 +14,7 @@ tts:
 
 
 automation:
+  
   - alias: System - UI theme change
     initial_state: True
     trigger:

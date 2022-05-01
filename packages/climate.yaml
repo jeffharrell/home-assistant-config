@@ -1,4 +1,5 @@
 sensor:
+
   - platform: template
     sensors:
       climate_operation:
@@ -6,32 +7,33 @@ sensor:
           {% set operation = state_attr('climate.home', 'hvac_action') %}
           {%- if operation == 'cooling' or operation == "heating" -%}1{%- else -%}0{%- endif -%}
 
-      family_room_status:
+      family_room_temp:
         value_template: "{{ states('sensor.family_room_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
-      living_room_status:
+      living_room_temp:
         value_template: "{{ states('sensor.living_room_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
-      playroom_status:
+      playroom_temp:
         value_template: "{{ states('sensor.playroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
-      boys_bedroom_status:
+      boys_bedroom_temp:
         value_template: "{{ states('sensor.boys_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
-      master_bedroom_status:
+      master_bedroom_temp:
         value_template: "{{ states('sensor.master_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
-      guest_bedroom_status:
+      guest_bedroom_temp:
         value_template: "{{ states('sensor.guest_bedroom_temperature')|round(0, default=0) }}"
         unit_of_measurement: °F
 
 
 automation:
+  
   - alias: Climate - House Fan On
     initial_state: True
     trigger:
@@ -113,18 +115,3 @@ automation:
       - delay: "00:00:10"
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
       - service: script.hvac_resume
-
-
-script:
-  hvac_disable:
-    sequence:
-      - service: climate.set_preset_mode
-        data:
-          entity_id: climate.home
-          preset_mode: "away"
-
-  hvac_resume:
-    sequence:
-      - service: ecobee.resume_program
-        data:
-          entity_id: climate.home

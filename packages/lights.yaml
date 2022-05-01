@@ -1,4 +1,5 @@
 light:
+
   - platform: group
     name: Kitchen
     entities:
@@ -6,39 +7,8 @@ light:
       - light.kitchen_2
 
 
-group:
-  landscape_lights:
-    entities:
-      - switch.back_landscape
-      - switch.front_landscape
-      - switch.front_yard_switch
-      - switch.pool_light
-  bedroom_lights:
-    entities:
-      - switch.boys_bedroom
-      - light.guest_bedroom
-      - light.master_bedroom
-      - light.play_room
-  kitchen_lights:
-    entities:
-      - light.Kitchen
-      - light.island
-      - switch.kitchen_cabinets
-      - light.pantry
-  lights:
-    entities:
-      - group.bedroom_lights
-      - group.kitchen_lights
-      - light.family_room
-      - light.dining_room
-      - switch.living_room
-      - light.entryway
-      - switch.hallway
-      - switch.garage_light
-      - switch.back_yard_switch
-
-
 automation:
+  
   - alias: Lights - Toggle when away
     initial_state: True
     trigger:
@@ -109,21 +79,3 @@ automation:
       - service_template: >
           light.turn_{% if trigger and trigger.to_state.state == "on" %}on{% else %}off{% endif %}
         entity_id: light.zipato_bulb
-
-
-script:
-  dinner_lights:
-    sequence:
-      - service: scene.turn_on
-        data:
-          entity_id: scene.dinner_lights
-      - condition: template
-        value_template: '{{ state_attr("sun.sun", "elevation") < 4 }}'
-      - service: light.turn_on
-        data:
-          entity_id: light.family_room
-          brightness: 40
-      - service: light.turn_on
-        data:
-          entity_id: light.entryway
-          brightness: 255

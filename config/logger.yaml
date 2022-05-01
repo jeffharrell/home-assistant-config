@@ -1,4 +1,5 @@
 default: warning
+
 logs:
   homeassistant.setup: error
   homeassistant.loader: error

@@ -1,0 +1,57 @@
+hvac_disable:
+  sequence:
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.home
+        preset_mode: "away"
+
+hvac_resume:
+  sequence:
+    - service: ecobee.resume_program
+      data:
+        entity_id: climate.home
+
+alarm_disarm_silently:
+  mode: restart
+  sequence:
+    - service: automation.turn_off
+      data:
+        entity_id: automation.security_say_status
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - delay: "00:30:00"
+    - service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - delay: "00:01:00"
+    - service: automation.turn_on
+      data:
+        entity_id: automation.security_say_status
+
+good_morning:
+  sequence:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < 2 }}'
+    - service: scene.turn_on
+      data:
+        entity_id: scene.good_morning
+
+dinner_lights:
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.dinner_lights
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < 4 }}'
+    - service: light.turn_on
+      data:
+        entity_id: light.family_room
+        brightness: 40
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 255

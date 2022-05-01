@@ -1,4 +1,5 @@
 automation:
+
   - alias: Landscape - Lighting
     initial_state: True
     trigger:
@@ -27,11 +28,7 @@ automation:
         event: sunset
     action:
       - service_template: >
-          {%- if trigger and trigger.event == "sunset" -%}
-            switch.turn_off
-          {%- else -%}
-            switch.turn_on
-          {%- endif -%}
+          switch.turn_{% if trigger and trigger.event == "sunset" %}off{% else %}on{% endif %}
         entity_id:
           switch.fountain
 
@@ -50,7 +47,6 @@ automation:
           switch.turn_{% if trigger and trigger.event == "sunrise" %}off{% else %}on{% endif %}
         entity_id:
           switch.front_yard_switch
-
 
   - alias: Landscape - Back door light
     initial_state: True

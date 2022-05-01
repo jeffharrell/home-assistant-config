@@ -1,4 +1,5 @@
 host: !secret influxdb_url
+
 include:
   domains:
     - sensor

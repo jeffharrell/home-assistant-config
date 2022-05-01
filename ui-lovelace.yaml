@@ -216,7 +216,7 @@ views:
             icon: mdi:lightbulb
             toggle: true
             entities:
-              - entity: sensor.family_room_status
+              - entity: sensor.family_room_temp
                 name: false
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
@@ -232,7 +232,7 @@ views:
             icon: mdi:lightbulb
             toggle: true
             entities:
-              - entity: sensor.living_room_status
+              - entity: sensor.living_room_temp
                 name: false
           - entity: light.dining_room
           - entity: light.entryway
@@ -246,25 +246,25 @@ views:
             entity: light.master_bedroom
             toggle: true
             entities:
-              - entity: sensor.master_bedroom_status
+              - entity: sensor.master_bedroom_temp
                 name: false
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
             toggle: true
             entities:
-              - entity: sensor.boys_bedroom_status
+              - entity: sensor.boys_bedroom_temp
                 name: false
           - type: custom:multiple-entity-row
             entity: light.play_room
             toggle: true
             entities:
-              - entity: sensor.playroom_status
+              - entity: sensor.playroom_temp
                 name: false
           - type: custom:multiple-entity-row
             entity: light.guest_bedroom
             toggle: true
             entities:
-              - entity: sensor.guest_bedroom_status
+              - entity: sensor.guest_bedroom_temp
                 name: false
 
       - type: entities
