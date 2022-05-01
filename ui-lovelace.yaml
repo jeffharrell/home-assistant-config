@@ -172,7 +172,7 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_uv')|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.dark_sky_uv_index') }} so wear sunscreen!
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.outside_uv') }} so wear sunscreen!
                   {% endif %}
 
                   {% if states('sensor.outside_rain_daily')|float(0) %}
@@ -321,8 +321,8 @@ views:
         state_color: false
         show_header_toggle: false
         entities:
-          - entity: cover.garage_door_2
           - entity: cover.garage_door_3
+          - entity: cover.garage_door_2
           - entity: cover.garage_door_1
       - type: entities
         title: "Landscape"
@@ -333,16 +333,17 @@ views:
             icon: mdi:lightbulb
           - entity: switch.back_yard_switch
             icon: mdi:lightbulb
-          - entity: switch.front_landscape
-            icon: mdi:flower-tulip
-          - entity: switch.back_landscape
-            icon: mdi:flower-tulip
           - entity: switch.garage_light
             icon: mdi:garage
           - entity: switch.pool_light
             icon: mdi:pool
           - entity: switch.fountain
             icon: mdi:cup-water
+          - entity: switch.front_landscape
+            icon: mdi:flower-tulip
+          - entity: switch.back_landscape
+            icon: mdi:flower-tulip
+
           - type: section
           - entity: automation.landscape_back_door_light
             name: "Automate Back Lights"
