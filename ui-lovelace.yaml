@@ -172,7 +172,7 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_uv')|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.outside_uv') }} so wear sunscreen!
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high so wear sunscreen!
                   {% endif %}
 
                   {% if states('sensor.outside_rain_daily')|float(0) %}
@@ -216,8 +216,9 @@ views:
             icon: mdi:lightbulb
             toggle: true
             entities:
-              - entity: sensor.family_room_temp
+              - entity: sensor.family_room_temperature
                 name: false
+                format: 'precision0'
           - entity: light.kitchen
           - entity: switch.kitchen_cabinets
             name: "Cabinets"
@@ -232,8 +233,9 @@ views:
             icon: mdi:lightbulb
             toggle: true
             entities:
-              - entity: sensor.living_room_temp
+              - entity: sensor.living_room_temperature
                 name: false
+                format: 'precision0'
           - entity: light.dining_room
           - entity: light.entryway
           - entity: switch.hallway
@@ -246,26 +248,30 @@ views:
             entity: light.master_bedroom
             toggle: true
             entities:
-              - entity: sensor.master_bedroom_temp
+              - entity: sensor.master_bedroom_temperature
                 name: false
+                format: 'precision0'
           - type: custom:multiple-entity-row
             entity: switch.boys_bedroom
             toggle: true
             entities:
-              - entity: sensor.boys_bedroom_temp
+              - entity: sensor.boys_bedroom_temperature
                 name: false
+                format: 'precision0'
           - type: custom:multiple-entity-row
             entity: light.play_room
             toggle: true
             entities:
-              - entity: sensor.playroom_temp
+              - entity: sensor.playroom_temperature
                 name: false
+                format: 'precision0'
           - type: custom:multiple-entity-row
             entity: light.guest_bedroom
             toggle: true
             entities:
-              - entity: sensor.guest_bedroom_temp
+              - entity: sensor.guest_bedroom_temperature
                 name: false
+                format: 'precision0'
 
       - type: entities
         title: "Media"
@@ -291,6 +297,7 @@ views:
               - attribute: current_temperature
                 name: "Temperature"
                 unit: "°F"
+                format: 'precision0'
               - attribute: preset_mode
                 name: "Mode"
           - entity: switch.house_fan_switch
@@ -299,7 +306,7 @@ views:
           - type: section
           - entity: automation.climate_windows_open
             state_color: false
-            name: Turn off when windows open
+            name: "Turn off when windows open"
 
   - title: "Outside"
     path: "outside"

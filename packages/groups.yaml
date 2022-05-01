@@ -1,5 +1,4 @@
 group:
-
   # Lights
   landscape_lights:
     entities:
@@ -17,7 +16,7 @@ group:
 
   kitchen_lights:
     entities:
-      - light.Kitchen
+      - light.kitchen
       - light.island
       - switch.kitchen_cabinets
       - light.pantry
@@ -56,7 +55,7 @@ group:
       - binary_sensor.garage_door_1
       - binary_sensor.garage_door_2
       - binary_sensor.garage_door_3
-      
+
   security:
     entities:
       - group.doors_and_windows

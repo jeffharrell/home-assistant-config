@@ -1,5 +1,4 @@
 homeassistant:
-
     customize_glob:
       "binary_sensor.garage_door_*":
         device_class: opening
@@ -8,7 +7,6 @@ homeassistant:
 
 
 camera:
-
   - platform: local_file
     name: Latest Doorbell 
     file_path: /config/www/cameras/doorbell.jpg
@@ -18,7 +16,6 @@ camera:
 
 
 cover:
-
   - platform: template
     covers:
 
@@ -66,7 +63,6 @@ cover:
 
 
 automation:
-  
   - alias: Security - Say status
     initial_state: True
     trigger:
@@ -116,7 +112,6 @@ automation:
           - group.lights
           - switch.house_fan_switch
           - remote.family_room
-
 
   - alias: Security - Alert lighting
     initial_state: True
@@ -183,7 +178,6 @@ automation:
           message: "Alarm Fault {{ trigger.event.data.event_name }}"
           data:
             url: "/config/logs"
-
       - service: system_log.write
         data_template:
           message: "Alarm Fault {{ trigger.event.data }}"

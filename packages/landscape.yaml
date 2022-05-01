@@ -1,5 +1,4 @@
 automation:
-
   - alias: Landscape - Lighting
     initial_state: True
     trigger:

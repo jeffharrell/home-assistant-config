@@ -1,14 +1,13 @@
 light:
-
   - platform: group
-    name: Kitchen
+    name: "Kitchen"
+    unique_id: kitchen
     entities:
       - light.kitchen_1
       - light.kitchen_2
 
 
 automation:
-  
   - alias: Lights - Toggle when away
     initial_state: True
     trigger:

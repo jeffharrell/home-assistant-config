@@ -1,62 +1,44 @@
 sun:
 
 sensor:
-
-  - platform: scrape
-    name: outside_temp
+  - name: outside_temp
     unit_of_measurement: "°F"
-    resource: !secret ambient_weather_url
     select: "[name='outTemp']"
-    attribute: value
-    scan_interval: 300
+    <<: &weather_scraper
+      platform: scrape
+      resource: !secret ambient_weather_url
+      attribute: value
+      scan_interval: 300
 
-  - platform: scrape
-    name: outside_humidity
+  - name: outside_humidity
     unit_of_measurement: "%"
-    resource: !secret ambient_weather_url
     select: "[name='outHumi']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
-  - platform: scrape
-    name: outside_wind_speed
+  - name: outside_wind_speed
     unit_of_measurement: "mph"
-    resource: !secret ambient_weather_url
     select: "[name='avgwind']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
-  - platform: scrape
-    name: outside_wind_gust
+  - name: outside_wind_gust
     unit_of_measurement: "mph"
-    resource: !secret ambient_weather_url
     select: "[name='gustspeed']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
-  - platform: scrape
-    name: outside_uv
+  - name: outside_uv
     unit_of_measurement: "UV Index"
-    resource: !secret ambient_weather_url
     select: "[name='uvi']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
-  - platform: scrape
-    name: outside_rain_daily
+  - name: outside_rain_daily
     unit_of_measurement: "In"
-    resource: !secret ambient_weather_url
     select: "[name='rainofdaily']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
-  - platform: scrape
-    name: outside_pm25
+  - name: outside_pm25
     unit_of_measurement: "µg/m3"
-    resource: !secret ambient_weather_url
     select: "[name='pm25out']"
-    attribute: value
-    scan_interval: 300
+    <<: *weather_scraper
 
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -85,7 +67,6 @@ sensor:
 
 
 automation:
-  
   - alias: Weather - Freezing temperature
     initial_state: True
     trigger:
