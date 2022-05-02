@@ -39,13 +39,13 @@ views:
               type: horizontal-stack
               cards:
                 - type: entity-button
-                  entity: script.alarm_disarm_silently
+                  entity: script.let_dog_out
                   name: "Let Dog Out"
                   icon: mdi:dog-side
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: script.alarm_disarm_silently
+                    service: script.let_dog_out
 
                 - type: entity-button
                   entity: script.good_morning
@@ -54,22 +54,20 @@ views:
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.good_morning
+                    service: script.good_morning
 
           # Actions - Alarm is off temporarily
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
-              - entity: script.alarm_disarm_silently
+              - entity: script.let_dog_out
                 state: "on"
             card:
               type: horizontal-stack
               cards:
                 - type: entity-button
-                  entity: script.alarm_disarm_silently
+                  entity: script.let_dog_out
                   name: "Alarm Will Automatically Arm"
                   icon: mdi:timer
                   icon_height: 1.5em
@@ -79,14 +77,14 @@ views:
                       text: "Are you sure you want to leave the alarm off?"
                     service: script.turn_off
                     service_data:
-                      entity_id: script.alarm_disarm_silently
+                      entity_id: script.let_dog_out
 
           # Actions - Alarm is off
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
-              - entity: script.alarm_disarm_silently
+              - entity: script.let_dog_out
                 state_not: "on"
             card:
               type: vertical-stack
@@ -100,19 +98,15 @@ views:
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: script.turn_on
-                        service_data:
-                          entity_id: script.dinner_lights
+                        service: script.dinner_lights
                     - type: entity-button
-                      entity: scene.mood_lights
+                      entity: script.mood_lights
                       name: "Movie"
                       icon: mdi:movie
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: scene.turn_on
-                        service_data:
-                          entity_id: scene.mood_lights
+                        service: script.mood_lights
 
                 - type: horizontal-stack
                   cards:
@@ -128,34 +122,28 @@ views:
                         icon_height: 1.5em
                         tap_action:
                           action: call-service
-                          service: script.turn_on
-                          service_data:
-                            entity_id: script.good_morning
+                          service: script.good_morning
                     - type: conditional
                       conditions:
                         - entity: sun.sun
                           state_not: "above_horizon"
                       card:
                         type: entity-button
-                        entity: scene.good_night
+                        entity: script.good_night
                         name: "Good Night"
                         icon: mdi:brightness-2
                         icon_height: 1.5em
                         tap_action:
                           action: call-service
-                          service: scene.turn_on
-                          service_data:
-                            entity_id: scene.good_night
+                          service: script.good_night
                     - type: entity-button
-                      entity: scene.away
+                      entity: script.away
                       name: "Away"
                       icon: mdi:exit-run
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: scene.turn_on
-                        service_data:
-                          entity_id: scene.away
+                        service: script.away
 
 
           - type: vertical-stack
@@ -165,8 +153,9 @@ views:
                 entity_id:
                   - sensor.outdoor_forecast
                   - sensor.outside_temp
-                  - sensor.outdoor_forecast
+                  - sensor.outside_uv
                   - sensor.outside_rain_daily
+                  - sensor.air_pollution_level
                   - alarm_control_panel.abode_alarm
                 content: >
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}

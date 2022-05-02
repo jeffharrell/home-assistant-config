@@ -3,45 +3,27 @@ service_account: !include ../google_assistant_key.json
 report_state: true
 expose_by_default: true
 exposed_domains:
-  - switch
   - light
+  - switch
   - script
-  - scene
 entity_config:
-  scene.mood_lights:
-    aliases:
-      - MOVIE_TIME
-      - MOVIE_LIGHTS
-  script.dinner_lights:
-    aliases:
-      - DINNER_TIME
-  scene.good_morning:
-    expose: false
-  scene.dinner_lights:
-    expose: false
-  scene.let_dog_out:
-    expose: false
   light.kitchen_1:
     expose: false
   light.kitchen_2:
     expose: false
   switch.front_landscape:
     expose: false
+  switch.back_landscape:
+    expose: false
   switch.front_yard_switch:
     aliases:
       - FRONT_LIGHTS
-  switch.back_landscape:
-    expose: false
   switch.back_yard_switch:
     aliases:
       - BACK_LIGHTS
   switch.fountain:
     expose: false
-  switch.family_room_chromecast:
-    expose: false
   switch.family_room_apple_tv:
-    expose: false
-  switch.family_room_bluetooth:
     expose: false
   switch.family_room_speakers:
     expose: false
@@ -55,15 +37,19 @@ entity_config:
     expose: false
   switch.zooz_plug:
     expose: false
-  script.snapshot_door_and_send:
+  script.let_dog_out:
     expose: false
-  script.snapshot_cameras_and_send:
-    expose: false
-  script.alarm_disarm_silently:
-    expose: false
+  script.dinner_lights:
+    aliases:
+      - DINNER_TIME
   script.good_morning:
     expose: false
   script.hvac_disable:
     expose: false
   script.hvac_resume:
     expose: false
+  script.let_dog_out:
+    expose: false
+  script.mood_lights:
+    aliases:
+      - MOVIE_TIME

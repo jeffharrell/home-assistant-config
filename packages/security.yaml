@@ -106,11 +106,9 @@ automation:
       entity_id: alarm_control_panel.abode_alarm
       to: "armed_away"
     action:
-      - service: homeassistant.turn_off
-        entity_id:
-          - group.lights
-          - switch.house_fan_switch
-          - remote.family_room
+      - service: scene.turn_on
+        data:
+          entity_id: scene.house_off
 
   - alias: Security - Alert lighting
     initial_state: True
@@ -118,27 +116,9 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - switch.kitchen_cabinets
-          - switch.living_room
-          - switch.hallway
-          - switch.back_yard_switch
-          - switch.front_yard_switch
-          - switch.boys_bedroom
-      - service: light.turn_on
-        entity_id:
-          - light.kitchen_1
-          - light.kitchen_2
-          - light.island
-          - light.family_room
-          - light.dining_room
-          - light.entryway
-          - light.master_bedroom
-          - light.guest_bedroom
-          - light.play_room
+      - service: scene.turn_on
         data:
-          brightness: 255
+          entity_id: scene.house_alert
 
   - alias: Security - Alert
     initial_state: True

@@ -1,3 +1,22 @@
+- name: Good Morning
+  entities:
+    switch.kitchen_cabinets:
+      state: on
+    light.island:
+      state: on
+      brightness: 127
+    light.dining_room: off
+    light.family_room: off
+    light.kitchen_1: off
+    light.kitchen_2: off
+    light.pantry: off
+
+- name: Good Night
+  entities:
+    switch.front_yard_switch:
+      state: on
+    alarm_control_panel.abode_alarm: "armed_home"
+
 - name: Mood Lights
   entities:
     light.kitchen_1:
@@ -27,34 +46,48 @@
     light.pantry: off
     switch.kitchen_cabinets: off
 
-- name: Good Morning
+- name: Dinner Lights More
   entities:
-    switch.kitchen_cabinets:
+    light.family_room:
       state: on
+      brightness: 40
+    light.entryway:
+      state: on
+      brightness: 255
+
+- name: House Off
+  entities:
+    group.lights: off
+    switch.house_fan_switch: off
+    remote.family_room: off
+
+- name: House Alert
+  entities:
+    group.lights: on
+    light.kitchen_1:
+      state: on
+      brightness: 255
+    light.kitchen_2:
+      state: on
+      brightness: 255
     light.island:
       state: on
-      brightness: 127
-    light.dining_room: off
-    light.family_room: off
-    light.kitchen_1: off
-    light.kitchen_2: off
-    light.pantry: off
-
-- name: Good Night
-  entities:
-    group.lights: off
-    switch.front_yard_switch:
+      brightness: 255
+    light.family_room:
       state: on
-    switch.house_fan_switch: off
-    remote.family_room:
-      state: off
-    alarm_control_panel.abode_alarm: "armed_home"
-
-- name: Away
-  entities:
-    group.lights: off
-    switch.house_fan_switch: off
-    remote.family_room:
-      state: off
-    alarm_control_panel.abode_alarm: "armed_away"
-
+      brightness: 255
+    light.dining_room:
+      state: on
+      brightness: 255
+    light.entryway:
+      state: on
+      brightness: 255
+    light.master_bedroom:
+      state: on
+      brightness: 255
+    light.guest_bedroom:
+      state: on
+      brightness: 255
+    light.play_room:
+      state: on
+      brightness: 255
