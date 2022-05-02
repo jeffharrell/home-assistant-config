@@ -74,6 +74,7 @@ automation:
         entity_id: alarm_control_panel.abode_alarm
         to: "disarmed"
     condition:
+      # Explicitly call out trigger states and this condition to protect against errors
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:

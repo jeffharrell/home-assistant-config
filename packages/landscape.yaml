@@ -51,10 +51,9 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: binary_sensor.family_room_doors
-        to: "on"
-      - platform: state
-        entity_id: binary_sensor.master_bedroom_doors
+        entity_id: 
+          - binary_sensor.family_room_doors
+          - binary_sensor.master_bedroom_doors
         to: "on"
     condition:
       condition: template
