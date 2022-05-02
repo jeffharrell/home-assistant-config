@@ -37,8 +37,6 @@ entity_config:
     expose: false
   switch.zooz_plug:
     expose: false
-  script.let_dog_out:
-    expose: false
   script.dinner_lights:
     aliases:
       - DINNER_TIME

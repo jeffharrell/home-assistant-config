@@ -8,7 +8,24 @@ sensor:
 
 
 automation:
-  - alias: Climate - House Fan On
+  - alias: Climate - Windows open
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: group.doors_and_windows
+        to: "on"
+        for: "00:20:00"
+    action:
+      - service: script.hvac_disable
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Turning HVAC off since window is open"
+      - delay: "00:00:10"
+      - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
+      - service: script.hvac_resume
+
+  - alias: Climate - Disable HVAC with house fan
     initial_state: True
     trigger:
       platform: state
@@ -17,56 +34,6 @@ automation:
       from: "off"
     action:
       - service: script.hvac_disable
-      - delay: "00:00:10"
-      - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
-      - service: script.hvac_resume
-
-  - alias: Climate - House Fan with HVAC Running
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.climate_operation
-      to: "1"
-    condition:
-      condition: template
-      value_template: "{{ is_state('switch.house_fan_switch', 'on') }}"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "House fan is running with the HVAC on!"
-
-  - alias: Climate - House Fan with Dryer Running
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: 
-          - switch.house_fan_switch
-          - sensor.dryer
-        from: "off"
-        to: "on"
-    condition:
-      condition: template
-      value_template: "{{ is_state('switch.house_fan_switch', 'on') and is_state('sensor.dryer', 'on') and is_state('binary_sensor.guest_window', 'on') }}"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "House fan is running with the dryer on!"
-
-  - alias: Climate - Windows Open
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: group.doors_and_windows
-        to: "on"
-        for: "00:30:00"
-    action:
-      - service: script.hvac_disable
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "HVAC disabled since a window was left open"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
@@ -83,7 +50,27 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "HVAC set to away mode"
+          message: "Setting thermostat to away"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
       - service: script.hvac_resume
+
+  - alias: Climate - House fan and HVAC/dryer both running
+    initial_state: True
+    trigger:
+      - id: HVAC 
+        platform: state
+        entity_id: sensor.climate_operation
+        to: "1"
+      - id: dryer
+        platform: state
+        entity_id: sensor.dryer
+        to: "on"
+    condition:
+      condition: template
+      value_template: "{{ is_state('switch.house_fan_switch', 'on') }}"
+    action:
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "House fan and {{ trigger.id }} are both running!"
