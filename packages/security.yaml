@@ -2,8 +2,6 @@ homeassistant:
     customize_glob:
       "binary_sensor.garage_door_*":
         device_class: opening
-      "binary_sensor.garage_side_door":
-        device_class: opening
 
 
 camera:

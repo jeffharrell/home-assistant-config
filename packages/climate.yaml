@@ -68,7 +68,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "HVAC disabled since a window was left open."
+          message: "HVAC disabled since a window was left open"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
@@ -85,7 +85,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "HVAC set to away mode."
+          message: "HVAC set to away mode"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
       - service: script.hvac_resume

@@ -51,7 +51,7 @@ group:
     entities:
       - binary_sensor.front_door
       - binary_sensor.laundry_room_door
-      - binary_sensor.garage_side_door
+      - binary_sensor.garage_door_side
       - binary_sensor.garage_door_1
       - binary_sensor.garage_door_2
       - binary_sensor.garage_door_3

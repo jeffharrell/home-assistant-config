@@ -29,7 +29,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}."
+          message: "Turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}"
 
   - alias: Lights - Turn on when coming home
     initial_state: True
@@ -49,7 +49,7 @@ automation:
       - service: tts.google_say
         entity_id: "all"
         data_template:
-          message: "Welcome home. I turned the lights on for you."
+          message: "Welcome home, I turned the lights on for you"
 
   - alias: Lights - Turn off after sunrise
     initial_state: True
