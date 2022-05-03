@@ -14,30 +14,30 @@ scene: !include scenes.yaml
 script: !include scripts.yaml
 
 
-
 # Configuration
 
 config:
 
-logger: !include config/logger.yaml
-
-http: !include config/http.yaml
-
 frontend: !include config/frontend.yaml
-
-lovelace: !include config/lovelace.yaml
-
-influxdb: !include config/influxdb.yaml
-
-notify: !include config/notify.yaml
 
 google_assistant: !include config/google_assistant.yaml
 
+http: !include config/http.yaml
+
+influxdb: !include config/influxdb.yaml
+
+logger: !include config/logger.yaml
+
+lovelace: !include config/lovelace.yaml
+
+notify: !include config/notify.yaml
+
 panel_custom: !include config/panel_custom.yaml
 
+tts: !include config/tts.yaml
 
 
-# Additions
+# Add ons
 
 api:
 

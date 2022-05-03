@@ -1,0 +1,11 @@
+- platform: google_cloud
+  service_name: google_say
+  key_file: google_cloud_key.json
+  base_url: !secret external_url
+  voice: en-US-Wavenet-C
+  text_type: ssml
+  speed: 1.1
+  pitch: 4.0
+  cache: false
+  profiles:
+    - medium-bluetooth-speaker-class-device

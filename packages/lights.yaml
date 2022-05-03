@@ -5,22 +5,27 @@ automation:
       # on
       - platform: sun
         event: sunset
+        variables:
+          action: "turn_on"
       # off
       - platform: time
         at: "22:00:00"
+        variables:
+          action: "turn_off"
     condition:
       condition: state
       entity_id: alarm_control_panel.abode_alarm
       state: "armed_away"
     action:
+      # Randomize the time the light turns on
       - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
-      - service_template: >
-          light.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+      - service: >
+          light.{{ action }}
         entity_id: light.living_room
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Turning the lights {% if trigger and trigger.event == 'sunset' %}on while you are away{% else %}off{% endif %}"
+          message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
 
   - alias: Lights - Turn on when coming home
     initial_state: True
@@ -35,12 +40,11 @@ automation:
       state: "below_horizon"
     action:
       - service: light.turn_on
-        entity_id:
-          - light.hallway
+        entity_id: light.hallway
       - service: tts.google_say
         entity_id: "all"
         data_template:
-          message: "Welcome home, I turned the lights on for you"
+          message: "Welcome home  I turned the lights on for you"
 
   - alias: Lights - Turn off after sunrise
     initial_state: True
@@ -58,13 +62,19 @@ automation:
   - alias: Lights - Playroom light toggles bulb
     initial_state: True
     trigger:
+      # on
       - platform: state
         entity_id: light.play_room
         to: "on"
+        variables:
+          action: "turn_on"
+      # off
       - platform: state
         entity_id: light.play_room
         to: "off"
+        variables:
+          action: "turn_off"
     action:
-      - service_template: >
-          light.turn_{% if trigger and trigger.to_state.state == "on" %}on{% else %}off{% endif %}
+      - service: >
+          light.{{ action }}
         entity_id: light.zipato_bulb

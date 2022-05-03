@@ -1,17 +1,3 @@
-tts:
-  - platform: google_cloud
-    service_name: google_say
-    key_file: google_cloud_key.json
-    base_url: !secret external_url
-    voice: en-US-Wavenet-C
-    text_type: ssml
-    speed: 1.1
-    pitch: 4.0
-    cache: false
-    profiles:
-      - medium-bluetooth-speaker-class-device
-
-
 automation:
   - alias: System - UI theme change
     initial_state: True
@@ -37,7 +23,6 @@ automation:
           - automation.security_garage_door_open
           - automation.landscape_back_door_light
 
-
   - alias: System - Reset speaker volumes
     initial_state: True
     trigger:
@@ -59,7 +44,6 @@ automation:
           entity_id: media_player.master_bedroom_speaker
         data:
           volume_level: 0.5
-
 
   - alias: System - Refresh non-zwave plus nodes
     initial_state: True

@@ -53,13 +53,15 @@ sensor:
       outdoor_forecast:
         value_template: "{{ states('sensor.dark_sky_hourly_summary')|default('')|lower }}"
         icon_template: >
-          {%- if "cloud" in states('sensor.dark_sky_hourly_summary')|lower -%}
+          {% set weather = states('sensor.dark_sky_hourly_summary')|lower %}
+          
+          {%- if "cloud" in weather -%}
             mdi:weather-cloudy
-          {%- elif "fog" in states('sensor.dark_sky_hourly_summary')|lower -%}
+          {%- elif "fog" in weather -%}
             mdi:weather-fog
-          {%- elif "rain" in states('sensor.dark_sky_hourly_summary')|lower -%}
+          {%- elif "rain" in weather -%}
             mdi:umbrella-outline
-          {%- elif "wind" in states('sensor.dark_sky_hourly_summary')|lower -%}
+          {%- elif "wind" in weather -%}
             mdi:weather-windy
           {%- else -%}
             mdi:weather-sunny
@@ -77,4 +79,4 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Cover the plants! Todays low temperature is {{ states('sensor.dark_sky_overnight_low_temperature_0d') }}°F"
+          message: "Cover the plants! Todays low temperature is {{ trigger.to_state }}°F"

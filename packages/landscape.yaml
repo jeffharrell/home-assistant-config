@@ -6,12 +6,16 @@ automation:
       - platform: sun
         event: sunset
         offset: "00:15:00"
+        variables:
+          action: "turn_on"
       # off
       - platform: time
         at: "22:00:00"
+        variables:
+          action: "turn_off"
     action:
-      - service_template: >
-          switch.{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+      - service: >
+          switch.{{ action }}
         entity_id:
           - switch.front_landscape
           - switch.back_landscape
@@ -22,12 +26,16 @@ automation:
       # on
       - platform: time
         at: "08:00:00"
+        variables:
+          action: "turn_on"
       # off
       - platform: sun
         event: sunset
+        variables:
+          action: "turn_off"
     action:
-      - service_template: >
-          switch.turn_{% if trigger and trigger.event == "sunset" %}off{% else %}on{% endif %}
+      - service: >
+          switch.{{ action }}
         entity_id:
           switch.fountain
 
@@ -37,13 +45,17 @@ automation:
       # on
       - platform: time
         at: "22:00:00"
+        variables:
+          action: "turn_on"
       # off
       - platform: sun
         event: sunrise
         offset: "-00:30:00"
+        variables:
+          action: "turn_off"
     action:
-      - service_template: >
-          light.turn_{% if trigger and trigger.event == "sunrise" %}off{% else %}on{% endif %}
+      - service: >
+          light.{{ action }}
         entity_id:
           light.front_door
 
