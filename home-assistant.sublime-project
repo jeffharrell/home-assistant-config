@@ -2,7 +2,6 @@
     "folders": [
         {
             "file_exclude_patterns": [
-                "zwave_device_config.yaml",
                 "*.sublime-project",
                 ".HA_VERSION",
                 ".pip_progress",
@@ -19,6 +18,7 @@
                 "*.bak"
             ],
             "folder_exclude_patterns": [
+                "backups",
                 "deps",
                 "src"
             ],

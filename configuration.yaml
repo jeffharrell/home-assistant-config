@@ -18,6 +18,8 @@ script: !include scripts.yaml
 
 config:
 
+backup:
+
 frontend: !include config/frontend.yaml
 
 google_assistant: !include config/google_assistant.yaml
