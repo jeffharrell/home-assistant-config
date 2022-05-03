@@ -91,7 +91,7 @@ automation:
 
               {%- if is_state("group.security", "on") -%}
                 Warning – The following are open:
-                {%- for entity in expand("group.security") -%}
+                {%- for entity in expand("binary_sensor.doors_and_windows") -%}
                   {%- if entity.state == "on" -%}
                     ... {{ entity.name }}
                   {%- endif -%}

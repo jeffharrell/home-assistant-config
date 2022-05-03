@@ -55,17 +55,19 @@ automation:
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
       - service: script.hvac_resume
 
-  - alias: Climate - House fan and HVAC/dryer both running
+  - alias: Climate - House fan is running while other equipment is
     initial_state: True
     trigger:
-      - id: HVAC 
-        platform: state
+      - platform: state
         entity_id: sensor.climate_operation
         to: "1"
-      - id: dryer
-        platform: state
+        variables:
+          equipment: "HVAC"
+      - platform: state
         entity_id: sensor.dryer
         to: "on"
+        variables:
+          equipment: "dryer"
     condition:
       condition: template
       value_template: "{{ is_state('switch.house_fan_switch', 'on') }}"
@@ -73,4 +75,4 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "House fan and {{ trigger.id }} are both running!"
+          message: "House fan and {{ equipment }} are both running!"

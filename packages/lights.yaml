@@ -1,12 +1,3 @@
-light:
-  - platform: group
-    name: "Kitchen"
-    unique_id: kitchen
-    entities:
-      - light.kitchen_1
-      - light.kitchen_2
-
-
 automation:
   - alias: Lights - Toggle when away
     initial_state: True
@@ -24,8 +15,8 @@ automation:
     action:
       - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
       - service_template: >
-          switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
-        entity_id: switch.living_room
+          light.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+        entity_id: light.living_room
       - service: notify.phones
         data_template:
           title: "Home"
@@ -43,9 +34,9 @@ automation:
       entity_id: sun.sun
       state: "below_horizon"
     action:
-      - service: homeassistant.turn_on
+      - service: light.turn_on
         entity_id:
-          - switch.hallway
+          - light.hallway
       - service: tts.google_say
         entity_id: "all"
         data_template:
@@ -58,12 +49,11 @@ automation:
       at: "08:00:00"
     condition:
       condition: state
-      entity_id: group.lights
+      entity_id: light.house
       state: "on"
     action:
-      - service: homeassistant.turn_off
-        entity_id:
-          - group.lights
+      - service: light.turn_off
+        entity_id: light.house
 
   - alias: Lights - Playroom light toggles bulb
     initial_state: True

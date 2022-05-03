@@ -184,8 +184,7 @@ views:
                   show_header_toggle: false
                 filter:
                   include:
-                    - group: group.doors_and_windows
-                    - group: group.entrances
+                    - group: binary_sensor.doors_and_windows
                   exclude:
                     - state: "off"
                     - state: "unavailable"
@@ -209,16 +208,14 @@ views:
                 name: false
                 format: 'precision0'
           - entity: light.kitchen
-          - entity: switch.kitchen_cabinets
-            name: "Cabinets"
-            icon: mdi:lightbulb
+          - entity: light.kitchen_cabinets
           - entity: light.island
 
           - type: divider
 
           # Living Room Area
           - type: custom:multiple-entity-row
-            entity: switch.living_room
+            entity: light.living_room
             icon: mdi:lightbulb
             toggle: true
             entities:
@@ -227,8 +224,7 @@ views:
                 format: 'precision0'
           - entity: light.dining_room
           - entity: light.entryway
-          - entity: switch.hallway
-            icon: mdi:lightbulb
+          - entity: light.hallway
 
           - type: divider
 
@@ -241,7 +237,7 @@ views:
                 name: false
                 format: 'precision0'
           - type: custom:multiple-entity-row
-            entity: switch.boys_bedroom
+            entity: light.boys_bedroom
             toggle: true
             entities:
               - entity: sensor.boys_bedroom_temperature
@@ -325,11 +321,9 @@ views:
         state_color: false
         show_header_toggle: false
         entities:
-          - entity: switch.front_yard_switch
-            icon: mdi:lightbulb
-          - entity: switch.back_yard_switch
-            icon: mdi:lightbulb
-          - entity: switch.garage_light
+          - entity: light.front_door
+          - entity: light.back_doors
+          - entity: light.garage_light
             icon: mdi:garage
           - entity: switch.pool_light
             icon: mdi:pool
@@ -342,9 +336,9 @@ views:
 
           - type: section
           - entity: automation.landscape_back_door_light
-            name: "Automate Back Lights"
+            name: "Turn back lights on with doors"
           - entity: automation.landscape_fountain
-            name: "Automate Fountain"
+            name: "Turn fountain on automatically"
 
   - title: "Cameras"
     path: "cameras"

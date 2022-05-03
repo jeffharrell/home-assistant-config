@@ -4,38 +4,11 @@ report_state: true
 expose_by_default: true
 exposed_domains:
   - light
-  - switch
   - script
 entity_config:
   light.kitchen_1:
     expose: false
   light.kitchen_2:
-    expose: false
-  switch.front_landscape:
-    expose: false
-  switch.back_landscape:
-    expose: false
-  switch.front_yard_switch:
-    aliases:
-      - FRONT_LIGHTS
-  switch.back_yard_switch:
-    aliases:
-      - BACK_LIGHTS
-  switch.fountain:
-    expose: false
-  switch.family_room_apple_tv:
-    expose: false
-  switch.family_room_speakers:
-    expose: false
-  switch.garage_door_1:
-    expose: false
-  switch.garage_door_2:
-    expose: false
-  switch.garage_door_3:
-    expose: false
-  switch.garage_door_group:
-    expose: false
-  switch.zooz_plug:
     expose: false
   script.dinner_lights:
     aliases:
@@ -51,3 +24,5 @@ entity_config:
   script.mood_lights:
     aliases:
       - MOVIE_TIME
+  switch.house_fan_switch:
+    expose: true

@@ -1,43 +1,94 @@
-group:
-  # Lights
-  landscape_lights:
+light:
+  # Overrides
+  - platform: switch
+    name: "Boys Bedroom"
+    entity_id: switch.boys_bedroom
+  - platform: switch
+    name: "Kitchen Cabinets"
+    entity_id: switch.kitchen_cabinets
+  - platform: switch
+    name: "Living Room"
+    entity_id: switch.living_room
+  - platform: switch
+    name: "Hallway"
+    entity_id: switch.hallway
+  - platform: switch
+    name: "Garage"
+    entity_id: switch.garage_light
+  - platform: switch
+    name: "Front Door"
+    entity_id: switch.front_yard_switch
+  - platform: switch
+    name: "Back Doors"
+    entity_id: switch.back_yard_switch
+  
+  # Groups
+  - platform: group
+    name: "Kitchen"
+    unique_id: kitchen
     entities:
-      - switch.back_landscape
-      - switch.front_landscape
-      - switch.front_yard_switch
-      - switch.pool_light
+      - light.kitchen_1
+      - light.kitchen_2
 
-  bedroom_lights:
+  - platform: group
+    name: "Kitchen Area"
+    unique_id: kitchen_area
     entities:
-      - switch.boys_bedroom
+      - light.kitchen
+      - light.island
+      - light.kitchen_cabinets
+      - light.pantry
+      - light.family_room
+
+  - platform: group
+    name: "Living Area"
+    unique_id: living_area
+    entities:
+      - light.living_room
+      - light.dining_room
+      - light.entryway
+
+  - platform: group
+    name: "Bedroom Area"
+    unique_id: bedroom_area
+    entities: 
+      - light.boys_bedroom
       - light.guest_bedroom
       - light.master_bedroom
       - light.play_room
 
-  kitchen_lights:
+  - platform: group
+    name: "Entrances"
+    unique_id: entrances
     entities:
-      - light.kitchen
-      - light.island
-      - switch.kitchen_cabinets
-      - light.pantry
+      - light.front_door
+      - light.back_doors
+      - light.garage
 
-  lights:
+  - platform: group
+    name: "House"
+    unique_id: house
     entities:
-      - group.bedroom_lights
-      - group.kitchen_lights
-      - light.family_room
-      - light.dining_room
-      - switch.living_room
-      - light.entryway
-      - switch.hallway
-      - switch.garage_light
-      - switch.back_yard_switch
+      - light.entrances
+      - light.kitchen_area
+      - light.living_area
+      - light.bedroom_area
+      - light.hallway
 
-  # Doors and Windows
-  doors_and_windows:
+binary_sensor:
+  # Groups
+  - platform: group
+    name: "Doors and Windows"
+    unique_id: doors_and_windows
     entities:
+      - binary_sensor.front_door
       - binary_sensor.family_room_doors
       - binary_sensor.master_bedroom_doors
+      - binary_sensor.laundry_room_door
+      - binary_sensor.garage_door_side
+      - binary_sensor.garage_door_1
+      - binary_sensor.garage_door_2
+      - binary_sensor.garage_door_3
       - binary_sensor.dining_room_window
       - binary_sensor.living_room_window_left
       - binary_sensor.living_room_window_right
@@ -46,17 +97,3 @@ group:
       - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
-
-  entrances:
-    entities:
-      - binary_sensor.front_door
-      - binary_sensor.laundry_room_door
-      - binary_sensor.garage_door_side
-      - binary_sensor.garage_door_1
-      - binary_sensor.garage_door_2
-      - binary_sensor.garage_door_3
-
-  security:
-    entities:
-      - group.doors_and_windows
-      - group.entrances

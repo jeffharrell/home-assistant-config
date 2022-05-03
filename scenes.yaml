@@ -1,28 +1,24 @@
 - name: Good Morning
   entities:
-    switch.kitchen_cabinets:
+    light.kitchen_cabinets:
       state: on
     light.island:
       state: on
       brightness: 127
     light.dining_room: off
     light.family_room: off
-    light.kitchen_1: off
-    light.kitchen_2: off
+    light.kitchen: off
     light.pantry: off
 
 - name: Good Night
   entities:
-    switch.front_yard_switch:
+    light.front_door:
       state: on
     alarm_control_panel.abode_alarm: "armed_home"
 
 - name: Mood Lights
   entities:
-    light.kitchen_1:
-      state: on
-      brightness: 40
-    light.kitchen_2:
+    light.kitchen:
       state: on
       brightness: 40
     light.entryway: 
@@ -32,19 +28,16 @@
     light.family_room: off
     light.island: off
     light.pantry: off
-    switch.kitchen_cabinets: off
+    light.kitchen_cabinets: off
 
 - name: Dinner Lights
   entities:
-    light.kitchen_1:
-      state: on
-      brightness: 120
-    light.kitchen_2:
+    light.kitchen:
       state: on
       brightness: 120
     light.island: off
     light.pantry: off
-    switch.kitchen_cabinets: off
+    light.kitchen_cabinets: off
 
 - name: Dinner Lights More
   entities:
@@ -57,37 +50,12 @@
 
 - name: House Off
   entities:
-    group.lights: off
+    lights.house: off
     switch.house_fan_switch: off
     remote.family_room: off
 
 - name: House Alert
   entities:
-    group.lights: on
-    light.kitchen_1:
-      state: on
-      brightness: 255
-    light.kitchen_2:
-      state: on
-      brightness: 255
-    light.island:
-      state: on
-      brightness: 255
-    light.family_room:
-      state: on
-      brightness: 255
-    light.dining_room:
-      state: on
-      brightness: 255
-    light.entryway:
-      state: on
-      brightness: 255
-    light.master_bedroom:
-      state: on
-      brightness: 255
-    light.guest_bedroom:
-      state: on
-      brightness: 255
-    light.play_room:
+    light.house:
       state: on
       brightness: 255
