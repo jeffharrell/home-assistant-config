@@ -78,8 +78,7 @@ automation:
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: tts.google_say
-        entity_id: media_player.master_bedroom_speaker
+      - service: notify.master_bedroom
         data_template:
           message: >
             {% set status = trigger.to_state.state %}

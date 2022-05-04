@@ -6,9 +6,19 @@ exposed_domains:
   - light
   - script
 entity_config:
+  light.bedroom_area:
+    expose: false
+  light.entrances:
+    expose: false
+  light.house:
+    expose: false
   light.kitchen_1:
     expose: false
   light.kitchen_2:
+    expose: false
+  light.kitchen_area:
+    expose: false
+  light.living_area:
     expose: false
   script.dinner_lights:
     aliases:

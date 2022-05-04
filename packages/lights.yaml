@@ -41,8 +41,7 @@ automation:
     action:
       - service: light.turn_on
         entity_id: light.hallway
-      - service: tts.google_say
-        entity_id: "all"
+      - service: notify.house
         data_template:
           message: "Welcome home  I turned the lights on for you"
 
