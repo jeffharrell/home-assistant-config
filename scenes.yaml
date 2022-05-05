@@ -50,7 +50,7 @@
 
 - name: House Off
   entities:
-    lights.house: off
+    light.house: off
     switch.house_fan_switch: off
     remote.family_room: off
 

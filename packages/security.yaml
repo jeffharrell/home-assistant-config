@@ -88,7 +88,7 @@ automation:
             {%- elif status == "armed_home" -%}
               Alarm armed...
 
-              {%- if is_state("group.security", "on") -%}
+              {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
                 Warning – The following are open:
                 {%- for entity in expand("binary_sensor.doors_and_windows") -%}
                   {%- if entity.state == "on" -%}
