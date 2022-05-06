@@ -1,38 +1,60 @@
 project_id: !secret google_assistant_id
 service_account: !include ../google_assistant_key.json
 report_state: true
-expose_by_default: true
-exposed_domains:
-  - light
-  - script
+expose_by_default: false
+
 entity_config:
-  light.bedroom_area:
-    expose: false
-  light.entrances:
-    expose: false
-  light.house:
-    expose: false
-  light.kitchen_1:
-    expose: false
-  light.kitchen_2:
-    expose: false
-  light.kitchen_area:
-    expose: false
-  light.living_area:
-    expose: false
+  light.back_doors:
+    expose: true
+  light.boys_bedroom:
+    expose: true
+  light.dining_room:
+    expose: true
+  light.entryway:
+    expose: true
+  light.family_room:
+    expose: true
+  light.front_door:
+    expose: true
+  light.garage:
+    expose: true
+  light.guest_bedroom:
+    expose: true
+  light.hallway:
+    expose: true
+  light.island:
+    expose: true
+  light.kitchen:
+    expose: true
+  light.kitchen_cabinets:
+    expose: true
+  light.living_room:
+    expose: true
+  light.master_bedroom:
+    expose: true
+  light.pantry:
+    expose: true
+  light.play_room:
+    expose: true
+  script.away:
+    expose: true
+    name: "Away mode"
+    room: house
   script.dinner_lights:
+    expose: true
+    name: "Dinner lights"
+    room: house
     aliases:
       - DINNER_TIME
-  script.good_morning:
-    expose: false
-  script.hvac_disable:
-    expose: false
-  script.hvac_resume:
-    expose: false
-  script.let_dog_out:
-    expose: false
+  script.good_night:
+    expose: true
+    name: "Good night"
+    room: house
   script.mood_lights:
+    expose: true
+    name: "Mood lights"
+    room: house
     aliases:
       - MOVIE_TIME
-  switch.house_fan_switch:
+  switch.house_fan:
     expose: true

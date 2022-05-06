@@ -29,7 +29,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: switch.house_fan_switch
+      entity_id: switch.house_fan
       to: "on"
       from: "off"
     action:
@@ -70,7 +70,7 @@ automation:
           equipment: "dryer"
     condition:
       condition: template
-      value_template: "{{ is_state('switch.house_fan_switch', 'on') }}"
+      value_template: "{{ is_state('switch.house_fan', 'on') }}"
     action:
       - service: notify.phones
         data_template:

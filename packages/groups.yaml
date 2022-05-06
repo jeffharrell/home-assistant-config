@@ -17,10 +17,10 @@ light:
     entity_id: switch.garage_light
   - platform: switch
     name: "Front Door"
-    entity_id: switch.front_yard_switch
+    entity_id: switch.front_yard
   - platform: switch
     name: "Back Doors"
-    entity_id: switch.back_yard_switch
+    entity_id: switch.back_yard
   
   # Groups
   - platform: group

@@ -285,7 +285,7 @@ views:
                 format: 'precision0'
               - attribute: preset_mode
                 name: "Mode"
-          - entity: switch.house_fan_switch
+          - entity: switch.house_fan
             icon: mdi:fan
             name: "Fan"
           - type: section
@@ -323,7 +323,7 @@ views:
         entities:
           - entity: light.front_door
           - entity: light.back_doors
-          - entity: light.garage_light
+          - entity: light.garage
             icon: mdi:garage
           - entity: switch.pool_light
             icon: mdi:pool
