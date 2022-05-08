@@ -32,6 +32,8 @@ logger: !include config/logger.yaml
 
 lovelace: !include config/lovelace.yaml
 
+media_source:
+
 notify: !include config/notify.yaml
 
 panel_custom: !include config/panel_custom.yaml
@@ -46,5 +48,3 @@ api:
 mobile_app:
 
 ios:
-
-system_health:
