@@ -61,7 +61,6 @@ light:
     name: "Entrances"
     unique_id: entrances
     entities:
-      - light.front_door
       - light.back_doors
       - light.garage
 

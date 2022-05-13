@@ -12,7 +12,7 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: group.doors_and_windows
+        entity_id: binary_sensor.doors_and_windows
         to: "on"
         for: "00:20:00"
     action:
@@ -22,7 +22,7 @@ automation:
           title: "Home"
           message: "Turning HVAC off since window is open"
       - delay: "00:00:10"
-      - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
+      - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
   - alias: Climate - Disable HVAC with house fan
@@ -35,7 +35,7 @@ automation:
     action:
       - service: script.hvac_disable
       - delay: "00:00:10"
-      - wait_template: "{{ is_state('group.doors_and_windows', 'off') }}"
+      - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
   - alias: Climate - Away

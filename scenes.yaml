@@ -12,8 +12,6 @@
 
 - name: Good Night
   entities:
-    light.front_door:
-      state: on
     alarm_control_panel.abode_alarm: "armed_home"
 
 - name: Mood Lights
@@ -59,3 +57,5 @@
     light.house:
       state: on
       brightness: 255
+    light.front_door:
+      state: on
