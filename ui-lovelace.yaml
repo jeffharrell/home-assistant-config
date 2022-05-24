@@ -101,7 +101,7 @@ views:
                         service: script.dinner_lights
                     - type: entity-button
                       entity: script.mood_lights
-                      name: "Movie"
+                      name: "Mood"
                       icon: mdi:movie
                       icon_height: 1.5em
                       tap_action:
@@ -349,24 +349,33 @@ views:
         columns: 2
         title: "Latest Events"
         cards:
-          - type: picture-entity
-            entity: camera.latest_doorbell
-            name: "Doorbell"
-            show_state: false
-            tap_action:
-              action: url
-              url_path: "/local/cameras/doorbell.jpg"
-            hold_action:
-              action: none
-          - type: picture-entity
-            entity: camera.latest_mailbox
-            name: "Mailbox"
-            show_state: false
-            tap_action:
-              action: url
-              url_path: "/local/cameras/mailbox.jpg"
-            hold_action:
-              action: none
+          - type: 'custom:config-template-card'
+            entities:
+              - camera.latest_doorbell
+            card:
+              type: picture-entity
+              entity: camera.latest_doorbell
+              name: "Doorbell"
+              show_state: false
+              tap_action:
+                action: url
+                url_path: "${ states['camera.latest_doorbell'].attributes.entity_picture }"
+              hold_action:
+                action: none
+
+          - type: 'custom:config-template-card'
+            entities:
+              - camera.latest_mailbox
+            card:
+              type: picture-entity
+              entity: camera.latest_mailbox
+              name: "Mailbox"
+              show_state: false
+              tap_action:
+                action: url
+                url_path: "${ states['camera.latest_mailbox'].attributes.entity_picture }"
+              hold_action:
+                action: none
       - type: grid
         square: false
         columns: 1

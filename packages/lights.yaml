@@ -19,13 +19,19 @@ automation:
     action:
       # Randomize the time the light turns on
       - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
-      - service: >
-          light.{{ action }}
-        entity_id: light.living_room
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
+      # Edge case: Check the alarm is still on after the delay is up
+      - if:
+          condition: state
+          entity_id: alarm_control_panel.abode_alarm
+          state: "armed_away"
+        then:
+          - service: >
+              light.{{ action }}
+            entity_id: light.living_room
+          - service: notify.phones
+            data_template:
+              title: "Home"
+              message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
 
   - alias: Lights - Turn on when coming home
     initial_state: True

@@ -49,8 +49,8 @@
 - name: House Off
   entities:
     light.house: off
-    switch.house_fan: off
     remote.family_room: off
+    switch.house_fan: off
 
 - name: House Alert
   entities:

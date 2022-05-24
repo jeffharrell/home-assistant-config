@@ -13,10 +13,10 @@ good_night:
   sequence:
     - service: scene.turn_on
       data:
-        entity_id: scene.house_off
+        entity_id: scene.good_night
     - service: scene.turn_on
       data:
-        entity_id: scene.good_night
+        entity_id: scene.house_off
 
 away:
   sequence:
