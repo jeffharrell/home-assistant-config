@@ -55,7 +55,22 @@ automation:
       - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
       - service: script.hvac_resume
 
-  - alias: Climate - House fan is running while other equipment is
+  - alias: Climate - Notify cooler outside than inside
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: sensor.climate_operation
+        to: "1"
+    condition:
+      condition: template
+      value_template: "{{ state_attr('climate.home', 'temperature')|int > states('sensor.outside_temp')|int }}"
+    action:
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Open the windows – it's nicer outside than inside!"
+
+  - alias: Climate - Notify house fan is running with other equipment
     initial_state: True
     trigger:
       - platform: state
