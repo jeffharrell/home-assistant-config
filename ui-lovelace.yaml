@@ -354,8 +354,8 @@ views:
               - camera.latest_doorbell
             card:
               type: picture-entity
-              entity: camera.latest_doorbell
               name: "Doorbell"
+              entity: camera.latest_doorbell
               show_state: false
               tap_action:
                 action: url
@@ -368,8 +368,8 @@ views:
               - camera.latest_mailbox
             card:
               type: picture-entity
-              entity: camera.latest_mailbox
               name: "Mailbox"
+              entity: camera.latest_mailbox
               show_state: false
               tap_action:
                 action: url
@@ -381,23 +381,24 @@ views:
         columns: 1
         title: "Live Cameras"
         cards:
-          - type: picture-entity
-            entity: camera.front_door
-            show_state: false
-            show_name: false
-          - type: picture-entity
-            entity: camera.driveway
-            show_state: false
-            show_name: false
-          - type: picture-entity
-            entity: camera.family_room
-            show_state: false
-            show_name: false
-          - type: picture-entity
-            entity: camera.living_room
-            show_state: false
-            show_name: false
-          - type: picture-entity
-            entity: camera.back_yard
-            show_state: false
-            show_name: false
+          - type: picture-glance
+            camera_image: camera.front_door
+            entities:
+              - entity: light.front_door
+          - type: picture-glance
+            camera_image: camera.driveway
+            entities:
+              - entity: light.front_door
+          - type: picture-glance
+            camera_image: camera.family_room
+            entities:
+              - entity: light.kitchen_area
+                icon: mdi:lightbulb
+          - type: picture-glance
+            camera_image: camera.living_room
+            entities:
+              - entity: light.living_area
+                icon: mdi:lightbulb
+          - type: picture-glance
+            camera_image: camera.back_yard
+            entities: []

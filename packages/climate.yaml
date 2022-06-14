@@ -31,10 +31,9 @@ automation:
       platform: state
       entity_id: switch.house_fan
       to: "on"
-      from: "off"
     action:
       - service: script.hvac_disable
-      - delay: "00:00:10"
+      - delay: "00:01:00"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
@@ -69,6 +68,8 @@ automation:
         data_template:
           title: "Home"
           message: "Open the windows – it's nicer outside than inside!"
+      - delay:
+          hours: 4
 
   - alias: Climate - Notify house fan is running with other equipment
     initial_state: True
