@@ -88,9 +88,9 @@ automation:
             {%- elif status == "armed_home" -%}
               Alarm armed...
 
-              {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
+              {%- if is_state("binary_sensor.doors_and_windows_and_garages", "on") -%}
                 Warning – The following are open:
-                {%- for entity in expand("binary_sensor.doors_and_windows") -%}
+                {%- for entity in expand("binary_sensor.doors_and_windows_and_garages") -%}
                   {%- if entity.state == "on" -%}
                     ... {{ entity.name }}
                   {%- endif -%}
@@ -223,5 +223,9 @@ automation:
                 name: "default"
                 critical: "{{ (states('sun.sun') == 'below_horizon')|int }}"
                 volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
+      - service: system_log.write
+        data_template:
+          message: "Mailbox motion detected"
+          level: info
       - delay:
           minutes: 1

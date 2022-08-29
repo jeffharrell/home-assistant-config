@@ -84,10 +84,6 @@ binary_sensor:
       - binary_sensor.family_room_doors
       - binary_sensor.master_bedroom_doors
       - binary_sensor.laundry_room_door
-      - binary_sensor.garage_door_side
-      - binary_sensor.garage_door_1
-      - binary_sensor.garage_door_2
-      - binary_sensor.garage_door_3
       - binary_sensor.dining_room_window
       - binary_sensor.living_room_window_left
       - binary_sensor.living_room_window_right
@@ -96,3 +92,17 @@ binary_sensor:
       - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
+  - platform: group
+    name: "Garage Doors"
+    unique_id: garage_doors
+    entities:
+      - binary_sensor.garage_door_side
+      - binary_sensor.garage_door_1
+      - binary_sensor.garage_door_2
+      - binary_sensor.garage_door_3
+  - platform: group
+    name: "Doors and Windows and Garages"
+    unique_id: doors_and_windows_and_garages
+    entities:
+      - binary_sensor.garage_doors
+      - binary_sensor.doors_and_windows

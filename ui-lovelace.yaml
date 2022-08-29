@@ -26,7 +26,7 @@ views:
 
                 @media only screen and (hover: none) and (pointer: coarse) {
                   .type-picture-entity {
-                    min-height: 215px !important;
+                    min-height: 212px !important;
                   }
                 }
 
@@ -184,6 +184,7 @@ views:
                   show_header_toggle: false
                 filter:
                   include:
+                    - group: binary_sensor.garage_doors
                     - group: binary_sensor.doors_and_windows
                   exclude:
                     - state: "off"
