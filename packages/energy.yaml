@@ -17,7 +17,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "PG&E power is {{ status }}! Powerwall is at {{ states('sensor.powerwall_charge') }}%"
+          message: "PG&E is {{ status }}! Powerwall is at {{ states('sensor.powerwall_charge') }}%"
 
   - alias: Energy - Disable climate if power out
     initial_state: True
@@ -33,4 +33,4 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Disabling the HVAC – You can turn back on manually"
+          message: "Disabling HVAC – You can turn back on manually"
