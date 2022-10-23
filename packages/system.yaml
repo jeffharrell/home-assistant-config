@@ -1,5 +1,5 @@
 automation:
-  - alias: System - UI theme change
+  - alias: System - Theme change
     initial_state: True
     trigger:
       - platform: homeassistant
@@ -19,7 +19,7 @@ automation:
         entity_id:
           - automation.security_doorbell_notifications
           - automation.security_mailbox_open
-          - automation.security_say_status
+          - automation.security_status_alerts
           - automation.security_garage_door_open
           - automation.landscape_back_door_light
 
@@ -65,3 +65,19 @@ automation:
             - switch.kitchen_cabinets
             - switch.living_room
           refresh_all_values: false
+
+  - alias: System - Node health check
+    initial_state: True
+    trigger:
+      platform: time
+      at: "20:00:00"
+      variables:
+         unavailable_nodes: "{{ states | selectattr('state', 'in', 'dead, unavailable') }}"
+    condition:
+      condition: template
+      value_template: "{{ unavailable_nodes }}"
+    action:
+      - service: notify.mobile_app_jeffs_iphone
+        data_template:
+          message: "The following are unavailable: {{ unavailable_nodes | map(attribute='name') | join(', ') }}"
+

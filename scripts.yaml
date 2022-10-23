@@ -60,7 +60,7 @@ let_dog_out:
     # Disable alarm voice updates
     - service: automation.turn_off
       data:
-        entity_id: automation.security_say_status
+        entity_id: automation.security_status_alerts
     # Turn off alarm
     - service: alarm_control_panel.alarm_disarm
       data:
@@ -74,5 +74,5 @@ let_dog_out:
     - delay: "00:01:00"
     - service: automation.turn_on
       data:
-        entity_id: automation.security_say_status
+        entity_id: automation.security_status_alerts
         

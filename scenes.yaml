@@ -49,6 +49,10 @@
 - name: House Off
   entities:
     light.house: off
+    media_player.family_room_speakers: off
+    media_player.living_room_speakers: off
+    media_player.playroom_speakers: off
+    media_player.outside_speakers: off
     remote.family_room: off
     switch.house_fan: off
 

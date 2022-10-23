@@ -264,10 +264,11 @@ views:
         state_color: true
         show_header_toggle: false
         entities:
-          - entity: switch.family_room_apple_tv
-            icon: mdi:television
-          - entity: switch.family_room_speakers
-            icon: mdi:speaker
+          - entity: remote.family_room
+          - entity: media_player.family_room_speakers
+          - entity: media_player.living_room_speakers
+          - entity: media_player.playroom_speakers
+          - entity: media_player.outside_speakers
 
       - type: entities
         title: "Climate"

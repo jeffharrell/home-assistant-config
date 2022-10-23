@@ -61,7 +61,7 @@ cover:
 
 
 automation:
-  - alias: Security - Status and open alerts
+  - alias: Security - Status alerts
     initial_state: True
     trigger:
       - platform: state
