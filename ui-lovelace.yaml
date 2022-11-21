@@ -20,7 +20,7 @@ views:
                 .type-picture-entity {
                   background-color: rgb(85, 85, 85);
                   border-radius: var(--ha-card-border-radius, 4px);
-                  min-height: 280px;
+                  min-height: 278px;
                   transition: none;
                 }
 
@@ -160,7 +160,7 @@ views:
                 content: >
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
 
-                  {% if states('sensor.outside_uv')|int > 3 %}
+                  {% if states('sensor.outside_uv')|replace('--', 0)|int > 3 %}
                     <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high so wear sunscreen!
                   {% endif %}
 
@@ -265,10 +265,18 @@ views:
         show_header_toggle: false
         entities:
           - entity: remote.family_room
-          - entity: media_player.family_room_speakers
-          - entity: media_player.living_room_speakers
-          - entity: media_player.playroom_speakers
-          - entity: media_player.outside_speakers
+          - type: custom:multiple-entity-row
+            entity: media_player.family_room_speakers
+            toggle: true
+          - type: custom:multiple-entity-row
+            entity: media_player.living_room_speakers
+            toggle: true
+          - type: custom:multiple-entity-row
+            entity: media_player.playroom_speakers
+            toggle: true
+          - type: custom:multiple-entity-row
+            entity: media_player.outside_speakers
+            toggle: true
 
       - type: entities
         title: "Climate"

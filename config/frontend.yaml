@@ -31,6 +31,7 @@ themes:
         }
       }
 
+
     # Colors
     text-color: '#555'
     text-medium-color: '#666'
@@ -62,6 +63,8 @@ themes:
     disabled-text-color: 'var(--text-light-color)'
     paper-dialog-button-color: 'var(--text-color)'
     secondary-background-color: 'var(--background-color-2)'
+    ha-card-border-width: '0'
+    ha-card-border-radius: '5px'
 
     # Icons
     paper-item-icon-color: 'var(--text-light-color)'
