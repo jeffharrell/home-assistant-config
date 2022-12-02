@@ -151,8 +151,6 @@ automation:
     trigger:
       - platform: event
         event_type: abode_panel_fault
-      - platform: event
-        event_type: abode_panel_restore
     action:
       - service: notify.phones
         data:

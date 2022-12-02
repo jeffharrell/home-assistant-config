@@ -32,8 +32,6 @@ entity_config:
     expose: true
   light.master_bedroom:
     expose: true
-  light.pantry:
-    expose: true
   light.play_room:
     expose: true
   script.away:

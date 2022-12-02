@@ -35,9 +35,8 @@ sensor:
     select: "[name='rainofdaily']"
     <<: *weather_scraper
 
-  - name: outside_pm25
-    unit_of_measurement: "µg/m3"
-    select: "[name='pm25out']"
+  - name: outside_battery
+    select: "[name='outBattSta1']"
     <<: *weather_scraper
 
   - platform: darksky
@@ -79,4 +78,17 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Cover the plants! Todays low temperature is {{ trigger.to_state }}°F"
+          message: "Cover the plants! The low tonight is {{ trigger.to_state.state }}°F"
+
+  - alias: Weather - Low Battery
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: sensor.outside_battery
+        to: "- -"
+        for: "01:00:00"
+    action:
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "The outside weather sensor battery is low!"

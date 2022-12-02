@@ -37,7 +37,6 @@ light:
       - light.kitchen
       - light.island
       - light.kitchen_cabinets
-      - light.pantry
       - light.family_room
 
   - platform: group
