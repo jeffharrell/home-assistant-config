@@ -1,43 +1,43 @@
 sun:
 
 sensor:
-  - name: outside_temp
-    unit_of_measurement: "°F"
-    select: "[name='outTemp']"
-    <<: &weather_scraper
-      platform: scrape
-      resource: !secret ambient_weather_url
-      attribute: value
-      scan_interval: 300
+#   - name: outside_temp
+#     unit_of_measurement: "°F"
+#     select: "[name='outTemp']"
+#     <<: &weather_scraper
+#       platform: scrape
+#       resource: !secret ambient_weather_url
+#       attribute: value
+#       scan_interval: 300
 
-  - name: outside_humidity
-    unit_of_measurement: "%"
-    select: "[name='outHumi']"
-    <<: *weather_scraper
+#   - name: outside_humidity
+#     unit_of_measurement: "%"
+#     select: "[name='outHumi']"
+#     <<: *weather_scraper
 
-  - name: outside_wind_speed
-    unit_of_measurement: "mph"
-    select: "[name='avgwind']"
-    <<: *weather_scraper
+#   - name: outside_wind_speed
+#     unit_of_measurement: "mph"
+#     select: "[name='avgwind']"
+#     <<: *weather_scraper
 
-  - name: outside_wind_gust
-    unit_of_measurement: "mph"
-    select: "[name='gustspeed']"
-    <<: *weather_scraper
+#   - name: outside_wind_gust
+#     unit_of_measurement: "mph"
+#     select: "[name='gustspeed']"
+#     <<: *weather_scraper
 
-  - name: outside_uv
-    unit_of_measurement: "UV Index"
-    select: "[name='uvi']"
-    <<: *weather_scraper
+#   - name: outside_uv
+#     unit_of_measurement: "UV Index"
+#     select: "[name='uvi']"
+#     <<: *weather_scraper
 
-  - name: outside_rain_daily
-    unit_of_measurement: "In"
-    select: "[name='rainofdaily']"
-    <<: *weather_scraper
+#   - name: outside_rain_daily
+#     unit_of_measurement: "In"
+#     select: "[name='rainofdaily']"
+#     <<: *weather_scraper
 
-  - name: outside_battery
-    select: "[name='outBattSta1']"
-    <<: *weather_scraper
+#   - name: outside_battery
+#     select: "[name='outBattSta1']"
+#     <<: *weather_scraper
 
   - platform: darksky
     api_key: !secret darksky_api_key

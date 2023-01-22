@@ -1,4 +1,21 @@
+shell_command:
+  mv_backup: "cd backups/ && mv $(ls -t | head -n 1) $(date +'%b').tar"
+
+
 automation:
+  - alias: System - Backup
+    initial_state: True
+    trigger:
+      platform: time
+      at: "01:00:00"
+    condition:
+      condition: template
+      value_template: "{{ now().day == 1 }}"
+    action:
+      - service: backup.create
+      - delay: "00:05:00" # Not ideal, but prevents race condition
+      - service: shell_command.mv_backup
+
   - alias: System - Theme change
     initial_state: True
     trigger:

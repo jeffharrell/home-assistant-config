@@ -4,6 +4,7 @@ homeassistant:
   longitude: !secret longitude
   elevation: !secret elevation
   unit_system: !secret units
+  country: !secret country
   time_zone: !secret time_zone
   external_url: !secret external_url
   packages: !include_dir_named packages/

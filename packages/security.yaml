@@ -113,22 +113,19 @@ automation:
         data:
           entity_id: scene.house_off
 
-  - alias: Security - Alert lighting
-    initial_state: True
-    trigger:
-      platform: event
-      event_type: abode_alarm
-    action:
-      - service: scene.turn_on
-        data:
-          entity_id: scene.house_alert
-
   - alias: Security - Alert
     initial_state: True
     trigger:
       platform: event
       event_type: abode_alarm
+    condition:
+      # Filter non-alarm events
+      condition: template
+      value_template: "{{ trigger.event.data.event_type != 'Not Connected to Gateway' }}"
     action:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.house_alert
       - service: notify.phones
         data_template:
           title: "Home"
@@ -143,7 +140,7 @@ automation:
                 volume: 1
       - service: system_log.write
         data_template:
-          message: "Alarm: {{ trigger.event.data }}"
+          message: "Alarm Event: {{ trigger.event.data }}"
           level: error
 
   - alias: Security - Fault

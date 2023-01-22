@@ -6,18 +6,14 @@ automation:
       - platform: state
         entity_id: binary_sensor.grid_status
         to: "on"
-        variables:
-          status: "online"
       - platform: state
         entity_id: binary_sensor.grid_status
         to: "off"
-        variables:
-          status: "offline"
     action:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "PG&E is {{ status }}! Powerwall is at {{ states('sensor.powerwall_charge') }}%"
+          message: "PG&E grid is {{ binary_sensor.grid_status }}! Powerwall is at {{ states('sensor.powerwall_charge') }}%"
 
   - alias: Energy - Disable climate if power out
     initial_state: True
