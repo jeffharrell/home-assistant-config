@@ -1,58 +1,15 @@
 sun:
 
 sensor:
-#   - name: outside_temp
-#     unit_of_measurement: "°F"
-#     select: "[name='outTemp']"
-#     <<: &weather_scraper
-#       platform: scrape
-#       resource: !secret ambient_weather_url
-#       attribute: value
-#       scan_interval: 300
-
-#   - name: outside_humidity
-#     unit_of_measurement: "%"
-#     select: "[name='outHumi']"
-#     <<: *weather_scraper
-
-#   - name: outside_wind_speed
-#     unit_of_measurement: "mph"
-#     select: "[name='avgwind']"
-#     <<: *weather_scraper
-
-#   - name: outside_wind_gust
-#     unit_of_measurement: "mph"
-#     select: "[name='gustspeed']"
-#     <<: *weather_scraper
-
-#   - name: outside_uv
-#     unit_of_measurement: "UV Index"
-#     select: "[name='uvi']"
-#     <<: *weather_scraper
-
-#   - name: outside_rain_daily
-#     unit_of_measurement: "In"
-#     select: "[name='rainofdaily']"
-#     <<: *weather_scraper
-
-#   - name: outside_battery
-#     select: "[name='outBattSta1']"
-#     <<: *weather_scraper
-
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 0
-    monitored_conditions:
-      - hourly_summary
-      - temperature_low
-
   - platform: template
     sensors:
       outdoor_forecast:
-        value_template: "{{ states('sensor.dark_sky_hourly_summary')|default('')|lower }}"
+        value_template: >
+          {% set forecast = state_attr('weather.krhv_daynight', 'forecast')[0]|default('') %}
+
+          {{ forecast.detailed_description.split('.')[0]|lower }}
         icon_template: >
-          {% set weather = states('sensor.dark_sky_hourly_summary')|lower %}
+          {% set weather = state_attr('weather.krhv_daynight', 'forecast')[0].condition %}
           
           {%- if "cloud" in weather -%}
             mdi:weather-cloudy
@@ -68,18 +25,6 @@ sensor:
 
 
 automation:
-  - alias: Weather - Freezing temperature
-    initial_state: True
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.dark_sky_overnight_low_temperature_0d
-      below: 33
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Cover the plants! The low tonight is {{ trigger.to_state.state }}°F"
-
   - alias: Weather - Low Battery
     initial_state: True
     trigger:
