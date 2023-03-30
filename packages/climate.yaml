@@ -23,7 +23,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Turning HVAC off since window is open"
+          message: "Turning HVAC off since {{ expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | map(attribute='name')| join(', ') }} is open"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
