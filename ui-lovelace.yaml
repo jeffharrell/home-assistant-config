@@ -161,7 +161,7 @@ views:
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
 
                   {% if states('sensor.outside_uv')|replace('--', 0)|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high so wear sunscreen!
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high
                   {% endif %}
 
                   {% if states('sensor.outside_rain_daily')|float(0) %}

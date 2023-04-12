@@ -6,31 +6,27 @@ themes:
     card-mod-theme: home
     header-height: 0;
     card-mod-root: |
+
+      .header .toolbar .action-items {
+        display: none !important;
+      }
+
       ha-tabs {
         --paper-tabs-selection-bar-color: transparent !important;
       }
 
-      app-toolbar ha-icon-button[slot="trigger"] {
-        display: none !important;
-      }
-
       @media only screen and (hover: none) and (pointer: coarse) {
-        app-header {
-          top: auto;
-          bottom: 0;
-          height: 90px;
-          transform: translate3d(0, 0, 0) !important;
-        }
-
-        app-toolbar {
-          transform: translate3d(0, 0, 0) !important;
-        }
-
         #view {
-          top: -90px;
+          margin-top: 0 !important;
+        }
+
+        .header {
+          position: fixed;
+          top: auto !important;
+          bottom: 0;
+          height: 80px;
         }
       }
-
 
     # Colors
     text-color: '#555'
