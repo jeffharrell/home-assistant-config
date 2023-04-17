@@ -10,7 +10,7 @@ automation:
           action: "turn_on"
       # off
       - platform: time
-        at: "22:00:00"
+        at: "23:00:00"
         variables:
           action: "turn_off"
     action:

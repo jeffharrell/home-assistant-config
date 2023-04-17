@@ -1,6 +1,11 @@
 shell_command:
   purge_backups: "find ./backups -maxdepth 1 -name '*.tar' -type f -mtime +365 -delete"
 
+input_boolean:
+  guest_mode:
+    name: "Guest Mode"
+    initial: "off"
+    icon: "mdi:bed"
 
 automation:
   - alias: System - Backup

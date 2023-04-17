@@ -4,6 +4,8 @@ report_state: true
 expose_by_default: false
 
 entity_config:
+  input_boolean.guest_mode:
+    expose: true
   light.back_doors:
     expose: true
   light.boys_bedroom:

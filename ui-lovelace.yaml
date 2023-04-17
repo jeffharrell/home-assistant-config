@@ -178,6 +178,10 @@ views:
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
 
+                  {% if is_state('input_boolean.guest_mode', 'on') %}
+                    <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
+                  {% endif %}
+
               - type: 'custom:auto-entities'
                 card:
                   type: entities

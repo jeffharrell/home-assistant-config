@@ -14,9 +14,18 @@ good_night:
     - service: scene.turn_on
       data:
         entity_id: scene.good_night
-    - service: scene.turn_on
-      data:
-        entity_id: scene.house_off
+    - if:
+        condition: state
+        entity_id: input_boolean.guest_mode
+        state: "off"
+      then:
+        service: scene.turn_on
+        data:
+          entity_id: scene.house_off
+      else:
+        service: scene.turn_on
+        data:
+          entity_id: scene.house_off_guest
 
 away:
   sequence:

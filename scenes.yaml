@@ -56,6 +56,19 @@
     remote.family_room: off
     switch.house_fan: off
 
+- name: House Off Guest
+  entities:
+    light.entrances: off
+    light.kitchen_area: off
+    light.living_area: off
+    light.hallway: off
+    light.master_bedroom: off
+    media_player.family_room_speakers: off
+    media_player.living_room_speakers: off
+    media_player.playroom_speakers: off
+    media_player.outside_speakers: off
+    switch.house_fan: off
+
 - name: House Alert
   entities:
     light.house:
