@@ -147,7 +147,7 @@ views:
 
 
           - type: vertical-stack
-            title: "Status"
+            title: " "
             cards:
               - type: markdown
                 entity_id:
@@ -157,6 +157,7 @@ views:
                   - sensor.outside_rain_daily
                   - sensor.air_pollution_level
                   - alarm_control_panel.abode_alarm
+                  - counter.camera_motion
                 content: >
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
 
@@ -176,6 +177,10 @@ views:
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
+                  {% endif %}
+
+                  {% if states('counter.camera_motion')|float(0) > 0 %}
+                    <ha-icon icon="mdi:alert"></ha-icon> {{ states('counter.camera_motion') }} events today
                   {% endif %}
 
                   {% if is_state('input_boolean.guest_mode', 'on') %}

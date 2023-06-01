@@ -17,7 +17,8 @@ themes:
 
       @media only screen and (hover: none) and (pointer: coarse) {
         #view {
-          margin-top: 0 !important;
+          margin-top: -50px !important;
+          padding-bottom: 80px !important;
         }
 
         .header {
@@ -25,6 +26,10 @@ themes:
           top: auto !important;
           bottom: 0;
           height: 80px;
+        }
+
+        .header .toolbar iron-icon {
+          display: none !important;
         }
       }
 

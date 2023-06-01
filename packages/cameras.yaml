@@ -1,0 +1,89 @@
+camera:
+  - platform: local_file
+    name: Latest Doorbell 
+    file_path: /config/www/cameras/doorbell.jpg
+  - platform: local_file
+    name: Latest Mailbox 
+    file_path: /config/www/cameras/mailbox.jpg
+
+
+counter:
+  camera_motion:
+    name: "Camera Motion Counter"
+    icon: mdi:alert
+    initial: 0
+    restore: True
+
+
+automation:
+  - alias: Cameras - Doorbell notifications
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell_sensor
+      to: "on"
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id: camera.front_door
+          filename: "/config/www/cameras/doorbell.jpg"
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Doorbell"
+          data:
+            entity_id: camera.front_door
+            url: "/lovelace/cameras"
+      - delay:
+          minutes: 1
+
+  - alias: Cameras - Mailbox open
+    initial_state: True
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.mailbox_motion
+        to: "on"
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id: camera.driveway
+          filename: "/config/www/cameras/mailbox.jpg"
+      - service: notify.phones
+        data_template:
+          title: "Home"
+          message: "Mailbox motion detected!"
+          data:
+            url: "/lovelace/cameras"
+            push:
+              sound:
+                name: "default"
+                critical: "{{ (states('sun.sun') == 'below_horizon')|int }}"
+                volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
+      - delay:
+          minutes: 1
+
+  - alias: Cameras - Motion webhook
+    initial_state: True
+    trigger:
+      - platform: webhook
+        webhook_id: "camera_motion"
+        local_only: True
+    action:
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion
+      - service: system_log.write
+        data_template:
+          message: "Camera motion detected: {{ trigger.json }}"
+          level: warning
+          
+  - alias: Cameras - Reset motion counter
+    initial_state: True
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - service: counter.reset
+        target:
+          entity_id: counter.camera_motion
