@@ -38,10 +38,10 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - automation.security_doorbell_notifications
-          - automation.security_mailbox_open
-          - automation.security_status_alerts
-          - automation.security_garage_door_open
+          - automation.cameras_doorbell_notifications
+          - automation.cameras_mailbox_open
+          - automation.alarm_status_alerts
+          - automation.garages_door_open
           - automation.landscape_back_door_light
 
   - alias: System - Reset speaker volumes
