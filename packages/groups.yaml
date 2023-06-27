@@ -21,6 +21,9 @@ light:
   - platform: switch
     name: "Back Doors"
     entity_id: switch.back_yard
+  - platform: switch
+    name: "Twinkle Lights"
+    entity_id: switch.twinkle_lights
   
   # Groups
   - platform: group
@@ -57,17 +60,18 @@ light:
       - light.play_room
 
   - platform: group
-    name: "Entrances"
-    unique_id: entrances
+    name: "Outside"
+    unique_id: outside
     entities:
       - light.back_doors
+      - light.twinkle_lights
       - light.garage
 
   - platform: group
     name: "House"
     unique_id: house
     entities:
-      - light.entrances
+      - light.outside
       - light.kitchen_area
       - light.living_area
       - light.bedroom_area

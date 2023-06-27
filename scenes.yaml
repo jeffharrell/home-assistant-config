@@ -58,7 +58,7 @@
 
 - name: House Off Guest
   entities:
-    light.entrances: off
+    light.outside: off
     light.kitchen_area: off
     light.living_area: off
     light.hallway: off

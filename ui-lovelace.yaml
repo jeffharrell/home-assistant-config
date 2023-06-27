@@ -180,7 +180,7 @@ views:
                   {% endif %}
 
                   {% if states('counter.camera_motion')|float(0) > 0 %}
-                    <ha-icon icon="mdi:alert"></ha-icon> {{ states('counter.camera_motion') }} events today
+                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
                   {% endif %}
 
                   {% if is_state('input_boolean.guest_mode', 'on') %}
@@ -342,6 +342,7 @@ views:
         entities:
           - entity: light.front_door
           - entity: light.back_doors
+          - entity: light.twinkle_lights
           - entity: light.garage
             icon: mdi:garage
           - entity: switch.pool_light

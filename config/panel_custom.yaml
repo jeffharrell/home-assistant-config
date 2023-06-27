@@ -1,13 +1,3 @@
-- name: ha_app_server
-  sidebar_title: App Server
-  sidebar_icon: mdi:cog-transfer
-  js_url: /api/hassio/app/entrypoint.js
-  url_path: developer-tools/yaml
-  embed_iframe: true
-  require_admin: true
-  config:
-    ingress: core_configurator
-
 - name: ha_logs
   sidebar_title: Logs
   sidebar_icon: mdi:math-log

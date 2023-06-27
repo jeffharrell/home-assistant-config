@@ -67,16 +67,18 @@ automation:
     initial_state: True
     trigger:
       - platform: webhook
-        webhook_id: "camera_motion"
+        webhook_id: "camera_driveway_motion"
+        local_only: True
+      - platform: webhook
+        webhook_id: "camera_front_door_motion"
+        local_only: True
+      - platform: webhook
+        webhook_id: "camera_back_yard_motion"
         local_only: True
     action:
       - service: counter.increment
         target:
           entity_id: counter.camera_motion
-      - service: system_log.write
-        data_template:
-          message: "Camera motion detected: {{ trigger.json }}"
-          level: warning
           
   - alias: Cameras - Reset motion counter
     initial_state: True
