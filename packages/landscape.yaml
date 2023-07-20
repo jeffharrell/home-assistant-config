@@ -68,8 +68,11 @@ automation:
           - binary_sensor.master_bedroom_doors
         to: "on"
     condition:
-      condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+      - condition: template
+        value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+      - condition: state
+        entity_id: light.twinkle_lights
+        state: "off"
     action:
       - service: light.turn_on
         entity_id: light.back_doors

@@ -1,23 +1,28 @@
 sun:
 
+shell_command:
+  cache_weather: !secret cache_weather_cmd
+
 sensor:
   - platform: template
     sensors:
       outdoor_forecast:
         value_template: >
-          {% set forecast = state_attr('weather.krhv_daynight', 'forecast')[0]|default('') %}
+          {% set forecast = state_attr('weather.krhv_daynight', 'forecast') %}
+          {% set today = forecast and forecast[0] %}
 
-          {{ forecast.detailed_description.split('.')[0]|lower }}
+          {{ today.detailed_description.split('.')[0]|lower }}
         icon_template: >
-          {% set weather = state_attr('weather.krhv_daynight', 'forecast')[0].condition %}
+          {% set weather = state_attr('weather.krhv_daynight', 'forecast') %}
+          {% set condition = weather and weather[0].condition|default('') %}
           
-          {%- if "cloud" in weather -%}
+          {%- if "cloud" in condition -%}
             mdi:weather-cloudy
-          {%- elif "fog" in weather -%}
+          {%- elif "fog" in condition -%}
             mdi:weather-fog
-          {%- elif "rain" in weather -%}
+          {%- elif "rain" in condition -%}
             mdi:umbrella-outline
-          {%- elif "wind" in weather -%}
+          {%- elif "wind" in condition -%}
             mdi:weather-windy
           {%- else -%}
             mdi:weather-sunny
@@ -25,6 +30,14 @@ sensor:
 
 
 automation:
+  - alias: Weather - Cache Local
+    initial_state: True
+    trigger:
+      platform: time_pattern
+      minutes: "/5"
+    action:
+      - service: shell_command.cache_weather
+      
   - alias: Weather - Low Battery
     initial_state: True
     trigger:

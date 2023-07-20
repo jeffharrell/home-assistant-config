@@ -70,12 +70,13 @@ automation:
       # on
       - platform: sun
         event: sunset
-        offset: "00:30:00"
+        offset: "00:00:00"
         variables:
           action: "turn_on"
       # off
-      - platform: time
-        at: "22:00:00"
+      - platform: sun
+        event: sunset
+        offset: "01:00:00"
         variables:
           action: "turn_off"
     condition:
