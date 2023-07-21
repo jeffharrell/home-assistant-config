@@ -1,11 +1,13 @@
-version: '1.0'
+version: '1.1'
 services:
     home-assistant:
         container_name: homeassistant
         restart: unless-stopped
         volumes:
             - '/volume1/docker/homeassistant:/config'
-        network_mode: host
+        network_mode: ha-net
+        ports:
+            - "8123:8123"
         environment:
             - TZ=America/Los_Angeles
         image: 'homeassistant/home-assistant:latest'

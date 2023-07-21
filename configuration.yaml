@@ -7,6 +7,7 @@ homeassistant:
   country: !secret country
   time_zone: !secret time_zone
   external_url: !secret external_url
+  internal_url: !secret internal_url
   packages: !include_dir_named packages/
   allowlist_external_dirs:
     - /tmp
