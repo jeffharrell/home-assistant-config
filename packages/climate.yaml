@@ -30,6 +30,8 @@ automation:
 
   - alias: Climate - Disable HVAC with house fan
     initial_state: True
+    mode: single
+    max_exceeded: silent
     trigger:
       platform: state
       entity_id: switch.house_fan

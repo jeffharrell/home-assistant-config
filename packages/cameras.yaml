@@ -18,6 +18,8 @@ counter:
 automation:
   - alias: Cameras - Doorbell notifications
     initial_state: True
+    mode: single
+    max_exceeded: silent
     trigger:
       platform: state
       entity_id: binary_sensor.doorbell_sensor
@@ -40,6 +42,7 @@ automation:
   - alias: Cameras - Mailbox open
     initial_state: True
     mode: single
+    max_exceeded: silent
     trigger:
       - platform: state
         entity_id: binary_sensor.mailbox_motion

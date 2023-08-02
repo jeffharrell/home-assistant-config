@@ -7,7 +7,7 @@
 - name: house
   platform: tts
   tts_service: tts.google_say
-  media_player: media_player.house_speaker
+  media_player: media_player.playroom_speakers
 
 - name: master_bedroom
   platform: tts

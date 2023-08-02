@@ -10,6 +10,9 @@ logs:
   homeassistant.components.binary_sensor: error
   homeassistant.components.abode.config_flow: error
   pychromecast.socket_client: critical
+  custom_components.hacs: critical
+  jaraco.abode.socketio: error
+  lomond: error
   skybellpy: error
   abodepy: error
   pyecobee: error

@@ -47,6 +47,6 @@ tts: !include config/tts.yaml
 
 api:
 
-mobile_app:
-
 ios:
+
+mobile_app:
