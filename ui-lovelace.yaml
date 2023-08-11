@@ -26,14 +26,14 @@ views:
 
                 @media only screen and (hover: none) and (pointer: coarse) {
                   .type-picture-entity {
-                    min-height: 212px !important;
+                    min-height: 211px !important;
                   }
                 }
 
           # Actions - Alarm is on
           - type: conditional
             conditions:
-              - entity: alarm_control_panel.abode_alarm
+              - entity: alarm_control_panel.alarm
                 state: "armed_home"
             card:
               type: horizontal-stack
@@ -59,7 +59,7 @@ views:
           # Actions - Alarm is off temporarily
           - type: conditional
             conditions:
-              - entity: alarm_control_panel.abode_alarm
+              - entity: alarm_control_panel.alarm
                 state: "disarmed"
               - entity: script.let_dog_out
                 state: "on"
@@ -82,7 +82,7 @@ views:
           # Actions - Alarm is off
           - type: conditional
             conditions:
-              - entity: alarm_control_panel.abode_alarm
+              - entity: alarm_control_panel.alarm
                 state: "disarmed"
               - entity: script.let_dog_out
                 state_not: "on"
@@ -156,7 +156,7 @@ views:
                   - sensor.outside_uv
                   - sensor.outside_rain_daily
                   - sensor.air_pollution_level
-                  - alarm_control_panel.abode_alarm
+                  - alarm_control_panel.alarm
                   - counter.camera_motion
                 content: >
                   <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
@@ -173,9 +173,9 @@ views:
                     <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
 
                   {% endif %}
-                  {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+                  {% if is_state('alarm_control_panel.alarm', 'armed_home') %}
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
-                  {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
+                  {% elif is_state('alarm_control_panel.alarm', 'armed_away') %}
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
 
@@ -302,8 +302,8 @@ views:
                 name: "Temperature"
                 unit: "°F"
                 format: 'precision0'
-              - attribute: preset_mode
-                name: "Mode"
+              - entity: climate.home
+                name: "Setting"
           - entity: switch.house_fan
             icon: mdi:fan
             name: "Fan"

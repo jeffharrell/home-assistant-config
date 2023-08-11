@@ -2,7 +2,7 @@ good_morning:
   sequence:
     - service: alarm_control_panel.alarm_disarm
       data:
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
     - condition: time
       before: "08:00:00"
     - service: scene.turn_on
@@ -31,7 +31,7 @@ away:
   sequence:
     - service: alarm_control_panel.alarm_arm_away
       data:
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
 
 dinner_lights:
   sequence:
@@ -52,16 +52,16 @@ mood_lights:
 
 hvac_disable:
   sequence:
-    - service: climate.set_preset_mode
+    - service: climate.set_temperature
       data:
         entity_id: climate.home
-        preset_mode: "away"
+        temperature: 80
 
 hvac_resume:
   sequence:
-    - service: ecobee.resume_program
+    - service: button.press
       data:
-        entity_id: climate.home
+        entity_id: button.home_clear_hold
 
 let_dog_out:
   mode: restart
@@ -73,12 +73,12 @@ let_dog_out:
     # Turn off alarm
     - service: alarm_control_panel.alarm_disarm
       data:
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
     # Turn on alarm after specified time
     - delay: "00:30:00"
     - service: alarm_control_panel.alarm_arm_home
       data:
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
     # Turn back on voice updates for alarm
     - delay: "00:01:00"
     - service: automation.turn_on

@@ -42,6 +42,8 @@ panel_custom: !include config/panel_custom.yaml
 
 tts: !include config/tts.yaml
 
+zeroconf:
+
 
 # Add ons
 

@@ -14,7 +14,7 @@ automation:
           action: "turn_off"
     condition:
       condition: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       state: "armed_away"
     action:
       # Randomize the time the light turns on
@@ -22,7 +22,7 @@ automation:
       # Edge case: Check the alarm is still on after the delay is up
       - if:
           condition: state
-          entity_id: alarm_control_panel.abode_alarm
+          entity_id: alarm_control_panel.alarm
           state: "armed_away"
         then:
           - service: >
@@ -37,7 +37,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       from: "armed_away"
       to: "disarmed"
     condition:
@@ -81,7 +81,7 @@ automation:
           action: "turn_off"
     condition:
       - condition: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         state: "disarmed"
     action:
       - service_template: >

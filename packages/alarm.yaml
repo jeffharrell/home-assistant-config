@@ -3,17 +3,17 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "armed_home"
         variables:
           target: "master_bedroom"
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "disarmed"
         variables:
           target: "master_bedroom"
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "armed_away"
         variables:
           target: "phones"
@@ -48,7 +48,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       to: "armed_away"
     action:
       - service: scene.turn_on
@@ -58,12 +58,9 @@ automation:
   - alias: Alarm - Alert
     initial_state: True
     trigger:
-      platform: event
-      event_type: abode_alarm
-    condition:
-      # Filter non-alarm events
-      condition: template
-      value_template: "{{ trigger.event.data.event_type != 'Not Connected to Gateway' }}"
+      platform: state
+      entity_id: alarm_control_panel.alarm
+      to: "triggered"
     action:
       - service: scene.turn_on
         data:
@@ -83,21 +80,4 @@ automation:
       - service: system_log.write
         data_template:
           message: "Alarm Event: {{ trigger.event.data }}"
-          level: error
-
-  - alias: Alarm - Fault
-    initial_state: True
-    trigger:
-      - platform: event
-        event_type: abode_panel_fault
-    action:
-      - service: notify.phones
-        data:
-          title: "Home"
-          message: "Alarm Fault {{ trigger.event.data.event_name }}"
-          data:
-            url: "/config/logs"
-      - service: system_log.write
-        data_template:
-          message: "Alarm Fault {{ trigger.event.data }}"
           level: error

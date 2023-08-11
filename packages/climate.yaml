@@ -42,23 +42,6 @@ automation:
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
-  - alias: Climate - Away
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: alarm_control_panel.abode_alarm
-        to: "armed_away"
-        for: "12:00:00"
-    action:
-      - service: script.hvac_disable
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Setting thermostat to away"
-      - delay: "00:00:10"
-      - wait_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
-      - service: script.hvac_resume
-
   - alias: Climate - Notify cooler outside than inside
     initial_state: True
     trigger:
@@ -67,7 +50,7 @@ automation:
         to: "1"
     condition:
       condition: template
-      value_template: "{{ is_state('climate.home', 'cool') and state_attr('climate.home', 'temperature')|int > states('sensor.outside_temp')|int }}"
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'disarmed') and is_state('climate.home', 'cool') and state_attr('climate.home', 'temperature')|int > states('sensor.outside_temp')|int }}"
     action:
       - service: notify.phones
         data_template:
@@ -75,25 +58,3 @@ automation:
           message: "Open the windows – it's nicer outside than inside!"
       - delay:
           hours: 8
-
-  - alias: Climate - Notify house fan is running with other equipment
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: sensor.climate_operation
-        to: "1"
-        variables:
-          equipment: "HVAC"
-      - platform: state
-        entity_id: sensor.dryer
-        to: "on"
-        variables:
-          equipment: "dryer"
-    condition:
-      condition: template
-      value_template: "{{ is_state('switch.house_fan', 'on') }}"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "House fan and {{ equipment }} are both running!"

@@ -12,7 +12,7 @@
 
 - name: Good Night
   entities:
-    alarm_control_panel.abode_alarm: "armed_home"
+    alarm_control_panel.alarm: "armed_home"
 
 - name: Mood Lights
   entities:
