@@ -2,9 +2,7 @@ sensor:
   - platform: template
     sensors:
       climate_operation:
-        value_template: >
-          {% set operation = state_attr('climate.home', 'hvac_action') %}
-          {%- if operation == 'cooling' or operation == "heating" -%}1{%- else -%}0{%- endif -%}
+        value_template: "{{ not is_state_attr('climate.home', 'hvac_action', 'idle') }}"
 
 
 automation:

@@ -1,48 +1,56 @@
 automation:
-  - alias: Alarm - Status alerts
+  - alias: Alarm - Status Away
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.alarm
+        to: "armed_away"
+    action:
+      - service: notify.phones
+        data_template:
+          message: >
+            {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
+              Warning! The following are open: {{ expand("binary_sensor.doors_and_windows") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
+            {%- endif -%}
+      - delay:
+          minutes: 10
+      - service: notify.phones
+        data_template:
+          message: >
+            {%- if is_state("binary_sensor.garage_doors", "on") -%}
+              The garage is still open: {{ expand("binary_sensor.garage_doors") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
+            {%- endif -%}
+
+  - alias: Alarm - Status Home
     initial_state: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "armed_home"
-        variables:
-          target: "master_bedroom"
+    action:
+      - service: notify.master_bedroom
+        data_template:
+          message: >
+            Alarm armed...
+
+            {%- if is_state("input_boolean.guest_mode", "on") -%}
+              Guest mode enabled...
+            {%- endif -%}
+
+            {%- if is_state("binary_sensor.doors_and_windows_and_garages", "on") -%}
+              Warning! The following are open: {{ expand("binary_sensor.doors_and_windows_and_garages") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
+            {%- endif -%}
+
+  - alias: Alarm - Status Disarmed
+    initial_state: True
+    trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "disarmed"
-        variables:
-          target: "master_bedroom"
-      - platform: state
-        entity_id: alarm_control_panel.alarm
-        to: "armed_away"
-        variables:
-          target: "phones"
-
-    condition:
-      # Explicitly call out trigger states and this condition to protect against errors
-      condition: template
-      value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: notify.{{ target }}
+      - service: notify.master_bedroom
         data_template:
-          message: >
-            {% set status = trigger.to_state.state %}
-
-            {%- if status == "disarmed" -%}
-              Alarm off
-            {%- else -%}
-              {%- if status == "armed_home" -%}
-                Alarm armed...
-              {%- endif -%}
-
-              {%- if is_state("input_boolean.guest_mode", "on") -%}
-                Guest mode enabled...
-              {%- endif -%}
-
-              {%- if is_state("binary_sensor.doors_and_windows_and_garages", "on") -%}
-                Warning! The following are open: {{ expand("binary_sensor.doors_and_windows_and_garages") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
-              {%- endif -%}
-            {%- endif -%}
+          message: "Alarm off"
 
   - alias: Alarm - Turn house off
     initial_state: True
@@ -77,7 +85,3 @@ automation:
                 name: "default"
                 critical: 1
                 volume: 1
-      - service: system_log.write
-        data_template:
-          message: "Alarm Event: {{ trigger.event.data }}"
-          level: error

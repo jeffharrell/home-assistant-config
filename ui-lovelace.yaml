@@ -296,14 +296,12 @@ views:
             entity: climate.home
             name: "Climate"
             show_state: false
-            state_color: false
+            state_color: true
             entities:
               - attribute: current_temperature
                 name: "Temperature"
                 unit: "°F"
                 format: 'precision0'
-              - entity: climate.home
-                name: "Setting"
           - entity: switch.house_fan
             icon: mdi:fan
             name: "Fan"
