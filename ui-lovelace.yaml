@@ -159,30 +159,23 @@ views:
                   - alarm_control_panel.alarm
                   - counter.camera_motion
                 content: >
-                  <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
-
-                  {% if states('sensor.outside_uv_index')|replace('--', 0)|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> Wear sunscreen
-                  {% endif %}
-
-                  {% if states('sensor.outside_rain_daily')|float(0) %}
-                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
-
-                  {% endif %}
-                  {% if states('sensor.air_pollution_level') != 'good' %}
-                    <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
-
-                  {% endif %}
                   {% if is_state('alarm_control_panel.alarm', 'armed_home') %}
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.alarm', 'armed_away') %}
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
-
+                  {% if states('sensor.outside_temp') %}
+                    <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
+                  {% endif %}
+                  {% if states('sensor.outside_rain_daily')|float(0) %}
+                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
+                  {% endif %}
+                  {% if states('sensor.air_pollution_level') != 'good' %}
+                    <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+                  {% endif %}
                   {% if states('counter.camera_motion')|float(0) > 0 %}
                     <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
                   {% endif %}
-
                   {% if is_state('input_boolean.guest_mode', 'on') %}
                     <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
                   {% endif %}
@@ -373,6 +366,7 @@ views:
             card:
               type: picture-entity
               name: "Doorbell"
+              aspect_ratio: 16x9
               entity: camera.latest_doorbell
               show_state: false
               tap_action:
@@ -387,6 +381,7 @@ views:
             card:
               type: picture-entity
               name: "Mailbox"
+              aspect_ratio: 16x9
               entity: camera.latest_mailbox
               show_state: false
               tap_action:
@@ -420,3 +415,8 @@ views:
           - type: picture-glance
             camera_image: camera.back_yard
             entities: []
+          - type: picture-glance
+            camera_image: camera.doorbell
+            aspect_ratio: 16x9
+            entities:
+              - entity: light.front_door

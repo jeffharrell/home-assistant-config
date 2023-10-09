@@ -40,7 +40,8 @@ automation:
         entity_id:
           - automation.cameras_doorbell_notifications
           - automation.cameras_mailbox_open
-          - automation.alarm_status_alerts
+          - automation.alarm_status_home
+          - automation.alarm_status_disarmed
           - automation.garages_door_open
           - automation.landscape_back_door_light
 
