@@ -11,9 +11,6 @@ amcrest:
     host: !secret amcrest_doorbell_ip
     username: !secret amcrest_doorbell_user
     password: !secret amcrest_doorbell_pass
-    binary_sensors:
-      - online
-      - motion_detected
 
 counter:
   camera_motion:
@@ -55,23 +52,6 @@ automation:
     mode: single
     max_exceeded: silent
     trigger:
-      platform: state
-      entity_id: binary_sensor.doorbell_motion_detected
-      to: "on"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Front Door Motion"
-          data:
-            entity_id: camera.doorbell
-            url: "/lovelace/cameras"
-
-  - alias: Cameras - Doorbell motion person
-    initial_state: True
-    mode: single
-    max_exceeded: silent
-    trigger:
       platform: event
       event_type: amcrest
       event_data:
@@ -90,22 +70,10 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Front Door Motion (Person)"
+          message: "Front Door Motion"
           data:
             entity_id: camera.doorbell
             url: "/lovelace/cameras"
-
-  - alias: Cameras - Doorbell offline
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: binary_sensor.doorbell_online
-      to: "off"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "Doorbell offline!"
 
   - alias: Cameras - Mailbox open
     initial_state: True

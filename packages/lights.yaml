@@ -76,7 +76,7 @@ automation:
       # off
       - platform: sun
         event: sunset
-        offset: "02:00:00"
+        offset: "01:30:00"
         variables:
           action: "turn_off"
     condition:
@@ -87,23 +87,3 @@ automation:
       - service_template: >
           homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
         entity_id: light.twinkle_lights
-
-  - alias: Lights - Playroom light toggles bulb
-    initial_state: True
-    trigger:
-      # on
-      - platform: state
-        entity_id: light.play_room
-        to: "on"
-        variables:
-          action: "turn_on"
-      # off
-      - platform: state
-        entity_id: light.play_room
-        to: "off"
-        variables:
-          action: "turn_off"
-    action:
-      - service: >
-          light.{{ action }}
-        entity_id: light.zipato_bulb
