@@ -9,7 +9,7 @@ views:
         cards:
           # House Pic
           - type: picture-entity
-            entity: camera.front_door
+            entity: camera.front_patio
             show_name: false
             show_state: false
             tap_action: 
@@ -344,8 +344,15 @@ views:
             icon: mdi:flower-tulip
           - entity: switch.back_landscape
             icon: mdi:flower-tulip
-
-          - type: section
+      - type: entities
+        title: "Automations"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - entity: automation.cameras_doorbell
+            name: "Doorbell press alerts"
+          - entity: automation.cameras_doorbell_motion
+            name: "Doorbell motion alerts"
           - entity: automation.landscape_back_door_light
             name: "Turn back lights on with doors"
           - entity: automation.landscape_fountain
@@ -395,7 +402,7 @@ views:
         title: "Live Cameras"
         cards:
           - type: picture-glance
-            camera_image: camera.front_door
+            camera_image: camera.front_patio
             entities:
               - entity: light.front_door
           - type: picture-glance
@@ -416,7 +423,7 @@ views:
             camera_image: camera.back_yard
             entities: []
           - type: picture-glance
-            camera_image: camera.doorbell
+            camera_image: camera.front_door
             aspect_ratio: 16x9
             entities:
               - entity: light.front_door

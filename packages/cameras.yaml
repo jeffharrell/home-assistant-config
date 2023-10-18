@@ -35,14 +35,14 @@ automation:
     action:
       - service: camera.snapshot
         data:
-          entity_id: camera.doorbell
+          entity_id: camera.front_door
           filename: "/config/www/cameras/doorbell.jpg"
       - service: notify.phones
         data_template:
           title: "Home"
           message: "Doorbell"
           data:
-            entity_id: camera.doorbell
+            entity_id: camera.latest_doorbell
             url: "/lovelace/cameras"
       - delay:
           minutes: 1
@@ -65,14 +65,14 @@ automation:
     action:
       - service: camera.snapshot
         data:
-          entity_id: camera.doorbell
+          entity_id: camera.front_door
           filename: "/config/www/cameras/doorbell.jpg"
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Front Door Motion"
+          message: "Front door motion"
           data:
-            entity_id: camera.doorbell
+            entity_id: camera.latest_doorbell
             url: "/lovelace/cameras"
 
   - alias: Cameras - Mailbox open
@@ -91,8 +91,9 @@ automation:
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Mailbox motion detected!"
+          message: "Mailbox motion"
           data:
+            entity_id: camera.latest_mailbox
             url: "/lovelace/cameras"
             push:
               sound:
@@ -109,7 +110,7 @@ automation:
         webhook_id: "camera_driveway_motion"
         local_only: True
       - platform: webhook
-        webhook_id: "camera_front_door_motion"
+        webhook_id: "camera_front_patio_motion"
         local_only: True
       - platform: webhook
         webhook_id: "camera_back_yard_motion"

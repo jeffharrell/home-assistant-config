@@ -10,6 +10,7 @@ logs:
   homeassistant.components.binary_sensor: error
   pychromecast.socket_client: critical
   custom_components.hacs: critical
+  py.warnings: error
   lomond: error
   skybellpy: error
   abodepy: error
