@@ -52,10 +52,20 @@ mood_lights:
 
 hvac_disable:
   sequence:
-    - service: climate.set_temperature
-      data:
+    - if:
+        condition: state
         entity_id: climate.home
-        temperature: 80
+        state: "heat"
+      then:
+        service: climate.set_temperature
+        data:
+          entity_id: climate.home
+          temperature: 60
+      else:
+        service: climate.set_temperature
+        data:
+          entity_id: climate.home
+          temperature: 80
 
 hvac_resume:
   sequence:
