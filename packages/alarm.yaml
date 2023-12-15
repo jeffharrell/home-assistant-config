@@ -6,6 +6,7 @@ automation:
         entity_id: alarm_control_panel.alarm
         to: "armed_away"
     action:
+      - delay: "00:00:15"
       - service: notify.phones
         data_template:
           message: >

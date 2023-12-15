@@ -85,6 +85,7 @@ automation:
             - light.kitchen_2
             - light.master_bedroom
             - light.pantry
+            - light.play_room
             - switch.hallway
             - switch.kitchen_cabinets
             - switch.living_room
