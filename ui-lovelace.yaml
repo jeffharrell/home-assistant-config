@@ -1,12 +1,85 @@
-title: "Home"
+kiosk_mode:
+  hide_header: false
+  hide_sidebar: false
+  hide_menubutton: false
+  hide_overflow: true
 
 views:
   - title: "Home"
     path: "home"
     cards:
       - type: vertical-stack
-        title: "Home"
         cards:
+          # Header and alarm
+          - type: entity
+            name: "Home"
+            entity: alarm_control_panel.alarm
+            card_mod:
+              style: |
+                :host ha-card {
+                  background: none;
+                  border: 0;
+                }
+
+                :host ha-card .header {
+                  padding: 0 0 0 5px;
+                }
+
+                :host ha-card .name {
+                  color: var(--primary-text-color);
+                  font-size: 24px;
+                  font-weight: 400;
+                }
+
+                :host ha-card .info {
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                }
+
+                :host ha-card .value {
+                  font-size: 16px;
+                  font-weight: 500;
+                }
+
+          # Status  
+          - type: markdown
+            entity_id:
+              - sensor.outdoor_forecast
+              - sensor.outside_temp
+              - sensor.outside_rain_daily
+              - sensor.outside_uv
+              - sensor.air_pollution_level
+              - counter.camera_motion
+            content: |
+              {%- if states('sensor.outside_temp') -%}
+                <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp; 
+
+                {%- if states('sensor.outside_rain_daily')|float(0) -%}
+                  with {{ states('sensor.outside_rain_daily') }}" of rain
+                {%- else -%}
+                  {{ states('sensor.outdoor_forecast') }}
+                {%- endif -%}
+              {%- endif -%}
+              {% if states('sensor.air_pollution_level') != 'good' %}
+                <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+              {%- endif -%}
+              {% if states('counter.camera_motion')|float(0) > 0 %}
+                <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+              {%- endif -%}
+              {% if is_state('input_boolean.guest_mode', 'on') %}
+                <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
+              {%- endif -%}
+            card_mod:
+              style: |
+                :host ha-card { 
+                  background: none;
+                  border: 0;
+                  margin: 0 0 5px -10px;
+                  color: var(--secondary-text-color);
+                  line-height: 2.25em;
+                }
+
           # House Pic
           - type: picture-entity
             entity: camera.front_patio
@@ -17,18 +90,12 @@ views:
               navigation_path: '/lovelace/cameras'
             card_mod:
               style: |
-                .type-picture-entity {
-                  background-color: rgb(85, 85, 85);
-                  border-radius: var(--ha-card-border-radius, 4px);
-                  min-height: 278px;
-                  transition: none;
+                :host ha-card { 
+                  margin: 0 -8px 20px;
+                  border: 0;
+                  border-radius: 0;
                 }
-
-                @media only screen and (hover: none) and (pointer: coarse) {
-                  .type-picture-entity {
-                    min-height: 211px !important;
-                  }
-                }
+                
 
           # Actions - Alarm is on
           - type: conditional
@@ -94,7 +161,7 @@ views:
                     - type: entity-button
                       entity: script.dinner_lights
                       name: "Dinner"
-                      icon: mdi:food-fork-drink
+                      icon: mdi:pot-steam
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
@@ -102,7 +169,7 @@ views:
                     - type: entity-button
                       entity: script.mood_lights
                       name: "Mood"
-                      icon: mdi:movie
+                      icon: mdi:movie-filter
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
@@ -149,37 +216,6 @@ views:
           - type: vertical-stack
             title: " "
             cards:
-              - type: markdown
-                entity_id:
-                  - sensor.outdoor_forecast
-                  - sensor.outside_temp
-                  - sensor.outside_uv
-                  - sensor.outside_rain_daily
-                  - sensor.air_pollution_level
-                  - alarm_control_panel.alarm
-                  - counter.camera_motion
-                content: >
-                  {% if is_state('alarm_control_panel.alarm', 'armed_home') %}
-                    <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
-                  {% elif is_state('alarm_control_panel.alarm', 'armed_away') %}
-                    <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
-                  {% endif %}
-                  {% if states('sensor.outside_temp') %}
-                    <ha-icon icon="{{ state_attr('sensor.outdoor_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outdoor_forecast') }}
-                  {% endif %}
-                  {% if states('sensor.outside_rain_daily')|float(0) %}
-                    <ha-icon icon="mdi:weather-rainy"></ha-icon> It rained {{ states('sensor.outside_rain_daily') }}" today
-                  {% endif %}
-                  {% if states('sensor.air_pollution_level') != 'good' %}
-                    <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
-                  {% endif %}
-                  {% if states('counter.camera_motion')|float(0) > 0 %}
-                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
-                  {% endif %}
-                  {% if is_state('input_boolean.guest_mode', 'on') %}
-                    <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
-                  {% endif %}
-
               - type: 'custom:auto-entities'
                 card:
                   type: entities
@@ -201,6 +237,8 @@ views:
         state_color: true
         show_header_toggle: true
         entities:
+          - type: divider
+
           # Family Room Area
           - type: custom:multiple-entity-row
             entity: light.family_room
@@ -266,6 +304,8 @@ views:
         state_color: true
         show_header_toggle: false
         entities:
+          - type: divider
+
           - entity: remote.family_room
           - type: custom:multiple-entity-row
             entity: media_player.family_room_speakers
@@ -285,6 +325,8 @@ views:
         state_color: true
         show_header_toggle: false
         entities:
+          - type: divider
+
           - type: custom:multiple-entity-row
             entity: climate.home
             name: "Climate"
@@ -307,22 +349,13 @@ views:
     path: "outside"
 
     cards:
-      - type: glance
-        title: "Weather"
-        show_name: false
-        entities:
-          - entity: sensor.outside_temp
-          - entity: sensor.outside_humidity
-            icon: mdi:water-percent
-          - entity: sensor.outside_wind_speed
-            icon: mdi:weather-windy
-          - entity: sensor.outside_uv_index
-            icon: mdi:weather-sunny
       - type: entities
         title: "Garages"
         state_color: false
         show_header_toggle: false
         entities:
+          - type: divider
+
           - entity: cover.garage_door_3
           - entity: cover.garage_door_2
           - entity: cover.garage_door_1
@@ -331,21 +364,25 @@ views:
         state_color: false
         show_header_toggle: false
         entities:
+          - type: divider
+
           - entity: light.front_door
           - entity: light.back_doors
           - entity: light.twinkle_lights
+          - type: divider
           - entity: light.garage
             icon: mdi:garage
           - entity: switch.pool_light
             icon: mdi:pool
           - entity: switch.fountain
             icon: mdi:cup-water
+          - type: divider
           - entity: switch.front_landscape
             icon: mdi:flower-tulip
           - entity: switch.back_landscape
             icon: mdi:flower-tulip
       - type: entities
-        title: "Automations"
+        title: "Settings"
         state_color: false
         show_header_toggle: false
         entities:

@@ -41,9 +41,6 @@ automation:
           - automation.cameras_doorbell
           - automation.cameras_doorbell_motion
           - automation.cameras_mailbox_open
-          - automation.alarm_status_home
-          - automation.alarm_status_disarmed
-          - automation.garages_door_open
           - automation.landscape_fountain
           - automation.landscape_back_door_light
 

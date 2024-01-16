@@ -9,12 +9,21 @@ sensor:
       outdoor_forecast:
         value_template: >
           {% set forecast = state_attr('weather.krhv_daynight', 'forecast') %}
-          {% set today = forecast and forecast[0] %}
 
-          {{ today.detailed_description.split('.')[0]|lower }}
+          {% if forecast %}
+            {% set description = forecast[0].detailed_description %}
+            {% set value = description.split('.')[0]|lower %}
+          {% endif %}
+
+          {{ value|default('') }}
         icon_template: >
-          {% set weather = state_attr('weather.krhv_daynight', 'forecast') %}
-          {% set condition = weather and weather[0].condition|default('') %}
+          {% set forecast = state_attr('weather.krhv_daynight', 'forecast') %}
+          
+          {% if forecast %}
+            {% set condition = forecast[0].condition %}
+          {% else %}
+            {% set condition = '' %}
+          {% endif %}
           
           {%- if "cloud" in condition -%}
             mdi:weather-cloudy

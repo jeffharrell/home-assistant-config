@@ -64,6 +64,26 @@ automation:
       - service: light.turn_off
         entity_id: light.house
 
+  - alias: Lights - Playroom light toggles bulb
+    initial_state: True
+    trigger:
+      # on
+      - platform: state
+        entity_id: light.play_room
+        to: "on"
+        variables:
+          action: "turn_on"
+      # off
+      - platform: state
+        entity_id: light.play_room
+        to: "off"
+        variables:
+          action: "turn_off"
+    action:
+      - service: >
+          light.{{ action }}
+        entity_id: light.zipato_bulb
+
   - alias: Lights - Twinkle lights
     initial_state: True
     trigger:
@@ -74,9 +94,8 @@ automation:
         variables:
           action: "turn_on"
       # off
-      - platform: sun
-        event: sunset
-        offset: "01:30:00"
+      - platform: time
+        at: "21:00:00"
         variables:
           action: "turn_off"
     condition:

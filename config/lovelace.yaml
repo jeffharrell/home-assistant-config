@@ -7,3 +7,18 @@ resources:
     type: module
   - url: /hacsfiles/config-template-card/config-template-card.js
     type: module
+  - url: /hacsfiles/kiosk-mode/kiosk-mode.js
+    type: module
+
+dashboards:
+  lovelace-beta:
+    mode: yaml
+    filename: ui-beta.yaml
+    title: "Home"
+    show_in_sidebar: false
+
+  lovelace-views:
+    mode: yaml
+    filename: ui-views.yaml
+    title: "Views"
+    show_in_sidebar: false

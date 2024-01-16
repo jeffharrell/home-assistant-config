@@ -115,6 +115,9 @@ automation:
       - platform: webhook
         webhook_id: "camera_back_yard_motion"
         local_only: True
+    condition:
+      condition: template
+      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
       - service: counter.increment
         target:
