@@ -12,7 +12,7 @@ cards:
             :host ha-card {
               background: none;
               border: 0;
-              margin: 17px 7px 0 7px;
+              margin: 17px 8px 0 8px;
             }
 
             :host ha-card .header {
@@ -152,7 +152,7 @@ cards:
         card_mod:
           style: |
             :host ha-card {
-              margin: 20px 0 0 -10px; 
+              margin: 20px 0 0 0; 
               background: none;
               border: 0;
               color: var(--secondary-text-color);
