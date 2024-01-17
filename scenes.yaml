@@ -10,10 +10,6 @@
     light.kitchen: off
     light.pantry: off
 
-- name: Good Night
-  entities:
-    alarm_control_panel.alarm: "armed_home"
-
 - name: Mood Lights
   entities:
     light.kitchen:

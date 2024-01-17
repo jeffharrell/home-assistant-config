@@ -1,0 +1,160 @@
+title: "Home"
+path: "home"
+cards:
+  - type: vertical-stack
+    cards:
+      # Header and alarm
+      - type: entity
+        name: "Home"
+        entity: alarm_control_panel.alarm_panel_ui
+        card_mod:
+          style: |
+            :host ha-card {
+              background: none;
+              border: 0;
+              margin: 17px 7px 0 7px;
+            }
+
+            :host ha-card .header {
+              padding: 0 0 0 5px;
+            }
+
+            :host ha-card .name {
+              color: var(--primary-text-color);
+              font-size: 24px;
+              font-weight: 400;
+            }
+
+            :host ha-card .info {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+            }
+
+            :host ha-card .value {
+              font-size: 16px;
+              font-weight: 500;
+            }
+
+
+      # House Pic
+      - type: picture-entity
+        entity: camera.front_patio
+        show_name: false
+        show_state: false
+        tap_action: 
+          action: 'navigate'
+          navigation_path: '/lovelace/cameras'
+        card_mod:
+          style: |
+            :host ha-card { 
+              margin: 25px -8px 25px;
+              border: 0;
+              border-radius: 0;
+            }
+            
+
+      # Actions - Alarm is on
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "armed_home"
+        card:
+          type: horizontal-stack
+          cards:
+            - type: entity-button
+              entity: script.let_dog_out
+              name: "Let Dog Out"
+              icon: mdi:dog-side
+              icon_height: 1.5em
+              tap_action:
+                action: call-service
+                service: script.let_dog_out
+
+      # Actions - Alarm is off temporarily
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "disarmed"
+          - entity: script.let_dog_out
+            state: "on"
+        card:
+          type: horizontal-stack
+          cards:
+            - type: entity-button
+              entity: script.let_dog_out
+              name: "Alarm Will Automatically Arm"
+              icon: mdi:timer
+              icon_height: 1.5em
+
+      # Actions - Alarm is off
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "disarmed"
+          - entity: script.let_dog_out
+            state_not: "on"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: entity-button
+                  entity: script.dinner_lights
+                  name: "Dinner"
+                  icon: mdi:pot-steam
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.dinner_lights
+                - type: entity-button
+                  entity: script.mood_lights
+                  name: "Mood"
+                  icon: mdi:movie-filter
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.mood_lights
+
+      # Status  
+      - type: markdown
+        entity_id:
+          - sensor.outdoor_forecast
+          - sensor.outside_temp
+          - sensor.outside_rain_daily
+          - sensor.outside_uv
+          - sensor.air_pollution_level
+          - counter.camera_motion
+        content: |
+          {%- if states('sensor.outside_temp') -%}
+            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp; 
+
+            {%- if states('sensor.outside_rain_daily')|float(0) -%}
+              with {{ states('sensor.outside_rain_daily') }}" of rain
+            {%- else -%}
+              {{ states('sensor.outdoor_forecast') }}
+            {%- endif -%}
+          {%- endif -%}
+          {% if states('sensor.air_pollution_level') != 'good' %}
+            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+          {%- endif -%}
+          {% if states('counter.camera_motion')|float(0) > 0 %}
+            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+          {%- endif -%}
+          {% if is_state('input_boolean.guest_mode', 'on') %}
+            <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
+          {%- endif -%}
+          {%- if is_state('binary_sensor.doors_and_windows_and_garages', 'on') -%}
+            {% for entity in expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list %}
+              <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name }} is open 
+            {%- endfor -%}
+          {%- endif -%}
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 20px 0 0 -10px; 
+              background: none;
+              border: 0;
+              color: var(--secondary-text-color);
+              line-height: 2.25em;
+            } 

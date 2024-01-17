@@ -1,0 +1,101 @@
+title: "Inside"
+path: "inside"
+cards:
+  - type: entities
+    title: "Family Rooms"
+    state_color: true
+    show_header_toggle: false
+    entities:
+      # Family Room
+      - type: custom:multiple-entity-row
+        entity: light.family_room
+        toggle: true
+        entities:
+          - entity: sensor.family_room_temperature
+            name: false
+            format: "precision0"
+      - entity: remote.family_room
+      - type: custom:multiple-entity-row
+        entity: media_player.family_room_speakers
+        toggle: true
+      - entity: light.kitchen
+      - entity: light.kitchen_cabinets
+      - entity: light.island
+
+      - type: divider
+
+      # Living Room
+      - type: custom:multiple-entity-row
+        entity: light.living_room
+        toggle: true
+        entities:
+          - entity: sensor.living_room_temperature
+            name: false
+            format: "precision0"
+      - type: custom:multiple-entity-row
+        entity: media_player.living_room_speakers
+        toggle: true
+      - entity: light.dining_room
+      - entity: light.entryway
+      - entity: light.hallway
+
+  - type: entities
+    title: "Bedrooms"
+    state_color: true
+    show_header_toggle: false
+    entities:
+      # Bedrooms
+      - type: custom:multiple-entity-row
+        entity: light.master_bedroom
+        toggle: true
+        entities:
+          - entity: sensor.master_bedroom_temperature
+            name: false
+            format: "precision0"
+      - type: custom:multiple-entity-row
+        entity: light.boys_bedroom
+        toggle: true
+        entities:
+          - entity: sensor.boys_bedroom_temperature
+            name: false
+            format: "precision0"
+      - type: custom:multiple-entity-row
+        entity: light.guest_bedroom
+        toggle: true
+        entities:
+          - entity: sensor.guest_bedroom_temperature
+            name: false
+            format: "precision0"
+      - type: custom:multiple-entity-row
+        entity: light.play_room
+        toggle: true
+        entities:
+          - entity: sensor.playroom_temperature
+            name: false
+            format: "precision0"
+      - type: custom:multiple-entity-row
+        entity: media_player.playroom_speakers
+        toggle: true
+
+
+  - type: entities
+    title: "Climate"
+    state_color: true
+    show_header_toggle: false
+    entities:
+      - type: custom:multiple-entity-row
+        entity: climate.home
+        name: "Climate"
+        show_state: false
+        state_color: true
+        entities:
+          - attribute: current_temperature
+            name: "Temperature"
+            unit: "°F"
+            format: "precision0"
+      - entity: switch.house_fan
+        name: "Fan"
+      - type: section
+      - entity: automation.climate_windows_open
+        state_color: false
+        name: "Turn off when windows open"

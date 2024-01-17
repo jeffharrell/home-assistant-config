@@ -5,45 +5,45 @@ themes:
   home:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
-    modes:
-      light:
-        primary-background-color: "#F7F8F9"
-        secondary-background-color: "#F4F5F6"
-        card-background-color: "#FFF"
+    # modes:
+    #   light:
+    primary-background-color: "#F7F8F9"
+    secondary-background-color: "#F4F5F6"
+    card-background-color: "#FFF"
 
-        primary-text-color: "#555"
-        secondary-text-color: "#666"
-        disabled-text-color: "#999"
+    primary-text-color: "#555"
+    secondary-text-color: "#666"
+    disabled-text-color: "#999"
 
-        app-header-text-color: "#fff"
-        app-header-background-color: "#555"
-        app-header-selection-bar-color: "transparent"
+    app-header-text-color: "#fff"
+    app-header-background-color: "#555"
+    app-header-selection-bar-color: "transparent"
+    
+    divider-color: "rgba(0, 0, 0, 0.15)"
+    state-icon-color: "#999"
+
+    switch-checked-button-color: "#FFF"
+    switch-unchecked-button-color: "#FFF"
+    switch-checked-track-color: "#0077FF"
+    switch-unchecked-track-color: "#999"
+
+      # dark:
+      #   primary-background-color: "#222222"
+      #   secondary-background-color: "#202020"
+      #   card-background-color: "#333333"
         
-        divider-color: "rgba(0, 0, 0, 0.15)"
-        state-icon-color: "#999"
-
-        switch-checked-button-color: "#FFF"
-        switch-unchecked-button-color: "#FFF"
-        switch-checked-track-color: "#0077FF"
-        switch-unchecked-track-color: "#999"
-
-      dark:
-        primary-background-color: "#222222"
-        secondary-background-color: "#202020"
-        card-background-color: "#333333"
+      #   primary-text-color: "#e1e1e1"
+      #   secondary-text-color: "#9b9b9b"
+      #   disabled-text-color: "#6f6f6f"
         
-        primary-text-color: "#e1e1e1"
-        secondary-text-color: "#9b9b9b"
-        disabled-text-color: "#6f6f6f"
+      #   app-header-text-color: "#e1e1e1"
+      #   app-header-background-color: "#222222"
+      #   app-header-selection-bar-color: "transparent"
         
-        app-header-text-color: "#e1e1e1"
-        app-header-background-color: "#222222"
-        app-header-selection-bar-color: "transparent"
-        
-        divider-color: "rgba(225, 225, 225, .12)"
+      #   divider-color: "rgba(225, 225, 225, .12)"
 
-        switch-unchecked-button-color: "#999999"
-        switch-unchecked-track-color: "#9b9b9b"
+      #   switch-unchecked-button-color: "#999999"
+      #   switch-unchecked-track-color: "#9b9b9b"
 
 
     # General settings

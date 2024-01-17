@@ -1,0 +1,17 @@
+title: "Settings"
+path: "settings"
+visible: false
+cards:
+  - type: entities
+    title: "Settings"
+    state_color: false
+    show_header_toggle: false
+    entities:
+      - entity: automation.cameras_doorbell
+        name: "Doorbell press alerts"
+      - entity: automation.cameras_doorbell_motion
+        name: "Doorbell motion alerts"
+      - entity: automation.landscape_back_door_light
+        name: "Turn back lights on with doors"
+      - entity: automation.landscape_fountain
+        name: "Turn fountain on automatically"

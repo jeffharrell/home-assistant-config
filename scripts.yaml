@@ -3,29 +3,12 @@ good_morning:
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
-    - condition: time
-      before: "08:00:00"
-    - service: scene.turn_on
-      data:
-        entity_id: scene.good_morning
 
 good_night:
   sequence:
-    - service: scene.turn_on
+    - service: alarm_control_panel.alarm_arm_home
       data:
-        entity_id: scene.good_night
-    - if:
-        condition: state
-        entity_id: input_boolean.guest_mode
-        state: "off"
-      then:
-        service: scene.turn_on
-        data:
-          entity_id: scene.house_off
-      else:
-        service: scene.turn_on
-        data:
-          entity_id: scene.house_off_guest
+        entity_id: alarm_control_panel.alarm
 
 away:
   sequence:
@@ -76,26 +59,26 @@ hvac_resume:
 let_dog_out:
   mode: restart
   sequence:
-    # Disable alarm voice updates
+    # Disable alarm voice and device updates
     - service: automation.turn_off
       data:
         entity_id: 
-          - automation.alarm_status_disarmed
-          - automation.alarm_status_home
+          - automation.alarm_disarmed_mode
+          - automation.alarm_home_mode
     # Turn off alarm
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
-    # Turn on alarm after specified time
+    # Turn back on alarm after specified time
     - delay: "00:30:00"
     - service: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.alarm
-    # Turn back on voice updates for alarm
+    # Turn back on voice and device updates for alarm
     - delay: "00:01:00"
     - service: automation.turn_on
       data:
         entity_id: 
-          - automation.alarm_status_disarmed
-          - automation.alarm_status_home
+          - automation.alarm_disarmed_mode
+          - automation.alarm_home_mode
         
