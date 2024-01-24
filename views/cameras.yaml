@@ -2,9 +2,9 @@ title: "Cameras"
 path: "cameras"
 visible: false
 cards:
-  - type: grid
-    square: false
-    columns: 2
+
+  # Latest event snapshots
+  - type: horizontal-stack
     title: "Latest Events"
     cards:
       - type: 'custom:config-template-card'
@@ -36,9 +36,9 @@ cards:
             url_path: "${ states['camera.latest_mailbox'].attributes.entity_picture }"
           hold_action:
             action: none
-  - type: grid
-    square: false
-    columns: 1
+
+  # Live camera views
+  - type: vertical-stack
     title: "Live Cameras"
     cards:
       - type: picture-glance
@@ -53,12 +53,10 @@ cards:
         camera_image: camera.family_room
         entities:
           - entity: light.kitchen_area
-            icon: mdi:lightbulb
       - type: picture-glance
         camera_image: camera.living_room
         entities:
           - entity: light.living_area
-            icon: mdi:lightbulb
       - type: picture-glance
         camera_image: camera.back_yard
         entities: []

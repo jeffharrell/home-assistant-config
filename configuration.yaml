@@ -26,6 +26,8 @@ frontend: !include config/frontend.yaml
 
 google_assistant: !include config/google_assistant.yaml
 
+history: !include config/history.yaml
+
 http: !include config/http.yaml
 
 influxdb: !include config/influxdb.yaml
@@ -39,6 +41,8 @@ media_source:
 notify: !include config/notify.yaml
 
 panel_custom: !include config/panel_custom.yaml
+
+recorder: !include config/recorder.yaml
 
 tts: !include config/tts.yaml
 

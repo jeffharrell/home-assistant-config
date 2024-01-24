@@ -10,6 +10,14 @@
     light.kitchen: off
     light.pantry: off
 
+- name: Wake Up
+  entities:
+    light.hallway: on
+    light.boys_bedroom: on
+    light.master_bedroom:
+      state: on
+      brightness: 40
+      
 - name: Mood Lights
   entities:
     light.kitchen:

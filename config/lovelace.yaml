@@ -1,9 +1,11 @@
 mode: yaml
 
 resources:
+  - url: /hacsfiles/kiosk-mode/kiosk-mode.js
+    type: module
   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
   - url: /hacsfiles/config-template-card/config-template-card.js
     type: module
-  - url: /hacsfiles/kiosk-mode/kiosk-mode.js
+  - url: /hacsfiles/stack-in-card/stack-in-card.js 
     type: module

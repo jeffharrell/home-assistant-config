@@ -1,101 +1,139 @@
 title: "Inside"
 path: "inside"
 cards:
-  - type: entities
-    title: "Family Rooms"
-    state_color: true
-    show_header_toggle: false
-    entities:
-      # Family Room
-      - type: custom:multiple-entity-row
-        entity: light.family_room
-        toggle: true
-        entities:
-          - entity: sensor.family_room_temperature
-            name: false
-            format: "precision0"
-      - entity: remote.family_room
-      - type: custom:multiple-entity-row
-        entity: media_player.family_room_speakers
-        toggle: true
-      - entity: light.kitchen
-      - entity: light.kitchen_cabinets
-      - entity: light.island
+  - type: vertical-stack
+    cards:
 
-      - type: divider
+    # Header
+    - type: entity
+      name: "Inside"
+      entity: climate.home
+      state_color: true
+      attribute: current_temperature
+      unit: "°F"
+      card_mod:
+        style: |
+          :host ha-card {
+            background: none;
+            border: 0;
+            margin: 15px 8px 25px 8px;
+            transition: none;
+          }
 
-      # Living Room
-      - type: custom:multiple-entity-row
-        entity: light.living_room
-        toggle: true
-        entities:
-          - entity: sensor.living_room_temperature
-            name: false
-            format: "precision0"
-      - type: custom:multiple-entity-row
-        entity: media_player.living_room_speakers
-        toggle: true
-      - entity: light.dining_room
-      - entity: light.entryway
-      - entity: light.hallway
+          :host ha-card .header {
+            padding: 0 0 0 5px;
+          }
 
-  - type: entities
-    title: "Bedrooms"
-    state_color: true
-    show_header_toggle: false
-    entities:
-      # Bedrooms
-      - type: custom:multiple-entity-row
-        entity: light.master_bedroom
-        toggle: true
-        entities:
-          - entity: sensor.master_bedroom_temperature
-            name: false
-            format: "precision0"
-      - type: custom:multiple-entity-row
-        entity: light.boys_bedroom
-        toggle: true
-        entities:
-          - entity: sensor.boys_bedroom_temperature
-            name: false
-            format: "precision0"
-      - type: custom:multiple-entity-row
-        entity: light.guest_bedroom
-        toggle: true
-        entities:
-          - entity: sensor.guest_bedroom_temperature
-            name: false
-            format: "precision0"
-      - type: custom:multiple-entity-row
-        entity: light.play_room
-        toggle: true
-        entities:
-          - entity: sensor.playroom_temperature
-            name: false
-            format: "precision0"
-      - type: custom:multiple-entity-row
-        entity: media_player.playroom_speakers
-        toggle: true
+          :host ha-card .name {
+            color: var(--primary-text-color);
+            font-size: 24px;
+            font-weight: 400;
+          }
 
+          :host ha-card .info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
 
-  - type: entities
-    title: "Climate"
-    state_color: true
-    show_header_toggle: false
-    entities:
-      - type: custom:multiple-entity-row
-        entity: climate.home
-        name: "Climate"
-        show_state: false
-        state_color: true
-        entities:
-          - attribute: current_temperature
-            name: "Temperature"
-            unit: "°F"
-            format: "precision0"
-      - entity: switch.house_fan
-        name: "Fan"
-      - type: section
-      - entity: automation.climate_windows_open
-        state_color: false
-        name: "Turn off when windows open"
+          :host ha-card .value, 
+          :host ha-card .measurement {
+            color: var(--disabled-text-color);
+            font-size: 24px;
+            font-weight: 400;
+          }
+
+          :host ha-card .measurement {
+            margin: 0 10px 0 -10px;
+          }
+
+    - type: entities
+      state_color: true
+      entities:
+        # Family Room
+        - type: custom:multiple-entity-row
+          entity: light.family_room
+          toggle: true
+          entities:
+            - entity: remote.family_room
+              icon: mdi:television
+              name: false
+              state_color: true
+            - entity: media_player.family_room_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
+
+        # Kitchen
+        - entity: light.kitchen
+        - entity: light.kitchen_cabinets
+        - entity: light.island
+
+        - type: divider
+
+        # Living Room
+        - type: custom:multiple-entity-row
+          entity: light.living_room
+          toggle: true
+          entities:
+            - entity: media_player.living_room_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
+
+        # Dining Room
+        - entity: light.dining_room
+        - entity: light.entryway
+        - entity: light.hallway
+
+        - type: divider
+
+        # Bedrooms
+        - type: custom:multiple-entity-row
+          entity: light.master_bedroom
+          toggle: true
+        - type: custom:multiple-entity-row
+          entity: light.boys_bedroom
+          toggle: true
+        - type: custom:multiple-entity-row
+          entity: light.guest_bedroom
+          toggle: true
+        - type: custom:multiple-entity-row
+          entity: light.play_room
+          toggle: true
+          entities:
+            - entity: media_player.playroom_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
+
+    # Climate
+    - type: entities
+      state_color: true
+      show_header_toggle: false
+      entities:
+        - type: custom:multiple-entity-row
+          entity: climate.home
+          name: "Climate"
+          show_state: false
+          state_color: true
+          entities:
+            - attribute: current_temperature
+              name: "Temperature"
+              unit: "°F"
+              format: "precision0"
+        - entity: switch.house_fan
+          name: "Fan"
+
+        - type: section
+        - entity: sensor.family_room_temperature
+        - entity: sensor.living_room_temperature
+        - entity: sensor.master_bedroom_temperature
+        - entity: sensor.boys_bedroom_temperature
+        - entity: sensor.guest_bedroom_temperature
+        - entity: sensor.playroom_temperature
+        
+        - type: section
+        - entity: automation.climate_windows_open
+          state_color: false
+          name: "Turn off when windows open"

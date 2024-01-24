@@ -2,6 +2,7 @@ title: "Settings"
 path: "settings"
 visible: false
 cards:
+  
   - type: entities
     title: "Settings"
     state_color: false

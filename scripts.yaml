@@ -1,8 +1,11 @@
-good_morning:
+wake_up:
   sequence:
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
+    - service: scene.turn_on
+      data:
+        entity_id: scene.wake_up
 
 good_night:
   sequence:
@@ -57,7 +60,7 @@ hvac_resume:
         entity_id: button.home_clear_hold
 
 let_dog_out:
-  mode: restart
+  mode: single
   sequence:
     # Disable alarm voice and device updates
     - service: automation.turn_off

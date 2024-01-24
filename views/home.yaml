@@ -3,6 +3,7 @@ path: "home"
 cards:
   - type: vertical-stack
     cards:
+
       # Header and alarm
       - type: entity
         name: "Home"
@@ -12,7 +13,8 @@ cards:
             :host ha-card {
               background: none;
               border: 0;
-              margin: 17px 8px 0 8px;
+              margin: 15px 8px 25px 8px;
+              transition: none;
             }
 
             :host ha-card .header {
@@ -32,8 +34,9 @@ cards:
             }
 
             :host ha-card .value {
-              font-size: 16px;
-              font-weight: 500;
+              color: var(--disabled-text-color);
+              font-size: 24px;
+              font-weight: 400;
             }
 
 
@@ -48,52 +51,57 @@ cards:
         card_mod:
           style: |
             :host ha-card { 
-              margin: 25px -8px 25px;
+              margin: 0 -8px 25px;
               border: 0;
               border-radius: 0;
-            }
-            
+              min-height: 285px;
+              transition: none;
+            }  
 
-      # Actions - Alarm is on
+            @media only screen and (hover: none) and (pointer: coarse) {
+              :host ha-card {
+                min-height: 218px !important;
+              }
+            }
+
+
+      # Buttons - Alarm is on
       - type: conditional
         conditions:
-          - entity: alarm_control_panel.alarm
-            state: "armed_home"
+          - condition: or
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: 'armed_home'
+              - condition: state
+                entity: script.let_dog_out
+                state: 'on'
         card:
           type: horizontal-stack
           cards:
+            - type: 'custom:config-template-card'
+              entities:
+                - script.let_dog_out
+              card:
+                type: entity-button
+                entity: script.let_dog_out
+                name: "${states['script.let_dog_out'].state === 'on' ? 'Arming Soon' : 'Let Dog Out'}"
+                icon_height: 1.5em
+                tap_action:
+                  action: call-service
+                  service: script.let_dog_out
             - type: entity-button
-              entity: script.let_dog_out
-              name: "Let Dog Out"
-              icon: mdi:dog-side
+              entity: script.wake_up
               icon_height: 1.5em
               tap_action:
                 action: call-service
-                service: script.let_dog_out
+                service: script.wake_up
 
-      # Actions - Alarm is off temporarily
+      # Buttons - Alarm is off
       - type: conditional
         conditions:
           - entity: alarm_control_panel.alarm
             state: "disarmed"
-          - entity: script.let_dog_out
-            state: "on"
-        card:
-          type: horizontal-stack
-          cards:
-            - type: entity-button
-              entity: script.let_dog_out
-              name: "Alarm Will Automatically Arm"
-              icon: mdi:timer
-              icon_height: 1.5em
-
-      # Actions - Alarm is off
-      - type: conditional
-        conditions:
-          - entity: alarm_control_panel.alarm
-            state: "disarmed"
-          - entity: script.let_dog_out
-            state_not: "on"
         card:
           type: vertical-stack
           cards:
@@ -101,16 +109,12 @@ cards:
               cards:
                 - type: entity-button
                   entity: script.dinner_lights
-                  name: "Dinner"
-                  icon: mdi:pot-steam
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: script.dinner_lights
                 - type: entity-button
                   entity: script.mood_lights
-                  name: "Mood"
-                  icon: mdi:movie-filter
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
@@ -155,6 +159,7 @@ cards:
               margin: 20px 0 0 0; 
               background: none;
               border: 0;
-              color: var(--secondary-text-color);
+              color: var(--primary-text-color);
               line-height: 2.25em;
+              transition: none;
             } 

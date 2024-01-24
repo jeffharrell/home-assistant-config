@@ -5,9 +5,6 @@ kiosk_mode:
   hide_overflow: true
   admin_settings:
     hide_overflow: false
-  mobile_settings:
-    hide_overflow: true
-
 
 views:
   - !include views/home.yaml
