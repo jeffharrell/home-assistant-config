@@ -45,94 +45,65 @@ cards:
                 font-weight: 400;
               }
 
-
-    - type: custom:stack-in-card
-      mode: vertical
+    # Garage Buttons
+    - type: horizontal-stack
       cards:
-        - type: horizontal-stack
-          cards:
-            - type: entity-button
-              show_name: false
-              show_state: true
-              entity: cover.garage_door_1
-              card_mod:
-                style: |
-                  :host ha-card {
-                    border: 0;
-                    margin: 10px 0;
-                    transition: none;
-                  }
-              tap_action:
-                action: call-service
-                service: switch.turn_on
-                data:
-                  entity_id: switch.garage_door_1
-            - type: entity-button 
-              show_name: false
-              show_state: true
-              entity: cover.garage_door_2
-              card_mod:
-                style: |
-                  :host ha-card {
-                    border: 0;
-                    margin: 10px 0;
-                    transition: none;
-                  }
-              tap_action:
-                action: call-service
-                service: switch.turn_on
-                data:
-                  entity_id: switch.garage_door_2
-            - type: entity-button
-              show_name: false
-              show_state: true
-              entity: cover.garage_door_3
-              card_mod:
-                style: |
-                  :host ha-card {
-                    border: 0;
-                    margin: 10px 0;
-                    transition: none;
-                  }
-              tap_action:
-                action: call-service
-                service: switch.turn_on
-                data:
-                  entity_id: switch.garage_door_3
+        - type: entity-button
+          show_name: false
+          show_state: true
+          entity: cover.garage_door_1
+          tap_action:
+            action: call-service
+            service: switch.turn_on
+            data:
+              entity_id: switch.garage_door_1
+        - type: entity-button 
+          show_name: false
+          show_state: true
+          entity: cover.garage_door_2
+          tap_action:
+            action: call-service
+            service: switch.turn_on
+            data:
+              entity_id: switch.garage_door_2
+        - type: entity-button
+          show_name: false
+          show_state: true
+          entity: cover.garage_door_3
+          tap_action:
+            action: call-service
+            service: switch.turn_on
+            data:
+              entity_id: switch.garage_door_3
 
-        - type: entities
-          state_color: false
-          show_header_toggle: false
-          card_mod:
-            style: |
-              :host ha-card {
-                border: 0;
-              }
+    # Lights
+    - type: entities
+      state_color: false
+      show_header_toggle: false
+      entities:
+        - entity: light.front_door
+        - type: custom:multiple-entity-row
+          entity: light.back_doors
+          toggle: true
           entities:
-            - type: divider
+            - entity: media_player.outside_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
 
-            - entity: light.front_door
-            - type: custom:multiple-entity-row
-              entity: light.back_doors
-              toggle: true
-              entities:
-                - entity: media_player.outside_speakers
-                  icon: mdi:speaker
-                  name: false
-                  state_color: true
+        - type: custom:multiple-entity-row
+          entity: light.garage
+          toggle: true
+          entities:
+            - entity: media_player.garage_speaker
+              icon: mdi:speaker
+              name: false
+              state_color: true
 
-            - type: custom:multiple-entity-row
-              entity: light.garage
-              toggle: true
-              entities:
-                - entity: media_player.garage_speaker
-                  icon: mdi:speaker
-                  name: false
-                  state_color: true
+        - type: section
 
-            - type: divider
-            - entity: switch.fountain
-            - entity: switch.pool_light
-            - entity: light.twinkle_lights
-            - entity: switch.front_landscape
-            - entity: switch.back_landscape
+        - entity: switch.fountain
+        - entity: switch.pool_light
+        - entity: light.twinkle_lights
+        - entity: switch.front_landscape
+        - entity: switch.back_landscape

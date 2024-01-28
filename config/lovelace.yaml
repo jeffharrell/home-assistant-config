@@ -7,5 +7,3 @@ resources:
     type: module
   - url: /hacsfiles/config-template-card/config-template-card.js
     type: module
-  - url: /hacsfiles/stack-in-card/stack-in-card.js 
-    type: module

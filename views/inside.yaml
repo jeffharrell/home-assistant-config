@@ -68,7 +68,7 @@ cards:
         - entity: light.kitchen_cabinets
         - entity: light.island
 
-        - type: divider
+        - type: section
 
         # Living Room
         - type: custom:multiple-entity-row
@@ -85,7 +85,7 @@ cards:
         - entity: light.entryway
         - entity: light.hallway
 
-        - type: divider
+        - type: section
 
         # Bedrooms
         - type: custom:multiple-entity-row
