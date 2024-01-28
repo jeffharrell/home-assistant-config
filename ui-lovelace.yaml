@@ -11,4 +11,6 @@ views:
   - !include views/inside.yaml
   - !include views/outside.yaml
   - !include views/cameras.yaml
+  - !include views/energy.yaml
+  - !include views/climate.yaml
   - !include views/settings.yaml

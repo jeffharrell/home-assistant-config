@@ -1,0 +1,24 @@
+title: "Powerwall"
+path: "energy"
+visible: false
+cards:
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: sensor.powerwall_charge_actual
+            name: "Powerwall"
+
+          - type: entity
+            entity: sensor.powerwall_load_now
+            name: "Home Now"
+
+      - type: energy-self-sufficiency-gauge
+      
+      - type: energy-solar-graph
+        title: "Solar Production"
+
+      - type: energy-usage-graph
+        title: "Energy Usage"

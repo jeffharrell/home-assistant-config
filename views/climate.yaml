@@ -1,0 +1,41 @@
+path: "climate"
+visible: false
+cards:
+
+  - type: vertical-stack
+    cards:
+      - type: thermostat
+        entity: climate.home
+        features:
+          - type: "climate-hvac-modes"
+            hvac_modes:
+              - heat
+              - cool
+              - "off"
+
+      - type: entities
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: switch.house_fan
+          - entity: automation.climate_windows_open
+            state_color: false
+            name: "Turn climate off when windows open"
+
+      - type: entities
+        entities:
+          - sensor.family_room_temperature
+          - sensor.living_room_temperature
+          - sensor.master_bedroom_temperature
+          - sensor.boys_bedroom_temperature
+          - sensor.guest_bedroom_temperature
+          - sensor.playroom_temperature
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 0; 
+              background: none;
+              border: 0;
+              color: var(--primary-text-color);
+              transition: none;
+            }

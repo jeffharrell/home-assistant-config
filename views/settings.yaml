@@ -16,3 +16,6 @@ cards:
         name: "Turn back lights on with doors"
       - entity: automation.landscape_fountain
         name: "Turn fountain on automatically"
+      - entity: automation.climate_windows_open
+        state_color: false
+        name: "Turn HVAC off when windows open"

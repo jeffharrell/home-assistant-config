@@ -1,3 +1,16 @@
+sensor:
+  - platform: template
+    sensors:
+      # fix data discrepancy between integration and app
+      powerwall_charge_actual:
+        unique_id: "powerwall_charge_actual"
+        unit_of_measurement: "%"
+        device_class: "battery"
+        value_template: >-
+          {% set percent = ((states('sensor.powerwall_charge') | float(0) / 100.0) - (0.05)) / (0.95) | float(0)%}
+          {{ (percent * 100) | round(1) }}
+
+
 automation:
   - alias: Energy - Power grid status
     initial_state: True

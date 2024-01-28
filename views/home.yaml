@@ -13,7 +13,7 @@ cards:
             :host ha-card {
               background: none;
               border: 0;
-              margin: 15px 8px 25px 8px;
+              margin: 15px 8px;
               transition: none;
             }
 
@@ -37,6 +37,7 @@ cards:
               color: var(--disabled-text-color);
               font-size: 24px;
               font-weight: 400;
+              text-transform: capitalize;
             }
 
 
@@ -64,7 +65,6 @@ cards:
               }
             }
 
-
       # Buttons - Alarm is on
       - type: conditional
         conditions:
@@ -85,7 +85,7 @@ cards:
               card:
                 type: entity-button
                 entity: script.let_dog_out
-                name: "${states['script.let_dog_out'].state === 'on' ? 'Arming Soon' : 'Let Dog Out'}"
+                name: "${states['script.let_dog_out'].state === 'on' ? 'Active' : 'Let Dog Out'}"
                 icon_height: 1.5em
                 tap_action:
                   action: call-service

@@ -86,6 +86,8 @@ automation:
             - switch.hallway
             - switch.kitchen_cabinets
             - switch.living_room
+            - switch.back_yard
+            - switch.house_fan
           refresh_all_values: false
 
   - alias: System - Node health check

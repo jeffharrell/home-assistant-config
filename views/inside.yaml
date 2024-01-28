@@ -5,48 +5,47 @@ cards:
     cards:
 
     # Header
-    - type: entity
-      name: "Inside"
-      entity: climate.home
-      state_color: true
-      attribute: current_temperature
-      unit: "°F"
+    - type: entities
+      entities:
+        - entity: sensor.home_current_temperature
+          name: "Inside"
+          tap_action:
+            action: navigate
+            navigation_path: climate
       card_mod:
-        style: |
-          :host ha-card {
-            background: none;
-            border: 0;
-            margin: 15px 8px 25px 8px;
-            transition: none;
-          }
+        style: 
+          .: |
+            #states {
+              padding: 0;
+            }
 
-          :host ha-card .header {
-            padding: 0 0 0 5px;
-          }
+            ha-card {
+              background: none;
+              border: 0;
+              margin: 25px 0;
+              transition: none;
+            }
+          hui-sensor-entity-row $:
+            hui-generic-entity-row $: |
+              state-badge {
+                position: absolute;
+                right: 0;
+              }
 
-          :host ha-card .name {
-            color: var(--primary-text-color);
-            font-size: 24px;
-            font-weight: 400;
-          }
+              .info {
+                color: var(--primary-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
 
-          :host ha-card .info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-          }
+              .value {
+                margin: 0 40px 0 0;
+                color: var(--disabled-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
 
-          :host ha-card .value, 
-          :host ha-card .measurement {
-            color: var(--disabled-text-color);
-            font-size: 24px;
-            font-weight: 400;
-          }
-
-          :host ha-card .measurement {
-            margin: 0 10px 0 -10px;
-          }
-
+    # Rooms
     - type: entities
       state_color: true
       entities:
@@ -106,34 +105,3 @@ cards:
               icon: mdi:speaker
               name: false
               state_color: true
-
-    # Climate
-    - type: entities
-      state_color: true
-      show_header_toggle: false
-      entities:
-        - type: custom:multiple-entity-row
-          entity: climate.home
-          name: "Climate"
-          show_state: false
-          state_color: true
-          entities:
-            - attribute: current_temperature
-              name: "Temperature"
-              unit: "°F"
-              format: "precision0"
-        - entity: switch.house_fan
-          name: "Fan"
-
-        - type: section
-        - entity: sensor.family_room_temperature
-        - entity: sensor.living_room_temperature
-        - entity: sensor.master_bedroom_temperature
-        - entity: sensor.boys_bedroom_temperature
-        - entity: sensor.guest_bedroom_temperature
-        - entity: sensor.playroom_temperature
-        
-        - type: section
-        - entity: automation.climate_windows_open
-          state_color: false
-          name: "Turn off when windows open"

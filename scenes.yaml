@@ -16,7 +16,7 @@
     light.boys_bedroom: on
     light.master_bedroom:
       state: on
-      brightness: 40
+      brightness: 80
       
 - name: Mood Lights
   entities:

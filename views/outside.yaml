@@ -5,46 +5,45 @@ cards:
     cards:
       
     # Header
-    - type: entity
-      name: "Outside"
-      entity: weather.krhv_daynight
-      attribute: temperature
-      unit: "°F"
+    - type: entities
+      entities:
+        - entity: sensor.powerwall_charge_actual
+          name: "Outside"
+          tap_action:
+            action: navigate
+            navigation_path: energy
       card_mod:
-        style: |
-          :host ha-card {
-            background: none;
-            border: 0;
-            margin: 15px 8px 25px 8px;
-            transition: none;
-          }
+        style: 
+          .: |
+            #states {
+              padding: 0;
+            }
 
-          :host ha-card .header {
-            padding: 0 0 0 5px;
-          }
+            ha-card {
+              background: none;
+              border: 0;
+              margin: 25px 0;
+              transition: none;
+            }
+          hui-sensor-entity-row $:
+            hui-generic-entity-row $: |
+              state-badge {
+                position: absolute;
+                right: 0;
+              }
 
-          :host ha-card .name {
-            color: var(--primary-text-color);
-            font-size: 24px;
-            font-weight: 400;
-          }
+              .info {
+                color: var(--primary-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
 
-          :host ha-card .info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-          }
-
-          :host ha-card .value, 
-          :host ha-card .measurement {
-            color: var(--disabled-text-color);
-            font-size: 24px;
-            font-weight: 400;
-          }
-
-          :host ha-card .measurement {
-            margin: 0 10px 0 -10px;
-          }
+              .value {
+                margin: 0 40px 0 0;
+                color: var(--disabled-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
 
 
     - type: custom:stack-in-card
