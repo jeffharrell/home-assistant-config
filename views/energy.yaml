@@ -12,13 +12,12 @@ cards:
             name: "Powerwall"
 
           - type: entity
-            entity: sensor.powerwall_load_now
-            name: "Home Now"
+            entity: sensor.powerwall_solar_export
+            name: "Solar"
 
-      - type: energy-self-sufficiency-gauge
-      
-      - type: energy-solar-graph
-        title: "Solar Production"
+          - type: entity
+            entity: sensor.powerwall_load_now
+            name: "Currently"
 
       - type: energy-usage-graph
-        title: "Energy Usage"
+        title: "Home Usage"

@@ -8,11 +8,10 @@ cards:
       - type: entity
         name: "Home"
         entity: alarm_control_panel.alarm_panel_ui
+        theme: nocard
         card_mod:
           style: |
             :host ha-card {
-              background: none;
-              border: 0;
               margin: 15px 8px;
               transition: none;
             }
@@ -49,13 +48,13 @@ cards:
         tap_action: 
           action: 'navigate'
           navigation_path: '/lovelace/cameras'
+        theme: nocard
         card_mod:
           style: |
             :host ha-card { 
               margin: 0 -8px 25px;
-              border: 0;
-              border-radius: 0;
               min-height: 285px;
+              background: var(--disabled-text-color);
               transition: none;
             }  
 
@@ -153,13 +152,11 @@ cards:
               <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name }} is open 
             {%- endfor -%}
           {%- endif -%}
+        theme: nocard
         card_mod:
           style: |
             :host ha-card {
-              margin: 20px 0 0 0; 
-              background: none;
-              border: 0;
-              color: var(--primary-text-color);
+              margin: 20px 0 0 0;
               line-height: 2.25em;
               transition: none;
             } 

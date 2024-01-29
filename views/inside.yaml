@@ -12,6 +12,7 @@ cards:
           tap_action:
             action: navigate
             navigation_path: climate
+      theme: nocard
       card_mod:
         style: 
           .: |
@@ -20,8 +21,6 @@ cards:
             }
 
             ha-card {
-              background: none;
-              border: 0;
               margin: 25px 0;
               transition: none;
             }
@@ -105,3 +104,15 @@ cards:
               icon: mdi:speaker
               name: false
               state_color: true
+
+    # Settings  
+    - type: markdown
+      content: |
+        Automations can be temporarily disabled in <a href="./settings">Advanced Settings</a>
+      theme: nocard
+      card_mod:
+        style: |
+          :host ha-card {
+            margin: 20px 0 0 0;
+            transition: none;
+          }

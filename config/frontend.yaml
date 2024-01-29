@@ -2,6 +2,11 @@ extra_module_url:
   - /hacsfiles/lovelace-card-mod/card-mod.js
 
 themes:
+  nocard:
+    ha-card-border-width: "0"
+    ha-card-border-radius: "0"
+    card-background-color: "transparent"
+
   home:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts

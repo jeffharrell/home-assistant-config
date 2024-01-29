@@ -3,19 +3,29 @@ path: "settings"
 visible: false
 cards:
   
+  # Disclaimer
+  - type: markdown
+    content: |
+      Settings reset daily
+    theme: nocard
+    card_mod:
+      style: |
+        :host ha-card {
+          margin: 20px 0 0 0;
+          transition: none;
+        }
+
+  # Automations
   - type: entities
-    title: "Settings"
-    state_color: false
-    show_header_toggle: false
+    state_color: true
     entities:
       - entity: automation.cameras_doorbell
         name: "Doorbell press alerts"
       - entity: automation.cameras_doorbell_motion
         name: "Doorbell motion alerts"
+      - entity: automation.cameras_mailbox_open
+        name: "Mailbox motion alerts"
       - entity: automation.landscape_back_door_light
         name: "Turn back lights on with doors"
       - entity: automation.landscape_fountain
         name: "Turn fountain on automatically"
-      - entity: automation.climate_windows_open
-        state_color: false
-        name: "Turn HVAC off when windows open"

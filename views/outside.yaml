@@ -107,3 +107,16 @@ cards:
         - entity: light.twinkle_lights
         - entity: switch.front_landscape
         - entity: switch.back_landscape
+
+
+    # Settings  
+    - type: markdown
+      content: |
+        Automations can be temporarily disabled in <a href="./settings">Advanced Settings</a>
+      theme: nocard
+      card_mod:
+        style: |
+          :host ha-card {
+            margin: 20px 0 0 0;
+            transition: none;
+          }

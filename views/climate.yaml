@@ -30,12 +30,10 @@ cards:
           - sensor.boys_bedroom_temperature
           - sensor.guest_bedroom_temperature
           - sensor.playroom_temperature
+        theme: nocard
         card_mod:
           style: |
             :host ha-card {
-              margin: 0; 
-              background: none;
-              border: 0;
-              color: var(--primary-text-color);
+              margin: 0;
               transition: none;
             }
