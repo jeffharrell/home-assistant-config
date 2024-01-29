@@ -12,12 +12,10 @@ cards:
             name: "Powerwall"
 
           - type: entity
-            entity: sensor.powerwall_solar_export
-            name: "Solar"
-
-          - type: entity
             entity: sensor.powerwall_load_now
             name: "Currently"
 
       - type: energy-usage-graph
         title: "Home Usage"
+
+      - type: energy-distribution

@@ -23,8 +23,16 @@ cards:
         name: "Doorbell press alerts"
       - entity: automation.cameras_doorbell_motion
         name: "Doorbell motion alerts"
+
+      - type: section
       - entity: automation.cameras_mailbox_open
         name: "Mailbox motion alerts"
+
+      - type: section
+      - entity: automation.climate_windows_open
+        name: "Turn climate off when windows open"
+
+      - type: section
       - entity: automation.landscape_back_door_light
         name: "Turn back lights on with doors"
       - entity: automation.landscape_fountain

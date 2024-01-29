@@ -18,9 +18,6 @@ cards:
         show_header_toggle: false
         entities:
           - entity: switch.house_fan
-          - entity: automation.climate_windows_open
-            state_color: false
-            name: "Turn climate off when windows open"
 
       - type: entities
         entities:

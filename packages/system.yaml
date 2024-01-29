@@ -41,6 +41,7 @@ automation:
           - automation.cameras_doorbell
           - automation.cameras_doorbell_motion
           - automation.cameras_mailbox_open
+          - automation.climate_windows_open
           - automation.landscape_fountain
           - automation.landscape_back_door_light
 

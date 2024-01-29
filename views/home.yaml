@@ -101,6 +101,8 @@ cards:
         conditions:
           - entity: alarm_control_panel.alarm
             state: "disarmed"
+          - entity: script.let_dog_out
+            state: 'off'
         card:
           type: vertical-stack
           cards:

@@ -105,6 +105,9 @@ cards:
         - entity: switch.fountain
         - entity: switch.pool_light
         - entity: light.twinkle_lights
+
+        - type: section
+  
         - entity: switch.front_landscape
         - entity: switch.back_landscape
 
@@ -112,11 +115,11 @@ cards:
     # Settings  
     - type: markdown
       content: |
-        Automations can be temporarily disabled in <a href="./settings">Advanced Settings</a>
+        Automations can be disabled in <a href="./settings">Advanced Settings</a>
       theme: nocard
       card_mod:
         style: |
           :host ha-card {
-            margin: 20px 0 0 0;
+            margin: 40px 0 0 0;
             transition: none;
           }
