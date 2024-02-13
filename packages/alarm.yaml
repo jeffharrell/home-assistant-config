@@ -101,7 +101,6 @@ automation:
         data:
           entity_id: scene.good_morning
 
-
   - alias: Alarm - Alert
     initial_state: True
     trigger:

@@ -30,6 +30,9 @@ themes:
     switch-checked-track-color: "#0077FF"
     switch-unchecked-track-color: "#999"
 
+    state-cover-open-color: "var(--state-active-color)"
+    state-media_player-speaker-playing-color: "var(--state-active-color)"
+
     # General settings
     ha-card-border-width: "1px"
     ha-card-border-radius: "4px"

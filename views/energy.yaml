@@ -5,17 +5,53 @@ cards:
 
   - type: vertical-stack
     cards:
+      - type: energy-self-sufficiency-gauge
+
       - type: horizontal-stack
         cards:
-          - type: entity
+          - type: statistic
+            name: "Solar Generation"
+            entity: sensor.powerwall_solar_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: statistic
+            name: "Home Usage"
+            entity: sensor.powerwall_load_import
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "To Grid"
+            entity: sensor.powerwall_site_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: statistic
+            name: "From Grid"
+            entity: sensor.powerwall_site_import
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            entity: sensor.powerwall_load_now
+            name: "Now"
+
+          - type: sensor
             entity: sensor.powerwall_charge_actual
             name: "Powerwall"
 
-          - type: entity
-            entity: sensor.powerwall_load_now
-            name: "Currently"
-
       - type: energy-usage-graph
-        title: "Home Usage"
-
-      - type: energy-distribution
