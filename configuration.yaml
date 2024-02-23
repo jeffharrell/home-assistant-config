@@ -18,6 +18,8 @@ script: !include scripts.yaml
 
 # Configuration
 
+api:
+
 config:
 
 backup:
@@ -32,13 +34,19 @@ history: !include config/history.yaml
 
 http: !include config/http.yaml
 
+#homekit: !include config/homekit.yaml
+
 influxdb: !include config/influxdb.yaml
+
+ios:
 
 logger: !include config/logger.yaml
 
 lovelace: !include config/lovelace.yaml
 
 media_source:
+
+mobile_app:
 
 notify: !include config/notify.yaml
 
@@ -49,12 +57,3 @@ recorder: !include config/recorder.yaml
 tts: !include config/tts.yaml
 
 zeroconf:
-
-
-# Add ons
-
-api:
-
-ios:
-
-mobile_app:

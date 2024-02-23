@@ -1,0 +1,10 @@
+- filter:
+    include_entities:
+        - binary_sensor.mailbox_motion
+        - camera.front_door
+    include_entity_globs:
+      - binary_sensor.*_door
+      - binary_sensor.*_*_doors
+      - binary_sensor.*_door_*
+      - binary_sensor.*_window
+      - binary_sensor.*_window_*
