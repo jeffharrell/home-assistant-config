@@ -10,48 +10,52 @@ cards:
       - type: horizontal-stack
         cards:
           - type: statistic
-            name: "Solar Generation"
+            name: "Solar Total"
             entity: sensor.powerwall_solar_export
             period:
               calendar:
                 period: day
             stat_type: change
 
+          - type: sensor
+            entity: sensor.powerwall_solar_now
+            name: "Now"
+
+      - type: horizontal-stack
+        cards:
           - type: statistic
-            name: "Home Usage"
+            name: "Home Total"
             entity: sensor.powerwall_load_import
             period:
               calendar:
                 period: day
             stat_type: change
 
-
-      - type: horizontal-stack
-        cards:
-          - type: statistic
-            name: "To Grid"
-            entity: sensor.powerwall_site_export
-            period:
-              calendar:
-                period: day
-            stat_type: change
-
-          - type: statistic
-            name: "From Grid"
-            entity: sensor.powerwall_site_import
-            period:
-              calendar:
-                period: day
-            stat_type: change
-
-      - type: horizontal-stack
-        cards:
           - type: sensor
             entity: sensor.powerwall_load_now
             name: "Now"
+
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "Grid Usage"
+            entity: sensor.powerwall_site_actual
+            period:
+              calendar:
+                period: day
+            stat_type: change
 
           - type: sensor
             entity: sensor.powerwall_charge_actual
             name: "Powerwall"
 
-      - type: energy-usage-graph
+      - type: statistics-graph
+        days_to_show: 1
+        stat_types: mean
+        hide_legend: true
+        entities:
+          - entity: sensor.powerwall_load_now
+            name: "Load"
+          - entity: sensor.powerwall_site_now
+            name: "Grid"
+

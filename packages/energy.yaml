@@ -7,8 +7,16 @@ sensor:
         unit_of_measurement: "%"
         device_class: "battery"
         value_template: >-
-          {% set percent = ((states('sensor.powerwall_charge') | float(0) / 100.0) - (0.05)) / (0.95) | float(0)%}
-          {{ (percent * 100) | round(1) }}
+          {% set value = ((states('sensor.powerwall_charge') | float(0) / 100.0) - (0.05)) / (0.95) | float(0) %}
+          {{ (value * 100) | round(1) }}
+
+      # calculate net usage of grid
+      powerwall_site_actual:
+        unique_id: "powerwall_site_actual"
+        unit_of_measurement: "kWh"
+        device_class: "energy"
+        value_template: >-
+          {{ states('sensor.powerwall_site_import')|int - states('sensor.powerwall_site_export')|int }}
 
 
 automation:
