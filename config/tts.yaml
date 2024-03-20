@@ -5,6 +5,6 @@
   text_type: ssml
   speed: 1.1
   pitch: 4.0
-  cache: false
+  cache: true
   profiles:
     - medium-bluetooth-speaker-class-device

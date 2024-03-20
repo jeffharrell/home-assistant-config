@@ -58,7 +58,7 @@ cards:
             data:
               entity_id: switch.garage_door_1
             confirmation:
-              text: "Open garage door"
+              text: "Toggle garage door"
         - type: entity-button 
           show_name: false
           show_state: true
@@ -69,7 +69,7 @@ cards:
             data:
               entity_id: switch.garage_door_2
             confirmation:
-              text: "Open garage door"
+              text: "Toggle garage door"
         - type: entity-button
           show_name: false
           show_state: true
@@ -80,7 +80,7 @@ cards:
             data:
               entity_id: switch.garage_door_3
             confirmation:
-              text: "Open garage door"
+              text: "Toggle garage door"
 
     # Lights
     - type: entities

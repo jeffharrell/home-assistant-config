@@ -5,7 +5,27 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: energy-self-sufficiency-gauge
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            name: "Powerwall"
+            entity: sensor.powerwall_charge_actual
+            graph: bar
+
+      - type: horizontal-stack
+        cards:
+          - type: statistics-graph
+            days_to_show: 1
+            hide_legend: true
+            entities:
+              - entity: sensor.powerwall_load_now
+                name: "Load"
+              - entity: sensor.powerwall_site_now
+                name: "Grid"
+
+              - type: sensor
+                name: "Powerwall"
+                entity: sensor.powerwall_charge_actual
 
       - type: horizontal-stack
         cards:
@@ -18,8 +38,8 @@ cards:
             stat_type: change
 
           - type: sensor
-            entity: sensor.powerwall_solar_now
             name: "Now"
+            entity: sensor.powerwall_solar_now
 
       - type: horizontal-stack
         cards:
@@ -32,30 +52,26 @@ cards:
             stat_type: change
 
           - type: sensor
-            entity: sensor.powerwall_load_now
             name: "Now"
-
+            entity: sensor.powerwall_load_now
+            
       - type: horizontal-stack
         cards:
           - type: statistic
-            name: "Grid Usage"
-            entity: sensor.powerwall_site_actual
+            name: "Grid Import"
+            entity: sensor.powerwall_site_import
             period:
               calendar:
                 period: day
             stat_type: change
 
-          - type: sensor
-            entity: sensor.powerwall_charge_actual
-            name: "Powerwall"
+          - type: statistic
+            name: "Grid Export"
+            entity: sensor.powerwall_site_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
 
-      - type: statistics-graph
-        days_to_show: 1
-        stat_types: mean
-        hide_legend: true
-        entities:
-          - entity: sensor.powerwall_load_now
-            name: "Load"
-          - entity: sensor.powerwall_site_now
-            name: "Grid"
+
 

@@ -49,7 +49,7 @@ automation:
     initial_state: True
     trigger:
       platform: time
-      at: "06:00:00"
+      at: "12:00:00"
     action:
       - service: media_player.volume_set
         target:
@@ -91,18 +91,19 @@ automation:
             - switch.house_fan
           refresh_all_values: false
 
-  - alias: System - Node health check
+  - alias: System - Entity health check
     initial_state: True
     trigger:
       platform: time
-      at: "20:00:00"
+      at: "00:00:00"
       variables:
-         unavailable_nodes: "{{ states | selectattr('state', 'in', 'dead, unavailable') }}"
+         unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
     condition:
       condition: template
-      value_template: "{{ unavailable_nodes }}"
+      value_template: "{{ unhealthy }}"
     action:
-      - service: notify.mobile_app_jeffs_iphone
-        data_template:
-          message: "The following are unavailable: {{ unavailable_nodes | map(attribute='name') | join(', ') }}"
+      - service: notify.persistent_notificatio
+        data:
+          notification_id: "unhealthy"
+          message: "Warning! The following are unavailable: {{ unhealthy }}"
 
