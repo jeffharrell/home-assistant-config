@@ -10,11 +10,11 @@ cards:
           - type: sensor
             name: "Powerwall"
             entity: sensor.powerwall_charge_actual
-            graph: bar
 
       - type: horizontal-stack
         cards:
           - type: statistics-graph
+            title: "Usage"
             days_to_show: 1
             hide_legend: true
             entities:

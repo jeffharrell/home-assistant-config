@@ -95,15 +95,15 @@ automation:
     initial_state: True
     trigger:
       platform: time
-      at: "00:00:00"
+      at: "04:00:00"
       variables:
          unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
-    condition:
-      condition: template
-      value_template: "{{ unhealthy }}"
     action:
-      - service: notify.persistent_notificatio
-        data:
-          notification_id: "unhealthy"
-          message: "Warning! The following are unavailable: {{ unhealthy }}"
-
+      - if:
+          condition: template
+          value_template: "{{ unhealthy | length > 0 }}"
+        then:
+          service: persistent_notification.create
+          data:
+            notification_id: unhealthy
+            message: "The following are unavailable: {{ unhealthy }}"
