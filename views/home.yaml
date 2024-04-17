@@ -132,12 +132,12 @@ cards:
           - counter.camera_motion
         content: |
           {%- if states('sensor.outside_temp') -%}
-            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp; 
+            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp; 
 
             {%- if states('sensor.outside_rain_daily')|float(0) -%}
               with {{ states('sensor.outside_rain_daily') }}" of rain
             {%- else -%}
-              {{ states('sensor.outdoor_forecast') }}
+              {{ states('sensor.outside_forecast') }}
             {%- endif -%}
           {%- endif -%}
           {% if states('sensor.air_pollution_level') != 'good' %}

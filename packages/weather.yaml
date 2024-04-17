@@ -6,25 +6,12 @@ shell_command:
 sensor:
   - platform: template
     sensors:
-      outdoor_forecast:
+      outside_forecast:
         value_template: >
-          {% set forecast = state_attr('weather.krhv_daynight', 'forecast') %}
-
-          {% if forecast %}
-            {% set description = forecast[0].detailed_description %}
-            {% set value = description.split('.')[0]|lower %}
-          {% endif %}
-
-          {{ value|default('') }}
+          {{ states("weather.krhv_daynight")|default("") }}
         icon_template: >
-          {% set forecast = state_attr('weather.krhv_daynight', 'forecast') %}
-          
-          {% if forecast %}
-            {% set condition = forecast[0].condition %}
-          {% else %}
-            {% set condition = '' %}
-          {% endif %}
-          
+          {% set condition = states("weather.krhv_daynight") %}
+
           {%- if "cloud" in condition -%}
             mdi:weather-cloudy
           {%- elif "fog" in condition -%}
