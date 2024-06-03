@@ -131,9 +131,11 @@ cards:
           - sensor.air_pollution_level
           - counter.camera_motion
         content: |
-          {%- if states('sensor.outside_temp') -%}
-            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp; 
-
+          {% if is_state('input_boolean.guest_mode', 'on') %}
+            <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
+          {%- endif %}
+          {% if states('sensor.outside_temp') -%}
+            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
             {%- if states('sensor.outside_rain_daily')|float(0) -%}
               with {{ states('sensor.outside_rain_daily') }}" of rain
             {%- else -%}
@@ -145,9 +147,6 @@ cards:
           {%- endif -%}
           {% if states('counter.camera_motion')|float(0) > 0 %}
             <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
-          {%- endif -%}
-          {% if is_state('input_boolean.guest_mode', 'on') %}
-            <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
           {%- endif -%}
           {%- if is_state('binary_sensor.doors_and_windows_and_garages', 'on') -%}
             {% for entity in expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list %}

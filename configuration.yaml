@@ -18,13 +18,13 @@ script: !include scripts.yaml
 
 # Configuration
 
+assist_pipeline:
+
 api:
 
 config:
 
 backup:
-
-energy:
 
 frontend: !include config/frontend.yaml
 

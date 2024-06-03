@@ -3,37 +3,76 @@ path: "settings"
 visible: false
 cards:
   
-  # Disclaimer
-  - type: markdown
-    content: |
-      Settings reset daily
-    theme: nocard
-    card_mod:
-      style: |
-        :host ha-card {
-          margin: 20px 0 0 0;
-          transition: none;
-        }
+  - type: vertical-stack
+    cards:
+      # Settings
+      - type: markdown
+        content: "Settings (reset daily)"
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 20px 0 0 0;
+              transition: none;
+            }
 
-  # Automations
-  - type: entities
-    state_color: true
-    entities:
-      - entity: automation.cameras_doorbell
-        name: "Doorbell press alerts"
-      - entity: automation.cameras_doorbell_motion
-        name: "Doorbell motion alerts"
+      - type: entities
+        state_color: false
+        entities:
+          - entity: automation.cameras_doorbell
+            name: "Doorbell Press Alerts"
+          - entity: automation.cameras_doorbell_motion
+            name: "Doorbell Motion Alerts"
 
-      - type: section
-      - entity: automation.cameras_mailbox_open
-        name: "Mailbox motion alerts"
+          - type: section
+          - entity: automation.cameras_mailbox_open
+            name: "Mailbox Motion Alerts"
 
-      - type: section
-      - entity: automation.climate_windows_open
-        name: "Turn climate off when windows open"
+          - type: section
+          - entity: automation.climate_windows_open
+            name: "Turn Climate Off When Windows Open"
 
-      - type: section
-      - entity: automation.landscape_back_door_light
-        name: "Turn back lights on with doors"
-      - entity: automation.landscape_fountain
-        name: "Turn fountain on automatically"
+          - type: section
+          - entity: automation.landscape_back_door_light
+            name: "Turn Back Lights On With Doors"
+          - entity: automation.landscape_fountain
+            name: "Turn Fountain On Automatically"
+
+      # Batteries
+      - type: markdown
+        content: "Battery Levels"
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 20px 0 0 0;
+              transition: none;
+            }
+
+      - type: entities
+        state_color: false
+        entities:
+          - entity: sensor.ups_battery_charge
+            name: "UPS"
+
+          - type: section
+          - entity: sensor.family_room_battery
+            name: "Family Room Temperature Sensor"
+          - entity: sensor.living_room_battery
+            name: "Living Room Temperature Sensor"
+          - entity: sensor.boys_bedroom_battery
+            name: "Boys Bedroom Temperature Sensor"
+          - entity: sensor.guest_bedroom_battery
+            name: "Office Temperature Sensor"
+          - entity: sensor.master_bedroom_battery
+            name: "Master Bedroom Temperature Sensor"
+          - entity: sensor.playroom_battery
+            name: "Playroom Bedroom Temperature Sensor"
+          - entity: sensor.master_bedroom_battery
+            name: "Master Bedroom Temperature Sensor"
+
+          - type: section
+          - entity: sensor.mailbox_battery_level
+            name: "Mailbox"
+          - entity: sensor.outside_battery
+            name: "Weather Station"

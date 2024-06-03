@@ -107,8 +107,7 @@ cards:
 
     # Settings  
     - type: markdown
-      content: |
-        Automations can be disabled in <a href="./settings">Advanced Settings</a>
+      content: "There's more in <a href='./settings'>Advanced</a>"
       theme: nocard
       card_mod:
         style: |

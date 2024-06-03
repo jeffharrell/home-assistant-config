@@ -8,7 +8,7 @@ sensor:
     sensors:
       outside_forecast:
         value_template: >
-          {{ states("weather.krhv_daynight")|default("") }}
+          {{ states("weather.krhv_daynight")|replace("-", " ")|replace("partlycloudy", "partly cloudy")|default("") }}
         icon_template: >
           {% set condition = states("weather.krhv_daynight") %}
 

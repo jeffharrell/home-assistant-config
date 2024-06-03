@@ -98,6 +98,10 @@ automation:
       at: "04:00:00"
       variables:
          unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
+    condition:
+      - condition: time
+        weekday:
+          - sun
     action:
       - if:
           condition: template

@@ -64,6 +64,44 @@ automation:
       - service: light.turn_off
         entity_id: light.house
 
+  - alias: Lights - Twinkle lights
+    initial_state: True
+    trigger:
+      # on
+      - platform: sun
+        event: sunset
+        offset: "00:00:00"
+        variables:
+          action: "turn_on"
+      # off
+      - platform: time
+        at: "21:30:00"
+        variables:
+          action: "turn_off"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.alarm
+        state: "disarmed"
+    action:
+      - service_template: >
+          homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
+        entity_id: light.twinkle_lights
+
+  - alias: Lights - Reset dim level to full
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: 
+          - light.master_bedroom
+        to: "on"
+    action:
+      - service: light.turn_on
+        target:
+          entity_id: "{{ trigger.entity_id }}"
+        data:
+          brightness: 255
+          transition: 3
+
   - alias: Lights - Playroom light toggles bulb
     initial_state: True
     trigger:
@@ -83,26 +121,3 @@ automation:
       - service: >
           light.{{ action }}
         entity_id: light.zipato_bulb
-
-  - alias: Lights - Twinkle lights
-    initial_state: True
-    trigger:
-      # on
-      - platform: sun
-        event: sunset
-        offset: "00:00:00"
-        variables:
-          action: "turn_on"
-      # off
-      - platform: time
-        at: "21:00:00"
-        variables:
-          action: "turn_off"
-    condition:
-      - condition: state
-        entity_id: alarm_control_panel.alarm
-        state: "disarmed"
-    action:
-      - service_template: >
-          homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
-        entity_id: light.twinkle_lights

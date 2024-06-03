@@ -3,6 +3,8 @@ wake_up:
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
+    - condition: template
+      value_template: "{{ state_attr('sun.sun', 'elevation') < 2 }}"
     - service: scene.turn_on
       data:
         entity_id: scene.wake_up
@@ -25,7 +27,7 @@ dinner_lights:
       data:
         entity_id: scene.dinner_lights
     - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < 4 }}'
+      value_template: "{{ state_attr('sun.sun', 'elevation') < 4 }}"
     - service: scene.turn_on
       data:
         entity_id: scene.dinner_lights_more
