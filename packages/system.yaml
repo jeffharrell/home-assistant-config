@@ -8,7 +8,7 @@ input_boolean:
     icon: "mdi:bed"
 
 automation:
-  - alias: System - Backup
+  - alias: "System - Backup"
     initial_state: True
     trigger:
       platform: time
@@ -20,7 +20,7 @@ automation:
       - service: backup.create
       - service: shell_command.purge_backups
 
-  - alias: System - Theme change
+  - alias: "System - Theme change"
     initial_state: True
     trigger:
       - platform: homeassistant
@@ -30,7 +30,7 @@ automation:
       data_template:
         name: home
 
-  - alias: System - Settings reset each day
+  - alias: "System - Reset settings"
     initial_state: True
     trigger:
       platform: time
@@ -45,29 +45,23 @@ automation:
           - automation.landscape_fountain
           - automation.landscape_back_door_light
 
-  - alias: System - Reset speaker volumes
+  - alias: "System - Reset speakers"
     initial_state: True
     trigger:
       platform: time
       at: "12:00:00"
     action:
-      - service: media_player.volume_set
-        target:
-          entity_id: media_player.kitchen_display
-        data:
-          volume_level: 0.6
-      - service: media_player.volume_set
-        target:
-          entity_id: media_player.living_room_speakers
-        data:
-          volume_level: 0.6
-      - service: media_player.volume_set
-        target:
-          entity_id: media_player.master_bedroom_speaker
-        data:
-          volume_level: 0.5
+      service: media_player.volume_set
+      target:
+        entity_id: 
+          - media_player.kitchen_display
+          - media_player.living_room_speakers
+          - media_player.playroom_speakers
+          - media_player.master_bedroom_speaker
+      data:
+        volume_level: 0.6
 
-  - alias: System - Refresh non-zwave plus nodes
+  - alias: "System - Refresh non-zwave plus nodes"
     initial_state: True
     trigger:
       platform: time_pattern
@@ -91,7 +85,7 @@ automation:
             - switch.house_fan
           refresh_all_values: false
 
-  - alias: System - Entity health check
+  - alias: "System - Entity health check"
     initial_state: True
     trigger:
       platform: time

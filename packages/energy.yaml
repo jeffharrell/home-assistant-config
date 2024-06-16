@@ -12,7 +12,7 @@ sensor:
 
 
 automation:
-  - alias: Energy - Power grid status
+  - alias: "Energy - Power grid status"
     initial_state: True
     mode: single
     trigger:
@@ -31,7 +31,7 @@ automation:
           title: "Home"
           message: "PG&E grid changed from {{ trigger.from_state }} to {{ trigger.to_state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%"
 
-  - alias: Energy - UPS status change
+  - alias: "Energy - UPS status change"
     initial_state: True
     mode: single
     trigger:
@@ -47,7 +47,7 @@ automation:
             title: "Home"
             message: "UPS changed from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"
 
-  - alias: Energy - Disable climate if power out
+  - alias: "Energy - Disable climate if power out"
     initial_state: True
     mode: single
     trigger:

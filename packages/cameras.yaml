@@ -21,7 +21,7 @@ counter:
 
 
 automation:
-  - alias: Cameras - Doorbell
+  - alias: "Cameras - Doorbell"
     initial_state: True
     mode: single
     max_exceeded: silent
@@ -47,7 +47,7 @@ automation:
       - delay:
           minutes: 1
 
-  - alias: Cameras - Doorbell motion
+  - alias: "Cameras - Doorbell motion"
     initial_state: True
     mode: single
     max_exceeded: silent
@@ -75,7 +75,7 @@ automation:
             entity_id: camera.latest_doorbell
             url: "/lovelace/cameras"
 
-  - alias: Cameras - Mailbox open
+  - alias: "Cameras - Mailbox open"
     initial_state: True
     mode: single
     max_exceeded: silent
@@ -103,7 +103,7 @@ automation:
       - delay:
           minutes: 1
 
-  - alias: Cameras - Motion webhook
+  - alias: "Cameras - Motion webhook"
     initial_state: True
     trigger:
       - platform: webhook
@@ -123,7 +123,7 @@ automation:
         target:
           entity_id: counter.camera_motion
           
-  - alias: Cameras - Reset motion counter
+  - alias: "Cameras - Reset motion counter"
     initial_state: True
     trigger:
       - platform: time

@@ -6,7 +6,7 @@ sensor:
 
 
 automation:
-  - alias: Climate - Windows open
+  - alias: "Climate - Windows open"
     initial_state: True
     trigger:
       - platform: state
@@ -26,7 +26,7 @@ automation:
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
-  - alias: Climate - Disable HVAC with house fan
+  - alias: "Climate - Disable HVAC with house fan"
     initial_state: True
     mode: single
     max_exceeded: silent
@@ -40,7 +40,7 @@ automation:
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
       - service: script.hvac_resume
 
-  - alias: Climate - Notify cooler outside than inside
+  - alias: "Climate - Notify cooler outside than inside"
     initial_state: True
     trigger:
       - platform: state

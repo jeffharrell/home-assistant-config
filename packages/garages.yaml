@@ -52,7 +52,7 @@ cover:
 
 
 automation:
-  - alias: Garages - Door open
+  - alias: "Garages - Door open"
     initial_state: True
     trigger:
       platform: state
