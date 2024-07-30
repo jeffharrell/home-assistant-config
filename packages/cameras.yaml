@@ -12,6 +12,9 @@ amcrest:
     username: !secret amcrest_doorbell_user
     password: !secret amcrest_doorbell_pass
 
+shell_command:
+  driveway_camera_record: !secret driveway_camera_cmd
+
 counter:
   camera_motion:
     name: "Camera Motion Counter"
@@ -84,6 +87,7 @@ automation:
         entity_id: binary_sensor.mailbox_motion
         to: "on"
     action:
+      # take a picture and notify phones
       - service: camera.snapshot
         data:
           entity_id: camera.driveway
@@ -100,6 +104,9 @@ automation:
                 name: "default"
                 critical: "{{ (states('sun.sun') == 'below_horizon')|int }}"
                 volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
+      # also trigger a recording 
+      - service: shell_command.driveway_camera_record
+      # debounce
       - delay:
           minutes: 1
 
@@ -107,13 +114,7 @@ automation:
     initial_state: True
     trigger:
       - platform: webhook
-        webhook_id: "camera_driveway_motion"
-        local_only: True
-      - platform: webhook
-        webhook_id: "camera_front_patio_motion"
-        local_only: True
-      - platform: webhook
-        webhook_id: "camera_back_yard_motion"
+        webhook_id: "camera_motion"
         local_only: True
     condition:
       condition: template

@@ -51,15 +51,20 @@ automation:
       platform: time
       at: "12:00:00"
     action:
-      service: media_player.volume_set
-      target:
-        entity_id: 
-          - media_player.kitchen_display
-          - media_player.living_room_speakers
-          - media_player.playroom_speakers
-          - media_player.master_bedroom_speaker
-      data:
-        volume_level: 0.6
+      - service: media_player.volume_set
+        target:
+          entity_id: 
+            - media_player.kitchen_display
+            - media_player.living_room_speakers
+            - media_player.playroom_speakers
+        data:
+          volume_level: 0.6
+      # some speakers should be quieter
+      - service: media_player.volume_set
+        target:
+          entity_id: media_player.master_bedroom_speaker
+        data:
+          volume_level: 0.5
 
   - alias: "System - Refresh non-zwave plus nodes"
     initial_state: True
