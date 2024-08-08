@@ -4,7 +4,9 @@ visible: false
 cards:
 
   # Latest event snapshots
-  - type: horizontal-stack
+  - type: grid
+    columns: 2
+    square: false
     title: "Latest Events"
     cards:
       - type: 'custom:config-template-card'
@@ -34,6 +36,21 @@ cards:
           tap_action:
             action: url
             url_path: "${ states['camera.latest_mailbox'].attributes.entity_picture }"
+          hold_action:
+            action: none
+
+      - type: 'custom:config-template-card'
+        entities:
+          - camera.latest_motion
+        card:
+          type: picture-entity
+          name: "Motion"
+          aspect_ratio: 16x9
+          entity: camera.latest_motion
+          show_state: false
+          tap_action:
+            action: url
+            url_path: "${ states['camera.latest_motion'].attributes.entity_picture }"
           hold_action:
             action: none
 

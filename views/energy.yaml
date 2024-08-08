@@ -16,16 +16,15 @@ cards:
           - type: statistics-graph
             title: "Usage"
             days_to_show: 1
+            stat_types: 
+              - "mean"
+              - "min"
             hide_legend: true
             entities:
               - entity: sensor.powerwall_load_now
                 name: "Load"
               - entity: sensor.powerwall_site_now
                 name: "Grid"
-
-              - type: sensor
-                name: "Powerwall"
-                entity: sensor.powerwall_charge_actual
 
       - type: horizontal-stack
         cards:

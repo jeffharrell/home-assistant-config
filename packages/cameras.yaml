@@ -5,6 +5,9 @@ camera:
   - platform: local_file
     name: Latest Mailbox 
     file_path: /config/www/cameras/mailbox.jpg
+  - platform: local_file
+    name: Latest Motion 
+    file_path: /config/www/cameras/motion.jpg
 
 amcrest:
   - name: Doorbell
@@ -110,7 +113,8 @@ automation:
       - delay:
           minutes: 1
 
-  - alias: "Cameras - Motion webhook"
+
+  - alias: "Cameras - Motion Webhook"
     initial_state: True
     trigger:
       - platform: webhook
@@ -120,6 +124,20 @@ automation:
       condition: template
       value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
+      # take a picture
+      - service: camera.snapshot
+        data:
+          entity_id: "{{ trigger.json.camera }}"
+          filename: "/config/www/cameras/motion.jpg"
+      # send a notification
+      - service: notify.phones
+        data:
+          title: "Home"
+          message: "{{ trigger.json.name }} motion!"
+          data:
+            entity_id: camera.latest_motion
+            url: "/lovelace/cameras"
+      # update the counter
       - service: counter.increment
         target:
           entity_id: counter.camera_motion
