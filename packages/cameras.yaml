@@ -16,7 +16,7 @@ amcrest:
     password: !secret amcrest_doorbell_pass
 
 shell_command:
-  driveway_camera_record: !secret driveway_camera_cmd
+  record_driveway_camera: !secret record_driveway_camera_cmd
 
 counter:
   camera_motion:
@@ -25,61 +25,81 @@ counter:
     initial: 0
     restore: True
 
-
 automation:
   - alias: "Cameras - Doorbell"
     initial_state: True
-    mode: single
-    max_exceeded: silent
     trigger:
-      platform: event
-      event_type: amcrest
-      event_data:
-        event: "CallNoAnswered"
-        payload:
-          action: "Start"
+      - platform: webhook
+        webhook_id: "camera_intercom"
+        local_only: True
+        variables:
+          title: "Doorbell"
+      # TODO: synology people detection doesn't trigger 
+      # so this needs to be captured with a manual event
+      - platform: event
+        event_type: amcrest
+        event_data:
+          event: "CrossRegionDetection"
+          payload:
+            action: "Start"
+            data:
+              Object:
+                Action: "Appear"
+                ObjectType: "Human"
+        variables:
+          title: "Doorbell motion"
     action:
+      # take a picture
       - service: camera.snapshot
         data:
           entity_id: camera.front_door
           filename: "/config/www/cameras/doorbell.jpg"
+      # send a notification
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "Doorbell"
+          message: "{{ title }}"
           data:
             entity_id: camera.latest_doorbell
             url: "/lovelace/cameras"
-      - delay:
-          minutes: 1
 
-  - alias: "Cameras - Doorbell motion"
+  - alias: "Cameras - Motion"
     initial_state: True
-    mode: single
-    max_exceeded: silent
     trigger:
-      platform: event
-      event_type: amcrest
-      event_data:
-        event: "CrossRegionDetection"
-        payload:
-          action: "Start"
-          data:
-            Object:
-              Action: "Appear"
-              ObjectType: "Human"
+      - platform: webhook
+        webhook_id: "camera_motion"
+        local_only: True
+    condition:
+      condition: template
+      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
+      # take a picture
       - service: camera.snapshot
         data:
-          entity_id: camera.front_door
-          filename: "/config/www/cameras/doorbell.jpg"
+          entity_id: "{{ trigger.json.camera }}"
+          filename: "/config/www/cameras/motion.jpg"
+      # send a notification
       - service: notify.phones
-        data_template:
+        data:
           title: "Home"
-          message: "Front door motion"
+          message: "{{ trigger.json.name }} motion"
           data:
-            entity_id: camera.latest_doorbell
+            entity_id: camera.latest_motion
             url: "/lovelace/cameras"
+      # update the counter
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion
+          
+  - alias: "Cameras - Reset motion counter"
+    initial_state: True
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - service: counter.reset
+        target:
+          entity_id: counter.camera_motion
 
   - alias: "Cameras - Mailbox open"
     initial_state: True
@@ -105,49 +125,28 @@ automation:
             push:
               sound:
                 name: "default"
-                critical: "{{ (states('sun.sun') == 'below_horizon')|int }}"
-                volume: "{{ (states('sun.sun') == 'below_horizon')|int }}"
-      # also trigger a recording 
-      - service: shell_command.driveway_camera_record
+                critical: "1"
+                volume: "{{ is_state('sun.sun', 'below_horizon')|int }}"
+      # trigger a recording 
+      - service: shell_command.record_driveway_camera
       # debounce
       - delay:
           minutes: 1
 
-
-  - alias: "Cameras - Motion Webhook"
+  - alias: "Camera - Swap recording profile"
     initial_state: True
     trigger:
-      - platform: webhook
-        webhook_id: "camera_motion"
-        local_only: True
-    condition:
-      condition: template
-      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
+      - platform: state
+        entity_id: alarm_control_panel.alarm
+        to: "armed_away"
+        variables:
+          action: "turn_off"
+      - platform: state
+        entity_id: alarm_control_panel.alarm
+        to: "disarmed"
+        variables:
+          action: "turn_on"
     action:
-      # take a picture
-      - service: camera.snapshot
-        data:
-          entity_id: "{{ trigger.json.camera }}"
-          filename: "/config/www/cameras/motion.jpg"
-      # send a notification
-      - service: notify.phones
-        data:
-          title: "Home"
-          message: "{{ trigger.json.name }} motion!"
-          data:
-            entity_id: camera.latest_motion
-            url: "/lovelace/cameras"
-      # update the counter
-      - service: counter.increment
-        target:
-          entity_id: counter.camera_motion
-          
-  - alias: "Cameras - Reset motion counter"
-    initial_state: True
-    trigger:
-      - platform: time
-        at: "00:00:00"
-    action:
-      - service: counter.reset
-        target:
-          entity_id: counter.camera_motion
+      - service: >
+          switch.{{ action }}
+        entity_id: switch.surveillance_station_home_mode
