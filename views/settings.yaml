@@ -20,21 +20,16 @@ cards:
         state_color: false
         entities:
           - entity: automation.cameras_doorbell
-            name: "Doorbell Press Alerts"
-          - entity: automation.cameras_doorbell_motion
-            name: "Doorbell Motion Alerts"
+            name: "Doorbell Alerts"
 
-          - type: section
           - entity: automation.cameras_mailbox_open
-            name: "Mailbox Motion Alerts"
+            name: "Mailbox Alerts"
 
-          - type: section
           - entity: automation.climate_windows_open
-            name: "Turn Climate Off When Windows Open"
+            name: "Turn HVAC Off When Windows Open"
 
-          - type: section
           - entity: automation.landscape_back_door_light
-            name: "Turn Back Lights On With Doors"
+            name: "Turn Back Lights on Automatically"
           - entity: automation.landscape_fountain
             name: "Turn Fountain On Automatically"
 
@@ -55,23 +50,23 @@ cards:
           - entity: sensor.ups_battery_charge
             name: "UPS"
 
-          - type: section
-          - entity: sensor.family_room_battery
-            name: "Family Room Temperature Sensor"
-          - entity: sensor.living_room_battery
-            name: "Living Room Temperature Sensor"
-          - entity: sensor.boys_bedroom_battery
-            name: "Boys Bedroom Temperature Sensor"
-          - entity: sensor.guest_bedroom_battery
-            name: "Office Temperature Sensor"
-          - entity: sensor.master_bedroom_battery
-            name: "Master Bedroom Temperature Sensor"
-          - entity: sensor.playroom_battery
-            name: "Playroom Bedroom Temperature Sensor"
-          - entity: sensor.master_bedroom_battery
-            name: "Master Bedroom Temperature Sensor"
+          # disabling as these don't report correctly with homekit
+          # - type: section
+          # - entity: sensor.family_room_battery
+          #   name: "Family Room Temperature Sensor"
+          # - entity: sensor.living_room_battery
+          #   name: "Living Room Temperature Sensor"
+          # - entity: sensor.boys_bedroom_battery
+          #   name: "Boys Bedroom Temperature Sensor"
+          # - entity: sensor.guest_bedroom_battery
+          #   name: "Office Temperature Sensor"
+          # - entity: sensor.master_bedroom_battery
+          #   name: "Master Bedroom Temperature Sensor"
+          # - entity: sensor.playroom_battery
+          #   name: "Playroom Bedroom Temperature Sensor"
+          # - entity: sensor.master_bedroom_battery
+          #   name: "Master Bedroom Temperature Sensor"
 
-          - type: section
           - entity: sensor.mailbox_battery_level
             name: "Mailbox"
           - entity: sensor.outside_battery

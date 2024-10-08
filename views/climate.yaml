@@ -4,20 +4,29 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: thermostat
+      - type: tile
         entity: climate.home
+        show_current_as_primary: true
         features:
-          - type: "climate-hvac-modes"
-            hvac_modes:
-              - heat
-              - cool
-              - "off"
+          - type: "target-temperature"
 
       - type: entities
         state_color: true
         show_header_toggle: false
         entities:
           - entity: switch.house_fan
+
+      - type: horizontal-stack
+        cards:
+          - type: statistics-graph
+            days_to_show: 1
+            stat_types:
+              - "max" 
+              - "mean"
+              - "min"
+            hide_legend: true
+            entities:
+              - entity: sensor.home_current_temperature
 
       - type: entities
         entities:

@@ -9,13 +9,8 @@ camera:
     name: Latest Motion 
     file_path: /config/www/cameras/motion.jpg
 
-amcrest:
-  - name: Doorbell
-    host: !secret amcrest_doorbell_ip
-    username: !secret amcrest_doorbell_user
-    password: !secret amcrest_doorbell_pass
-
 shell_command:
+  purge_camera_events: !secret purge_cameras_events_cmd
   record_driveway_camera: !secret record_driveway_camera_cmd
 
 counter:
@@ -30,35 +25,19 @@ automation:
     initial_state: True
     trigger:
       - platform: webhook
-        webhook_id: "camera_intercom"
+        webhook_id: "camera_doorbell"
         local_only: True
-        variables:
-          title: "Doorbell"
-      # TODO: synology people detection doesn't trigger 
-      # so this needs to be captured with a manual event
-      - platform: event
-        event_type: amcrest
-        event_data:
-          event: "CrossRegionDetection"
-          payload:
-            action: "Start"
-            data:
-              Object:
-                Action: "Appear"
-                ObjectType: "Human"
-        variables:
-          title: "Doorbell motion"
     action:
       # take a picture
       - service: camera.snapshot
         data:
-          entity_id: camera.front_door
+          entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/doorbell.jpg"
       # send a notification
       - service: notify.phones
         data_template:
           title: "Home"
-          message: "{{ title }}"
+          message: "{{ trigger.json.name }}"
           data:
             entity_id: camera.latest_doorbell
             url: "/lovelace/cameras"
@@ -91,7 +70,7 @@ automation:
         target:
           entity_id: counter.camera_motion
           
-  - alias: "Cameras - Reset motion counter"
+  - alias: "Cameras - Reset camera events"
     initial_state: True
     trigger:
       - platform: time
@@ -100,6 +79,7 @@ automation:
       - service: counter.reset
         target:
           entity_id: counter.camera_motion
+      - service: shell_command.purge_camera_events
 
   - alias: "Cameras - Mailbox open"
     initial_state: True
@@ -125,7 +105,7 @@ automation:
             push:
               sound:
                 name: "default"
-                critical: "1"
+                critical: "{{ is_state('sun.sun', 'below_horizon')|int }}"
                 volume: "{{ is_state('sun.sun', 'below_horizon')|int }}"
       # trigger a recording 
       - service: shell_command.record_driveway_camera

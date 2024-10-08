@@ -1,5 +1,5 @@
 shell_command:
-  purge_backups: "find ./backups -maxdepth 1 -name '*.tar' -type f -mtime +365 -delete"
+  purge_backups: !secret purge_backups_cmd 
 
 input_boolean:
   guest_mode:
@@ -39,7 +39,6 @@ automation:
       - service: homeassistant.turn_on
         entity_id:
           - automation.cameras_doorbell
-          - automation.cameras_doorbell_motion
           - automation.cameras_mailbox_open
           - automation.climate_windows_open
           - automation.landscape_fountain

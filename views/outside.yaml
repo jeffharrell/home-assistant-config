@@ -82,7 +82,7 @@ cards:
             confirmation:
               text: "Toggle garage door"
 
-    # Lights
+    # Switches
     - type: entities
       state_color: false
       show_header_toggle: false
@@ -108,6 +108,7 @@ cards:
 
         - type: section
 
+        - entity: switch.garage_fan
         - entity: switch.fountain
         - entity: switch.pool_light
         - entity: light.twinkle_lights

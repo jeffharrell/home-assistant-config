@@ -1,7 +1,7 @@
 sun:
 
 shell_command:
-  cache_weather: !secret cache_weather_cmd
+  get_weather: !secret get_weather_cmd
 
 sensor:
   - platform: template
@@ -32,7 +32,7 @@ automation:
       platform: time_pattern
       minutes: "/5"
     action:
-      - service: shell_command.cache_weather
+      - service: shell_command.get_weather
       
   - alias: "Weather - Low Battery"
     initial_state: True

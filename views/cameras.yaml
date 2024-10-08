@@ -3,82 +3,86 @@ path: "cameras"
 visible: false
 cards:
 
-  # Latest event snapshots
   - type: grid
-    columns: 2
+    columns: 1
     square: false
-    title: "Latest Events"
     cards:
-      - type: 'custom:config-template-card'
-        entities:
-          - camera.latest_doorbell
-        card:
-          type: picture-entity
-          name: "Doorbell"
-          aspect_ratio: 16x9
-          entity: camera.latest_doorbell
-          show_state: false
-          tap_action:
-            action: url
-            url_path: "${ states['camera.latest_doorbell'].attributes.entity_picture }"
-          hold_action:
-            action: none
+      # Latest event snapshots
+      - type: grid
+        columns: 3
+        square: false
+        title: "Latest Events"
+        cards:
+          - type: 'custom:config-template-card'
+            entities:
+              - camera.latest_doorbell
+            card:
+              type: picture-entity
+              name: "Doorbell"
+              aspect_ratio: 16x9
+              entity: camera.latest_doorbell
+              show_state: false
+              tap_action:
+                action: url
+                url_path: "${ states['camera.latest_doorbell'].attributes.entity_picture }"
+              hold_action:
+                action: none
 
-      - type: 'custom:config-template-card'
-        entities:
-          - camera.latest_mailbox
-        card:
-          type: picture-entity
-          name: "Mailbox"
-          aspect_ratio: 16x9
-          entity: camera.latest_mailbox
-          show_state: false
-          tap_action:
-            action: url
-            url_path: "${ states['camera.latest_mailbox'].attributes.entity_picture }"
-          hold_action:
-            action: none
+          - type: 'custom:config-template-card'
+            entities:
+              - camera.latest_mailbox
+            card:
+              type: picture-entity
+              name: "Mailbox"
+              aspect_ratio: 16x9
+              entity: camera.latest_mailbox
+              show_state: false
+              tap_action:
+                action: url
+                url_path: "${ states['camera.latest_mailbox'].attributes.entity_picture }"
+              hold_action:
+                action: none
 
-      - type: 'custom:config-template-card'
-        entities:
-          - camera.latest_motion
-        card:
-          type: picture-entity
-          name: "Motion"
-          aspect_ratio: 16x9
-          entity: camera.latest_motion
-          show_state: false
-          tap_action:
-            action: url
-            url_path: "${ states['camera.latest_motion'].attributes.entity_picture }"
-          hold_action:
-            action: none
+          - type: 'custom:config-template-card'
+            entities:
+              - camera.latest_motion
+            card:
+              type: picture-entity
+              name: "Motion"
+              aspect_ratio: 16x9
+              entity: camera.latest_motion
+              show_state: false
+              tap_action:
+                action: url
+                url_path: "${ states['camera.latest_motion'].attributes.entity_picture }"
+              hold_action:
+                action: none
 
-  # Live camera views
-  - type: vertical-stack
-    title: "Live Cameras"
-    cards:
-      - type: picture-glance
-        camera_image: camera.front_patio
-        entities:
-          - entity: light.front_door
-      - type: picture-glance
-        camera_image: camera.driveway
-        entities:
-          - entity: light.front_door
-      - type: picture-glance
-        camera_image: camera.family_room
-        entities:
-          - entity: light.kitchen_area
-      - type: picture-glance
-        camera_image: camera.living_room
-        entities:
-          - entity: light.living_area
-      - type: picture-glance
-        camera_image: camera.back_yard
-        entities: []
-      - type: picture-glance
-        camera_image: camera.front_door
-        aspect_ratio: 16x9
-        entities:
-          - entity: light.front_door
+      # Live camera views
+      - type: vertical-stack
+        title: "Live Cameras"
+        cards:
+          - type: picture-glance
+            camera_image: camera.front_patio
+            entities:
+              - entity: light.front_door
+          - type: picture-glance
+            camera_image: camera.driveway
+            entities:
+              - entity: light.front_door
+          - type: picture-glance
+            camera_image: camera.family_room
+            entities:
+              - entity: light.kitchen_area
+          - type: picture-glance
+            camera_image: camera.living_room
+            entities:
+              - entity: light.living_area
+          - type: picture-glance
+            camera_image: camera.back_yard
+            entities: []
+          - type: picture-glance
+            camera_image: camera.front_door
+            aspect_ratio: 16x9
+            entities:
+              - entity: light.front_door
