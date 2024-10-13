@@ -14,7 +14,6 @@ cards:
       - type: horizontal-stack
         cards:
           - type: statistics-graph
-            title: "Usage"
             days_to_show: 1
             stat_types: 
               - "mean"

@@ -108,7 +108,11 @@ cards:
 
         - type: section
 
+        - entity: switch.house_fan
         - entity: switch.garage_fan
+  
+        - type: section
+  
         - entity: switch.fountain
         - entity: switch.pool_light
         - entity: light.twinkle_lights

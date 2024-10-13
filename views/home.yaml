@@ -129,28 +129,32 @@ cards:
           - sensor.outside_rain_daily
           - sensor.outside_uv
           - sensor.air_pollution_level
+          - sensor.ups_status
           - counter.camera_motion
         content: |
           {% if is_state('input_boolean.guest_mode', 'on') %}
-            <ha-icon icon="mdi:bed"></ha-icon> Guest mode is enabled
+            <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
           {%- endif %}
           {% if states('sensor.outside_temp') -%}
             <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
             {%- if states('sensor.outside_rain_daily')|float(0) -%}
               with {{ states('sensor.outside_rain_daily') }}" of rain
-            {%- else -%}
+            {%- elif has_value('sensor.outside_forecast') -%}
               {{ states('sensor.outside_forecast') }}
             {%- endif -%}
           {%- endif -%}
-          {% if states('sensor.air_pollution_level') != 'good' %}
+          {% if has_value('sensor.air_pollution_level') and states('sensor.air_pollution_level') != 'good' %}
             <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+          {%- endif -%}
+          {% if 'Discharging' in states('sensor.ups_status') %}
+            <ha-icon icon="mdi:battery-50"></ha-icon> UPS at {{ states('sensor.ups_battery_charge') }}% {{ states('sensor.ups_status')|lower }}
           {%- endif -%}
           {% if states('counter.camera_motion')|float(0) > 0 %}
             <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
           {%- endif -%}
           {%- if is_state('binary_sensor.doors_and_windows_and_garages', 'on') -%}
             {% for entity in expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list %}
-              <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name }} is open 
+              <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name|capitalize }} {% if entity.name.endswith('s') %}are{% else %}is{% endif %} open 
             {%- endfor -%}
           {%- endif -%}
         theme: nocard

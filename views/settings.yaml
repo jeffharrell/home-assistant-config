@@ -49,25 +49,9 @@ cards:
         entities:
           - entity: sensor.ups_battery_charge
             name: "UPS"
-
-          # disabling as these don't report correctly with homekit
-          # - type: section
-          # - entity: sensor.family_room_battery
-          #   name: "Family Room Temperature Sensor"
-          # - entity: sensor.living_room_battery
-          #   name: "Living Room Temperature Sensor"
-          # - entity: sensor.boys_bedroom_battery
-          #   name: "Boys Bedroom Temperature Sensor"
-          # - entity: sensor.guest_bedroom_battery
-          #   name: "Office Temperature Sensor"
-          # - entity: sensor.master_bedroom_battery
-          #   name: "Master Bedroom Temperature Sensor"
-          # - entity: sensor.playroom_battery
-          #   name: "Playroom Bedroom Temperature Sensor"
-          # - entity: sensor.master_bedroom_battery
-          #   name: "Master Bedroom Temperature Sensor"
-
           - entity: sensor.mailbox_battery_level
-            name: "Mailbox"
+            name: "Mailbox Sensor"
+          - entity: sensor.garage_temp_battery
+            name: "Garage Temperature"
           - entity: sensor.outside_battery
             name: "Weather Station"

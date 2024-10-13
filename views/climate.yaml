@@ -10,12 +10,6 @@ cards:
         features:
           - type: "target-temperature"
 
-      - type: entities
-        state_color: true
-        show_header_toggle: false
-        entities:
-          - entity: switch.house_fan
-
       - type: horizontal-stack
         cards:
           - type: statistics-graph
@@ -36,6 +30,7 @@ cards:
           - sensor.boys_bedroom_temperature
           - sensor.guest_bedroom_temperature
           - sensor.playroom_temperature
+          - sensor.garage_temp
         theme: nocard
         card_mod:
           style: |
