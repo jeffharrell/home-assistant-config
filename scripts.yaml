@@ -48,12 +48,12 @@ hvac_disable:
         service: climate.set_temperature
         data:
           entity_id: climate.home
-          temperature: 60
+          temperature: !secret climate_off_heat
       else:
         service: climate.set_temperature
         data:
           entity_id: climate.home
-          temperature: 80
+          temperature: !secret climate_off_cool
 
 hvac_resume:
   sequence:

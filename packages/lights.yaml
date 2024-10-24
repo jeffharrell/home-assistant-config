@@ -1,5 +1,5 @@
 automation:
-  - alias: Lights - Toggle when away
+  - alias: "Lights - Toggle when away"
     initial_state: True
     trigger:
       # on
@@ -17,9 +17,9 @@ automation:
       entity_id: alarm_control_panel.alarm
       state: "armed_away"
     action:
-      # Randomize the time the light turns on
+      # randomize the time the light turns on
       - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
-      # Edge case: Check the alarm is still on after the delay is up
+      # edge case: Check the alarm is still on after the delay is up
       - if:
           condition: state
           entity_id: alarm_control_panel.alarm
@@ -33,7 +33,7 @@ automation:
               title: "Home"
               message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
 
-  - alias: Lights - Turn on when coming home
+  - alias: "Lights - Turn on when coming home"
     initial_state: True
     trigger:
       platform: state
@@ -51,7 +51,7 @@ automation:
         data_template:
           message: "Welcome home I turned the lights on for you"
 
-  - alias: Lights - Turn off after sunrise
+  - alias: "Lights - Turn off after sunrise"
     initial_state: True
     trigger:
       platform: time
@@ -64,7 +64,7 @@ automation:
       - service: light.turn_off
         entity_id: light.house
 
-  - alias: Lights - Twinkle lights
+  - alias: "Lights - Twinkle lights"
     initial_state: True
     trigger:
       # on
@@ -84,16 +84,20 @@ automation:
         state: "disarmed"
     action:
       - service_template: >
-          homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
+          homeassistant.{{ action }}
         entity_id: light.twinkle_lights
 
-  - alias: Lights - Reset dim level to full
+  - alias: "Lights - Reset dim level to full"
     initial_state: True
     trigger:
       - platform: state
         entity_id: 
           - light.master_bedroom
         to: "on"
+    condition:
+      # only trigger when switch is manually turned on
+      condition: template
+      value_template: "{{ trigger.to_state.context.user_id == None }}"
     action:
       - service: light.turn_on
         target:
@@ -102,7 +106,8 @@ automation:
           brightness: 255
           transition: 3
 
-  - alias: Lights - Playroom light toggles bulb
+
+  - alias: "Lights - Playroom light toggles bulb"
     initial_state: True
     trigger:
       # on

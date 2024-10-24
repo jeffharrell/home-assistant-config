@@ -9,7 +9,7 @@ cards:
     cards:
       # Latest event snapshots
       - type: grid
-        columns: 3
+        columns: 2
         square: false
         title: "Latest Events"
         cards:

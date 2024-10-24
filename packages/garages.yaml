@@ -7,7 +7,6 @@ homeassistant:
 cover:
   - platform: template
     covers:
-
         garage_door_1:
             device_class: garage
             unique_id: "garage_door_1"
@@ -75,14 +74,14 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.garage_temp
-        above: 79
+        above: !secret garage_fan_above
         for:
           minutes: 10
         variables:
           action: "turn_on"
       - platform: numeric_state
         entity_id: sensor.garage_temp
-        below: 78
+        below: !secret garage_fan_below
         for:
           minutes: 10
         variables:
