@@ -4,7 +4,6 @@ shell_command:
 input_boolean:
   guest_mode:
     name: "Guest Mode"
-    initial: "off"
     icon: "mdi:bed"
 
 automation:
