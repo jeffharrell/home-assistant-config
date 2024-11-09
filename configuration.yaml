@@ -54,6 +54,8 @@ panel_custom: !include config/panel_custom.yaml
 
 recorder: !include config/recorder.yaml
 
+stream:
+
 tts: !include config/tts.yaml
 
 zeroconf:

@@ -1,14 +1,3 @@
-camera:
-  - platform: local_file
-    name: Latest Doorbell 
-    file_path: /config/www/cameras/doorbell.jpg
-  - platform: local_file
-    name: Latest Mailbox 
-    file_path: /config/www/cameras/mailbox.jpg
-  - platform: local_file
-    name: Latest Motion 
-    file_path: /config/www/cameras/motion.jpg
-
 shell_command:
   purge_camera_events: !secret purge_cameras_events_cmd
   record_driveway_camera: !secret record_driveway_camera_cmd
@@ -33,13 +22,20 @@ automation:
         data:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/doorbell.jpg"
-      # send a notification
+      # create a text response for that picture
+      - action: google_generative_ai_conversation.generate_content
+        data:
+          prompt: !secret prompt_describe_image
+          image_filename:
+            - /config/www/cameras/doorbell.jpg
+        response_variable: generated_content
+      # send notification
       - service: notify.phones
         data_template:
-          title: "Home"
-          message: "{{ trigger.json.name }}"
+          title: "{{ trigger.json.name }}"
+          message: "{{ generated_content.text }}"
           data:
-            entity_id: camera.latest_doorbell
+            image: "/local/cameras/doorbell.jpg"
             url: "/lovelace/cameras"
 
   - alias: "Cameras - Motion"
@@ -57,13 +53,20 @@ automation:
         data:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/motion.jpg"
+      # create a text response for that picture
+      - action: google_generative_ai_conversation.generate_content
+        data:
+          prompt: !secret prompt_describe_image
+          image_filename:
+            - /config/www/cameras/motion.jpg
+        response_variable: generated_content
       # send a notification
       - service: notify.phones
-        data:
-          title: "Home"
-          message: "{{ trigger.json.name }} motion"
+        data_template:
+          title: "{{ trigger.json.name }}"
+          message: "{{ generated_content.text }}"
           data:
-            entity_id: camera.latest_motion
+            image: "/local/cameras/motion.jpg"
             url: "/lovelace/cameras"
       # update the counter
       - service: counter.increment
@@ -90,17 +93,24 @@ automation:
         entity_id: binary_sensor.mailbox_motion
         to: "on"
     action:
-      # take a picture and notify phones
+      # take a picture
       - service: camera.snapshot
         data:
           entity_id: camera.driveway
           filename: "/config/www/cameras/mailbox.jpg"
+      - action: google_generative_ai_conversation.generate_content
+        data:
+          prompt: !secret prompt_describe_image
+          image_filename:
+            - /config/www/cameras/mailbox.jpg
+        response_variable: generated_content
+      # send a notification
       - service: notify.phones
         data_template:
-          title: "Home"
-          message: "Mailbox motion"
+          title: "Mailbox motion"
+          message: "{{ generated_content.text }}"
           data:
-            entity_id: camera.latest_mailbox
+            image: "/local/cameras/mailbox.jpg"
             url: "/lovelace/cameras"
             push:
               sound:
