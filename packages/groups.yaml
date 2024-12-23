@@ -108,4 +108,5 @@ binary_sensor:
     unique_id: doors_and_windows_and_garages
     entities:
       - binary_sensor.garage_doors
+      - binary_sensor.garage_side_door
       - binary_sensor.doors_and_windows

@@ -51,6 +51,8 @@ cards:
             name: "UPS"
           - entity: sensor.mailbox_battery_level
             name: "Mailbox Sensor"
+          - entity: sensor.garage_side_door_battery_level
+            name: "Garage Side Door"
           - entity: sensor.garage_temp_battery
             name: "Garage Temperature"
           - entity: sensor.outside_battery

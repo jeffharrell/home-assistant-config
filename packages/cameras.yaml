@@ -12,6 +12,7 @@ counter:
 automation:
   - alias: "Cameras - Doorbell"
     initial_state: True
+    mode: single
     trigger:
       - platform: webhook
         webhook_id: "camera_doorbell"
@@ -37,9 +38,14 @@ automation:
           data:
             image: "/local/cameras/doorbell.jpg"
             url: "/lovelace/cameras"
+      # update the counter
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion
 
   - alias: "Cameras - Motion"
     initial_state: True
+    mode: queued
     trigger:
       - platform: webhook
         webhook_id: "camera_motion"
@@ -73,17 +79,6 @@ automation:
         target:
           entity_id: counter.camera_motion
           
-  - alias: "Cameras - Reset camera events"
-    initial_state: True
-    trigger:
-      - platform: time
-        at: "00:00:00"
-    action:
-      - service: counter.reset
-        target:
-          entity_id: counter.camera_motion
-      - service: shell_command.purge_camera_events
-
   - alias: "Cameras - Mailbox open"
     initial_state: True
     mode: single
@@ -119,9 +114,24 @@ automation:
                 volume: "{{ is_state('sun.sun', 'below_horizon')|int }}"
       # trigger a recording 
       - service: shell_command.record_driveway_camera
+      # update the counter
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion
       # debounce
       - delay:
           minutes: 1
+
+  - alias: "Cameras - Reset camera events"
+    initial_state: True
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - service: counter.reset
+        target:
+          entity_id: counter.camera_motion
+      - service: shell_command.purge_camera_events
 
   - alias: "Camera - Swap recording profile"
     initial_state: True

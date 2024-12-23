@@ -78,11 +78,3 @@ cards:
           - type: picture-glance
             camera_image: camera.back_yard
             entities: []
-          - type: picture-glance
-            camera_image: camera.family_room
-            entities:
-              - entity: light.kitchen_area
-          - type: picture-glance
-            camera_image: camera.living_room
-            entities:
-              - entity: light.living_area
