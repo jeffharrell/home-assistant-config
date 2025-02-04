@@ -1,13 +1,13 @@
-version: '1.2'
+version: "1.3"
 services:
     home-assistant:
         container_name: homeassistant
         restart: unless-stopped
         volumes:
-            - '/volume1/docker/homeassistant:/config'
+            - "/volume1/docker/homeassistant:/config"
         network_mode: host
         ports:
             - "8123:8123"
         environment:
             - TZ=America/Los_Angeles
-        image: 'homeassistant/home-assistant:latest'
+        image: "homeassistant/home-assistant:2025.1.3"

@@ -1,24 +1,9 @@
-shell_command:
-  purge_backups: !secret purge_backups_cmd 
-
 input_boolean:
   guest_mode:
     name: "Guest Mode"
     icon: "mdi:bed"
 
 automation:
-  - alias: "System - Backup"
-    initial_state: True
-    trigger:
-      platform: time
-      at: "01:00:00"
-    condition:
-      condition: template
-      value_template: "{{ now().day == 1 }}"
-    action:
-      - service: backup.create
-      - service: shell_command.purge_backups
-
   - alias: "System - Theme change"
     initial_state: True
     trigger:

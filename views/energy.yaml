@@ -15,13 +15,14 @@ cards:
         cards:
           - type: statistics-graph
             days_to_show: 1
-            stat_types: 
+            period: hour
+            chart_type: line
+            stat_types:
               - "mean"
-              - "min"
             hide_legend: true
             entities:
-              - entity: sensor.powerwall_load_now
-                name: "Load"
+              - entity: sensor.powerwall_battery_now
+                name: "Battery"
               - entity: sensor.powerwall_site_now
                 name: "Grid"
 

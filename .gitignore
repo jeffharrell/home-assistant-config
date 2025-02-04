@@ -5,6 +5,7 @@ www/
 tts/
 secrets.yaml
 home-assistant.sublime-workspace
+FLUME_TOKEN_FILE-jeff@theharrells.com
 __pycache__
 .DS_Store
 .HA_VERSION
@@ -21,3 +22,4 @@ __pycache__
 *.xml
 *.sqlite
 *.bak
+@eaDir

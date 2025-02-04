@@ -15,7 +15,8 @@
                 "*.db*",
                 "*.xml",
                 "*.sqlite",
-                "*.bak"
+                "*.bak",
+                "FLUME_TOKEN_FILE*"
             ],
             "folder_exclude_patterns": [
                 "backups",

@@ -14,10 +14,10 @@ cards:
         cards:
           - type: statistics-graph
             days_to_show: 1
+            period: hour
+            chart_type: line
             stat_types:
-              - "max" 
               - "mean"
-              - "min"
             hide_legend: true
             entities:
               - entity: sensor.home_current_temperature
