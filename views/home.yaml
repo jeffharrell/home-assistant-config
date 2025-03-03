@@ -124,7 +124,7 @@ cards:
       # Status  
       - type: markdown
         entity_id:
-          - input_boolean.guest_mode
+          - input_boolean.guest_mode_enabled
           - sensor.outside_temp
           - sensor.outside_forecast
           - sensor.outside_rain_daily
@@ -133,7 +133,7 @@ cards:
           - counter.camera_motion
           - binary_sensor.doors_and_windows_and_garages
         content: |
-          {% if is_state('input_boolean.guest_mode', 'on') %}
+          {% if is_state('input_boolean.guest_mode_enabled', 'on') %}
             <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
           {%- endif %}
           {% if states('sensor.outside_temp') -%}

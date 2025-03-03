@@ -1,5 +1,5 @@
 input_boolean:
-  guest_mode:
+  guest_mode_enabled:
     name: "Guest Mode"
     icon: "mdi:bed"
 
@@ -27,6 +27,7 @@ automation:
           - automation.climate_windows_open
           - automation.landscape_fountain
           - automation.landscape_back_door_light
+          - input_boolean.camera_motion_enabled
 
   - alias: "System - Reset speakers"
     initial_state: True
@@ -37,7 +38,7 @@ automation:
       - service: media_player.volume_set
         target:
           entity_id: 
-            - media_player.kitchen_display
+            - media_player.kitchen_hub
             - media_player.living_room_speakers
             - media_player.playroom_speakers
         data:
@@ -73,8 +74,9 @@ automation:
             - switch.house_fan
           refresh_all_values: false
 
+  # Disabled by default
   - alias: "System - Entity health check"
-    initial_state: True
+    initial_state: False
     trigger:
       platform: time
       at: "04:00:00"

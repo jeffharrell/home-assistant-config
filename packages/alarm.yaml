@@ -32,6 +32,10 @@ automation:
       - service: scene.turn_on
         data:
           entity_id: scene.house_off
+      # update camera motion alerts
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.camera_motion_enabled
       # notify if doors or garages are open (with built in delays for leaving)
       - delay: "00:00:15"
       - service: notify.phones
@@ -59,7 +63,7 @@ automation:
       # turn off the devices in house
       - if:
           condition: state
-          entity_id: input_boolean.guest_mode
+          entity_id: input_boolean.guest_mode_enabled
           state: "off"
         then:
           service: scene.turn_on
@@ -69,13 +73,17 @@ automation:
           service: scene.turn_on
           data:
             entity_id: scene.house_off_guest
+      # update camera motion alerts
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.camera_motion_enabled
       # notify if doors or garages are open
       - service: notify.master_bedroom
         data_template:
           message: >
             Alarm armed...
 
-            {%- if is_state("input_boolean.guest_mode", "on") -%}
+            {%- if is_state("input_boolean.guest_mode_enabled", "on") -%}
               Guest mode enabled...
             {%- endif -%}
 
@@ -94,6 +102,10 @@ automation:
       - service: notify.master_bedroom
         data_template:
           message: "Alarm off"
+      # update camera motion alerts
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.camera_motion_enabled
       # turn on the house if morning
       - condition: time
         before: "08:00:00"

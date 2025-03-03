@@ -10,4 +10,4 @@ services:
             - "8123:8123"
         environment:
             - TZ=America/Los_Angeles
-        image: "homeassistant/home-assistant:2025.1.3"
+        image: "homeassistant/home-assistant:latest"

@@ -53,10 +53,6 @@ cards:
           entity: light.family_room
           toggle: true
           entities:
-            - entity: remote.family_room
-              icon: mdi:television
-              name: false
-              state_color: true
             - entity: media_player.family_room_speakers
               icon: mdi:speaker
               name: false

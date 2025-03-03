@@ -4,7 +4,7 @@ report_state: true
 expose_by_default: false
 
 entity_config:
-  input_boolean.guest_mode:
+  input_boolean.guest_mode_enabled:
     expose: true
   light.back_doors:
     expose: true

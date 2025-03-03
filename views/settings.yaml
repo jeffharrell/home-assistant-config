@@ -19,6 +19,9 @@ cards:
       - type: entities
         state_color: false
         entities:
+          - entity: input_boolean.camera_motion_enabled
+            name: "Camera Motion Alerts"
+
           - entity: automation.cameras_doorbell
             name: "Doorbell Alerts"
 

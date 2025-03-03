@@ -9,6 +9,11 @@ counter:
     initial: 0
     restore: True
 
+input_boolean:
+  camera_motion_enabled:
+    name: "Camera Motion Alerts"
+    icon: "mdi:robot"
+
 automation:
   - alias: "Cameras - Doorbell"
     initial_state: True
@@ -52,7 +57,7 @@ automation:
         local_only: True
     condition:
       condition: template
-      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
+      value_template: "{{ is_state('input_boolean.camera_motion_enabled', 'on') }}"
     action:
       # take a picture
       - service: camera.snapshot
