@@ -4,23 +4,23 @@ cards:
 
   - type: vertical-stack
     cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.home_current_temperature
+            aggregate_func: avg
+            show_legend: false
+            name: "Temperature"
+            color: orange
+        name: "Inside Temperature"
+        line_width: 3
+        decimals: 0
+        show:
+          graph: line
+          labels: false
+
       - type: tile
         entity: climate.home
         show_current_as_primary: true
-        features:
-          - type: "target-temperature"
-
-      - type: horizontal-stack
-        cards:
-          - type: statistics-graph
-            days_to_show: 1
-            period: hour
-            chart_type: line
-            stat_types:
-              - "mean"
-            hide_legend: true
-            entities:
-              - entity: sensor.home_current_temperature
 
       - type: entities
         entities:
@@ -28,8 +28,8 @@ cards:
           - sensor.living_room_temperature
           - sensor.master_bedroom_temperature
           - sensor.boys_bedroom_temperature
-          - sensor.guest_bedroom_temperature
-          - sensor.playroom_temperature
+          - sensor.playroom_temperature_new
+          - sensor.office_outlet_temperature
           - sensor.garage_temp
         theme: nocard
         card_mod:

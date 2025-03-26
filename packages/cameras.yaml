@@ -32,7 +32,7 @@ automation:
       - action: google_generative_ai_conversation.generate_content
         data:
           prompt: !secret prompt_describe_image
-          image_filename:
+          filenames:
             - /config/www/cameras/doorbell.jpg
         response_variable: generated_content
       # send notification
@@ -68,7 +68,7 @@ automation:
       - action: google_generative_ai_conversation.generate_content
         data:
           prompt: !secret prompt_describe_image
-          image_filename:
+          filenames:
             - /config/www/cameras/motion.jpg
         response_variable: generated_content
       # send a notification
@@ -101,7 +101,7 @@ automation:
       - action: google_generative_ai_conversation.generate_content
         data:
           prompt: !secret prompt_describe_image
-          image_filename:
+          filenames:
             - /config/www/cameras/mailbox.jpg
         response_variable: generated_content
       # send a notification

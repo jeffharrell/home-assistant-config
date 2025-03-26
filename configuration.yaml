@@ -18,8 +18,6 @@ script: !include scripts.yaml
 
 # Configuration
 
-assist_pipeline:
-
 api:
 
 config:
@@ -33,8 +31,6 @@ google_assistant: !include config/google_assistant.yaml
 history: !include config/history.yaml
 
 http: !include config/http.yaml
-
-#homekit: !include config/homekit.yaml
 
 influxdb: !include config/influxdb.yaml
 

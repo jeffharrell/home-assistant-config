@@ -5,26 +5,23 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: sensor
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.powerwall_battery_now
+            aggregate_func: avg
+            show_legend: false
             name: "Powerwall"
-            entity: sensor.powerwall_charge_actual
-
-      - type: horizontal-stack
-        cards:
-          - type: statistics-graph
-            days_to_show: 1
-            period: hour
-            chart_type: line
-            stat_types:
-              - "mean"
-            hide_legend: true
-            entities:
-              - entity: sensor.powerwall_battery_now
-                name: "Battery"
-              - entity: sensor.powerwall_site_now
-                name: "Grid"
+            color: green
+          - entity: sensor.powerwall_site_now
+            aggregate_func: avg
+            show_legend: false
+            name: "Grid"
+            color: orange
+        name: "Electricity Usage"
+        line_width: 3
+        show:
+          graph: line
+          labels: false
 
       - type: horizontal-stack
         cards:
@@ -71,6 +68,3 @@ cards:
               calendar:
                 period: day
             stat_type: change
-
-
-

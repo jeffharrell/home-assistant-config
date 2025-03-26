@@ -7,3 +7,5 @@ resources:
     type: module
   - url: /hacsfiles/config-template-card/config-template-card.js
     type: module
+  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js 
+    type: module
