@@ -4,19 +4,29 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: custom:mini-graph-card
+      - type: custom:config-template-card
         entities:
-          - entity: sensor.home_current_temperature
-            aggregate_func: avg
-            show_legend: false
-            name: "Temperature"
-            color: orange
-        name: "Inside Temperature"
-        line_width: 3
-        decimals: 0
-        show:
-          graph: line
-          labels: false
+          - sensor.home_current_temperature
+        card:
+          type: custom:mini-graph-card
+          name: "Inside Temperature"
+          line_width: 3
+          points_per_hour: 2
+          hours_to_show: >-
+            ${
+              var date = new Date();
+              var curHour = date.getHours() + date.getMinutes()/60.0;
+              curHour
+            }
+          entities:
+            - entity: sensor.home_current_temperature
+              aggregate_func: last
+              show_legend: true
+              name: "Temperature"
+              color: orange
+          show:
+            graph: line
+            labels: true
 
       - type: tile
         entity: climate.home
