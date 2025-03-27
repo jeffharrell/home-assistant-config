@@ -11,9 +11,10 @@ cards:
           - sensor.powerwall_site_now
         card:
           type: custom:mini-graph-card
-          name: "Electricity Usage"
+          name: "Powerwall"
           line_width: 3
-          points_per_hour: 2
+          points_per_hour: 4
+          decimals: 1
           hours_to_show: >-
             ${
               var date = new Date();
@@ -21,9 +22,11 @@ cards:
               curHour
             }
           entities:
+            - entity: sensor.powerwall_charge_actual
+              show_graph: false
             - entity: sensor.powerwall_battery_now
               aggregate_func: last
-              show_legend: true
+              show_legend: false
               name: "Powerwall"
               color: green
             - entity: sensor.powerwall_site_now
@@ -33,12 +36,13 @@ cards:
               color: orange
           show:
             graph: line
+            points: hover
             labels: true
 
       - type: horizontal-stack
         cards:
           - type: statistic
-            name: "Solar Total"
+            name: "Solar Generation"
             entity: sensor.powerwall_solar_export
             period:
               calendar:
@@ -52,7 +56,7 @@ cards:
       - type: horizontal-stack
         cards:
           - type: statistic
-            name: "Home Total"
+            name: "Home Usage"
             entity: sensor.powerwall_load_import
             period:
               calendar:
