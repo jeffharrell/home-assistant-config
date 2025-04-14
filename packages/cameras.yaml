@@ -2,17 +2,23 @@ shell_command:
   purge_camera_events: !secret purge_cameras_events_cmd
   record_driveway_camera: !secret record_driveway_camera_cmd
 
+input_text:
+  camera_motion_prompt:
+    name: "Camera Motion Prompt"
+    icon: "mdi:robot"
+    max: 255
+
+input_boolean:
+  camera_motion_enabled:
+    name: "Camera Motion Alerts"
+    icon: "mdi:robot"
+
 counter:
   camera_motion:
     name: "Camera Motion Counter"
     icon: mdi:alert
     initial: 0
     restore: True
-
-input_boolean:
-  camera_motion_enabled:
-    name: "Camera Motion Alerts"
-    icon: "mdi:robot"
 
 automation:
   - alias: "Cameras - Doorbell"
@@ -31,7 +37,7 @@ automation:
       # create a text response for that picture
       - action: google_generative_ai_conversation.generate_content
         data:
-          prompt: !secret prompt_describe_image
+          prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/doorbell.jpg
         response_variable: generated_content
@@ -67,7 +73,7 @@ automation:
       # create a text response for that picture
       - action: google_generative_ai_conversation.generate_content
         data:
-          prompt: !secret prompt_describe_image
+          prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/motion.jpg
         response_variable: generated_content
@@ -100,7 +106,7 @@ automation:
           filename: "/config/www/cameras/mailbox.jpg"
       - action: google_generative_ai_conversation.generate_content
         data:
-          prompt: !secret prompt_describe_image
+          prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/mailbox.jpg
         response_variable: generated_content

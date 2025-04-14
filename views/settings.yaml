@@ -21,12 +21,14 @@ cards:
         entities:
           - entity: input_boolean.camera_motion_enabled
             name: "Camera Motion Alerts"
-
           - entity: automation.cameras_doorbell
             name: "Doorbell Alerts"
-
           - entity: automation.cameras_mailbox_open
             name: "Mailbox Alerts"
+          - entity: input_text.camera_motion_prompt
+            name: "Notification Prompt"
+
+          - type: section
 
           - entity: automation.climate_windows_open
             name: "Turn HVAC Off When Windows Open"
