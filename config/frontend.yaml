@@ -7,6 +7,74 @@ themes:
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
+  subview:
+    primary-background-color: "#313131" 
+    card-background-color: "#3D3D3D"
+
+  apptheme:
+    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
+    
+    primary-background-color: "#3D3D3D"
+    card-background-color: "#313131"
+    secondary-background-color: "#666"
+
+    primary-text-color: "#E0E0E0"
+    secondary-text-color: "#E0E0E0"
+
+    accent-color: "#F3BB00"
+
+    # Header
+    app-header-text-color: "var(--primary-text-color)"
+    app-header-background-color: "var(--primary-background-color)"
+    app-header-selection-bar-color: "transparent"
+    mdc-top-app-bar-fixed-box-shadow: "none"
+
+    # Cards
+    ha-card-border-width: "1px"
+    ha-card-border-radius: "8px"
+    divider-color: "rgba(0, 0, 0, 0.15)"
+
+    code-editor-background-color: "#000"
+
+    # Icons
+    state-icon-color: "#E0E0E0"
+    state-active-color: "var(--accent-color)"
+    state-inactive-color: "var(--state-icon-color)"
+
+    state-light-active-color: "var(--state-active-color)"
+    state-binary_sensor-active-color: "var(--state-active-color)"
+    state-cover-active-color: "var(--state-active-color)"
+    state-media_player-active-color: "var(--state-active-color)"
+    state-climate-auto-color: "var(--state-active-color)"
+    state-climate-cool-color: "var(--state-active-color)"
+    state-climate-heat-color: "var(--state-active-color)"
+    state-climate-fan_only-color: "var(--state-icon-color)"
+
+    # CSS Overrides
+    card-mod-theme: apptheme
+    card-mod-root: |
+      #view {
+        margin-top: -20px !important;
+      }
+
+      .header {
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        width: auto !important;
+      }
+
+      .header .main-title {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+
+      @media only screen and (hover: none) and (pointer: coarse) {
+        .header .main-title {
+          margin-left: 10px;
+        }
+      }
+
   home:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts

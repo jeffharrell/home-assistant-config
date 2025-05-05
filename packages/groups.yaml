@@ -24,6 +24,9 @@ light:
   - platform: switch
     name: "Twinkle Lights"
     entity_id: switch.twinkle_lights
+  - platform: switch
+    name: "Pool"
+    entity_id: switch.pool_light
   
   # Groups
   - platform: group
@@ -66,6 +69,7 @@ light:
       - light.back_doors
       - light.twinkle_lights
       - light.garage
+      - light.pool
 
   - platform: group
     name: "House"
@@ -81,6 +85,7 @@ binary_sensor:
   # Groups
   - platform: group
     name: "Doors and Windows"
+    device_class: door
     unique_id: doors_and_windows
     entities:
       - binary_sensor.front_door
@@ -95,8 +100,10 @@ binary_sensor:
       - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
+      - binary_sensor.garage_side_door
   - platform: group
     name: "Garage Doors"
+    device_class: door
     unique_id: garage_doors
     entities:
       - binary_sensor.garage_door_side
@@ -105,8 +112,54 @@ binary_sensor:
       - binary_sensor.garage_door_3
   - platform: group
     name: "Doors and Windows and Garages"
+    device_class: door
     unique_id: doors_and_windows_and_garages
     entities:
       - binary_sensor.garage_doors
       - binary_sensor.garage_side_door
       - binary_sensor.doors_and_windows
+
+group:
+  # making these normal groups so that more-info shows the entities
+  lights_house:
+    name: "Lights"
+    entities:
+      - light.kitchen
+      - light.island
+      - light.kitchen_cabinets
+      - light.family_room
+      - light.living_room
+      - light.dining_room
+      - light.entryway
+      - light.boys_bedroom
+      - light.guest_bedroom
+      - light.master_bedroom
+      - light.play_room
+      - light.front_door
+      - light.back_doors
+      - light.twinkle_lights
+      - light.garage
+      - light.pool
+      - light.hallway
+      
+  media_player_speakers:
+    name: "Speakers"
+    entities:
+      - media_player.family_room_speakers
+      - media_player.garage_speakers
+      - media_player.kitchen_hub
+      - media_player.living_room_speakers
+      - media_player.master_bedroom_speaker
+      - media_player.outside_speakers
+      - media_player.playroom_speakers
+
+  media_player_tvs:
+    name: "TVs"
+    entities:
+      - media_player.garage_tv
+      
+  media_player_speakers_and_tvs:
+    name: "Speakers and TVs"
+    entities:
+      - group.media_player_speakers
+      - group.media_player_tvs

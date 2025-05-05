@@ -106,7 +106,6 @@ automation:
           brightness: 255
           transition: 3
 
-
   - alias: "Lights - Playroom light toggles bulb"
     initial_state: True
     trigger:
