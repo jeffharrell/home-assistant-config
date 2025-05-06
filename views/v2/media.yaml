@@ -1,0 +1,78 @@
+title: "Media"
+path: "media"
+subview: true
+theme: subview
+max_columns: 1
+
+type: sections
+sections:
+
+  - type: grid
+    cards:
+      - type: tile
+        entity: media_player.family_room_apple_tv
+        name: "Family Room TV"
+        hide_state: false
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+        grid_options:
+          columns: full
+      - type: tile
+        entity: media_player.living_room_apple_tv
+        name: "Living Room TV"
+        hide_state: false
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+        grid_options:
+          columns: full
+      - type: tile
+        entity: media_player.master_bedroom_apple_tv
+        name: "Master Bedroom TV"
+        hide_state: false
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+        grid_options:
+          columns: full
+      # - type: tile
+      #   entity: media_player.garage_tv
+      #   name: "Garage TV"
+      #   hide_state: false
+      #   tap_action:
+      #     action: more-info
+      #   icon_tap_action:
+      #     action: more-info
+      #   grid_options:
+      #     columns: full
+
+      - type: vertical-stack
+        title: " "
+        cards:
+          - type: markdown
+            content: >-
+              {% if is_state('group.media_player_speakers', 'on') %}
+
+              There are **{{ state_attr('group.media_player_speakers',
+              'entity_id') | expand | selectattr('state', 'eq', 'playing') |
+              list | count }}** speakers on
+
+              {% endif %}
+            text_only: true
+
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - group: group.media_player_speakers
+              exclude:
+                - state: "off"
+            show_empty: false
+        grid_options:
+          columns: full

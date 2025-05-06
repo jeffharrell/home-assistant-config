@@ -1,0 +1,81 @@
+title: "Lights"
+path: "lights"
+subview: true
+theme: subview
+max_columns: 1
+
+type: sections
+sections:
+  
+  - type: grid
+    cards:
+      # tiles
+      - type: tile
+        entity: script.mood_lights
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+      - type: tile
+        entity: script.dinner_lights
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+      - type: tile
+        entity: group.lights_house
+        name: "Lights"
+        icon: mdi:lightbulb-multiple
+        hide_state: true
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+
+      # what's on
+      - type: vertical-stack
+        title: " "
+        cards:
+          - type: markdown
+            content: >-
+              {% if is_state('group.lights_house', 'on') %}
+
+              There are **{{ state_attr('group.lights_house', 'entity_id') |
+              expand | selectattr('state', 'eq', 'on') | list | count }}**
+              lights on
+
+              {% endif %}
+            text_only: true
+
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - group: group.lights_house
+              exclude:
+                - state: 'off'
+            show_empty: false
+            sort:
+              method: friendly_name
+        grid_options:
+          columns: full
+        
+
+      # settings
+      - type: heading
+        heading: "Settings"
+        heading_style: title
+      - type: entities
+        entities:
+          - entity: switch.front_landscape
+          - entity: switch.back_landscape
+
+          - type: divider
+          
+          - entity: automation.landscape_back_door_light
+            name: "Outside lights on when doors open"
+            icon: mdi:creation

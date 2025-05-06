@@ -7,10 +7,10 @@ kiosk_mode:
     hide_overflow: false
 
 views:
-  - !include views/original/home.yaml
-  - !include views/original/inside.yaml
-  - !include views/original/outside.yaml
-  - !include views/original/cameras.yaml
-  - !include views/original/energy.yaml
-  - !include views/original/climate.yaml
-  - !include views/original/settings.yaml
+  - !include views/v1/home.yaml
+  - !include views/v1/inside.yaml
+  - !include views/v1/outside.yaml
+  - !include views/v1/cameras.yaml
+  - !include views/v1/energy.yaml
+  - !include views/v1/climate.yaml
+  - !include views/v1/settings.yaml

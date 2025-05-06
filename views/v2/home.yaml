@@ -1,0 +1,229 @@
+title: Home
+type: sections
+max_columns: 1
+
+header:
+  card:
+    type: markdown
+    content: >-
+      {% if is_state('input_boolean.guest_mode_enabled', 'on') %}
+        <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
+      {%- endif %}
+
+      {% if states('sensor.outside_temp') -%}
+        <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
+        {%- if states('sensor.outside_rain_daily')|float(0) -%}
+          with {{ states('sensor.outside_rain_daily') }}" of rain
+        {%- elif has_value('sensor.outside_forecast') -%}
+          {{ states('sensor.outside_forecast') }}
+        {%- endif -%}
+      {%- endif -%}
+
+      {% if has_value('sensor.air_pollution_level') and
+      states('sensor.air_pollution_level') != 'good' %}
+        <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+      {%- endif -%}
+
+      {% if 'Discharging' in states('sensor.ups_status') %}
+        <ha-icon icon="mdi:battery-50"></ha-icon> UPS at {{ states('sensor.ups_battery_charge') }}% {{ states('sensor.ups_status')|lower }}
+      {%- endif -%}
+
+      {% if states('counter.camera_motion')|float(0) > 0 %}
+        <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+      {%- endif -%}
+    text_only: true
+    card_mod:
+      style: |
+        :host ha-card { 
+          margin-top: -60px;
+          padding-bottom: 15px;
+          transition: none;
+        }
+  layout: start
+
+sections:
+  - type: grid
+    cards:
+      - type: picture-entity
+        entity: camera.front_patio
+        show_name: false
+        show_state: false
+        tap_action:
+          action: navigate
+          navigation_path: cameras
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card { 
+              margin: 15px -8px;
+              min-height: 225px;
+              max-height: 240px;
+              background: rgba(0, 0, 0, 0.1);
+              border: 2px solid rgba(0, 0, 0, 0.1);
+              border-left: 0;
+              border-right: 0;
+              transition: none;
+            }
+
+      - type: grid
+        columns: 4
+        square: false
+        cards:
+          - type: button
+            entity: group.lights_house
+            name: "Lights"
+            icon: mdi:ceiling-light
+            icon_height: 25px
+            tap_action:
+              action: navigate
+              navigation_path: lights
+            hold_action:
+              action: navigate
+              navigation_path: status
+            theme: nocard
+            show_state: true
+            
+          - type: button
+            entity: group.media_player_speakers_and_tvs
+            name: "Media"
+            icon: mdi:television
+            icon_height: 25px
+            tap_action:
+              action: navigate
+              navigation_path: media
+            hold_action:
+              action: none
+            theme: nocard
+            show_state: true
+
+          - type: button
+            entity: binary_sensor.doors_and_windows_and_garages
+            name: "Outside"
+            icon: mdi:window-closed-variant
+            icon_height: 25px
+            tap_action:
+              action: navigate
+              navigation_path: outside
+            hold_action:
+              action: none
+            theme: nocard
+            show_state: true
+
+          - type: button
+            entity: climate.home
+            name: "Climate"
+            icon: mdi:home-thermometer-outline
+            icon_height: 25px      
+            tap_action:
+              action: navigate
+              navigation_path: climate
+            hold_action:
+              action: none
+            theme: nocard
+            show_state: true
+
+  - type: grid
+    theme: secondary-actions
+    cards:
+      - type: heading
+        heading: "Quick Actions"
+        heading_style: title
+
+      - type: tile
+        entity: script.wake_up
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_wake_up
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state_not: armed_away
+
+      - type: tile
+        entity: script.mood_lights
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_mood_lights
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state_not: armed_away
+
+      - type: tile
+        entity: script.dinner_lights
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_dinner_time
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state_not: armed_away
+
+      - type: tile
+        entity: script.good_night
+        name: "Good Night"
+        hide_state: true
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        icon: mdi:weather-night
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_good_night
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state_not: armed_away
+        
+
+      - type: custom:config-template-card
+        entities:
+          - alarm_control_panel.alarm_panel_ui
+        card:
+          type: tile
+          entity: alarm_control_panel.alarm_panel_ui
+          name: >-
+            ${
+               states['alarm_control_panel.alarm_panel_ui']
+                .state.split('_')
+                .map(word => word.charAt(0)
+                .toUpperCase() + word.slice(1))
+                .join(' ') 
+              }
+          hide_state: true
+          tap_action:
+            action: more-info
+          icon_tap_action:
+            action: more-info

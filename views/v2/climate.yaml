@@ -1,0 +1,129 @@
+title: "Climate"
+path: "climate"
+subview: true
+theme: subview
+max_columns: 1
+
+type: sections
+sections:
+
+  - type: grid
+    cards:
+      - type: tile
+        entity: climate.home
+        features:
+          - style: dropdown
+            type: climate-hvac-modes
+            hvac_modes:
+              - heat
+              - cool
+              - 'off'
+
+        features_position: inline
+        hide_state: true
+        icon_tap_action:
+          action: more-info
+        tap_action:
+          action: more-info
+
+      - type: vertical-stack
+        title: " "
+        cards:
+          - type: markdown
+            content: >-
+              Inside the average temperature is **{{
+              states('sensor.home_current_temperature')|round(0) }} °F**
+            text_only: true
+
+      - type: sensor
+        entity: sensor.home_current_temperature
+        name: "Inside"
+        graph: line
+        detail: 1
+        icon: " "
+        theme: nocard
+        grid_options:
+          columns: full
+        card_mod:
+          style: |
+            :host .header, :host .info { 
+              display: none;
+            }
+
+      - type: entities
+        entities:
+          - type: custom:multiple-entity-row
+            entity: sensor.family_room_temperature
+            name: "Family Room"
+            show_state: false
+            entities:
+              - entity: sensor.family_room_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.living_room_temperature
+            name: "Living Room"
+            show_state: false
+            entities:
+              - entity: sensor.living_room_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.master_bedroom_temperature
+            name: "Master Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.master_bedroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.boys_bedroom_temperature
+            name: "Boys Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.boys_bedroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.playroom_temperature
+            name: "Playroom"
+            show_state: false
+            entities:
+              - entity: sensor.playroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.office_outlet_temperature
+            name: "Office"
+            show_state: false
+            entities:
+              - entity: sensor.office_outlet_humidity
+                name: Humidity
+              - entity: sensor.office_outlet_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.garage_temp
+            name: "Garage"
+            show_state: false
+            entities:
+              - entity: sensor.garage_humidity
+                name: Humidity
+              - entity: sensor.garage_temp
+                name: Temperature
+                format: precision0
+        card_mod:
+          style: |
+            :host ha-card {
+              margin-top: -7px;
+            }
+
+      - type: heading
+        heading: "Settings"
+        heading_style: title
+
+      - type: entities
+        entities:
+          - entity: automation.climate_windows_open
+            name: "Turn climate off when windows open"
+            icon: mdi:creation

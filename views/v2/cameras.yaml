@@ -1,0 +1,106 @@
+title: "Cameras"
+path: "cameras"
+subview: true
+theme: subview
+max_columns: 1
+
+type: sections
+sections:
+
+  - type: grid
+    cards:
+      - type: grid
+        square: false
+        cards:
+          - type: custom:config-template-card
+            entities:
+              - camera.latest_doorbell
+            card:
+              type: picture-entity
+              name: "Doorbell"
+              aspect_ratio: 16x9
+              entity: camera.latest_doorbell
+              show_state: false
+              tap_action:
+                action: url
+                url_path: >-
+                  ${ states['camera.latest_doorbell'].attributes.entity_picture }
+              hold_action:
+                action: none
+          - type: custom:config-template-card
+            entities:
+              - camera.latest_mailbox
+            card:
+              type: picture-entity
+              name: "Mailbox"
+              aspect_ratio: 16x9
+              entity: camera.latest_mailbox
+              show_state: false
+              tap_action:
+                action: url
+                url_path: >-
+                  ${ states['camera.latest_mailbox'].attributes.entity_picture }
+              hold_action:
+                action: none
+          - type: custom:config-template-card
+            entities:
+              - camera.latest_motion
+            card:
+              type: picture-entity
+              name: "Motion"
+              aspect_ratio: 16x9
+              entity: camera.latest_motion
+              show_state: false
+              tap_action:
+                action: url
+                url_path: >-
+                  ${ states['camera.latest_motion'].attributes.entity_picture }
+              hold_action:
+                action: none
+        columns: 2
+
+      - type: vertical-stack
+        title: " "
+        cards:
+          - type: heading
+            heading: "Live Cameras"
+            heading_style: title
+
+          - camera_view: auto
+            type: picture-glance
+            camera_image: camera.front_door
+            aspect_ratio: 16x9
+            entities:
+              - entity: light.front_door
+
+          - type: picture-glance
+            camera_image: camera.front_patio
+            entities:
+              - entity: light.front_door
+
+          - type: picture-glance
+            camera_image: camera.driveway
+            entities:
+              - entity: light.front_door
+
+          - type: picture-glance
+            camera_image: camera.back_yard
+            entities: []
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Settings"
+        heading_style: title
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: input_boolean.camera_motion_enabled
+                icon: mdi:creation
+                name: "Notify when motion detected"
+              - entity: input_text.camera_motion_prompt
+                secondary_info: none
+                name: "Prompt"
+                icon: none

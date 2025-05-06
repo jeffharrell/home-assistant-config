@@ -1,0 +1,85 @@
+title: "Outside"
+path: "outside"
+subview: true
+theme: subview
+max_columns: 1
+
+type: sections
+sections:
+
+  - type: grid
+    cards:
+      - type: tile
+        entity: cover.garage_door_1
+        state_content: state
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+      - type: tile
+        entity: cover.garage_door_2
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+      - type: tile
+        entity: cover.garage_door_3
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+
+      - type: vertical-stack
+        title: " "
+        cards:
+          - type: markdown
+            content: >-
+              {% if is_state('binary_sensor.doors_and_windows_and_garages',
+              'on') %}
+
+              There are **{{
+              state_attr('binary_sensor.doors_and_windows_and_garages',
+              'entity_id') | expand | selectattr('state', 'eq', 'on') | list
+              | count }}** windows or doors **open**
+
+              {% endif %}
+            text_only: true
+
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+              state_color: true
+            filter:
+              include:
+                - group: binary_sensor.doors_and_windows
+              exclude:
+                - state: 'off'
+            show_empty: false
+            sort:
+              method: friendly_name
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Settings"
+        heading_style: title
+
+      - type: entities
+        entities:
+          - entity: switch.fountain
+            icon: mdi:cup-water
+          - entity: switch.house_fan
+          - entity: switch.garage_fan
+            icon: mdi:fan
+
+          - type: divider
+
+          - entity: input_boolean.camera_motion_enabled
+            icon: mdi:creation
+          - entity: automation.cameras_doorbell
+            icon: mdi:creation
+            name: "Doorbell Alerts"
+          - entity: automation.cameras_mailbox_open
+            icon: mdi:creation
+            name: "Mailbox Alerts"
