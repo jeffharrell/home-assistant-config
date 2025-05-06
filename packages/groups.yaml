@@ -124,23 +124,23 @@ group:
   lights_house:
     name: "Lights"
     entities:
-      - light.kitchen
-      - light.island
-      - light.kitchen_cabinets
       - light.family_room
+      - light.kitchen
+      - light.kitchen_cabinets
+      - light.island
       - light.living_room
       - light.dining_room
       - light.entryway
+      - light.hallway
+      - light.master_bedroom
       - light.boys_bedroom
       - light.guest_bedroom
-      - light.master_bedroom
       - light.play_room
       - light.front_door
       - light.back_doors
       - light.twinkle_lights
       - light.garage
       - light.pool
-      - light.hallway
       
   media_player_speakers:
     name: "Speakers"

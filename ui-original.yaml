@@ -1,0 +1,16 @@
+kiosk_mode:
+  hide_header: false
+  hide_sidebar: false
+  hide_menubutton: false
+  hide_overflow: true
+  admin_settings:
+    hide_overflow: false
+
+views:
+  - !include views/original/home.yaml
+  - !include views/original/inside.yaml
+  - !include views/original/outside.yaml
+  - !include views/original/cameras.yaml
+  - !include views/original/energy.yaml
+  - !include views/original/climate.yaml
+  - !include views/original/settings.yaml

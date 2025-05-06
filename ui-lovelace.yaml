@@ -2,15 +2,909 @@ kiosk_mode:
   hide_header: false
   hide_sidebar: false
   hide_menubutton: false
-  hide_overflow: true
-  admin_settings:
-    hide_overflow: false
-
+  hide_overflow: false
+  mobile_settings:
+    hide_sidebar: true
+    hide_overflow: true
+    
+swipe_nav:
+  wrap: false
+  animate: swipe
+  
 views:
-  - !include views/home.yaml
-  - !include views/inside.yaml
-  - !include views/outside.yaml
-  - !include views/cameras.yaml
-  - !include views/energy.yaml
-  - !include views/climate.yaml
-  - !include views/settings.yaml
+  - title: Home
+    header:
+      card:
+        type: markdown
+        content: >-
+          {% if is_state('input_boolean.guest_mode_enabled', 'on') %}
+            <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
+          {%- endif %}
+
+          {% if states('sensor.outside_temp') -%}
+            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
+            {%- if states('sensor.outside_rain_daily')|float(0) -%}
+              with {{ states('sensor.outside_rain_daily') }}" of rain
+            {%- elif has_value('sensor.outside_forecast') -%}
+              {{ states('sensor.outside_forecast') }}
+            {%- endif -%}
+          {%- endif -%}
+
+          {% if has_value('sensor.air_pollution_level') and
+          states('sensor.air_pollution_level') != 'good' %}
+            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+          {%- endif -%}
+
+          {% if 'Discharging' in states('sensor.ups_status') %}
+            <ha-icon icon="mdi:battery-50"></ha-icon> UPS at {{ states('sensor.ups_battery_charge') }}% {{ states('sensor.ups_status')|lower }}
+          {%- endif -%}
+
+          {% if states('counter.camera_motion')|float(0) > 0 %}
+            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+          {%- endif -%}
+        text_only: true
+        card_mod:
+          style: |
+            :host ha-card { 
+              margin-top: -60px;
+              padding-bottom: 15px;
+              transition: none;
+            }
+      layout: start
+    sections:
+      - type: grid
+        cards:
+          - type: picture-entity
+            entity: camera.front_patio
+            show_name: false
+            show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: cameras
+            theme: nocard
+            card_mod:
+              style: |
+                :host ha-card { 
+                  margin: 15px -8px;
+                  min-height: 225px;
+                  max-height: 240px;
+                  background: rgba(0, 0, 0, 0.1);
+                  border: 2px solid rgba(0, 0, 0, 0.1);
+                  border-left: 0;
+                  border-right: 0;
+                  transition: none;
+                }
+        column_span: 4
+      - type: grid
+        cards:
+          - square: false
+            type: grid
+            cards:
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Lights
+                icon: mdi:ceiling-light
+                tap_action:
+                  action: navigate
+                  navigation_path: lights
+                hold_action:
+                  action: navigate
+                  navigation_path: status
+                theme: nocard
+                icon_height: 25px
+                show_state: true
+                entity: group.lights_house
+              - show_name: true
+                show_icon: true
+                type: button
+                icon: mdi:television
+                tap_action:
+                  action: navigate
+                  navigation_path: media
+                hold_action:
+                  action: none
+                theme: nocard
+                icon_height: 25px
+                name: Media
+                entity: group.media_player_speakers_and_tvs
+                show_state: true
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Outside
+                icon: mdi:window-closed-variant
+                tap_action:
+                  action: navigate
+                  navigation_path: outside
+                hold_action:
+                  action: none
+                theme: nocard
+                icon_height: 25px
+                entity: binary_sensor.doors_and_windows_and_garages
+                show_state: true
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Climate
+                icon: mdi:home-thermometer-outline
+                tap_action:
+                  action: navigate
+                  navigation_path: climate
+                hold_action:
+                  action: none
+                theme: nocard
+                icon_height: 25px
+                entity: climate.home
+                show_state: true
+            grid_options:
+              columns: full
+            columns: 4
+        column_span: 4
+      - type: grid
+        theme: secondary-actions
+        cards:
+          - type: heading
+            heading: Quick Actions
+            heading_style: title
+          - type: tile
+            entity: script.wake_up
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+            grid_options:
+              columns: full
+            icon: ''
+            visibility:
+              - condition: state
+                entity: schedule.quick_actions_wake_up
+                state: 'on'
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarm
+                    state_not: armed_away
+          - type: tile
+            entity: script.mood_lights
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+            grid_options:
+              columns: full
+            icon: ''
+            visibility:
+              - condition: state
+                entity: schedule.quick_actions_mood_lights
+                state: 'on'
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarm
+                    state_not: armed_away
+          - type: tile
+            entity: script.dinner_lights
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+            grid_options:
+              columns: full
+            icon: ''
+            visibility:
+              - condition: state
+                entity: schedule.quick_actions_dinner_time
+                state: 'on'
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarm
+                    state_not: armed_away
+          - type: tile
+            entity: script.good_night
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+            grid_options:
+              columns: full
+            icon: mdi:weather-night
+            visibility:
+              - condition: state
+                entity: schedule.quick_actions_good_night
+                state: 'on'
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarm
+                    state_not: armed_away
+            name: Good Night
+          - type: custom:config-template-card
+            entities:
+              - alarm_control_panel.alarm_panel_ui
+            card:
+              type: tile
+              entity: alarm_control_panel.alarm_panel_ui
+              name: >-
+                ${
+                states['alarm_control_panel.alarm_panel_ui'].state.split('_').map(word
+                => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') }
+              features_position: bottom
+              vertical: false
+              hide_state: true
+              color: disabled
+              tap_action:
+                action: more-info
+              icon_tap_action:
+                action: more-info
+              grid_options:
+                columns: full
+        column_span: 4
+    type: sections
+    max_columns: 1
+    cards: []
+    top_margin: false
+    badges: []
+  - type: sections
+    max_columns: 1
+    title: Lights
+    path: lights
+    sections:
+      - type: grid
+        cards:
+          - type: tile
+            entity: script.mood_lights
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: script.dinner_lights
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            features_position: inline
+            vertical: false
+            entity: group.lights_house
+            name: Lights
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+            hide_state: true
+            icon: mdi:lightbulb-multiple
+        column_span: 4
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  {% if is_state('group.lights_house', 'on') %}
+
+                  There are **{{ state_attr('group.lights_house', 'entity_id') |
+                  expand | selectattr('state', 'eq', 'on') | list | count }}**
+                  lights on
+
+                  {% endif %}
+                text_only: true
+              - type: custom:auto-entities
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                    - group: group.lights_house
+                  exclude:
+                    - state: 'off'
+                show_empty: false
+                sort:
+                  method: friendly_name
+            grid_options:
+              columns: full
+            title: ' '
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Settings
+            heading_style: title
+          - type: entities
+            entities:
+              - entity: switch.front_landscape
+              - entity: switch.back_landscape
+              - type: divider
+              - entity: automation.landscape_back_door_light
+                name: Outside lights on when doors open
+                icon: mdi:creation
+            grid_options:
+              columns: full
+        column_span: 4
+    header:
+      layout: start
+      badges_position: bottom
+    subview: true
+    cards: []
+    theme: subview
+    badges: []
+  - type: sections
+    max_columns: 1
+    title: Media
+    path: media
+    sections:
+      - type: grid
+        cards:
+          - type: tile
+            entity: media_player.family_room_apple_tv
+            vertical: false
+            hide_state: false
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+            show_entity_picture: false
+            grid_options:
+              columns: full
+            name: Family Room TV
+          - type: tile
+            entity: media_player.living_room_apple_tv
+            vertical: false
+            hide_state: false
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+            show_entity_picture: false
+            grid_options:
+              columns: full
+            name: Living Room TV
+          - type: tile
+            entity: media_player.master_bedroom_apple_tv
+            vertical: false
+            hide_state: false
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+            show_entity_picture: false
+            grid_options:
+              columns: full
+            name: Master Bedroom TV
+          - type: tile
+            entity: media_player.garage_tv
+            vertical: false
+            hide_state: false
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+            show_entity_picture: false
+            grid_options:
+              columns: full
+            name: Garage TV
+        column_span: 4
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  {% if is_state('group.media_player_speakers', 'on') %}
+
+                  There are **{{ state_attr('group.media_player_speakers',
+                  'entity_id') | expand | selectattr('state', 'eq', 'playing') |
+                  list | count }}** speakers on
+
+                  {% endif %}
+                text_only: true
+              - type: custom:auto-entities
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                    - group: group.media_player_speakers
+                  exclude:
+                    - state: 'off'
+                show_empty: false
+            grid_options:
+              columns: full
+            title: ' '
+        column_span: 4
+    header:
+      layout: start
+      badges_position: bottom
+    subview: true
+    cards: []
+    theme: subview
+    badges: []
+  - type: sections
+    max_columns: 1
+    title: Outside
+    path: outside
+    sections:
+      - type: grid
+        cards:
+          - type: tile
+            features_position: inline
+            vertical: false
+            entity: cover.garage_door_1
+            state_content: state
+            tap_action:
+              action: toggle
+            icon: ''
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: cover.garage_door_2
+            features_position: bottom
+            vertical: false
+            hide_state: false
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: cover.garage_door_3
+            features_position: bottom
+            vertical: false
+            hide_state: false
+            icon: ''
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
+        column_span: 4
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  {% if is_state('binary_sensor.doors_and_windows_and_garages',
+                  'on') %}
+
+                  There are **{{
+                  state_attr('binary_sensor.doors_and_windows_and_garages',
+                  'entity_id') | expand | selectattr('state', 'eq', 'on') | list
+                  | count }}** windows or doors **open**
+
+                  {% endif %}
+                text_only: true
+                grid_options:
+                  columns: full
+              - type: custom:auto-entities
+                card:
+                  type: entities
+                  show_header_toggle: false
+                  state_color: true
+                filter:
+                  include:
+                    - group: binary_sensor.doors_and_windows
+                  exclude:
+                    - state: 'off'
+                show_empty: false
+                grid_options:
+                  columns: full
+                sort:
+                  method: friendly_name
+            title: ' '
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Settings
+            heading_style: title
+          - type: entities
+            entities:
+              - entity: switch.fountain
+                icon: mdi:cup-water
+              - entity: switch.house_fan
+              - entity: switch.garage_fan
+                icon: mdi:fan
+              - type: divider
+              - entity: input_boolean.camera_motion_enabled
+                icon: mdi:creation
+              - entity: automation.cameras_doorbell
+                icon: mdi:creation
+                name: Doorbell Alerts
+              - entity: automation.cameras_mailbox_open
+                icon: mdi:creation
+                name: Mailbox Alerts
+            grid_options:
+              columns: full
+    header:
+      layout: start
+      badges_position: bottom
+    subview: true
+    cards: []
+    theme: subview
+  - type: sections
+    max_columns: 1
+    title: Climate
+    path: climate
+    sections:
+      - type: grid
+        cards:
+          - features:
+              - style: dropdown
+                type: climate-hvac-modes
+                hvac_modes:
+                  - heat
+                  - cool
+                  - 'off'
+            type: tile
+            entity: climate.home
+            features_position: inline
+            vertical: false
+            hide_state: true
+            icon_tap_action:
+              action: more-info
+            tap_action:
+              action: more-info
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  Inside the average temperature is **{{
+                  states('sensor.home_current_temperature')|round(0) }} °F**
+                text_only: true
+            grid_options:
+              columns: full
+            title: ' '
+          - graph: line
+            type: sensor
+            entity: sensor.home_current_temperature
+            detail: 1
+            icon: ''
+            theme: nocard
+            name: ' Inside'
+            grid_options:
+              columns: full
+            card_mod:
+              style: |
+                :host .header, :host .info { 
+                  display: none;
+                }
+          - type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: sensor.family_room_temperature
+                name: Family Room
+                show_state: false
+                entities:
+                  - entity: sensor.family_room_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.living_room_temperature
+                name: Living Room
+                show_state: false
+                entities:
+                  - entity: sensor.living_room_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.master_bedroom_temperature
+                name: Master Bedroom
+                show_state: false
+                entities:
+                  - entity: sensor.master_bedroom_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.boys_bedroom_temperature
+                name: Boys Bedroom
+                show_state: false
+                entities:
+                  - entity: sensor.boys_bedroom_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.playroom_temperature
+                name: Playroom
+                show_state: false
+                entities:
+                  - entity: sensor.playroom_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.office_outlet_temperature
+                name: Office Outlet
+                show_state: false
+                entities:
+                  - entity: sensor.office_outlet_humidity
+                    name: Humidity
+                  - entity: sensor.office_outlet_temperature
+                    name: Temperature
+                    format: precision0
+              - type: custom:multiple-entity-row
+                entity: sensor.garage_temp
+                name: Garage
+                show_state: false
+                entities:
+                  - entity: sensor.garage_humidity
+                    name: Humidity
+                  - entity: sensor.garage_temp
+                    name: Temperature
+                    format: precision0
+            grid_options:
+              columns: full
+            show_header_toggle: false
+            state_color: false
+            card_mod:
+              style: |
+                :host ha-card {
+                  margin-top: -7px;
+                }
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Settings
+            heading_style: title
+          - type: entities
+            entities:
+              - entity: automation.climate_windows_open
+                name: Turn HVAC off when windows open
+                icon: mdi:creation
+            grid_options:
+              columns: full
+        column_span: 4
+    header:
+      layout: start
+      badges_position: bottom
+    subview: true
+    cards: []
+    theme: subview
+  - type: sections
+    max_columns: 1
+    title: Cameras
+    path: cameras
+    sections:
+      - type: grid
+        cards:
+          - square: false
+            type: grid
+            cards:
+              - type: custom:config-template-card
+                entities:
+                  - camera.latest_doorbell
+                card:
+                  type: picture-entity
+                  name: Doorbell
+                  aspect_ratio: 16x9
+                  entity: camera.latest_doorbell
+                  show_state: false
+                  tap_action:
+                    action: url
+                    url_path: >-
+                      ${
+                      states['camera.latest_doorbell'].attributes.entity_picture
+                      }
+                  hold_action:
+                    action: none
+              - type: custom:config-template-card
+                entities:
+                  - camera.latest_mailbox
+                card:
+                  type: picture-entity
+                  name: Mailbox
+                  aspect_ratio: 16x9
+                  entity: camera.latest_mailbox
+                  show_state: false
+                  tap_action:
+                    action: url
+                    url_path: >-
+                      ${
+                      states['camera.latest_mailbox'].attributes.entity_picture
+                      }
+                  hold_action:
+                    action: none
+              - type: custom:config-template-card
+                entities:
+                  - camera.latest_motion
+                card:
+                  type: picture-entity
+                  name: Motion
+                  aspect_ratio: 16x9
+                  entity: camera.latest_motion
+                  show_state: false
+                  tap_action:
+                    action: url
+                    url_path: >-
+                      ${
+                      states['camera.latest_motion'].attributes.entity_picture }
+                  hold_action:
+                    action: none
+            columns: 2
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Live Cameras
+                heading_style: title
+              - camera_view: auto
+                type: picture-glance
+                camera_image: camera.front_door
+                aspect_ratio: 16x9
+                entities:
+                  - entity: light.front_door
+              - type: picture-glance
+                camera_image: camera.front_patio
+                entities:
+                  - entity: light.front_door
+              - type: picture-glance
+                camera_image: camera.driveway
+                entities:
+                  - entity: light.front_door
+              - type: picture-glance
+                camera_image: camera.back_yard
+                entities: []
+            title: ' '
+      - type: grid
+        cards:
+          - type: heading
+            heading: Settings
+            heading_style: title
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: input_boolean.camera_motion_enabled
+                    icon: mdi:creation
+                    name: Notify when motion detected
+                  - entity: input_text.camera_motion_prompt
+                    secondary_info: none
+                    name: Prompt
+                    icon: none
+            grid_options:
+              columns: full
+        column_span: 4
+    subview: true
+    cards: []
+    theme: subview
+  - type: sections
+    max_columns: 1
+    title: Status
+    path: status
+    theme: subview
+    subview: true
+    visible:
+      - user: 0064d1649f1a456883e30898f976f2bf
+      - user: feaa3f5113d84e1295d8ce4d96cbfac4
+    sections:
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:config-template-card
+                entities:
+                  - sensor.powerwall_battery_now
+                  - sensor.powerwall_site_now
+                card:
+                  type: custom:mini-graph-card
+                  name: Powerwall
+                  line_width: 3
+                  points_per_hour: 4
+                  decimals: 0
+                  hours_to_show: |-
+                    ${
+                      var date = new Date();
+                      var curHour = date.getHours() + date.getMinutes()/60.0;
+                      curHour
+                    }
+                  entities:
+                    - entity: sensor.powerwall_charge_actual
+                      show_graph: false
+                    - entity: sensor.powerwall_battery_now
+                      aggregate_func: last
+                      show_legend: false
+                      name: Powerwall
+                      color: green
+                    - entity: sensor.powerwall_site_now
+                      aggregate_func: last
+                      show_legend: false
+                      name: Grid
+                      color: orange
+                  show:
+                    graph: line
+                    points: hover
+                    labels: true
+              - type: horizontal-stack
+                cards:
+                  - type: statistic
+                    name: Solar Generation
+                    entity: sensor.powerwall_solar_export
+                    period:
+                      calendar:
+                        period: day
+                    stat_type: change
+                  - type: sensor
+                    name: Now
+                    entity: sensor.powerwall_solar_now
+              - type: horizontal-stack
+                cards:
+                  - type: statistic
+                    name: Home Usage
+                    entity: sensor.powerwall_load_import
+                    period:
+                      calendar:
+                        period: day
+                    stat_type: change
+                  - type: sensor
+                    name: Now
+                    entity: sensor.powerwall_load_now
+              - type: horizontal-stack
+                cards:
+                  - type: statistic
+                    name: Grid Import
+                    entity: sensor.powerwall_site_import
+                    period:
+                      calendar:
+                        period: day
+                    stat_type: change
+                  - type: statistic
+                    name: Grid Export
+                    entity: sensor.powerwall_site_export
+                    period:
+                      calendar:
+                        period: day
+                    stat_type: change
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - type: divider
+                  - entity: sensor.ups_battery_charge
+                    name: UPS
+                  - type: divider
+                  - entity: sensor.mailbox_battery_level
+                    name: Mailbox Sensor
+                  - entity: sensor.garage_side_door_battery_level
+                    name: Garage Side Door
+                  - entity: sensor.garage_temp_battery
+                  - entity: sensor.outside_battery
+                    name: Weather Station Battery
+                title: Batteries
+              - type: markdown
+                content: |
+                  There's more in <a href="./?disable_km">Advanced</a>
+                text_only: true
+            grid_options:
+              columns: full
+        column_span: 4
+    cards: []
+ 
