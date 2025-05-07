@@ -35,41 +35,41 @@ sections:
           action: more-info
 
       # what's on
-      - type: vertical-stack
-        title: " "
-        cards:
-          - type: markdown
-            content: >-
-              {% if is_state('group.lights_house', 'on') %}
-
-              There are **{{ state_attr('group.lights_house', 'entity_id') |
-              expand | selectattr('state', 'eq', 'on') | list | count }}**
-              lights on
-
-              {% endif %}
-            text_only: true
-
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-                - group: group.lights_house
-              exclude:
-                - state: 'off'
-            show_empty: false
-            sort:
-              method: friendly_name
+      - type: entity-filter
+        card:
+          title: "Currently On"
+          state_color: true
+          show_header_toggle: false
+        entities:
+          - light.family_room
+          - light.kitchen
+          - light.kitchen_cabinets
+          - light.island
+          - light.living_room
+          - light.dining_room
+          - light.entryway
+          - light.hallway
+          - light.master_bedroom
+          - light.boys_bedroom
+          - light.guest_bedroom
+          - light.play_room
+          - light.front_door
+          - light.back_doors
+          - light.twinkle_lights
+          - light.garage
+          - light.pool
+        conditions:
+          - condition: state
+            state: "on"
+        show_empty: false
         grid_options:
           columns: full
-        
 
       # settings
-      - type: heading
-        heading: "Settings"
-        heading_style: title
       - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
         entities:
           - entity: switch.front_landscape
           - entity: switch.back_landscape

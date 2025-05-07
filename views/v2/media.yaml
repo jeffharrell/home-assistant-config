@@ -9,10 +9,12 @@ sections:
 
   - type: grid
     cards:
+
       - type: tile
         entity: media_player.family_room_apple_tv
         name: "Family Room TV"
         hide_state: false
+        show_entity_picture: true
         tap_action:
           action: more-info
         icon_tap_action:
@@ -23,6 +25,7 @@ sections:
         entity: media_player.living_room_apple_tv
         name: "Living Room TV"
         hide_state: false
+        show_entity_picture: true
         tap_action:
           action: more-info
         icon_tap_action:
@@ -33,46 +36,31 @@ sections:
         entity: media_player.master_bedroom_apple_tv
         name: "Master Bedroom TV"
         hide_state: false
+        show_entity_picture: true
         tap_action:
           action: more-info
         icon_tap_action:
           action: more-info
         grid_options:
           columns: full
-      # - type: tile
-      #   entity: media_player.garage_tv
-      #   name: "Garage TV"
-      #   hide_state: false
-      #   tap_action:
-      #     action: more-info
-      #   icon_tap_action:
-      #     action: more-info
-      #   grid_options:
-      #     columns: full
 
-      - type: vertical-stack
-        title: " "
-        cards:
-          - type: markdown
-            content: >-
-              {% if is_state('group.media_player_speakers', 'on') %}
-
-              There are **{{ state_attr('group.media_player_speakers',
-              'entity_id') | expand | selectattr('state', 'eq', 'playing') |
-              list | count }}** speakers on
-
-              {% endif %}
-            text_only: true
-
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-                - group: group.media_player_speakers
-              exclude:
-                - state: "off"
-            show_empty: false
+      # what's on
+      - type: entity-filter
+        card:
+          title: "Currently Playing"
+          state_color: true
+          show_header_toggle: false
+        entities:
+          - media_player.family_room_speakers
+          - media_player.garage_speakers
+          - media_player.kitchen_hub
+          - media_player.living_room_speakers
+          - media_player.master_bedroom_speaker
+          - media_player.outside_speakers
+          - media_player.playroom_speakers
+        conditions:
+          - condition: state
+            state: "on"
+        show_empty: false
         grid_options:
           columns: full

@@ -18,22 +18,14 @@ sections:
               - heat
               - cool
               - 'off'
-
         features_position: inline
-        hide_state: true
+        state_content:
+          - current_temperature
+          - hvac_action
         icon_tap_action:
           action: more-info
         tap_action:
           action: more-info
-
-      - type: vertical-stack
-        title: " "
-        cards:
-          - type: markdown
-            content: >-
-              Inside the average temperature is **{{
-              states('sensor.home_current_temperature')|round(0) }} °F**
-            text_only: true
 
       - type: sensor
         entity: sensor.home_current_temperature
@@ -118,11 +110,10 @@ sections:
               margin-top: -7px;
             }
 
-      - type: heading
-        heading: "Settings"
-        heading_style: title
-
       - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
         entities:
           - entity: automation.climate_windows_open
             name: "Turn climate off when windows open"

@@ -29,43 +29,39 @@ sections:
         icon_tap_action:
           action: more-info
 
-      - type: vertical-stack
-        title: " "
-        cards:
-          - type: markdown
-            content: >-
-              {% if is_state('binary_sensor.doors_and_windows_and_garages',
-              'on') %}
-
-              There are **{{
-              state_attr('binary_sensor.doors_and_windows_and_garages',
-              'entity_id') | expand | selectattr('state', 'eq', 'on') | list
-              | count }}** windows or doors **open**
-
-              {% endif %}
-            text_only: true
-
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-              state_color: true
-            filter:
-              include:
-                - group: binary_sensor.doors_and_windows
-              exclude:
-                - state: 'off'
-            show_empty: false
-            sort:
-              method: friendly_name
+      # what's on
+      - type: entity-filter
+        card:
+          title: "Currently Open"
+          state_color: true
+          show_header_toggle: false
+        entities:
+          - binary_sensor.front_door
+          - binary_sensor.family_room_doors
+          - binary_sensor.master_bedroom_doors
+          - binary_sensor.laundry_room_door
+          - binary_sensor.dining_room_window
+          - binary_sensor.living_room_window_left
+          - binary_sensor.living_room_window_right
+          - binary_sensor.kitchen_window
+          - binary_sensor.boys_window
+          - binary_sensor.playroom_window
+          - binary_sensor.guest_window
+          - binary_sensor.master_bedroom_window
+          - binary_sensor.garage_side_door
+        conditions:
+          - condition: state
+            state: "on"
+        show_empty: false
+        grid_options:
+          columns: full
 
   - type: grid
     cards:
-      - type: heading
-        heading: "Settings"
-        heading_style: title
-
       - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
         entities:
           - entity: switch.fountain
             icon: mdi:cup-water

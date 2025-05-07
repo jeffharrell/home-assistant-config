@@ -156,8 +156,10 @@ group:
   media_player_tvs:
     name: "TVs"
     entities:
-      - media_player.garage_tv
-      
+      - media_player.family_room_apple_tv
+      - media_player.living_room_apple_tv
+      - media_player.master_bedroom_apple_tv
+
   media_player_speakers_and_tvs:
     name: "Speakers and TVs"
     entities:

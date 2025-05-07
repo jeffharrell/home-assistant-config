@@ -6,10 +6,6 @@ header:
   card:
     type: markdown
     content: >-
-      {% if is_state('input_boolean.guest_mode_enabled', 'on') %}
-        <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
-      {%- endif %}
-
       {% if states('sensor.outside_temp') -%}
         <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
         {%- if states('sensor.outside_rain_daily')|float(0) -%}
@@ -19,25 +15,34 @@ header:
         {%- endif -%}
       {%- endif -%}
 
-      {% if has_value('sensor.air_pollution_level') and
-      states('sensor.air_pollution_level') != 'good' %}
+      {% if has_value('sensor.air_pollution_level') and states('sensor.air_pollution_level') != 'good' %}
         <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
-      {%- endif -%}
-
-      {% if 'Discharging' in states('sensor.ups_status') %}
-        <ha-icon icon="mdi:battery-50"></ha-icon> UPS at {{ states('sensor.ups_battery_charge') }}% {{ states('sensor.ups_status')|lower }}
       {%- endif -%}
 
       {% if states('counter.camera_motion')|float(0) > 0 %}
         <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
       {%- endif -%}
+
+      {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
+      {% set len = list | count %}
+      {% if len == 1 %} 
+        <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
+      {% elif len > 1 %}
+        <ha-icon icon="mdi:door"></ha-icon> Multiple doors or windows are open
+      {% endif %}
+
+      {% if is_state('input_boolean.guest_mode_enabled', 'on') %}
+        <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
+      {%- endif %}
+
     text_only: true
     card_mod:
       style: |
         :host ha-card { 
           margin-top: -60px;
-          padding-bottom: 15px;
+          padding-bottom: 5px;
           transition: none;
+          line-height: 2em;
         }
   layout: start
 
@@ -55,7 +60,7 @@ sections:
         card_mod:
           style: |
             :host ha-card { 
-              margin: 15px -8px;
+              margin: 15px -8px 30px;
               min-height: 225px;
               max-height: 240px;
               background: rgba(0, 0, 0, 0.1);
@@ -81,7 +86,7 @@ sections:
               action: navigate
               navigation_path: status
             theme: nocard
-            show_state: true
+            show_state: false
             
           - type: button
             entity: group.media_player_speakers_and_tvs
@@ -94,12 +99,12 @@ sections:
             hold_action:
               action: none
             theme: nocard
-            show_state: true
+            show_state: false
 
           - type: button
             entity: binary_sensor.doors_and_windows_and_garages
             name: "Outside"
-            icon: mdi:window-closed-variant
+            icon: mdi:door
             icon_height: 25px
             tap_action:
               action: navigate
@@ -107,7 +112,7 @@ sections:
             hold_action:
               action: none
             theme: nocard
-            show_state: true
+            show_state: false
 
           - type: button
             entity: climate.home
@@ -120,7 +125,7 @@ sections:
             hold_action:
               action: none
             theme: nocard
-            show_state: true
+            show_state: false
 
   - type: grid
     theme: secondary-actions
@@ -132,6 +137,7 @@ sections:
       - type: tile
         entity: script.wake_up
         hide_state: true
+        color: disabled
         tap_action:
           action: toggle
         icon_tap_action:
@@ -151,6 +157,7 @@ sections:
       - type: tile
         entity: script.mood_lights
         hide_state: true
+        color: disabled
         tap_action:
           action: toggle
         icon_tap_action:
@@ -165,11 +172,12 @@ sections:
             conditions:
               - condition: state
                 entity: alarm_control_panel.alarm
-                state_not: armed_away
+                state: disarmed
 
       - type: tile
         entity: script.dinner_lights
         hide_state: true
+        color: disabled
         tap_action:
           action: toggle
         icon_tap_action:
@@ -184,12 +192,13 @@ sections:
             conditions:
               - condition: state
                 entity: alarm_control_panel.alarm
-                state_not: armed_away
+                state: disarmed
 
       - type: tile
         entity: script.good_night
         name: "Good Night"
         hide_state: true
+        color: disabled
         tap_action:
           action: toggle
         icon_tap_action:
@@ -205,8 +214,22 @@ sections:
             conditions:
               - condition: state
                 entity: alarm_control_panel.alarm
-                state_not: armed_away
-        
+                state: disarmed
+
+      - type: tile
+        entity: script.let_dog_out
+        hide_state: true
+        color: disabled
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: armed_home
 
       - type: custom:config-template-card
         entities:
@@ -223,6 +246,7 @@ sections:
                 .join(' ') 
               }
           hide_state: true
+          color: disabled
           tap_action:
             action: more-info
           icon_tap_action:
