@@ -37,9 +37,15 @@ sections:
       # what's on
       - type: entity-filter
         card:
-          title: "Currently On"
           state_color: true
           show_header_toggle: false
+          card_mod:
+            style: |
+              :host ha-card {
+                margin: 25px 0 0;
+                height: auto;
+                transition: none;
+              }
         entities:
           - light.family_room
           - light.kitchen
@@ -71,11 +77,18 @@ sections:
         state_color: false
         show_header_toggle: false
         entities:
-          - entity: switch.front_landscape
-          - entity: switch.back_landscape
-
           - type: divider
-          
           - entity: automation.landscape_back_door_light
             name: "Outside lights on when doors open"
             icon: mdi:creation
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }

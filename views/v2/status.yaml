@@ -118,3 +118,10 @@ sections:
             content: |
               There's more in <a href="./?disable_km">Advanced</a>
             text_only: true
+            card_mod:
+              style: |
+                :host ha-card {
+                  margin: 25px 0 0;
+                  height: auto;
+                  transition: none;
+                }

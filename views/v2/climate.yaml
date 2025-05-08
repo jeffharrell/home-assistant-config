@@ -108,6 +108,7 @@ sections:
           style: |
             :host ha-card {
               margin-top: -7px;
+              transition: none;
             }
 
       - type: entities
@@ -115,6 +116,18 @@ sections:
         state_color: false
         show_header_toggle: false
         entities:
+          - type: divider
           - entity: automation.climate_windows_open
             name: "Turn climate off when windows open"
             icon: mdi:creation
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }

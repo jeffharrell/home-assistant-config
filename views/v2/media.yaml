@@ -50,6 +50,13 @@ sections:
           title: "Currently Playing"
           state_color: true
           show_header_toggle: false
+          card_mod:
+            style: |
+              :host ha-card {
+                margin: 25px 0 0;
+                height: auto;
+                transition: none;
+              }
         entities:
           - media_player.family_room_speakers
           - media_player.garage_speakers
@@ -64,3 +71,14 @@ sections:
         show_empty: false
         grid_options:
           columns: full
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }

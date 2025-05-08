@@ -32,9 +32,15 @@ sections:
       # what's on
       - type: entity-filter
         card:
-          title: "Currently Open"
           state_color: true
           show_header_toggle: false
+          card_mod:
+            style: |
+              :host ha-card {
+                margin: 25px 0 0;
+                height: auto;
+                transition: none;
+              }
         entities:
           - binary_sensor.front_door
           - binary_sensor.family_room_doors
@@ -63,8 +69,7 @@ sections:
         state_color: false
         show_header_toggle: false
         entities:
-          - entity: switch.fountain
-            icon: mdi:cup-water
+          - type: divider
           - entity: switch.house_fan
           - entity: switch.garage_fan
             icon: mdi:fan
@@ -79,3 +84,16 @@ sections:
           - entity: automation.cameras_mailbox_open
             icon: mdi:creation
             name: "Mailbox Alerts"
+          - entity: switch.fountain
+            icon: mdi:creation
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }

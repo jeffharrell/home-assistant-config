@@ -89,18 +89,27 @@ sections:
 
   - type: grid
     cards:
-      - type: heading
-        heading: "Settings"
-        heading_style: title
+      - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - type: divider
+          - entity: input_boolean.camera_motion_enabled
+            icon: mdi:creation
+            name: "Notify when motion detected"
+          - entity: input_text.camera_motion_prompt
+            secondary_info: none
+            name: "Prompt"
+            icon: none
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
 
-      - type: vertical-stack
-        cards:
-          - type: entities
-            entities:
-              - entity: input_boolean.camera_motion_enabled
-                icon: mdi:creation
-                name: "Notify when motion detected"
-              - entity: input_text.camera_motion_prompt
-                secondary_info: none
-                name: "Prompt"
-                icon: none
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }

@@ -35,6 +35,7 @@ themes:
     divider-color: "rgba(0, 0, 0, 0.15)"
 
     code-editor-background-color: "#000"
+    ha-card-header-font-size: "16px"
 
     # Icons
     state-icon-color: "#E0E0E0"
