@@ -11,14 +11,6 @@ sections:
     cards:
       - type: tile
         entity: climate.home
-        features:
-          - style: dropdown
-            type: climate-hvac-modes
-            hvac_modes:
-              - heat
-              - cool
-              - 'off'
-        features_position: inline
         state_content:
           - current_temperature
           - hvac_action
@@ -26,21 +18,6 @@ sections:
           action: more-info
         tap_action:
           action: more-info
-
-      - type: sensor
-        entity: sensor.home_current_temperature
-        name: "Inside"
-        graph: line
-        detail: 1
-        icon: " "
-        theme: nocard
-        grid_options:
-          columns: full
-        card_mod:
-          style: |
-            :host .header, :host .info { 
-              display: none;
-            }
 
       - type: entities
         entities:
@@ -107,12 +84,23 @@ sections:
         card_mod:
           style: |
             :host ha-card {
-              margin-top: -7px;
+              margin: 25px 0 0;
+              height: auto;
               transition: none;
             }
+            
+            # multiple-entity-row:
+            #   $ hui-generic-entity-row $: |
+            #     state_badge {
+            #       display: none !important;
+            #     }
+
+            #     .info {
+            #       margin-left: 0 !important;
+            #     }
 
       - type: entities
-        title: "Settings"
+        title: "Advanced"
         state_color: false
         show_header_toggle: false
         entities:

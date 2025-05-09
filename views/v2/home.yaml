@@ -152,7 +152,7 @@ sections:
             conditions:
               - condition: state
                 entity: alarm_control_panel.alarm
-                state_not: armed_away
+                state: armed_home
 
       - type: tile
         entity: script.mood_lights

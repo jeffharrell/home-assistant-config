@@ -59,7 +59,6 @@ sections:
           - light.boys_bedroom
           - light.guest_bedroom
           - light.play_room
-          - light.front_door
           - light.back_doors
           - light.twinkle_lights
           - light.garage
@@ -73,13 +72,13 @@ sections:
 
       # settings
       - type: entities
-        title: "Settings"
+        title: "Advanced"
         state_color: false
         show_header_toggle: false
         entities:
           - type: divider
           - entity: automation.landscape_back_door_light
-            name: "Outside lights on when doors open"
+            name: "Opening doors turns on lights"
             icon: mdi:creation
         card_mod:
           style: |

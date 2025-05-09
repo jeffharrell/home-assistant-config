@@ -100,7 +100,6 @@ binary_sensor:
       - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
-      - binary_sensor.garage_side_door
   - platform: group
     name: "Garage Doors"
     device_class: door
@@ -136,7 +135,6 @@ group:
       - light.boys_bedroom
       - light.guest_bedroom
       - light.play_room
-      - light.front_door
       - light.back_doors
       - light.twinkle_lights
       - light.garage
@@ -165,3 +163,11 @@ group:
     entities:
       - group.media_player_speakers
       - group.media_player_tvs
+
+  garages:
+    name: "Garages"
+    icon: "mdi:garage"
+    entities:
+      - cover.garage_door_1
+      - cover.garage_door_2
+      - cover.garage_door_3

@@ -59,15 +59,15 @@ sections:
               }
         entities:
           - media_player.family_room_speakers
-          - media_player.garage_speakers
-          - media_player.kitchen_hub
           - media_player.living_room_speakers
+          - media_player.kitchen_hub
           - media_player.master_bedroom_speaker
-          - media_player.outside_speakers
           - media_player.playroom_speakers
+          - media_player.garage_speakers
+          - media_player.outside_speakers
         conditions:
           - condition: state
-            state: "on"
+            state: "playing"
         show_empty: false
         grid_options:
           columns: full

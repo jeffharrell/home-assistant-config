@@ -10,20 +10,25 @@ sections:
   - type: grid
     cards:
       - type: tile
-        entity: cover.garage_door_1
-        state_content: state
+        entity: switch.house_fan
         tap_action:
           action: toggle
         icon_tap_action:
           action: toggle
       - type: tile
-        entity: cover.garage_door_2
+        entity: switch.garage_fan
         tap_action:
           action: toggle
         icon_tap_action:
           action: toggle
       - type: tile
-        entity: cover.garage_door_3
+        entity: switch.fountain
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+      - type: tile
+        entity: group.garages
         tap_action:
           action: more-info
         icon_tap_action:
@@ -65,27 +70,20 @@ sections:
   - type: grid
     cards:
       - type: entities
-        title: "Settings"
+        title: "Advanced"
         state_color: false
         show_header_toggle: false
         entities:
           - type: divider
-          - entity: switch.house_fan
-          - entity: switch.garage_fan
-            icon: mdi:fan
-
-          - type: divider
-
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
+            name: "Motion Alerts"
           - entity: automation.cameras_doorbell
             icon: mdi:creation
             name: "Doorbell Alerts"
           - entity: automation.cameras_mailbox_open
             icon: mdi:creation
             name: "Mailbox Alerts"
-          - entity: switch.fountain
-            icon: mdi:creation
         card_mod:
           style: |
             :host ha-card {

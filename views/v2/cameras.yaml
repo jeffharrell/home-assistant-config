@@ -90,7 +90,7 @@ sections:
   - type: grid
     cards:
       - type: entities
-        title: "Settings"
+        title: "Advanced"
         state_color: false
         show_header_toggle: false
         entities:
