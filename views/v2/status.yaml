@@ -2,16 +2,12 @@ title: "Status"
 path: "status"
 subview: true
 theme: subview
-max_columns: 1
-visible:
-  - user: 0064d1649f1a456883e30898f976f2bf
-  - user: feaa3f5113d84e1295d8ce4d96cbfac4
+cards:
 
-type: sections
-sections:
-
-  - type: grid
+  - type: vertical-stack
     cards:
+
+      # energy
       - type: vertical-stack
         cards:
           - type: custom:config-template-card
@@ -91,9 +87,8 @@ sections:
                   calendar:
                     period: day
                 stat_type: change
-        grid_options:
-          columns: full
 
+      # batteries
       - type: vertical-stack
         cards:
           - type: entities
@@ -114,6 +109,9 @@ sections:
               - entity: sensor.outside_battery
                 name: "Weather Station Battery"
 
+      # settings
+      - type: vertical-stack
+        cards:
           - type: markdown
             content: |
               There's more in <a href="./?disable_km">Advanced</a>

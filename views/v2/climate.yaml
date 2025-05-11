@@ -2,23 +2,27 @@ title: "Climate"
 path: "climate"
 subview: true
 theme: subview
-max_columns: 1
+cards:
 
-type: sections
-sections:
-
-  - type: grid
+  - type: vertical-stack
     cards:
-      - type: tile
-        entity: climate.home
-        state_content:
-          - current_temperature
-          - hvac_action
-        icon_tap_action:
-          action: more-info
-        tap_action:
-          action: more-info
 
+      # tiles
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: climate.home
+            state_content:
+              - current_temperature
+              - hvac_action
+            icon_tap_action:
+              action: more-info
+            tap_action:
+              action: more-info
+
+      # room temperatures
       - type: entities
         entities:
           - type: custom:multiple-entity-row
@@ -99,6 +103,7 @@ sections:
             #       margin-left: 0 !important;
             #     }
 
+      # settings
       - type: entities
         title: "Advanced"
         state_color: false

@@ -2,37 +2,40 @@ title: "Outside"
 path: "outside"
 subview: true
 theme: subview
-max_columns: 1
+cards:
 
-type: sections
-sections:
-
-  - type: grid
+  - type: vertical-stack
     cards:
-      - type: tile
-        entity: switch.house_fan
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-      - type: tile
-        entity: switch.garage_fan
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-      - type: tile
-        entity: switch.fountain
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-      - type: tile
-        entity: group.garages
-        tap_action:
-          action: more-info
-        icon_tap_action:
-          action: more-info
+
+      # tiles
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: switch.house_fan
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: switch.garage_fan
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: switch.fountain
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: group.garages
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
 
       # what's on
       - type: entity-filter
@@ -64,11 +67,8 @@ sections:
           - condition: state
             state: "on"
         show_empty: false
-        grid_options:
-          columns: full
 
-  - type: grid
-    cards:
+      # settings
       - type: entities
         title: "Advanced"
         state_color: false

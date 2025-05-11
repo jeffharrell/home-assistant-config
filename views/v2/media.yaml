@@ -2,13 +2,8 @@ title: "Media"
 path: "media"
 subview: true
 theme: subview
-max_columns: 1
-
-type: sections
-sections:
-
-  - type: grid
-    columns: 2
+cards:
+  - type: vertical-stack
     cards:
 
       # tvs

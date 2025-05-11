@@ -2,14 +2,14 @@ title: "Cameras"
 path: "cameras"
 subview: true
 theme: subview
-max_columns: 1
+cards:
 
-type: sections
-sections:
-
-  - type: grid
+  - type: vertical-stack
     cards:
+
+      # latest
       - type: grid
+        columns: 2
         square: false
         cards:
           - type: custom:config-template-card
@@ -57,14 +57,11 @@ sections:
                   ${ states['camera.latest_motion'].attributes.entity_picture }
               hold_action:
                 action: none
-        columns: 2
 
+      # live cameras
       - type: vertical-stack
-        title: " "
+        title: "Live Cameras"
         cards:
-          - type: heading
-            heading: "Live Cameras"
-            heading_style: title
 
           - camera_view: auto
             type: picture-glance
@@ -87,8 +84,7 @@ sections:
             camera_image: camera.back_yard
             entities: []
 
-  - type: grid
-    cards:
+      # settings
       - type: entities
         title: "Advanced"
         state_color: false

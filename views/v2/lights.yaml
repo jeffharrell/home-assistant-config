@@ -2,37 +2,39 @@ title: "Lights"
 path: "lights"
 subview: true
 theme: subview
-max_columns: 1
+cards:
 
-type: sections
-sections:
-  
-  - type: grid
+  - type: vertical-stack
     cards:
+
       # tiles
-      - type: tile
-        entity: script.mood_lights
-        hide_state: true
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-      - type: tile
-        entity: script.dinner_lights
-        hide_state: true
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-      - type: tile
-        entity: group.lights_house
-        name: "Lights"
-        icon: mdi:lightbulb-multiple
-        hide_state: true
-        tap_action:
-          action: more-info
-        icon_tap_action:
-          action: more-info
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: script.mood_lights
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: script.dinner_lights
+            hide_state: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+          - type: tile
+            entity: group.lights_house
+            name: "Lights"
+            icon: mdi:lightbulb-multiple
+            hide_state: true
+            tap_action:
+              action: more-info
+            icon_tap_action:
+              action: more-info
 
       # what's on
       - type: entity-filter
