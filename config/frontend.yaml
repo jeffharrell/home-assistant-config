@@ -38,6 +38,7 @@ themes:
     ha-card-header-font-size: "16px"
 
     # Icons
+    state-color: "#E0E0E0"
     state-icon-color: "#E0E0E0"
     state-active-color: "var(--accent-color)"
     state-inactive-color: "var(--state-icon-color)"
@@ -49,15 +50,11 @@ themes:
     state-climate-auto-color: "var(--state-active-color)"
     state-climate-cool-color: "var(--state-active-color)"
     state-climate-heat-color: "var(--state-active-color)"
-    state-climate-fan_only-color: "var(--state-icon-color)"
+    state-climate-fan_only-color: "var(--state-color)"
 
     # CSS Overrides
     card-mod-theme: apptheme
     card-mod-root: |
-      #view {
-        margin-top: -20px !important;
-      }
-
       .header {
         position: relative !important;
         top: auto !important;

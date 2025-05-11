@@ -21,10 +21,6 @@ cards:
             <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
           {%- endif -%}
 
-          {% if states('counter.camera_motion')|float(0) > 0 %}
-            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
-          {%- endif -%}
-
           {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
@@ -40,33 +36,41 @@ cards:
         card_mod:
           style: |
             :host ha-card { 
-              margin-top: -30px;
-              padding-bottom: 5px;
+              margin-top: -65px;
+              padding-bottom: 20px;
               transition: none;
-              line-height: 2em;
+              line-height: 1.8em;
             }
 
       # picture
-      - type: picture-entity
-        entity: camera.front_patio
-        show_name: false
-        show_state: false
-        tap_action:
-          action: navigate
-          navigation_path: cameras
-        theme: nocard
-        card_mod:
-          style: |
-            :host ha-card { 
-              margin: 15px -8px 30px;
-              min-height: 225px;
-              max-height: 240px;
-              background: rgba(0, 0, 0, 0.1);
-              border: 2px solid rgba(0, 0, 0, 0.1);
-              border-left: 0;
-              border-right: 0;
-              transition: none;
-            }
+      - type: custom:config-template-card
+        entities:
+          - counter.camera_motion
+        card:
+          type: picture-entity
+          entity: camera.front_patio
+          name: ${ states["counter.camera_motion"].state + " events today"}
+          show_name: ${ !!states["counter.camera_motion"].state }
+          show_state: false
+          tap_action:
+            action: navigate
+            navigation_path: cameras
+          theme: nocard
+          card_mod:
+            style: |
+              :host ha-card { 
+                margin: 15px -8px 30px;
+                min-height: 225px;
+                max-height: 240px;
+                background: rgba(0, 0, 0, 0.1);
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                border-left: 0;
+                border-right: 0;
+                transition: none;
+
+                --ha-picture-card-background-color: rgba(0, 0, 0, 0.15);
+                --ha-picture-card-text-color: var(--primary-text-color);
+              }
 
       # navigation
       - type: grid
@@ -127,9 +131,12 @@ cards:
             show_state: false
 
       - type: vertical-stack
-        title: "Quick Actions"
-        theme: secondary-actions
+        title: " "
         cards:
+          - type: heading
+            heading: "Quick Actions"
+
+
           # mood lights
           - type: tile
             entity: script.mood_lights
@@ -241,11 +248,11 @@ cards:
               entity: alarm_control_panel.alarm_panel_ui
               name: >-
                 ${
-                   states['alarm_control_panel.alarm_panel_ui']
-                    .state.split('_')
+                   states["alarm_control_panel.alarm_panel_ui"]
+                    .state.split("_")
                     .map(word => word.charAt(0)
                     .toUpperCase() + word.slice(1))
-                    .join(' ') 
+                    .join(" ") 
                   }
               hide_state: true
               color: disabled

@@ -111,7 +111,7 @@ cards:
         entities:
           - type: divider
           - entity: automation.climate_windows_open
-            name: "Turn climate off when windows open"
+            name: "Turn climate off if windows open"
             icon: mdi:creation
         card_mod:
           style: |
