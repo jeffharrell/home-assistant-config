@@ -49,8 +49,8 @@ cards:
         card:
           type: picture-entity
           entity: camera.front_patio
-          name: ${ states["counter.camera_motion"].state + " events today"}
-          show_name: ${ !!states["counter.camera_motion"].state }
+          name: ${ states["counter.camera_motion"].state + " events"}
+          show_name: ${ parseInt(states["counter.camera_motion"].state) > 0 }
           show_state: false
           tap_action:
             action: navigate
@@ -70,6 +70,11 @@ cards:
 
                 --ha-picture-card-background-color: rgba(0, 0, 0, 0.15);
                 --ha-picture-card-text-color: var(--primary-text-color);
+              }
+
+              :host ha-card .footer {
+                font-size: 14px;
+                text-align: right;
               }
 
       # navigation
@@ -136,18 +141,15 @@ cards:
           - type: heading
             heading: "Quick Actions"
 
-
           # mood lights
-          - type: tile
+          - type: custom:bubble-card
             entity: script.mood_lights
-            hide_state: true
-            color: disabled
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-            grid_options:
-              columns: full
             visibility:
               - condition: state
                 entity: schedule.quick_actions_mood_lights
@@ -158,17 +160,16 @@ cards:
                     entity: alarm_control_panel.alarm
                     state: disarmed
 
+
           # dinner lights
-          - type: tile
+          - type: custom:bubble-card
             entity: script.dinner_lights
-            hide_state: true
-            color: disabled
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-            grid_options:
-              columns: full
             visibility:
               - condition: state
                 entity: schedule.quick_actions_dinner_time
@@ -180,18 +181,14 @@ cards:
                     state: disarmed
 
           # good night
-          - type: tile
+          - type: custom:bubble-card
             entity: script.good_night
-            name: "Good Night"
-            hide_state: true
-            color: disabled
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-            grid_options:
-              columns: full
-            icon: mdi:weather-night
             visibility:
               - condition: state
                 entity: schedule.quick_actions_good_night
@@ -203,32 +200,28 @@ cards:
                     state: disarmed
 
           # let dog out
-          - type: tile
+          - type: custom:bubble-card
             entity: script.let_dog_out
-            hide_state: true
-            color: disabled
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-            grid_options:
-              columns: full
             visibility:
               - condition: state
                 entity: alarm_control_panel.alarm
                 state: armed_home
 
           # wake up
-          - type: tile
+          - type: custom:bubble-card
             entity: script.wake_up
-            hide_state: true
-            color: disabled
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-            grid_options:
-              columns: full
             visibility:
               - condition: state
                 entity: schedule.quick_actions_wake_up
@@ -244,8 +237,14 @@ cards:
             entities:
               - alarm_control_panel.alarm_panel_ui
             card:
-              type: tile
+              type: custom:bubble-card
               entity: alarm_control_panel.alarm_panel_ui
+              card_type: button
+              use_accent_color: true
+              tap_action:
+                action: toggle
+              icon_tap_action:
+                action: toggle
               name: >-
                 ${
                    states["alarm_control_panel.alarm_panel_ui"]
@@ -254,18 +253,7 @@ cards:
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
                   }
-              hide_state: true
-              color: disabled
               tap_action:
                 action: more-info
               icon_tap_action:
                 action: more-info
-            visibility:
-              - condition: state
-                entity: schedule.quick_actions_good_night
-                state: 'off'
-              - condition: and
-                conditions:
-                  - condition: state
-                    entity: alarm_control_panel.alarm
-                    state: disarmed

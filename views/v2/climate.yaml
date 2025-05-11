@@ -12,15 +12,18 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: tile
+          - type: custom:bubble-card
             entity: climate.home
-            state_content:
-              - current_temperature
-              - hvac_action
-            icon_tap_action:
-              action: more-info
-            tap_action:
-              action: more-info
+            card_type: climate
+            show_state: true
+            state_color: true
+            show_attribute: true
+            attribute: current_temperature
+            sub_button:
+              - name: HVAC modes menu
+                select_attribute: hvac_modes
+                state_background: false
+                show_arrow: false
 
       # room temperatures
       - type: entities

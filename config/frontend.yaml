@@ -1,5 +1,6 @@
 extra_module_url:
-  - /hacsfiles/lovelace-card-mod/card-mod.js
+  - /local/community/lovelace-card-mod/card-mod.js
+  - /local/community/Bubble-Card/bubble-card.js 
 
 themes:
   nocard:
@@ -11,12 +12,15 @@ themes:
     primary-background-color: "#313131" 
     card-background-color: "#3D3D3D"
 
+    bubble-button-main-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--card-background-color)"
+
   apptheme:
     # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
     
     primary-background-color: "#3D3D3D"
     card-background-color: "#313131"
-    secondary-background-color: "#666"
+    secondary-background-color: "var(--primary-background-color)"
 
     primary-text-color: "#E0E0E0"
     secondary-text-color: "#E0E0E0"
@@ -31,14 +35,18 @@ themes:
 
     # Cards
     ha-card-border-width: "1px"
-    ha-card-border-radius: "8px"
-    divider-color: "rgba(0, 0, 0, 0.15)"
-
-    code-editor-background-color: "#000"
+    ha-card-border-radius: "12px"
     ha-card-header-font-size: "16px"
 
+    bubble-border-radius: "28px"
+    bubble-pop-up-main-background-color: "var(--card-background-color)"
+    bubble-button-main-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--card-background-color)"
+    
+    divider-color: "rgba(0, 0, 0, 0.15)"
+    code-editor-background-color: "#000"
+
     # Icons
-    state-color: "#E0E0E0"
     state-icon-color: "#E0E0E0"
     state-active-color: "var(--accent-color)"
     state-inactive-color: "var(--state-icon-color)"
@@ -50,7 +58,7 @@ themes:
     state-climate-auto-color: "var(--state-active-color)"
     state-climate-cool-color: "var(--state-active-color)"
     state-climate-heat-color: "var(--state-active-color)"
-    state-climate-fan_only-color: "var(--state-color)"
+    state-climate-fan_only-color: "var(--state-active-color)"
 
     # CSS Overrides
     card-mod-theme: apptheme

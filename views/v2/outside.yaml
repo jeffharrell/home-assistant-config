@@ -12,30 +12,45 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: tile
-            entity: switch.house_fan
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
-          - type: tile
-            entity: switch.garage_fan
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
-          - type: tile
+          - type: custom:bubble-card
             entity: switch.fountain
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-          - type: tile
+
+          - type: custom:bubble-card
+            entity: switch.garage_fan
+            card_type: button
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+
+          - type: custom:bubble-card
+            entity: switch.house_fan
+            card_type: button
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+
+          - type: custom:bubble-card
             entity: group.garages
+            name: "Garages"
+            card_type: button
+            use_accent_color: true
             tap_action:
-              action: more-info
-            icon_tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: "#popup-garages"
+            button_action:
+              tap_action:
+                action: navigate
+                navigation_path: "#popup-garages"
 
       # what's on
       - type: entity-filter
@@ -95,3 +110,51 @@ cards:
             :host ha-card h1 {
               padding: 5px 15px 10px;
             }
+
+  # pop ups
+  - type: vertical-stack
+    cards:
+      
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#popup-garages"
+
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: entity-button
+            show_name: true
+            show_state: true
+            entity: cover.garage_door_1
+            tap_action:
+              action: call-service
+              service: switch.turn_on
+              data:
+                entity_id: switch.garage_door_1
+              confirmation:
+                text: "Toggle garage door"
+
+          - type: entity-button 
+            show_name: true
+            show_state: true
+            entity: cover.garage_door_2
+            tap_action:
+              action: call-service
+              service: switch.turn_on
+              data:
+                entity_id: switch.garage_door_2
+              confirmation:
+                text: "Toggle garage door"
+
+          - type: entity-button
+            show_name: true
+            show_state: true
+            entity: cover.garage_door_3
+            tap_action:
+              action: call-service
+              service: switch.turn_on
+              data:
+                entity_id: switch.garage_door_3
+              confirmation:
+                text: "Toggle garage door"

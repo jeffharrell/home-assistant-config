@@ -5,7 +5,7 @@ theme: subview
 cards:
   - type: vertical-stack
     cards:
-
+      
       # tvs
       - type: media-control
         entity: media_player.family_room_apple_tv

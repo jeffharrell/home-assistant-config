@@ -12,29 +12,36 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: tile
+          - type: custom:bubble-card
             entity: script.mood_lights
-            hide_state: true
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-          - type: tile
+
+          - type: custom:bubble-card
             entity: script.dinner_lights
-            hide_state: true
+            card_type: button
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
-          - type: tile
-            entity: group.lights_house
+
+          - type: custom:bubble-card
+            entity: light.house
             name: "Lights"
-            icon: mdi:lightbulb-multiple
-            hide_state: true
+            card_type: button
+            use_accent_color: true
             tap_action:
-              action: more-info
-            icon_tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: "#popup-lights"
+            button_action:
+              tap_action:
+                action: navigate
+                navigation_path: "#popup-lights"
 
       # what's on
       - type: entity-filter
@@ -93,3 +100,87 @@ cards:
             :host ha-card h1 {
               padding: 5px 15px 10px;
             }
+
+  # pop ups
+  - type: vertical-stack
+    cards:
+      
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#popup-lights"
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          # Family Room
+          - type: custom:bubble-card
+            entity: light.family_room
+            card_type: button
+            button_type: slider
+
+          # Kitchen
+          - type: custom:bubble-card
+            entity: light.kitchen
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.kitchen_cabinets
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.island
+            card_type: button
+            button_type: slider
+            
+      - type: custom:bubble-card
+        card_type: separator
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          # Living Room
+          - type: custom:bubble-card
+            entity: light.living_room
+            card_type: button
+            button_type: slider
+
+          # Dining Room
+          - type: custom:bubble-card
+            entity: light.dining_room
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.entryway
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.hallway
+            card_type: button
+            button_type: slider
+
+      - type: custom:bubble-card
+        card_type: separator
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          # Bedrooms
+          - type: custom:bubble-card
+            entity: light.master_bedroom
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.boys_bedroom
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.guest_bedroom
+            card_type: button
+            button_type: slider
+          - type: custom:bubble-card
+            entity: light.play_room
+            card_type: button
+            button_type: slider

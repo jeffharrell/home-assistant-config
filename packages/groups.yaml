@@ -122,6 +122,7 @@ group:
   # making these normal groups so that more-info shows the entities
   lights_house:
     name: "Lights"
+    icon: mdi:lightbulb-multiple
     entities:
       - light.family_room
       - light.kitchen
