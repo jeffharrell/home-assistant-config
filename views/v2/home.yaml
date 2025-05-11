@@ -1,4 +1,4 @@
-title: Home
+title: "Home"
 type: sections
 max_columns: 1
 
@@ -135,26 +135,6 @@ sections:
         heading_style: title
 
       - type: tile
-        entity: script.wake_up
-        hide_state: true
-        color: disabled
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: toggle
-        grid_options:
-          columns: full
-        visibility:
-          - condition: state
-            entity: schedule.quick_actions_wake_up
-            state: 'on'
-          - condition: and
-            conditions:
-              - condition: state
-                entity: alarm_control_panel.alarm
-                state: armed_home
-
-      - type: tile
         entity: script.mood_lights
         hide_state: true
         color: disabled
@@ -231,6 +211,26 @@ sections:
             entity: alarm_control_panel.alarm
             state: armed_home
 
+      - type: tile
+        entity: script.wake_up
+        hide_state: true
+        color: disabled
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_wake_up
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: armed_home
+
       - type: custom:config-template-card
         entities:
           - alarm_control_panel.alarm_panel_ui
@@ -251,3 +251,12 @@ sections:
             action: more-info
           icon_tap_action:
             action: more-info
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_good_night
+            state: 'off'
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: disarmed

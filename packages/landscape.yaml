@@ -20,24 +20,24 @@ automation:
           - switch.front_landscape
           - switch.back_landscape
 
-  - alias: "Landscape - Fountain"
-    initial_state: True
-    trigger:
-      # on
-      - platform: time
-        at: "08:00:00"
-        variables:
-          action: "turn_on"
-      # off
-      - platform: sun
-        event: sunset
-        variables:
-          action: "turn_off"
-    action:
-      - service: >
-          switch.{{ action }}
-        entity_id:
-          switch.fountain
+  # - alias: "Landscape - Fountain"
+  #   initial_state: True
+  #   trigger:
+  #     # on
+  #     - platform: time
+  #       at: "08:00:00"
+  #       variables:
+  #         action: "turn_on"
+  #     # off
+  #     - platform: sun
+  #       event: sunset
+  #       variables:
+  #         action: "turn_off"
+  #   action:
+  #     - service: >
+  #         switch.{{ action }}
+  #       entity_id:
+  #         switch.fountain
 
   - alias: "Landscape - Front door light"
     initial_state: True

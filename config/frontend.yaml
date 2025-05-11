@@ -12,7 +12,7 @@ themes:
     card-background-color: "#3D3D3D"
 
   apptheme:
-    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
+    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
     
     primary-background-color: "#3D3D3D"
     card-background-color: "#313131"
