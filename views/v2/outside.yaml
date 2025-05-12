@@ -1,7 +1,8 @@
 title: "Outside"
 path: "outside"
-subview: true
 theme: subview
+subview: true
+back_path: "/lovelace/home"
 cards:
 
   - type: vertical-stack
@@ -15,7 +16,7 @@ cards:
           - type: custom:bubble-card
             entity: switch.fountain
             card_type: button
-            use_accent_color: true
+            use_accent_color: false
             tap_action:
               action: toggle
             icon_tap_action:

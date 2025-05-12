@@ -14,6 +14,8 @@ themes:
 
     bubble-button-main-background-color: "var(--card-background-color)"
     bubble-button-icon-background-color: "var(--card-background-color)"
+    bubble-main-background-color: "var(--card-background-color)"
+
 
   apptheme:
     # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
@@ -39,10 +41,15 @@ themes:
     ha-card-header-font-size: "16px"
 
     bubble-border-radius: "28px"
+    #bubble-accent-color: "var(--accent-color)"
+    bubble-light-color: "var(--accent-color)"
+
+    bubble-main-background-color: "var(--card-background-color)"
+    bubble-icon-background-color: "var(--primary-background-color)"
     bubble-pop-up-main-background-color: "var(--card-background-color)"
     bubble-button-main-background-color: "var(--card-background-color)"
     bubble-button-icon-background-color: "var(--card-background-color)"
-    
+
     divider-color: "rgba(0, 0, 0, 0.15)"
     code-editor-background-color: "#000"
 

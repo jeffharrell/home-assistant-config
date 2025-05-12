@@ -1,7 +1,8 @@
 title: "Climate"
 path: "climate"
-subview: true
 theme: subview
+subview: true
+back_path: "/lovelace/home"
 cards:
 
   - type: vertical-stack

@@ -1,7 +1,9 @@
 title: "Lights"
 path: "lights"
-subview: true
 theme: subview
+subview: true
+back_path: "/lovelace/home"
+
 cards:
 
   - type: vertical-stack
@@ -109,6 +111,10 @@ cards:
         card_type: pop-up
         hash: "#popup-lights"
 
+      - type: custom:bubble-card
+        card_type: separator
+        name: "Kitchen and Family Rooms"
+
       - type: grid
         columns: 2
         square: false
@@ -135,6 +141,7 @@ cards:
             
       - type: custom:bubble-card
         card_type: separator
+        name: "Living and Dining Rooms"
 
       - type: grid
         columns: 2
@@ -154,14 +161,15 @@ cards:
           - type: custom:bubble-card
             entity: light.entryway
             card_type: button
-            button_type: slider
+            button_type: switch
           - type: custom:bubble-card
             entity: light.hallway
             card_type: button
-            button_type: slider
+            button_type: switch
 
       - type: custom:bubble-card
         card_type: separator
+        name: "Bedrooms"
 
       - type: grid
         columns: 2
@@ -175,12 +183,12 @@ cards:
           - type: custom:bubble-card
             entity: light.boys_bedroom
             card_type: button
-            button_type: slider
+            button_type: switch
           - type: custom:bubble-card
             entity: light.guest_bedroom
             card_type: button
-            button_type: slider
+            button_type: switch
           - type: custom:bubble-card
             entity: light.play_room
             card_type: button
-            button_type: slider
+            button_type: switch
