@@ -6,85 +6,226 @@ back_path: "/lovelace/home"
 cards:
   - type: vertical-stack
     cards:
-      
-      # tvs
-      - type: media-control
-        entity: media_player.family_room_apple_tv
-        name: "Family Room TV"
-        visibility:
-          - condition: state
+    
+      # tiles
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:bubble-card
+            entity: script.play_music_kitchen
+            name: "Cooking Music"
+            card_type: button
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+
+          - type: custom:bubble-card
+            entity: script.play_music_outside
+            name: "Outside Music"
+            card_type: button
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+
+          - type: custom:bubble-card
+            entity: group.media_player_speakers_and_tvs
+            name: "Devices"
+            card_type: button
+            use_accent_color: true
+            tap_action:
+              action: navigate
+              navigation_path: "#popup-devices"
+            button_action:
+              tap_action:
+                action: navigate
+                navigation_path: "#popup-devices"
+
+      # currently playing
+      - type: grid
+        title: " "
+        columns: 1
+        square: false
+        cards:
+          # tvs
+          - type: media-control
             entity: media_player.family_room_apple_tv
-            state: playing
+            name: "Family Room TV"
+            visibility:
+              - condition: state
+                entity: media_player.family_room_apple_tv
+                state: playing
 
-      - type: media-control
-        entity: media_player.living_room_apple_tv
-        name: "Living Room TV"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.living_room_apple_tv
-            state: playing
+            name: "Living Room TV"
+            visibility:
+              - condition: state
+                entity: media_player.living_room_apple_tv
+                state: playing
 
-      - type: media-control
-        entity: media_player.master_bedroom_apple_tv
-        name: "Master Bedroom TV"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.master_bedroom_apple_tv
-            state: playing
+            name: "Master Bedroom TV"
+            visibility:
+              - condition: state
+                entity: media_player.master_bedroom_apple_tv
+                state: playing
 
-      # speakers
-      - type: media-control
-        entity: media_player.family_room_speakers
-        name: "Family Room Speakers"
-        visibility:
-          - condition: state
+          # speakers
+          - type: media-control
             entity: media_player.family_room_speakers
-            state: playing
+            name: "Family Room Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.family_room_speakers
+                state: playing
 
-      - type: media-control
-        entity: media_player.living_room_speakers
-        name: "Living Room Speakers"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.living_room_speakers
-            state: playing
+            name: "Living Room Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.living_room_speakers
+                state: playing
 
-      - type: media-control
-        entity: media_player.kitchen_hub
-        name: "Kitchen Hub Speaker"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.kitchen_hub
-            state: playing
+            name: "Kitchen Hub Speaker"
+            visibility:
+              - condition: state
+                entity: media_player.kitchen_hub
+                state: playing
 
-      - type: media-control
-        entity: media_player.master_bedroom_speaker
-        name: "Master Bedroom Speakers"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.master_bedroom_speaker
-            state: playing
+            name: "Master Bedroom Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.master_bedroom_speaker
+                state: playing
 
-      - type: media-control
-        entity: media_player.playroom_speakers
-        name: "Playroom Speakers"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.playroom_speakers
-            state: playing
+            name: "Playroom Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.playroom_speakers
+                state: playing
 
-      - type: media-control
-        entity: media_player.garage_speakers
-        name: "Garage Speakers"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.garage_speakers
-            state: playing
+            name: "Garage Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.garage_speakers
+                state: playing
 
-      - type: media-control
-        entity: media_player.outside_speakers
-        name: "Outside Speakers"
-        visibility:
-          - condition: state
+          - type: media-control
             entity: media_player.outside_speakers
-            state: playing
+            name: "Outside Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.outside_speakers
+                state: playing
+
+  # pop ups
+  - type: vertical-stack
+    cards:
+      
+      - type: custom:bubble-card
+        card_type: pop-up
+        hash: "#popup-devices"
+
+      - type: custom:bubble-card
+        card_type: separator
+        name: "TVs"
+
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: custom:bubble-card
+            entity: media_player.family_room_apple_tv
+            name: "Family Room TV"
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.living_room_apple_tv
+            name: "Living Room TV"
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.master_bedroom_apple_tv
+            name: "Master Bedroom TV"
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+      - type: custom:bubble-card
+        card_type: separator
+        name: "Speakers"
+
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: custom:bubble-card
+            entity: media_player.family_room_speakers
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.living_room_speakers
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.kitchen_hub
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.master_bedroom_speaker
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.playroom_speakers
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.garage_speakers
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title
+
+          - type: custom:bubble-card
+            entity: media_player.outside_speakers
+            card_type: media-player
+            show_state: true
+            show_attribute: true
+            attribute: media_title

@@ -124,20 +124,24 @@ cards:
             entity: light.family_room
             card_type: button
             button_type: slider
+            show_state: true
 
           # Kitchen
           - type: custom:bubble-card
             entity: light.kitchen
             card_type: button
             button_type: slider
+            show_state: true
           - type: custom:bubble-card
             entity: light.kitchen_cabinets
             card_type: button
             button_type: slider
+            show_state: true
           - type: custom:bubble-card
             entity: light.island
             card_type: button
             button_type: slider
+            show_state: true
             
       - type: custom:bubble-card
         card_type: separator
@@ -152,20 +156,24 @@ cards:
             entity: light.living_room
             card_type: button
             button_type: slider
+            show_state: true
 
           # Dining Room
           - type: custom:bubble-card
             entity: light.dining_room
             card_type: button
             button_type: slider
+            show_state: true
           - type: custom:bubble-card
             entity: light.entryway
             card_type: button
             button_type: switch
+            show_state: true
           - type: custom:bubble-card
             entity: light.hallway
             card_type: button
             button_type: switch
+            show_state: true
 
       - type: custom:bubble-card
         card_type: separator
@@ -180,15 +188,19 @@ cards:
             entity: light.master_bedroom
             card_type: button
             button_type: slider
+            show_state: true
           - type: custom:bubble-card
             entity: light.boys_bedroom
             card_type: button
             button_type: switch
+            show_state: true
           - type: custom:bubble-card
             entity: light.guest_bedroom
             card_type: button
             button_type: switch
+            show_state: true
           - type: custom:bubble-card
             entity: light.play_room
             card_type: button
             button_type: switch
+            show_state: true
