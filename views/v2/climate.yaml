@@ -1,8 +1,8 @@
 title: "Climate"
 path: "climate"
-theme: subview
-subview: true
 back_path: "/lovelace/home"
+subview: true
+theme: subview
 cards:
 
   - type: vertical-stack
@@ -10,12 +10,13 @@ cards:
 
       # tiles
       - type: grid
-        columns: 2
+        columns: 1
         square: false
         cards:
           - type: custom:bubble-card
             entity: climate.home
             card_type: climate
+            card_layout: large
             show_state: true
             state_color: true
             show_attribute: true

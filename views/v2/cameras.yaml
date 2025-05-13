@@ -1,5 +1,6 @@
 title: "Cameras"
 path: "cameras"
+back_path: "/lovelace/home"
 subview: true
 theme: subview
 cards:

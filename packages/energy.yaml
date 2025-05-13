@@ -11,6 +11,15 @@ sensor:
           {{ (value * 100) | round(1) }}
 
 
+utility_meter:
+  energy_import:
+    source: sensor.powerwall_site_import
+    cycle: daily
+  energy_export:
+    source: sensor.powerwall_site_export
+    cycle: daily
+
+
 automation:
   - alias: "Energy - Power grid status"
     initial_state: True

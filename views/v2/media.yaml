@@ -1,9 +1,10 @@
 title: "Media"
 path: "media"
-theme: subview
-subview: true
 back_path: "/lovelace/home"
+subview: true
+theme: subview
 cards:
+  
   - type: vertical-stack
     cards:
     
@@ -14,8 +15,8 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: script.play_music_kitchen
-            name: "Cooking Music"
             card_type: button
+            card_layout: large
             use_accent_color: true
             tap_action:
               action: toggle
@@ -24,8 +25,8 @@ cards:
 
           - type: custom:bubble-card
             entity: script.play_music_outside
-            name: "Outside Music"
             card_type: button
+            card_layout: large
             use_accent_color: true
             tap_action:
               action: toggle
@@ -36,6 +37,7 @@ cards:
             entity: group.media_player_speakers_and_tvs
             name: "Devices"
             card_type: button
+            card_layout: large
             use_accent_color: true
             tap_action:
               action: navigate
@@ -151,27 +153,45 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: media_player.family_room_apple_tv
-            name: "Family Room TV"
+            name: "Family Room"
             card_type: media-player
             show_state: true
             show_attribute: true
             attribute: media_title
+            hide:
+              volume_button: true
+              play_pause_button: false
+              next_button: true
+              power_button: false
+              previous_button: true
 
           - type: custom:bubble-card
             entity: media_player.living_room_apple_tv
-            name: "Living Room TV"
+            name: "Living Room"
             card_type: media-player
             show_state: true
             show_attribute: true
             attribute: media_title
+            hide:
+              volume_button: true
+              play_pause_button: false
+              next_button: true
+              power_button: false
+              previous_button: true
 
           - type: custom:bubble-card
             entity: media_player.master_bedroom_apple_tv
-            name: "Master Bedroom TV"
+            name: "Master Bedroom"
             card_type: media-player
             show_state: true
             show_attribute: true
             attribute: media_title
+            hide:
+              volume_button: true
+              play_pause_button: false
+              next_button: true
+              power_button: false
+              previous_button: true
 
       - type: custom:bubble-card
         card_type: separator
@@ -183,6 +203,7 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: media_player.family_room_speakers
+            name: "Family Room"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -190,6 +211,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.living_room_speakers
+            name: "Living Room"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -197,6 +219,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.kitchen_hub
+            name: "Kitchen Hub"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -204,6 +227,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.master_bedroom_speaker
+            name: "Master Bedroom"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -211,6 +235,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.playroom_speakers
+            name: "Playroom"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -218,6 +243,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.garage_speakers
+            name: "Garage"
             card_type: media-player
             show_state: true
             show_attribute: true
@@ -225,6 +251,7 @@ cards:
 
           - type: custom:bubble-card
             entity: media_player.outside_speakers
+            name: "Outside"
             card_type: media-player
             show_state: true
             show_attribute: true

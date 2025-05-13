@@ -1,9 +1,8 @@
 title: "Lights"
 path: "lights"
-theme: subview
-subview: true
 back_path: "/lovelace/home"
-
+subview: true
+theme: subview
 cards:
 
   - type: vertical-stack
@@ -17,7 +16,9 @@ cards:
           - type: custom:bubble-card
             entity: script.mood_lights
             card_type: button
+            card_layout: large
             use_accent_color: true
+
             tap_action:
               action: toggle
             icon_tap_action:
@@ -26,6 +27,7 @@ cards:
           - type: custom:bubble-card
             entity: script.dinner_lights
             card_type: button
+            card_layout: large
             use_accent_color: true
             tap_action:
               action: toggle
@@ -36,6 +38,7 @@ cards:
             entity: light.house
             name: "Lights"
             card_type: button
+            card_layout: large
             use_accent_color: true
             tap_action:
               action: navigate
@@ -89,7 +92,7 @@ cards:
         entities:
           - type: divider
           - entity: automation.landscape_back_door_light
-            name: "Opening doors turns on lights"
+            name: "Open doors turns on lights"
             icon: mdi:creation
         card_mod:
           style: |

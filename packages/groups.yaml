@@ -161,6 +161,7 @@ group:
 
   media_player_speakers_and_tvs:
     name: "Speakers and TVs"
+    icon: "mdi:television"
     entities:
       - group.media_player_speakers
       - group.media_player_tvs

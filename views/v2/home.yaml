@@ -21,11 +21,18 @@ cards:
             <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
           {%- endif -%}
 
+          {% set energy = (states('sensor.energy_import')|float - states('sensor.energy_export')|float)|round %}
+          {% if energy == 0 %}
+            <ha-icon icon="mdi:battery-50"></ha-icon> Powerwall at {{ states('sensor.powerwall_charge_actual')|round }}% 
+          {%- else -%}
+            <ha-icon icon="mdi:home-lightning-bolt"></ha-icon> Electricity use is {{ states('sensor.energy_import')|float - states('sensor.energy_export')|float }} kWh
+          {%- endif -%}
+
           {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {% elif len > 1 %}
+          {% elif len > 0 %}
             <ha-icon icon="mdi:door"></ha-icon> Multiple doors or windows are open
           {% endif %}
 
@@ -135,6 +142,7 @@ cards:
             theme: nocard
             show_state: false
 
+      # actions
       - type: vertical-stack
         title: " "
         cards:
@@ -145,11 +153,8 @@ cards:
           - type: custom:bubble-card
             entity: script.mood_lights
             card_type: button
+            card_layout: large
             use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: schedule.quick_actions_mood_lights
@@ -165,11 +170,8 @@ cards:
           - type: custom:bubble-card
             entity: script.dinner_lights
             card_type: button
+            card_layout: large
             use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: schedule.quick_actions_dinner_time
@@ -184,11 +186,8 @@ cards:
           - type: custom:bubble-card
             entity: script.good_night
             card_type: button
+            card_layout: large
             use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: schedule.quick_actions_good_night
@@ -203,11 +202,8 @@ cards:
           - type: custom:bubble-card
             entity: script.let_dog_out
             card_type: button
+            card_layout: large
             use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: alarm_control_panel.alarm
@@ -217,11 +213,8 @@ cards:
           - type: custom:bubble-card
             entity: script.wake_up
             card_type: button
+            card_layout: large
             use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: schedule.quick_actions_wake_up
@@ -240,11 +233,8 @@ cards:
               type: custom:bubble-card
               entity: alarm_control_panel.alarm_panel_ui
               card_type: button
+              card_layout: large
               use_accent_color: true
-              tap_action:
-                action: toggle
-              icon_tap_action:
-                action: toggle
               name: >-
                 ${
                    states["alarm_control_panel.alarm_panel_ui"]
@@ -253,7 +243,8 @@ cards:
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
                   }
-              tap_action:
-                action: more-info
-              icon_tap_action:
-                action: more-info
+              button_action:
+                tap_action:
+                  action: more-info
+                icon_tap_action:
+                  action: more-info
