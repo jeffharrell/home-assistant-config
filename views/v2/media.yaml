@@ -85,7 +85,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.family_room_speakers
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.living_room_speakers
@@ -93,7 +93,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.living_room_speakers
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.kitchen_hub
@@ -101,7 +101,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.kitchen_hub
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.master_bedroom_speaker
@@ -109,7 +109,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.master_bedroom_speaker
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.playroom_speakers
@@ -117,7 +117,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.playroom_speakers
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.garage_speakers
@@ -125,7 +125,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.garage_speakers
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.outside_speakers
@@ -133,7 +133,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.outside_speakers
-                state: playing
+                state_not: "off"
 
       # pop ups
       - type: vertical-stack
