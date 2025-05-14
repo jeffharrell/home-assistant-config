@@ -3,6 +3,15 @@ input_boolean:
     name: "Guest Mode"
     icon: "mdi:bed"
 
+  play_kitchen_music:
+    name: "Play Kitchen Music"
+    icon: "mdi:music"
+
+  play_outside_music:
+    name: "Play Outside Music"
+    icon: "mdi:music"
+
+
 automation:
   - alias: "System - Theme change"
     initial_state: True
@@ -13,6 +22,22 @@ automation:
       service: frontend.set_theme
       data_template:
         name: apptheme
+
+  - alias: "System - Reset switches"
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: 
+        - input_boolean.play_kitchen_music
+        - input_boolean.play_outside_music
+      to: "on"
+      for:
+        minutes: 1
+    action:
+      - service: homeassistant.turn_off
+        entity_id:
+          - input_boolean.play_kitchen_music
+          - input_boolean.play_kitchen_music
 
   - alias: "System - Reset settings"
     initial_state: True

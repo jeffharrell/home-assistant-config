@@ -14,7 +14,7 @@ cards:
         square: false
         cards:
           - type: custom:bubble-card
-            entity: script.play_music_kitchen
+            entity: input_boolean.play_kitchen_music
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -24,7 +24,7 @@ cards:
               action: toggle
 
           - type: custom:bubble-card
-            entity: script.play_music_outside
+            entity: input_boolean.play_outside_music
             card_type: button
             card_layout: large
             use_accent_color: true

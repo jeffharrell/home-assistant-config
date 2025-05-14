@@ -6,6 +6,10 @@ expose_by_default: false
 entity_config:
   input_boolean.guest_mode_enabled:
     expose: true
+  input_boolean.play_kitchen_music:
+    expose: true
+  input_boolean.play_outside_music:
+    expose: true
   light.back_doors:
     expose: true
   light.boys_bedroom:
