@@ -123,53 +123,53 @@ cards:
               padding: 5px 15px 10px;
             }
 
-  # pop ups
-  - type: vertical-stack
-    cards:
-      
-      - type: custom:bubble-card
-        card_type: pop-up
-        hash: "#popup-garages"
-
-      - type: grid
-        columns: 1
-        square: false
+      # pop ups
+      - type: vertical-stack
         cards:
-          - type: entity-button
-            entity: cover.garage_door_1
-            show_name: true
-            show_state: true
-            icon_height: 80px
-            tap_action:
-              action: call-service
-              service: switch.turn_on
-              data:
-                entity_id: switch.garage_door_1
-              confirmation:
-                text: "Toggle garage door"
+          
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: "#popup-garages"
 
-          - type: entity-button
-            entity: cover.garage_door_2 
-            show_name: true
-            show_state: true
-            icon_height: 80px
-            tap_action:
-              action: call-service
-              service: switch.turn_on
-              data:
-                entity_id: switch.garage_door_2
-              confirmation:
-                text: "Toggle garage door"
+          - type: grid
+            columns: 1
+            square: false
+            cards:
+              - type: entity-button
+                entity: cover.garage_door_1
+                show_name: true
+                show_state: true
+                icon_height: 80px
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  data:
+                    entity_id: switch.garage_door_1
+                  confirmation:
+                    text: "Toggle garage door"
 
-          - type: entity-button
-            entity: cover.garage_door_3
-            show_name: true
-            show_state: true
-            icon_height: 80px
-            tap_action:
-              action: call-service
-              service: switch.turn_on
-              data:
-                entity_id: switch.garage_door_3
-              confirmation:
-                text: "Toggle garage door"
+              - type: entity-button
+                entity: cover.garage_door_2 
+                show_name: true
+                show_state: true
+                icon_height: 80px
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  data:
+                    entity_id: switch.garage_door_2
+                  confirmation:
+                    text: "Toggle garage door"
+
+              - type: entity-button
+                entity: cover.garage_door_3
+                show_name: true
+                show_state: true
+                icon_height: 80px
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  data:
+                    entity_id: switch.garage_door_3
+                  confirmation:
+                    text: "Toggle garage door"
