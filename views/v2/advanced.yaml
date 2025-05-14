@@ -1,5 +1,5 @@
-title: "Status"
-path: "status"
+title: "Advanced"
+path: "advanced"
 back_path: "/lovelace/home"
 subview: true
 theme: subview
@@ -30,11 +30,34 @@ cards:
                 name: "Weather Station Battery"
 
       # settings
+      - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - type: divider
+          - entity: input_text.camera_motion_prompt
+            icon: mdi:creation
+            name: "Camera Motion Prompt"
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            :host ha-card h1 {
+              padding: 5px 15px 10px;
+            }
+
+
+      # footer
       - type: vertical-stack
         cards:
           - type: markdown
             content: |
-              There's more in <a href="./?disable_km">Advanced</a>
+              Even more <a href="./?disable_km">advanced mode</a>
             text_only: true
             card_mod:
               style: |

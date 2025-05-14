@@ -96,7 +96,7 @@ cards:
               navigation_path: lights
             hold_action:
               action: navigate
-              navigation_path: status
+              navigation_path: advanced
             theme: nocard
             show_state: false
             

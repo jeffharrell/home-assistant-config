@@ -18,4 +18,4 @@ views:
   - !include views/v2/outside.yaml
   - !include views/v2/climate.yaml
   - !include views/v2/cameras.yaml
-  - !include views/v2/status.yaml
+  - !include views/v2/advanced.yaml

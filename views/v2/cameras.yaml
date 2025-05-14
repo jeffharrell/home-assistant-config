@@ -84,29 +84,3 @@ cards:
           - type: picture-glance
             camera_image: camera.back_yard
             entities: []
-
-      # settings
-      - type: entities
-        title: "Advanced"
-        state_color: false
-        show_header_toggle: false
-        entities:
-          - type: divider
-          - entity: input_boolean.camera_motion_enabled
-            icon: mdi:creation
-            name: "Motion Alerts"
-          - entity: input_text.camera_motion_prompt
-            secondary_info: none
-            name: "Prompt"
-            icon: none
-        card_mod:
-          style: |
-            :host ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            :host ha-card h1 {
-              padding: 5px 15px 10px;
-            }
