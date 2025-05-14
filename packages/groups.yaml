@@ -122,7 +122,7 @@ group:
   # making these normal groups so that more-info shows the entities
   lights_house:
     name: "Lights"
-    icon: mdi:lightbulb-multiple
+    icon: mdi:ceiling-light
     entities:
       - light.family_room
       - light.kitchen
@@ -160,7 +160,7 @@ group:
       - media_player.master_bedroom_apple_tv
 
   media_player_speakers_and_tvs:
-    name: "Speakers and TVs"
+    name: "Media"
     icon: "mdi:television"
     entities:
       - group.media_player_speakers
@@ -173,3 +173,9 @@ group:
       - cover.garage_door_1
       - cover.garage_door_2
       - cover.garage_door_3
+
+  climate:
+    name: "Climate"
+    icon: "mdi:home-thermometer-outline"
+    entities:
+      - climate.home

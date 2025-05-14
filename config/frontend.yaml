@@ -62,7 +62,6 @@ themes:
     state-binary_sensor-active-color: "var(--state-active-color)"
     state-cover-active-color: "var(--state-active-color)"
     state-media_player-active-color: "var(--state-active-color)"
-    state-cover-active-color: "var(--state-active-color)"
     state-climate-auto-color: "var(--state-active-color)"
     state-climate-cool-color: "var(--state-active-color)"
     state-climate-heat-color: "var(--state-active-color)"

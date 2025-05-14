@@ -89,7 +89,6 @@ cards:
           - type: button
             entity: group.lights_house
             name: "Lights"
-            icon: mdi:ceiling-light
             icon_height: 25px
             tap_action:
               action: navigate
@@ -103,7 +102,6 @@ cards:
           - type: button
             entity: group.media_player_speakers_and_tvs
             name: "Media"
-            icon: mdi:television
             icon_height: 25px
             tap_action:
               action: navigate
@@ -127,9 +125,8 @@ cards:
             show_state: false
 
           - type: button
-            entity: climate.home
+            entity: group.climate
             name: "Climate"
-            icon: mdi:home-thermometer-outline
             icon_height: 25px      
             tap_action:
               action: navigate

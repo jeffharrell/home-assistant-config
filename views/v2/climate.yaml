@@ -15,17 +15,22 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: climate.home
-            card_type: climate
+            card_type: button
             card_layout: large
+            button_type: state
+            show_name: true
+            show_icon: true
             show_state: true
             state_color: true
             show_attribute: true
             attribute: current_temperature
             sub_button:
-              - name: HVAC modes menu
+              - name: "HVAC modes"
                 select_attribute: hvac_modes
-                state_background: false
-                show_arrow: false
+            styles: |
+              .bubble-sub-button-1 ha-select mwc-list-item:nth-child(4) {
+                display: none;
+              }
 
       # room temperatures
       - type: entities

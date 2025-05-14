@@ -208,3 +208,7 @@ cards:
                 entity: light.twinkle_lights
                 card_type: button
                 button_type: switch
+              - type: custom:bubble-card
+                entity: light.garage
+                card_type: button
+                button_type: switch
