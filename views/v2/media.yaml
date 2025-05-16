@@ -15,6 +15,7 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: input_boolean.play_kitchen_music
+            name: "Kitchen Music"
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -25,6 +26,7 @@ cards:
 
           - type: custom:bubble-card
             entity: input_boolean.play_outside_music
+            name: "Outside Music"
             card_type: button
             card_layout: large
             use_accent_color: true

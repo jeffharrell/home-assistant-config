@@ -37,8 +37,8 @@ automation:
     action:
       - service: notify.phones
         data_template:
-          title: "Home"
-          message: "PG&E grid changed from {{ trigger.from_state }} to {{ trigger.to_state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%"
+          title: "Power grid is {{ trigger.to_state }}!"
+          message: "Powerwall at {{ states('sensor.powerwall_charge') }}%"
 
   - alias: "Energy - UPS status change"
     initial_state: True
@@ -53,8 +53,8 @@ automation:
     action:
       service: notify.mobile_app_jeffs_iphone
       data_template:
-        title: "Home"
-        message: "UPS changed to {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"
+        title: "UPS is {{ trigger.to_state.state }}!"
+        message: "Battery at {{ states('sensor.ups_battery_charge') }}%"
 
   - alias: "Energy - Disable climate if power out"
     initial_state: True
@@ -69,5 +69,5 @@ automation:
           entity_id: climate.home
       - service: notify.phones
         data_template:
-          title: "Home"
-          message: "Disabling HVAC – You can turn back on manually"
+          title: "Disabling HVAC"
+          message: "You can turn back on manually"

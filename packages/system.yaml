@@ -25,6 +25,7 @@ automation:
 
   - alias: "System - Reset switches"
     initial_state: True
+    mode: parallel
     trigger:
       platform: state
       entity_id: 
@@ -35,9 +36,8 @@ automation:
         minutes: 1
     action:
       - service: homeassistant.turn_off
-        entity_id:
-          - input_boolean.play_kitchen_music
-          - input_boolean.play_kitchen_music
+        target:
+          entity_id: "{{ trigger.id }}"
 
   - alias: "System - Reset settings"
     initial_state: True

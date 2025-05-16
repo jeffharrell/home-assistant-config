@@ -40,6 +40,7 @@ automation:
       - delay: "00:00:15"
       - service: notify.phones
         data_template:
+          title: "Alarm Warning"
           message: >
             {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
               Warning! The following are open: {{ expand("binary_sensor.doors_and_windows") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
@@ -48,6 +49,7 @@ automation:
           minutes: 10
       - service: notify.phones
         data_template:
+          title: "Alarm Warning"
           message: >
             {%- if is_state("binary_sensor.garage_doors", "on") -%}
               The garage is still open: {{ expand("binary_sensor.garage_doors") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
@@ -125,8 +127,8 @@ automation:
           entity_id: scene.house_alert
       - service: notify.phones
         data_template:
-          title: "Home"
-          message: "Alarm alert!"
+          title: "Alarm triggered!"
+          message: "Warning!"
           data:
             entity_id: camera.front_door
             url: "/lovelace/cameras"

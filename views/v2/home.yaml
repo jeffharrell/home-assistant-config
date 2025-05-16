@@ -28,9 +28,11 @@ cards:
           {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
-            <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {%- elif len > 0 -%}
-            <ha-icon icon="mdi:door"></ha-icon> Multiple doors or windows are open
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
+          {% elif len == 2 %}
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|capitalize }} {% if list[1].name.endswith('s') %}are{% else %}is{% endif %} open
+          {% elif len > 2 %}
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more are open
           {%- endif %}
 
           {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
@@ -125,8 +127,9 @@ cards:
             show_state: false
 
           - type: button
-            entity: group.climate
+            entity: climate.home
             name: "Climate"
+            icon: mdi:home-thermometer-outline
             icon_height: 25px      
             tap_action:
               action: navigate
@@ -135,6 +138,7 @@ cards:
               action: none
             theme: nocard
             show_state: false
+            state_color: false
 
       # actions
       - type: vertical-stack
@@ -152,12 +156,12 @@ cards:
             visibility:
               - condition: state
                 entity: schedule.quick_actions_mood_lights
-                state: 'on'
+                state: "on"
               - condition: and
                 conditions:
                   - condition: state
                     entity: alarm_control_panel.alarm
-                    state: disarmed
+                    state: "disarmed"
 
 
           # dinner lights
@@ -169,12 +173,12 @@ cards:
             visibility:
               - condition: state
                 entity: schedule.quick_actions_dinner_time
-                state: 'on'
+                state: "on"
               - condition: and
                 conditions:
                   - condition: state
                     entity: alarm_control_panel.alarm
-                    state: disarmed
+                    state: "disarmed"
 
           # good night
           - type: custom:bubble-card
@@ -185,12 +189,12 @@ cards:
             visibility:
               - condition: state
                 entity: schedule.quick_actions_good_night
-                state: 'on'
+                state: "on"
               - condition: and
                 conditions:
                   - condition: state
                     entity: alarm_control_panel.alarm
-                    state: disarmed
+                    state: "disarmed"
 
           # let dog out
           - type: custom:bubble-card
@@ -201,7 +205,12 @@ cards:
             visibility:
               - condition: state
                 entity: alarm_control_panel.alarm
-                state: armed_home
+                state: "armed_home"
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: script.let_dog_out
+                    state_not: "off"
 
           # wake up
           - type: custom:bubble-card
@@ -212,12 +221,12 @@ cards:
             visibility:
               - condition: state
                 entity: schedule.quick_actions_wake_up
-                state: 'on'
+                state: "on"
               - condition: and
                 conditions:
                   - condition: state
                     entity: alarm_control_panel.alarm
-                    state: armed_home
+                    state: "armed_home"
 
           # alarm
           - type: custom:config-template-card
