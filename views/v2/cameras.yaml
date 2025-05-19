@@ -28,6 +28,7 @@ cards:
                   ${ states['camera.latest_doorbell'].attributes.entity_picture }
               hold_action:
                 action: none
+
           - type: custom:config-template-card
             entities:
               - camera.latest_mailbox
@@ -43,6 +44,7 @@ cards:
                   ${ states['camera.latest_mailbox'].attributes.entity_picture }
               hold_action:
                 action: none
+                
           - type: custom:config-template-card
             entities:
               - camera.latest_motion

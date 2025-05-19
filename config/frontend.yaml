@@ -6,11 +6,15 @@ extra_module_url:
 # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
 themes:
   nocard:
+    card-mod-theme: nocard 
+
     ha-card-border-width: "0"
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
   subview:
+    card-mod-theme: subview 
+
     primary-background-color: "#313131" 
     card-background-color: "#3D3D3D"
 
@@ -18,7 +22,9 @@ themes:
     bubble-button-icon-background-color: "var(--primary-background-color)"
     bubble-main-background-color: "var(--card-background-color)"
 
-  apptheme:    
+  apptheme:
+    card-mod-theme: apptheme
+     
     primary-background-color: "#3D3D3D"
     card-background-color: "#313131"
     secondary-background-color: "var(--primary-background-color)"
@@ -66,7 +72,6 @@ themes:
     state-climate-fan_only-color: "var(--state-active-color)"
 
     # CSS Overrides
-    card-mod-theme: apptheme
     card-mod-root: |
       .header {
         position: relative !important;

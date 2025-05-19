@@ -42,7 +42,7 @@ cards:
         text_only: true
         card_mod:
           style: |
-            :host ha-card { 
+            ha-card { 
               margin-top: -65px;
               padding-bottom: 20px;
               transition: none;
@@ -65,7 +65,7 @@ cards:
           theme: nocard
           card_mod:
             style: |
-              :host ha-card { 
+              ha-card { 
                 margin: 15px -8px 30px;
                 min-height: 225px;
                 max-height: 240px;
@@ -79,7 +79,7 @@ cards:
                 --ha-picture-card-text-color: var(--primary-text-color);
               }
 
-              :host ha-card .footer {
+              ha-card .footer {
                 font-size: 14px;
                 text-align: right;
               }
@@ -163,11 +163,12 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: &button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
 
           # dinner lights
           - type: custom:bubble-card
@@ -184,11 +185,7 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
               
           # good night
           - type: custom:bubble-card
@@ -205,12 +202,8 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
-
+            <<: *button_styles
+            
           # let dog out
           - type: custom:bubble-card
             entity: script.let_dog_out
@@ -226,11 +219,7 @@ cards:
                   - condition: state
                     entity: script.let_dog_out
                     state_not: "off"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           # wake up
           - type: custom:bubble-card
@@ -247,11 +236,7 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "armed_home"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           # alarm
           - type: custom:config-template-card
@@ -276,8 +261,4 @@ cards:
                   action: more-info
                 icon_tap_action:
                   action: more-info
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
+            <<: *button_styles

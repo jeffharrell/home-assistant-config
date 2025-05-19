@@ -22,11 +22,12 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: &button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
 
           - type: custom:bubble-card
             entity: switch.garage_fan
@@ -37,11 +38,7 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           - type: custom:bubble-card
             entity: switch.house_fan
@@ -52,11 +49,7 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           - type: custom:bubble-card
             entity: group.garages
@@ -71,11 +64,7 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-garages"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
       # what's on
       - type: entity-filter
@@ -84,7 +73,7 @@ cards:
           show_header_toggle: false
           card_mod:
             style: |
-              :host ha-card {
+              ha-card {
                 margin: 25px 0 0;
                 height: auto;
                 transition: none;
@@ -133,13 +122,13 @@ cards:
             name: "Mailbox Alerts"
         card_mod:
           style: |
-            :host ha-card {
+            ha-card {
               margin: 25px 0 0;
               height: auto;
               transition: none;
             }
 
-            :host ha-card h1 {
+            ha-card h1 {
               padding: 5px 15px 10px;
             }
 

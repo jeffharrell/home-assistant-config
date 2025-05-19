@@ -102,21 +102,11 @@ cards:
                 format: precision0
         card_mod:
           style: |
-            :host ha-card {
+            ha-card {
               margin: 25px 0 0;
               height: auto;
               transition: none;
             }
-            
-            # multiple-entity-row:
-            #   $ hui-generic-entity-row $: |
-            #     state_badge {
-            #       display: none !important;
-            #     }
-
-            #     .info {
-            #       margin-left: 0 !important;
-            #     }
 
       # settings
       - type: entities
@@ -130,12 +120,12 @@ cards:
             icon: mdi:creation
         card_mod:
           style: |
-            :host ha-card {
+            ha-card {
               margin: 25px 0 0;
               height: auto;
               transition: none;
             }
 
-            :host ha-card h1 {
+            ha-card h1 {
               padding: 5px 15px 10px;
             }

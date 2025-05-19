@@ -23,11 +23,12 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: &button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
 
           - type: custom:bubble-card
             entity: input_boolean.play_outside_music
@@ -39,11 +40,7 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           - type: custom:bubble-card
             entity: group.media_player_speakers_and_tvs
@@ -58,11 +55,7 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-devices"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
               
       # currently playing
       - type: grid
@@ -162,170 +155,86 @@ cards:
             styles: |
               .bubble-header-container { padding-bottom: 0; }
 
-          - type: heading
-            heading: "TVs"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "TVs"
+            <<: &heading_styles
+              type: heading
+              card_mod:
+                style: |
+                  ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 1
             square: false
             cards:
-              - type: custom:bubble-card
-                entity: media_player.family_room_apple_tv
+              - entity: media_player.family_room_apple_tv
                 name: "Family Room"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                hide:
-                  volume_button: true
-                  play_pause_button: false
-                  next_button: true
-                  power_button: false
-                  previous_button: true
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: &tv_options
+                  type: custom:bubble-card
+                  card_type: media-player
+                  show_state: true
+                  show_attribute: true
+                  attribute: media_title
+                  hide:
+                    volume_button: true
+                    play_pause_button: false
+                    next_button: true
+                    power_button: false
+                    previous_button: true
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.living_room_apple_tv
+              - entity: media_player.living_room_apple_tv
                 name: "Living Room"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                hide:
-                  volume_button: true
-                  play_pause_button: false
-                  next_button: true
-                  power_button: false
-                  previous_button: true
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *tv_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.master_bedroom_apple_tv
+              - entity: media_player.master_bedroom_apple_tv
                 name: "Master Bedroom"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                hide:
-                  volume_button: true
-                  play_pause_button: false
-                  next_button: true
-                  power_button: false
-                  previous_button: true
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *tv_options
+                <<: *button_styles
 
-          - type: heading
-            heading: "Speakers"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "Speakers"
+            <<: *heading_styles
 
           - type: grid
             columns: 1
             square: false
             cards:
-              - type: custom:bubble-card
-                entity: media_player.family_room_speakers
+              - entity: media_player.family_room_speakers
                 name: "Family Room"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: &speaker_options
+                  type: custom:bubble-card
+                  card_type: media-player
+                  show_state: true
+                  show_attribute: true
+                  attribute: media_title
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.living_room_speakers
+              - entity: media_player.living_room_speakers
                 name: "Living Room"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.kitchen_hub
+              - entity: media_player.kitchen_hub
                 name: "Kitchen Hub"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.master_bedroom_speaker
+              - entity: media_player.master_bedroom_speaker
                 name: "Master Bedroom"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.playroom_speakers
+              - entity: media_player.playroom_speakers
                 name: "Playroom"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.garage_speakers
+              - entity: media_player.garage_speakers
                 name: "Garage"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles
 
-              - type: custom:bubble-card
-                entity: media_player.outside_speakers
+              - entity: media_player.outside_speakers
                 name: "Outside"
-                card_type: media-player
-                show_state: true
-                show_attribute: true
-                attribute: media_title
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *speaker_options
+                <<: *button_styles

@@ -22,11 +22,12 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: &button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
 
           - type: custom:bubble-card
             entity: script.dinner_lights
@@ -37,11 +38,7 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
           - type: custom:bubble-card
             entity: light.house
@@ -56,11 +53,7 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-lights"
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            <<: *button_styles
 
       # what's on
       - type: entity-filter
@@ -110,13 +103,13 @@ cards:
             icon: mdi:creation
         card_mod:
           style: |
-            :host ha-card {
+            ha-card {
               margin: 25px 0 0;
               height: auto;
               transition: none;
             }
 
-            :host ha-card h1 {
+            ha-card h1 {
               padding: 5px 15px 10px;
             }
 
@@ -130,11 +123,12 @@ cards:
             styles: |
               .bubble-header-container { padding-bottom: 0; }
 
-          - type: heading
-            heading: "Kitchen"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "Kitchen"
+            <<: &heading_styles
+              type: heading
+              card_mod:
+                style: |
+                  ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 2
@@ -145,49 +139,30 @@ cards:
                 entity: light.family_room
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               # Kitchen
               - type: custom:bubble-card
                 entity: light.kitchen
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.kitchen_cabinets
                 name: "Cabinets"
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.island
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
-          - type: heading
-            heading: "Living and Dining Rooms"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "Living and Dining Rooms"
+            <<: *heading_styles
 
           - type: grid
             columns: 2
@@ -198,48 +173,29 @@ cards:
                 entity: light.living_room
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               # Dining Room
               - type: custom:bubble-card
                 entity: light.dining_room
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.entryway
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.hallway
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
-          - type: heading
-            heading: "Bedrooms"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "Bedrooms"
+            <<: *heading_styles
 
           - type: grid
             columns: 2
@@ -251,47 +207,28 @@ cards:
                 name: "Master"
                 card_type: button
                 button_type: slider
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.boys_bedroom
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.guest_bedroom
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.play_room
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
-          - type: heading
-            heading: "Outside"
-            card_mod:
-              style: |
-                ha-card { margin: 5px 0 0; }
+          - heading: "Outside"
+            <<: *heading_styles
                 
           - type: grid
             columns: 2
@@ -301,28 +238,16 @@ cards:
                 entity: light.twinkle_lights
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.garage
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles
 
               - type: custom:bubble-card
                 entity: light.pool
                 card_type: button
                 button_type: switch
-                styles: |
-                  .bubble-name {
-                    font-size: 15px;
-                    font-weight: 400;
-                  }
+                <<: *button_styles

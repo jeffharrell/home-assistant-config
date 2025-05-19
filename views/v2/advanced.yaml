@@ -41,13 +41,13 @@ cards:
             name: "Camera Motion Prompt"
         card_mod:
           style: |
-            :host ha-card {
+            ha-card {
               margin: 25px 0 0;
               height: auto;
               transition: none;
             }
 
-            :host ha-card h1 {
+            ha-card h1 {
               padding: 5px 15px 10px;
             }
 
@@ -61,7 +61,7 @@ cards:
             text_only: true
             card_mod:
               style: |
-                :host ha-card {
+                ha-card {
                   margin: 25px 0 0;
                   height: auto;
                   transition: none;
