@@ -31,9 +31,9 @@ cards:
           {% if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
           {% elif len == 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|lower }} {% if list[1].name.endswith('s') %}are{% else %}is{% endif %} open
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|capitalize }} are open
           {% elif len > 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|lower }}, and more
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more
           {%- endif %}
 
           {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
@@ -261,4 +261,4 @@ cards:
                   action: more-info
                 icon_tap_action:
                   action: more-info
-            <<: *button_styles
+              <<: *button_styles
