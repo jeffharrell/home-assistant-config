@@ -20,7 +20,7 @@ automation:
       - service: script.hvac_disable
       - service: notify.phones
         data_template:
-          title: "HVAC off"
+          title: "Home"
           message: "Turning HVAC off since {{ expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | map(attribute='name')| join(', ') }} is open"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
@@ -52,7 +52,7 @@ automation:
     action:
       - service: notify.phones
         data_template:
-          title: "Open the windows!"
-          message: "It's nicer outside than inside."
+          title: "Home"
+          message: "Open the windows! It's nicer outside than inside."
       - delay:
           hours: 8
