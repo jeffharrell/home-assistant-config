@@ -159,10 +159,14 @@ cards:
           - type: custom:bubble-card
             card_type: pop-up
             hash: "#popup-devices"
+            styles: |
+              .bubble-header-container { padding-bottom: 0; }
 
-          - type: custom:bubble-card
-            card_type: separator
-            name: "TVs"
+          - type: heading
+            heading: "TVs"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 1
@@ -181,6 +185,11 @@ cards:
                   next_button: true
                   power_button: false
                   previous_button: true
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.living_room_apple_tv
@@ -195,6 +204,11 @@ cards:
                   next_button: true
                   power_button: false
                   previous_button: true
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.master_bedroom_apple_tv
@@ -209,10 +223,17 @@ cards:
                   next_button: true
                   power_button: false
                   previous_button: true
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
-          - type: custom:bubble-card
-            card_type: separator
-            name: "Speakers"
+          - type: heading
+            heading: "Speakers"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 1
@@ -225,6 +246,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.living_room_speakers
@@ -233,6 +259,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.kitchen_hub
@@ -241,6 +272,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.master_bedroom_speaker
@@ -249,6 +285,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.playroom_speakers
@@ -257,6 +298,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.garage_speakers
@@ -265,6 +311,11 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               - type: custom:bubble-card
                 entity: media_player.outside_speakers
@@ -273,3 +324,8 @@ cards:
                 show_state: true
                 show_attribute: true
                 attribute: media_title
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }

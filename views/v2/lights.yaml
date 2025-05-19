@@ -127,10 +127,14 @@ cards:
           - type: custom:bubble-card
             card_type: pop-up
             hash: "#popup-lights"
+            styles: |
+              .bubble-header-container { padding-bottom: 0; }
 
-          - type: custom:bubble-card
-            card_type: separator
-            name: "Kitchen and Family Rooms"
+          - type: heading
+            heading: "Kitchen"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 2
@@ -141,24 +145,49 @@ cards:
                 entity: light.family_room
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               # Kitchen
               - type: custom:bubble-card
                 entity: light.kitchen
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.kitchen_cabinets
+                name: "Cabinets"
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.island
                 card_type: button
                 button_type: slider
-                
-          - type: custom:bubble-card
-            card_type: separator
-            name: "Living and Dining Rooms"
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
+          - type: heading
+            heading: "Living and Dining Rooms"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 2
@@ -169,24 +198,48 @@ cards:
                 entity: light.living_room
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
               # Dining Room
               - type: custom:bubble-card
                 entity: light.dining_room
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.entryway
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.hallway
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
-          - type: custom:bubble-card
-            card_type: separator
-            name: "Bedrooms"
+          - type: heading
+            heading: "Bedrooms"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
 
           - type: grid
             columns: 2
@@ -195,25 +248,51 @@ cards:
               # Bedrooms
               - type: custom:bubble-card
                 entity: light.master_bedroom
+                name: "Master"
                 card_type: button
                 button_type: slider
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.boys_bedroom
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.guest_bedroom
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.play_room
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
 
-          - type: custom:bubble-card
-            card_type: separator
-            name: "Outside"
-
+          - type: heading
+            heading: "Outside"
+            card_mod:
+              style: |
+                ha-card { margin: 5px 0 0; }
+                
           - type: grid
             columns: 2
             square: false
@@ -222,7 +301,28 @@ cards:
                 entity: light.twinkle_lights
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
               - type: custom:bubble-card
                 entity: light.garage
                 card_type: button
                 button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
+
+              - type: custom:bubble-card
+                entity: light.pool
+                card_type: button
+                button_type: switch
+                styles: |
+                  .bubble-name {
+                    font-size: 15px;
+                    font-weight: 400;
+                  }
