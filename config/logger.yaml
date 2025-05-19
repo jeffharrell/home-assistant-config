@@ -8,6 +8,7 @@ logs:
   homeassistant.components.sensor: error
   homeassistant.components.scrape.sensor: error
   homeassistant.components.binary_sensor: error
+  homeassistant.components.apple_tv: error
   pychromecast.socket_client: critical
   custom_components.hacs: critical
   py.warnings: error

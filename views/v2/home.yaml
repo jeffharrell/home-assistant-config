@@ -1,5 +1,6 @@
 title: "Home"
 path: "home"
+theme: mainview
 cards:
 
   - type: vertical-stack
@@ -30,9 +31,9 @@ cards:
           {% if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
           {% elif len == 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|capitalize }} {% if list[1].name.endswith('s') %}are{% else %}is{% endif %} open
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|lower }} {% if list[1].name.endswith('s') %}are{% else %}is{% endif %} open
           {% elif len > 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more are open
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|lower }}, and more
           {%- endif %}
 
           {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
@@ -162,7 +163,11 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           # dinner lights
           - type: custom:bubble-card
@@ -179,7 +184,12 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
+              
           # good night
           - type: custom:bubble-card
             entity: script.good_night
@@ -195,6 +205,11 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           # let dog out
           - type: custom:bubble-card
@@ -211,6 +226,11 @@ cards:
                   - condition: state
                     entity: script.let_dog_out
                     state_not: "off"
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           # wake up
           - type: custom:bubble-card
@@ -227,6 +247,11 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "armed_home"
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           # alarm
           - type: custom:config-template-card
@@ -251,3 +276,8 @@ cards:
                   action: more-info
                 icon_tap_action:
                   action: more-info
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }

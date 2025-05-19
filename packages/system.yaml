@@ -37,7 +37,7 @@ automation:
     action:
       - service: homeassistant.turn_off
         target:
-          entity_id: "{{ trigger.id }}"
+          entity_id: "{{ trigger.entity_id }}"
 
   - alias: "System - Reset settings"
     initial_state: True

@@ -18,11 +18,15 @@ cards:
             card_type: button
             card_layout: large
             use_accent_color: true
-
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: script.dinner_lights
@@ -33,6 +37,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: light.house
@@ -47,6 +56,11 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-lights"
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
       # what's on
       - type: entity-filter
@@ -55,7 +69,7 @@ cards:
           show_header_toggle: false
           card_mod:
             style: |
-              :host ha-card {
+              ha-card {
                 margin: 25px 0 0;
                 height: auto;
                 transition: none;
@@ -92,7 +106,7 @@ cards:
         entities:
           - type: divider
           - entity: automation.landscape_back_door_light
-            name: "Open doors turns on lights"
+            name: "Opening doors turns on lights"
             icon: mdi:creation
         card_mod:
           style: |
@@ -109,7 +123,7 @@ cards:
       # pop ups
       - type: vertical-stack
         cards:
-          
+                
           - type: custom:bubble-card
             card_type: pop-up
             hash: "#popup-lights"

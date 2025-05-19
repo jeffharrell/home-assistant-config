@@ -22,6 +22,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: switch.garage_fan
@@ -32,6 +37,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: switch.house_fan
@@ -42,6 +52,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: group.garages
@@ -56,6 +71,11 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-garages"
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
       # what's on
       - type: entity-filter

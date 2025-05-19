@@ -2,6 +2,8 @@ extra_module_url:
   - /local/community/lovelace-card-mod/card-mod.js
   - /local/community/Bubble-Card/bubble-card.js 
 
+
+# Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
 themes:
   nocard:
     ha-card-border-width: "0"
@@ -13,13 +15,10 @@ themes:
     card-background-color: "#3D3D3D"
 
     bubble-button-main-background-color: "var(--card-background-color)"
-    bubble-button-icon-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--primary-background-color)"
     bubble-main-background-color: "var(--card-background-color)"
 
-
-  apptheme:
-    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
-    
+  apptheme:    
     primary-background-color: "#3D3D3D"
     card-background-color: "#313131"
     secondary-background-color: "var(--primary-background-color)"
@@ -38,17 +37,16 @@ themes:
     # Cards
     ha-card-border-width: "1px"
     ha-card-border-radius: "12px"
-    ha-card-header-font-size: "16px"
+    ha-card-header-font-size: "15px"
 
     bubble-border-radius: "28px"
-    #bubble-accent-color: "var(--accent-color)"
     bubble-light-color: "var(--accent-color)"
 
     bubble-main-background-color: "var(--card-background-color)"
     bubble-icon-background-color: "var(--primary-background-color)"
     bubble-pop-up-main-background-color: "var(--card-background-color)"
     bubble-button-main-background-color: "var(--card-background-color)"
-    bubble-button-icon-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--primary-background-color)"
 
     divider-color: "rgba(0, 0, 0, 0.15)"
     code-editor-background-color: "#000"

@@ -23,6 +23,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: input_boolean.play_outside_music
@@ -34,6 +39,11 @@ cards:
               action: toggle
             icon_tap_action:
               action: toggle
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
 
           - type: custom:bubble-card
             entity: group.media_player_speakers_and_tvs
@@ -48,7 +58,12 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-devices"
-
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
+              
       # currently playing
       - type: grid
         title: " "
