@@ -239,26 +239,31 @@ cards:
             <<: *button_styles
 
           # alarm
-          - type: custom:config-template-card
-            entities:
-              - alarm_control_panel.alarm_panel_ui
-            card:
-              type: custom:bubble-card
-              entity: alarm_control_panel.alarm_panel_ui
-              card_type: button
-              card_layout: large
-              use_accent_color: true
-              name: >-
-                ${
-                   states["alarm_control_panel.alarm_panel_ui"]
-                    .state.split("_")
+          - type: custom:bubble-card
+            entity: alarm_control_panel.alarm_panel_ui
+            card_type: button
+            card_layout: large
+            use_accent_color: true
+            button_action:
+              tap_action:
+                action: more-info
+              icon_tap_action:
+                action: more-info
+            styles: |
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
+
+              .bubble-button-background {
+                opacity: 1 !important;
+                background-color: ${ state !== 'disarmed' ? '#f44336' : 'transparent' } !important;
+              }
+
+              ${
+                card.querySelector('.bubble-name').innerText = 
+                  state.split("_")
                     .map(word => word.charAt(0)
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
-                  }
-              button_action:
-                tap_action:
-                  action: more-info
-                icon_tap_action:
-                  action: more-info
-              <<: *button_styles
+                }
