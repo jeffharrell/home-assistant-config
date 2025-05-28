@@ -1,14 +1,5 @@
 mode: yaml
 
-dashboards:
-  lovelace-home:
-    mode: yaml
-    filename: ui-original.yaml
-    title: "Overview (v1)"
-    icon: mdi:view-dashboard
-    show_in_sidebar: true
-    require_admin: true
-
 resources:
   - url: /hacsfiles/kiosk-mode/kiosk-mode.js
     type: module
