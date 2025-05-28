@@ -7,7 +7,87 @@ cards:
 
   - type: vertical-stack
     cards:
+      # power 
+      - type: custom:config-template-card
+        entities:
+          - sensor.powerwall_battery_now
+          - sensor.powerwall_site_now
+        card:
+          type: custom:mini-graph-card
+          name: "Powerwall"
+          line_width: 3
+          points_per_hour: 4
+          decimals: 1
+          hours_to_show: >-
+            ${
+              var date = new Date();
+              var curHour = date.getHours() + date.getMinutes()/60.0;
+              curHour
+            }
+          entities:
+            - entity: sensor.powerwall_charge_actual
+              show_graph: false
+            - entity: sensor.powerwall_battery_now
+              aggregate_func: last
+              show_legend: false
+              name: "Powerwall"
+              color: green
+            - entity: sensor.powerwall_site_now
+              aggregate_func: last
+              show_legend: false
+              name: "Grid"
+              color: orange
+          show:
+            graph: line
+            points: hover
+            labels: true
 
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "Solar Generation"
+            entity: sensor.powerwall_solar_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: sensor
+            name: "Now"
+            entity: sensor.powerwall_solar_now
+
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "Home Usage"
+            entity: sensor.powerwall_load_import
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: sensor
+            name: "Now"
+            entity: sensor.powerwall_load_now
+            
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "Grid Import"
+            entity: sensor.powerwall_site_import
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: statistic
+            name: "Grid Export"
+            entity: sensor.powerwall_site_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
+            
       # batteries
       - type: vertical-stack
         cards:
