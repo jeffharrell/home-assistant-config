@@ -62,14 +62,15 @@ themes:
     state-active-color: "var(--accent-color)"
     state-inactive-color: "var(--state-icon-color)"
 
-    state-light-active-color: "var(--state-active-color)"
-    state-binary_sensor-active-color: "var(--state-active-color)"
-    state-cover-open-color: "var(--state-active-color)"
-    state-media_player-active-color: "var(--state-active-color)"
-    state-climate-auto-color: "var(--state-active-color)"
-    state-climate-cool-color: "var(--state-active-color)"
-    state-climate-heat-color: "var(--state-active-color)"
-    state-climate-fan_only-color: "var(--state-active-color)"
+    state-light-active-color: "var(--accent-color)"
+    state-binary_sensor-active-color: "var(--accent-color)"
+    state-cover-open-color: "var(--accent-color)"
+    state-media_player-active-color: "var(--accent-color)"
+    state-climate-auto-color: "var(--accent-color)"
+    state-climate-cool-color: "var(--accent-color)"
+    state-climate-heat-color: "var(--accent-color)"
+    state-climate-fan_only-color: "var(--accent-color)"
+
 
     # CSS Overrides
     card-mod-root: |

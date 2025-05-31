@@ -100,7 +100,7 @@ cards:
               action: navigate
               navigation_path: advanced
             theme: nocard
-            show_state: false
+            show_state: true
             
           - type: button
             entity: group.media_player_speakers_and_tvs
@@ -112,7 +112,7 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
 
           - type: button
             entity: binary_sensor.doors_and_windows_and_garages
@@ -125,7 +125,7 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
 
           - type: button
             entity: climate.home
@@ -138,7 +138,7 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
             state_color: false
 
       # actions
@@ -256,8 +256,8 @@ cards:
               }
 
               .bubble-button-background {
-                opacity: 1 !important;
-                background-color: ${ state !== 'disarmed' ? '#f44336' : 'transparent' } !important;
+                opacity: 0.6 !important;
+                background-color: ${ state !== 'disarmed' ? '#aa2e25' : 'transparent' } !important;
               }
 
               ${
