@@ -13,8 +13,8 @@ automation:
         at: "23:00:00"
         variables:
           action: "turn_off"
-    action:
-      - service: >
+    actions:
+      - action: >
           switch.{{ action }}
         entity_id:
           - switch.front_landscape
@@ -33,8 +33,8 @@ automation:
         event: sunset
         variables:
           action: "turn_off"
-    action:
-      - service: >
+    actions:
+      - action: >
           switch.{{ action }}
         entity_id:
           switch.fountain
@@ -53,8 +53,8 @@ automation:
         offset: "-00:30:00"
         variables:
           action: "turn_off"
-    action:
-      - service: >
+    actions:
+      - action: >
           light.{{ action }}
         entity_id:
           light.front_door
@@ -73,6 +73,6 @@ automation:
       - condition: state
         entity_id: light.twinkle_lights
         state: "off"
-    action:
-      - service: light.turn_on
+    actions:
+      - action: light.turn_on
         entity_id: light.back_doors

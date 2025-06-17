@@ -23,26 +23,27 @@ counter:
 automation:
   - alias: "Cameras - Doorbell"
     initial_state: True
-    mode: single
+    mode: queued
     trigger:
       - platform: webhook
         webhook_id: "camera_doorbell"
         local_only: True
-    action:
+    actions:
       # take a picture
-      - service: camera.snapshot
+      - action: camera.snapshot
         data:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/doorbell.jpg"
       # create a text response for that picture
       - action: google_generative_ai_conversation.generate_content
+        continue_on_error: true
         data:
           prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/doorbell.jpg
         response_variable: generated_content
       # send notification
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           title: "{{ trigger.json.name }}"
           message: "{{ generated_content.text }}"
@@ -50,7 +51,7 @@ automation:
             image: "/local/cameras/doorbell.jpg"
             url: "/lovelace/cameras"
       # update the counter
-      - service: counter.increment
+      - action: counter.increment
         target:
           entity_id: counter.camera_motion
 
@@ -64,21 +65,22 @@ automation:
     condition:
       condition: template
       value_template: "{{ is_state('input_boolean.camera_motion_enabled', 'on') }}"
-    action:
+    actions:
       # take a picture
-      - service: camera.snapshot
+      - action: camera.snapshot
         data:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/motion.jpg"
       # create a text response for that picture
       - action: google_generative_ai_conversation.generate_content
+        continue_on_error: true
         data:
           prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/motion.jpg
         response_variable: generated_content
       # send a notification
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           title: "{{ trigger.json.name }}"
           message: "{{ generated_content.text }}"
@@ -86,32 +88,37 @@ automation:
             image: "/local/cameras/motion.jpg"
             url: "/lovelace/cameras"
       # update the counter
-      - service: counter.increment
+      - action: counter.increment
         target:
           entity_id: counter.camera_motion
           
   - alias: "Cameras - Mailbox open"
     initial_state: True
-    mode: single
+    mode: queued
     max_exceeded: silent
     trigger:
       - platform: state
         entity_id: binary_sensor.mailbox_motion
         to: "on"
-    action:
+    actions:
+      # trigger a recording 
+      - action: shell_command.record_driveway_camera
+        continue_on_error: true
       # take a picture
-      - service: camera.snapshot
+      - action: camera.snapshot
         data:
           entity_id: camera.driveway
           filename: "/config/www/cameras/mailbox.jpg"
+      # create a text response for that picture
       - action: google_generative_ai_conversation.generate_content
+        continue_on_error: true
         data:
           prompt: "{{ states('input_text.camera_motion_prompt') }}"
           filenames:
             - /config/www/cameras/mailbox.jpg
         response_variable: generated_content
       # send a notification
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           title: "Mailbox motion"
           message: "{{ generated_content.text }}"
@@ -123,10 +130,8 @@ automation:
                 name: "default"
                 critical: "{{ is_state('sun.sun', 'below_horizon')|int }}"
                 volume: "{{ is_state('sun.sun', 'below_horizon')|int }}"
-      # trigger a recording 
-      - service: shell_command.record_driveway_camera
       # update the counter
-      - service: counter.increment
+      - action: counter.increment
         target:
           entity_id: counter.camera_motion
       # debounce
@@ -138,11 +143,11 @@ automation:
     trigger:
       - platform: time
         at: "00:00:00"
-    action:
-      - service: counter.reset
+    actions:
+      - action: counter.reset
         target:
           entity_id: counter.camera_motion
-      - service: shell_command.purge_camera_events
+      - action: shell_command.purge_camera_events
 
   - alias: "Camera - Swap recording profile"
     initial_state: True
@@ -157,7 +162,7 @@ automation:
         to: "disarmed"
         variables:
           action: "turn_on"
-    action:
-      - service: >
+    actions:
+      - action: >
           switch.{{ action }}
         entity_id: switch.surveillance_station_home_mode

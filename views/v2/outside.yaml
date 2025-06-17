@@ -29,19 +29,9 @@ cards:
                   font-weight: 400;
                 }
 
-          - type: custom:bubble-card
-            entity: switch.garage_fan
-            card_type: button
-            card_layout: large
-            use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
 
           - type: custom:bubble-card
-            entity: switch.house_fan
+            entity: switch.garage_fan
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -64,6 +54,17 @@ cards:
               tap_action:
                 action: navigate
                 navigation_path: "#popup-garages"
+            <<: *button_styles
+
+          - type: custom:bubble-card
+            entity: switch.house_fan
+            card_type: button
+            card_layout: large
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
             <<: *button_styles
 
       # what's on

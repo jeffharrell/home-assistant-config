@@ -10,7 +10,6 @@ sensor:
           {% set value = ((states('sensor.powerwall_charge') | float(0) / 100.0) - (0.05)) / (0.95) | float(0) %}
           {{ (value * 100) | round(1) }}
 
-
 utility_meter:
   energy_import:
     source: sensor.powerwall_site_import
@@ -18,7 +17,6 @@ utility_meter:
   energy_export:
     source: sensor.powerwall_site_export
     cycle: daily
-
 
 automation:
   - alias: "Energy - Power grid status"
@@ -34,8 +32,8 @@ automation:
         entity_id: binary_sensor.grid_status
         to: "off"
         from: "on"
-    action:
-      - service: notify.phones
+    actions:
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "Power grid is {{ trigger.to_state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%."
@@ -50,8 +48,8 @@ automation:
       - platform: state
         entity_id: sensor.ups_status
         to: "On Battery Battery Discharging"
-    action:
-      service: notify.mobile_app_jeffs_iphone
+    actions:
+      action: notify.mobile_app_jeffs_iphone
       data_template:
         title: "Home"
         message: "UPS is {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%."
@@ -63,11 +61,11 @@ automation:
       - platform: state
         entity_id: binary_sensor.grid_status
         to: "off"
-    action:
-      - service: climate.turn_off
+    actions:
+      - action: climate.turn_off
         data:
           entity_id: climate.home
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "Disabling HVAC. You can turn back on manually."

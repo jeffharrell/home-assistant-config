@@ -11,15 +11,14 @@ input_boolean:
     name: "Play Outside Music"
     icon: "mdi:music"
 
-
 automation:
   - alias: "System - Theme change"
     initial_state: True
     trigger:
       - platform: homeassistant
         event: start
-    action:
-      service: frontend.set_theme
+    actions:
+      action: frontend.set_theme
       data_template:
         name: apptheme
 
@@ -34,8 +33,8 @@ automation:
       to: "on"
       for:
         minutes: 1
-    action:
-      - service: homeassistant.turn_off
+    actions:
+      - action: homeassistant.turn_off
         target:
           entity_id: "{{ trigger.entity_id }}"
 
@@ -44,8 +43,8 @@ automation:
     trigger:
       platform: time
       at: "04:00:00"
-    action:
-      - service: homeassistant.turn_on
+    actions:
+      - action: homeassistant.turn_on
         entity_id:
           - automation.cameras_doorbell
           - automation.cameras_mailbox_open
@@ -59,8 +58,8 @@ automation:
     trigger:
       platform: time
       at: "12:00:00"
-    action:
-      - service: media_player.volume_set
+    actions:
+      - action: media_player.volume_set
         target:
           entity_id: 
             - media_player.kitchen_hub
@@ -69,7 +68,7 @@ automation:
         data:
           volume_level: 0.6
       # some speakers should be quieter
-      - service: media_player.volume_set
+      - action: media_player.volume_set
         target:
           entity_id: media_player.master_bedroom_speaker
         data:
@@ -80,8 +79,8 @@ automation:
     trigger:
       platform: time_pattern
       minutes: "/5"
-    action:
-      - service: zwave_js.refresh_value
+    actions:
+      - action: zwave_js.refresh_value
         data:
           entity_id:
             - light.family_room
@@ -111,12 +110,12 @@ automation:
       - condition: time
         weekday:
           - sun
-    action:
+    actions:
       - if:
           condition: template
           value_template: "{{ unhealthy | length > 0 }}"
         then:
-          service: persistent_notification.create
+          action: persistent_notification.create
           data:
             notification_id: unhealthy
             message: "The following are unavailable: {{ unhealthy }}"

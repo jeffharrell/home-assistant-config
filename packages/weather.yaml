@@ -29,15 +29,14 @@ sensor:
             mdi:weather-sunny
           {%- endif %}
 
-
 automation:
   - alias: "Weather - Cache Local"
     initial_state: True
     trigger:
       platform: time_pattern
       minutes: "/5"
-    action:
-      - service: shell_command.get_weather
+    actions:
+      - action: shell_command.get_weather
       
   - alias: "Weather - Low Battery"
     initial_state: True
@@ -46,8 +45,8 @@ automation:
         entity_id: sensor.outside_battery
         to: "- -"
         for: "01:00:00"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Home"
-          message: "The outside weather sensor battery is low!"
+    actions:
+      - action: persistent_notification.create
+        data:
+          notification_id: outside_weather_battery
+          message: "The outside weather sensor battery is low."

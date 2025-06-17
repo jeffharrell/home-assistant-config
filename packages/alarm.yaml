@@ -27,18 +27,18 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "armed_away"
-    action:
+    actions:
       # turn off the devices in house
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           entity_id: scene.house_off
       # update camera motion alerts
-      - service: input_boolean.turn_on
+      - action: input_boolean.turn_on
         data:
           entity_id: input_boolean.camera_motion_enabled
       # notify if doors or garages are open (with built in delays for leaving)
       - delay: "00:00:15"
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           message: >
             {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
@@ -46,7 +46,7 @@ automation:
             {%- endif -%}
       - delay:
           minutes: 10
-      - service: notify.phones
+      - action: notify.phones
         data_template:
           message: >
             {%- if is_state("binary_sensor.garage_doors", "on") -%}
@@ -59,26 +59,26 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "armed_home"
-    action:
+    actions:
       # turn off the devices in house
       - if:
           condition: state
           entity_id: input_boolean.guest_mode_enabled
           state: "off"
         then:
-          service: scene.turn_on
+          action: scene.turn_on
           data:
             entity_id: scene.house_off
         else:
-          service: scene.turn_on
+          action: scene.turn_on
           data:
             entity_id: scene.house_off_guest
       # update camera motion alerts
-      - service: input_boolean.turn_on
+      - action: input_boolean.turn_on
         data:
           entity_id: input_boolean.camera_motion_enabled
       # notify if doors or garages are open
-      - service: notify.master_bedroom
+      - action: notify.master_bedroom
         data_template:
           message: >
             Alarm armed...
@@ -97,19 +97,19 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "disarmed"
-    action:
+    actions:
       # notify on status change
-      - service: notify.master_bedroom
+      - action: notify.master_bedroom
         data_template:
           message: "Alarm off"
       # update camera motion alerts
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data:
           entity_id: input_boolean.camera_motion_enabled
       # turn on the house if morning
       - condition: time
         before: "08:00:00"
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           entity_id: scene.good_morning
 
@@ -119,11 +119,13 @@ automation:
       platform: state
       entity_id: alarm_control_panel.alarm
       to: "triggered"
-    action:
-      - service: scene.turn_on
+    actions:
+      # light up the house
+      - action: scene.turn_on
         data:
           entity_id: scene.house_alert
-      - service: notify.phones
+      # send an alert
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "Alarm triggered!"

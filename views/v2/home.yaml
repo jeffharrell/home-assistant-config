@@ -9,7 +9,9 @@ cards:
       #status 
       - type: markdown
         content: >-
-          {% if states('sensor.outside_temp') -%}
+          {% if is_state('sensor.outside_battery', '- -') -%}
+            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> The outside weather sensor battery is low
+          {%- elif states('sensor.outside_temp') -%}
             <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
             {%- if states('sensor.outside_rain_daily')|float(0) -%}
               with {{ states('sensor.outside_rain_daily') }}" of rain
@@ -30,10 +32,8 @@ cards:
           {% set len = list | count %}
           {% if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {% elif len == 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|capitalize }} are open
-          {% elif len > 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more
+          {% elif len > 1 %}
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
           {%- endif %}
 
           {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
@@ -98,7 +98,7 @@ cards:
               navigation_path: lights
             hold_action:
               action: navigate
-              navigation_path: advanced
+              navigation_path: advanced?disable_km
             theme: nocard
             show_state: true
             
@@ -145,9 +145,6 @@ cards:
       - type: vertical-stack
         title: " "
         cards:
-          - type: heading
-            heading: "Quick Actions"
-
           # mood lights
           - type: custom:bubble-card
             entity: script.mood_lights
@@ -218,7 +215,7 @@ cards:
                 conditions:
                   - condition: state
                     entity: script.let_dog_out
-                    state_not: "off"
+                    state: "off"
             <<: *button_styles
 
           # wake up
@@ -267,3 +264,4 @@ cards:
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
                 }
+            scrolling_effect: false

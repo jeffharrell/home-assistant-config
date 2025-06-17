@@ -3,7 +3,6 @@ homeassistant:
       "binary_sensor.garage_door_*":
         device_class: opening
 
-
 cover:
   - platform: template
     covers:
@@ -49,7 +48,6 @@ cover:
                 service: switch.turn_on
                 entity_id: switch.garage_door_3
 
-
 automation:
   - alias: "Garages - Door open"
     initial_state: True
@@ -63,14 +61,13 @@ automation:
       for:
         minutes: 10
     mode: parallel
-    action:
-      - service: notify.phones
+    actions:
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "{{ trigger.to_state.attributes.friendly_name }} is open"
           data:
             url: "/lovelace/outside"
-
 
   - alias: "Garages - Fan"
     initial_state: True
@@ -89,7 +86,7 @@ automation:
           minutes: 10
         variables:
           action: "turn_off"
-    action:
-      - service: >
+    actions:
+      - action: >
           switch.{{ action }}
         entity_id: switch.garage_fan

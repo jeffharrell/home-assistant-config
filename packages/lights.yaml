@@ -16,7 +16,7 @@ automation:
       condition: state
       entity_id: alarm_control_panel.alarm
       state: "armed_away"
-    action:
+    actions:
       # randomize the time the light turns on
       - delay: "00:{{ (range(1, 30)|random|int) }}:{{ (range(1, 59)|random|int) }}"
       # edge case: Check the alarm is still on after the delay is up
@@ -25,10 +25,10 @@ automation:
           entity_id: alarm_control_panel.alarm
           state: "armed_away"
         then:
-          - service: >
+          - action: >
               light.{{ action }}
             entity_id: light.living_room
-          - service: notify.phones
+          - action: notify.phones
             data_template:
               title: "Home"
               message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
@@ -44,10 +44,10 @@ automation:
       condition: state
       entity_id: sun.sun
       state: "below_horizon"
-    action:
-      - service: light.turn_on
+    actions:
+      - action: light.turn_on
         entity_id: light.hallway
-      - service: notify.house
+      - action: notify.house
         data_template:
           message: "Welcome home I turned the lights on for you"
 
@@ -60,8 +60,8 @@ automation:
       condition: state
       entity_id: light.house
       state: "on"
-    action:
-      - service: light.turn_off
+    actions:
+      - action: light.turn_off
         entity_id: light.house
 
   - alias: "Lights - Twinkle lights"
@@ -82,8 +82,8 @@ automation:
       - condition: state
         entity_id: alarm_control_panel.alarm
         state: "disarmed"
-    action:
-      - service_template: >
+    actions:
+      - action: >
           homeassistant.{{ action }}
         entity_id: light.twinkle_lights
 
@@ -98,8 +98,8 @@ automation:
       # only trigger when switch is manually turned on
       condition: template
       value_template: "{{ trigger.to_state.context.user_id == None }}"
-    action:
-      - service: light.turn_on
+    actions:
+      - action: light.turn_on
         target:
           entity_id: "{{ trigger.entity_id }}"
         data:
@@ -121,7 +121,7 @@ automation:
         to: "off"
         variables:
           action: "turn_off"
-    action:
-      - service: >
+    actions:
+      - action: >
           light.{{ action }}
         entity_id: light.zipato_bulb

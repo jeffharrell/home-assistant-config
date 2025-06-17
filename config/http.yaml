@@ -1,4 +1,4 @@
-use_x_forwarded_for: true
-trusted_proxies: !secret proxy_url
 ip_ban_enabled: true
 login_attempts_threshold: 4
+use_x_forwarded_for: true
+trusted_proxies: !secret proxy_url

@@ -4,7 +4,6 @@ binary_sensor:
       climate_operation:
         value_template: "{{ not is_state_attr('climate.home', 'hvac_action', 'idle') }}"
 
-
 automation:
   - alias: "Climate - Windows open"
     initial_state: True
@@ -16,15 +15,15 @@ automation:
     condition:
       condition: template
       value_template: "{{ is_state('switch.house_fan', 'off') }}"
-    action:
-      - service: script.hvac_disable
-      - service: notify.phones
+    actions:
+      - action: script.hvac_disable
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "Turning HVAC off since {{ expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | map(attribute='name')| join(', ') }} is open"
       - delay: "00:00:10"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
-      - service: script.hvac_resume
+      - action: script.hvac_resume
 
   - alias: "Climate - Disable HVAC with house fan"
     initial_state: True
@@ -34,11 +33,11 @@ automation:
       platform: state
       entity_id: switch.house_fan
       to: "on"
-    action:
-      - service: script.hvac_disable
+    actions:
+      - action: script.hvac_disable
       - delay: "00:01:00"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
-      - service: script.hvac_resume
+      - action: script.hvac_resume
 
   - alias: "Climate - Notify cooler outside than inside"
     initial_state: True
@@ -49,8 +48,8 @@ automation:
     condition:
       condition: template
       value_template: "{{ is_state('alarm_control_panel.alarm', 'disarmed') and is_state('climate.home', 'cool') and state_attr('climate.home', 'temperature')|int > states('sensor.outside_temp')|int }}"
-    action:
-      - service: notify.phones
+    actions:
+      - action: notify.phones
         data_template:
           title: "Home"
           message: "Open the windows! It's nicer outside than inside."
