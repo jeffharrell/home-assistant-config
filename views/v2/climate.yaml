@@ -10,7 +10,7 @@ cards:
 
       # tiles
       - type: grid
-        columns: 1
+        columns: 2
         square: false
         cards:
           - type: custom:bubble-card
@@ -24,14 +24,23 @@ cards:
             state_color: true
             show_attribute: true
             attribute: current_temperature
-            sub_button:
-              - name: "HVAC modes"
-                select_attribute: hvac_modes
+            <<: &button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
+
+          - type: custom:bubble-card
+            entity: switch.house_fan
+            card_type: button
+            card_layout: large
+            use_accent_color: true
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
             styles: |
-              .bubble-sub-button-1 ha-select mwc-list-item:nth-child(4) {
-                display: none;
-              }
-              
               .bubble-name {
                 font-size: 15px;
                 font-weight: 400;

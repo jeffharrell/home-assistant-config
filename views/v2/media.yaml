@@ -45,6 +45,7 @@ cards:
           - type: custom:bubble-card
             entity: group.media_player_speakers_and_tvs
             name: "Devices"
+            icon: mdi:dots-horizontal
             card_type: button
             card_layout: large
             use_accent_color: true

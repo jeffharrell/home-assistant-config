@@ -137,7 +137,6 @@ group:
       - light.guest_bedroom
       - light.play_room
       - light.back_doors
-      - light.twinkle_lights
       - light.garage
       - light.pool
       

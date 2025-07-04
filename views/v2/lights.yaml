@@ -43,6 +43,7 @@ cards:
           - type: custom:bubble-card
             entity: light.house
             name: "Lights"
+            icon: mdi:dots-horizontal
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -81,9 +82,11 @@ cards:
           - light.guest_bedroom
           - light.play_room
           - light.back_doors
-          - light.twinkle_lights
           - light.garage
           - light.pool
+          # these aren't in the light group since they are fully automated
+          - light.front_door
+          - light.twinkle_lights
         conditions:
           - condition: state
             state: "on"
@@ -234,6 +237,18 @@ cards:
             columns: 2
             square: false
             cards:
+              - type: custom:bubble-card
+                entity: light.front_door
+                card_type: button
+                button_type: switch
+                <<: *button_styles
+
+              - type: custom:bubble-card
+                entity: light.back_doors
+                card_type: button
+                button_type: switch
+                <<: *button_styles
+
               - type: custom:bubble-card
                 entity: light.twinkle_lights
                 card_type: button

@@ -10,6 +10,7 @@ kiosk_mode:
 swipe_nav:
   wrap: false
   animate: swipe
+  animate_duration: 100
   
 views:
   - !include views/v2/home.yaml

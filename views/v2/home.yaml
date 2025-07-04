@@ -153,8 +153,8 @@ cards:
             use_accent_color: true
             visibility:
               - condition: state
-                entity: schedule.quick_actions_mood_lights
-                state: "on"
+                entity: sun.sun
+                state: "below_horizon"
               - condition: and
                 conditions:
                   - condition: state
@@ -175,10 +175,13 @@ cards:
             use_accent_color: true
             visibility:
               - condition: state
-                entity: schedule.quick_actions_dinner_time
-                state: "on"
+                entity: sun.sun
+                state: "below_horizon"
               - condition: and
                 conditions:
+                  - condition: state
+                    entity: schedule.quick_actions_dinner_time
+                    state: "on"
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
