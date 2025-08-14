@@ -13,61 +13,32 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: script.mood_lights
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: &button_styles
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
 
-          - type: custom:bubble-card
+          - type: button
             entity: script.dinner_lights
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
 
-          - type: custom:bubble-card
+          - type: button
             entity: light.house
             name: "Lights"
             icon: mdi:dots-horizontal
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
-              action: navigate
-              navigation_path: "#popup-lights"
-            button_action:
-              tap_action:
-                action: navigate
-                navigation_path: "#popup-lights"
-            <<: *button_styles
-
+              action: more-info
+              
       # what's on
       - type: entity-filter
         card:
           state_color: true
           show_header_toggle: false
-          card_mod:
-            style: |
-              ha-card {
-                margin: 25px 0 0;
-                height: auto;
-                transition: none;
-              }
+          theme: padded_card
         entities:
           - light.family_room
           - light.kitchen
@@ -91,178 +62,16 @@ cards:
           - condition: state
             state: "on"
         show_empty: false
-        grid_options:
-          columns: full
 
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
-        show_header_toggle: false
+        state_color: true
+        theme: padded_card
         entities:
           - type: divider
           - entity: automation.landscape_back_door_light
             name: "Opening doors turns on lights"
             icon: mdi:creation
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }
-
-      # pop ups
-      - type: vertical-stack
-        cards:
-                
-          - type: custom:bubble-card
-            card_type: pop-up
-            hash: "#popup-lights"
-            styles: |
-              .bubble-header-container { padding-bottom: 0; }
-
-          - heading: "Kitchen"
-            <<: &heading_styles
-              type: heading
-              card_mod:
-                style: |
-                  ha-card { margin: 5px 0 0; }
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              # Family Room
-              - type: custom:bubble-card
-                entity: light.family_room
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              # Kitchen
-              - type: custom:bubble-card
-                entity: light.kitchen
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.kitchen_cabinets
-                name: "Cabinets"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.island
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-          - heading: "Living and Dining Rooms"
-            <<: *heading_styles
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              # Living Room
-              - type: custom:bubble-card
-                entity: light.living_room
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              # Dining Room
-              - type: custom:bubble-card
-                entity: light.dining_room
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.entryway
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.hallway
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-          - heading: "Bedrooms"
-            <<: *heading_styles
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              # Bedrooms
-              - type: custom:bubble-card
-                entity: light.master_bedroom
-                name: "Master"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.boys_bedroom
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.guest_bedroom
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.play_room
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-          - heading: "Outside"
-            <<: *heading_styles
-                
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              - type: custom:bubble-card
-                entity: light.front_door
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.back_doors
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.twinkle_lights
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.garage
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.pool
-                card_type: button
-                button_type: switch
-                <<: *button_styles
+            tap_action:
+              action: none

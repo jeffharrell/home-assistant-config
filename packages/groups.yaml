@@ -75,11 +75,25 @@ light:
     name: "House"
     unique_id: house
     entities:
-      - light.outside
-      - light.kitchen_area
-      - light.living_area
-      - light.bedroom_area
-      - light.hallway
+      # living
+      - light.living_room
+      - light.dining_room
+      - light.entryway
+      # kitchen
+      - light.kitchen
+      - light.island
+      - light.kitchen_cabinets
+      - light.family_room
+      # bedrooms
+      - light.boys_bedroom
+      - light.guest_bedroom
+      - light.master_bedroom
+      - light.play_room
+      # outside
+      - light.back_doors
+      - light.twinkle_lights
+      - light.garage
+      - light.pool
 
 binary_sensor:
   # Groups
@@ -119,26 +133,11 @@ binary_sensor:
       - binary_sensor.doors_and_windows
 
 group:
-  # making these normal groups so that more-info shows the entities
-  lights_house:
-    name: "Lights"
-    icon: mdi:ceiling-light
+  climate:
+    name: "Climate"
     entities:
-      - light.family_room
-      - light.kitchen
-      - light.kitchen_cabinets
-      - light.island
-      - light.living_room
-      - light.dining_room
-      - light.entryway
-      - light.hallway
-      - light.master_bedroom
-      - light.boys_bedroom
-      - light.guest_bedroom
-      - light.play_room
-      - light.back_doors
-      - light.garage
-      - light.pool
+      - climate.home
+      - switch.house_fan
       
   media_player_speakers:
     name: "Speakers"

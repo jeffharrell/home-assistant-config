@@ -3,6 +3,7 @@ kiosk_mode:
   hide_sidebar: false
   hide_menubutton: false
   hide_overflow: false
+  hide_dialog_header_breadcrumb_navigation:  true
   mobile_settings:
     hide_sidebar: true
     hide_overflow: true

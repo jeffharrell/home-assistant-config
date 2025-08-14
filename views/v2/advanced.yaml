@@ -91,21 +91,13 @@ cards:
       # settings
       - type: entities
         title: "Settings"
-        state_color: false
+        state_color: true
         show_header_toggle: false
+        theme: padded_card
         entities:
           - type: divider
           - entity: input_text.camera_motion_prompt
             icon: mdi:creation
             name: "Camera Motion Prompt"
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }
+            tap_action:
+              action: none

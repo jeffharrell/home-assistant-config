@@ -13,41 +13,23 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: climate.home
-            card_type: button
-            card_layout: large
-            button_type: state
-            show_name: true
-            show_icon: true
+            name: "Climate"
             show_state: true
-            state_color: true
-            show_attribute: true
-            attribute: current_temperature
-            <<: &button_styles
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
+            theme: round_button
+            tap_action:
+              action: more-info
 
-          - type: custom:bubble-card
+          - type: button
             entity: switch.house_fan
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
 
       # room temperatures
       - type: entities
+        theme: padded_card
         entities:
           - type: custom:multiple-entity-row
             entity: sensor.family_room_temperature
@@ -109,32 +91,17 @@ cards:
               - entity: sensor.garage_temp
                 name: Temperature
                 format: precision0
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
 
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
+        state_color: true
         show_header_toggle: false
+        theme: padded_card
         entities:
           - type: divider
           - entity: automation.climate_windows_open
             name: "Turn climate off if windows open"
             icon: mdi:creation
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }
+            tap_action:
+              action: none

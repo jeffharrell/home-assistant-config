@@ -20,7 +20,7 @@ automation:
     actions:
       action: frontend.set_theme
       data_template:
-        name: apptheme
+        name: app_theme
 
   - alias: "System - Reset switches"
     initial_state: True

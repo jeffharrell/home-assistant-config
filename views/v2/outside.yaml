@@ -13,62 +13,32 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: switch.fountain
-            card_type: button
-            card_layout: large
-            use_accent_color: false
+            theme: round_button
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: &button_styles
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
 
-
-          - type: custom:bubble-card
+          - type: button
             entity: switch.garage_fan
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
-
-          - type: custom:bubble-card
+              
+          - type: button
             entity: group.garages
             name: "Garages"
             icon: mdi:dots-horizontal
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: round_button
             tap_action:
-              action: navigate
-              navigation_path: "#popup-garages"
-            button_action:
-              tap_action:
-                action: navigate
-                navigation_path: "#popup-garages"
-            <<: *button_styles
+              action: more-info
 
       # what's on
       - type: entity-filter
         card:
           state_color: true
           show_header_toggle: false
-          card_mod:
-            style: |
-              ha-card {
-                margin: 25px 0 0;
-                height: auto;
-                transition: none;
-              }
+          theme: padded_card
         entities:
           - cover.garage_door_1
           - cover.garage_door_2
@@ -98,78 +68,23 @@ cards:
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
+        state_color: true
         show_header_toggle: false
+        theme: padded_card
         entities:
           - type: divider
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
             name: "Motion Alerts"
+            tap_action:
+              action: none
           - entity: automation.cameras_doorbell
             icon: mdi:creation
             name: "Doorbell Alerts"
+            tap_action:
+              action: none
           - entity: automation.cameras_mailbox_open
             icon: mdi:creation
             name: "Mailbox Alerts"
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }
-
-      # pop ups
-      - type: vertical-stack
-        cards:
-          
-          - type: custom:bubble-card
-            card_type: pop-up
-            hash: "#popup-garages"
-
-          - type: grid
-            columns: 1
-            square: false
-            cards:
-              - type: entity-button
-                entity: cover.garage_door_1
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_1
-                  confirmation:
-                    text: "Toggle garage door"
-
-              - type: entity-button
-                entity: cover.garage_door_2 
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_2
-                  confirmation:
-                    text: "Toggle garage door"
-
-              - type: entity-button
-                entity: cover.garage_door_3
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_3
-                  confirmation:
-                    text: "Toggle garage door"
+            tap_action:
+              action: none
