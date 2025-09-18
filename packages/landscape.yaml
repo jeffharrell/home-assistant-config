@@ -39,27 +39,40 @@ automation:
         entity_id:
           switch.fountain
 
-  - alias: "Landscape - Front door light"
+  - alias: "Landscape - Automatic front lights"
     initial_state: True
     trigger:
-      # on
+      # time on
       - platform: time
         at: "22:00:00"
         variables:
           action: "turn_on"
-      # off
+      # time off
       - platform: sun
         event: sunrise
         offset: "-00:30:00"
         variables:
           action: "turn_off"
+      # doorbell
+      - platform: webhook
+        webhook_id: "camera_doorbell"
+        local_only: True
+        variables:
+          action: "turn_off"
+      # door opened
+      - platform: state
+        entity_id: binary_sensor.front_door
+        to: "on"
+    condition:
+      - condition: template
+        value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     actions:
       - action: >
           light.{{ action }}
         entity_id:
           light.front_door
 
-  - alias: "Landscape - Back door light"
+  - alias: "Landscape - Automatic back lights"
     initial_state: True
     trigger:
       - platform: state
