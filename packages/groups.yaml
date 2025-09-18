@@ -79,6 +79,7 @@ light:
       - light.living_room
       - light.dining_room
       - light.entryway
+      - light.hallway
       # kitchen
       - light.kitchen
       - light.island
@@ -114,6 +115,7 @@ binary_sensor:
       - binary_sensor.playroom_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
+
   - platform: group
     name: "Garage Doors"
     device_class: door
@@ -123,6 +125,7 @@ binary_sensor:
       - binary_sensor.garage_door_1
       - binary_sensor.garage_door_2
       - binary_sensor.garage_door_3
+
   - platform: group
     name: "Doors and Windows and Garages"
     device_class: door
@@ -141,6 +144,7 @@ group:
       
   media_player_speakers:
     name: "Speakers"
+    icon: "mdi:speaker"
     entities:
       - media_player.family_room_speakers
       - media_player.garage_speakers
@@ -152,6 +156,7 @@ group:
 
   media_player_tvs:
     name: "TVs"
+    icon: "mdi:television"
     entities:
       - media_player.family_room_apple_tv
       - media_player.living_room_apple_tv

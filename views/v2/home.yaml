@@ -114,19 +114,6 @@ cards:
               action: none
 
           - type: button
-            entity: binary_sensor.doors_and_windows_and_garages
-            name: "Outside"
-            theme: no_card
-            show_state: true
-            icon: mdi:door
-            icon_height: 25px
-            tap_action:
-              action: navigate
-              navigation_path: outside
-            hold_action:
-              action: none
-
-          - type: button
             entity: group.climate
             name: "Climate"
             theme: no_card
@@ -136,6 +123,19 @@ cards:
             tap_action:
               action: navigate
               navigation_path: climate
+            hold_action:
+              action: none
+              
+          - type: button
+            entity: binary_sensor.doors_and_windows_and_garages
+            name: "Outside"
+            theme: no_card
+            show_state: true
+            icon: mdi:door
+            icon_height: 25px
+            tap_action:
+              action: navigate
+              navigation_path: outside
             hold_action:
               action: none
 

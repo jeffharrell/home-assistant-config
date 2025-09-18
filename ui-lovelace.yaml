@@ -3,10 +3,11 @@ kiosk_mode:
   hide_sidebar: false
   hide_menubutton: false
   hide_overflow: false
-  hide_dialog_header_breadcrumb_navigation:  true
   mobile_settings:
     hide_sidebar: true
     hide_overflow: true
+    hide_dialog_header_action_items: true
+    hide_dialog_header_breadcrumb_navigation: true
     
 swipe_nav:
   wrap: false
@@ -21,3 +22,14 @@ views:
   - !include views/v2/climate.yaml
   - !include views/v2/cameras.yaml
   - !include views/v2/advanced.yaml
+
+  
+
+
+
+
+
+
+
+
+
