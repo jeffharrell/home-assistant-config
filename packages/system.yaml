@@ -50,7 +50,7 @@ automation:
           - automation.cameras_mailbox_open
           - automation.climate_windows_open
           - automation.landscape_fountain
-          - automation.landscape_back_door_light
+          - automation.landscape_automatic_back_lights
           - input_boolean.camera_motion_enabled
 
   - alias: "System - Reset speakers"

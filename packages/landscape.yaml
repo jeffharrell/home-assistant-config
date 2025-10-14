@@ -58,11 +58,13 @@ automation:
         webhook_id: "camera_doorbell"
         local_only: True
         variables:
-          action: "turn_off"
+          action: "turn_on"
       # door opened
       - platform: state
         entity_id: binary_sensor.front_door
         to: "on"
+        variables:
+          action: "turn_on"
     condition:
       - condition: template
         value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'

@@ -70,7 +70,7 @@ cards:
         theme: padded_card
         entities:
           - type: divider
-          - entity: automation.landscape_back_door_light
+          - entity: automation.landscape_automatic_back_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation
             tap_action:
