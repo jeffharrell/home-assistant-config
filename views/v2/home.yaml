@@ -35,6 +35,10 @@ cards:
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
           {%- endif %}
 
+          {% if is_state('binary_sensor.flume_sensor_home_leak_detected', 'on') -%}
+            <ha-icon icon="mdi:water"></ha-icon> Potential leak detected!
+          {%- endif %}
+
           {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
             <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
           {%- endif -%}
