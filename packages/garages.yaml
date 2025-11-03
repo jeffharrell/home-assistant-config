@@ -62,12 +62,19 @@ automation:
         minutes: 10
     mode: parallel
     actions:
+      # take a picture
+      - action: camera.snapshot
+        data:
+          entity_id: camera.driveway
+          filename: "/config/www/cameras/garages.jpg"
+      # send notification
       - action: notify.phones
         data_template:
           title: "Home"
           message: "{{ trigger.to_state.attributes.friendly_name }} is open"
           data:
             url: "/lovelace/outside"
+            image: "/local/cameras/garages.jpg"
             actions:
               - action: "garage_close_{{ trigger.to_state.entity_id }}"
                 title: "Close"
