@@ -1,10 +1,10 @@
 - platform: google_cloud
   service_name: google_say
   key_file: google_cloud_key.json
-  voice: en-US-Wavenet-C
-  text_type: ssml
-  speed: 1.1
-  pitch: 4.0
   cache: true
-  profiles:
-    - medium-bluetooth-speaker-class-device
+  # voice: en-US-Wavenet-C
+  # text_type: ssml
+  # speed: 1.1
+  # pitch: 4.0
+  # profiles:
+  #   - medium-bluetooth-speaker-class-device

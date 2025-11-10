@@ -35,18 +35,20 @@ automation:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/doorbell.jpg"
       # create a text response for that picture
-      - action: google_generative_ai_conversation.generate_content
+      - action: ai_task.generate_data
         continue_on_error: true
         data:
-          prompt: "{{ states('input_text.camera_motion_prompt') }}"
-          filenames:
-            - /config/www/cameras/doorbell.jpg
+          task_name: "Doorbell camera description"
+          instructions: "{{ states('input_text.camera_motion_prompt') }}"
+          attachments:
+            - media_content_id: "media-source://camera/camera.latest_doorbell"
+              media_content_type: "image/jpeg"
         response_variable: generated_content
       # send notification
       - action: notify.phones
         data_template:
           title: "{{ trigger.json.name }}"
-          message: "{{ generated_content.text }}"
+          message: "{{ generated_content.data }}"
           data:
             image: "/local/cameras/doorbell.jpg"
             url: "/lovelace/cameras"
@@ -72,18 +74,20 @@ automation:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/motion.jpg"
       # create a text response for that picture
-      - action: google_generative_ai_conversation.generate_content
+      - action: ai_task.generate_data
         continue_on_error: true
         data:
-          prompt: "{{ states('input_text.camera_motion_prompt') }}"
-          filenames:
-            - /config/www/cameras/motion.jpg
+          task_name: "Camera motion description"
+          instructions: "{{ states('input_text.camera_motion_prompt') }}"
+          attachments:
+            - media_content_id: "media-source://camera/camera.latest_motion"
+              media_content_type: "image/jpeg"
         response_variable: generated_content
       # send a notification
       - action: notify.phones
         data_template:
           title: "{{ trigger.json.name }}"
-          message: "{{ generated_content.text }}"
+          message: "{{ generated_content.data }}"
           data:
             image: "/local/cameras/motion.jpg"
             url: "/lovelace/cameras"
@@ -110,18 +114,20 @@ automation:
           entity_id: camera.driveway
           filename: "/config/www/cameras/mailbox.jpg"
       # create a text response for that picture
-      - action: google_generative_ai_conversation.generate_content
+      - action: ai_task.generate_data
         continue_on_error: true
         data:
-          prompt: "{{ states('input_text.camera_motion_prompt') }}"
-          filenames:
-            - /config/www/cameras/mailbox.jpg
+          task_name: "Mailbox open description"
+          instructions: "{{ states('input_text.camera_motion_prompt') }}"
+          attachments:
+            - media_content_id: "media-source://camera/camera.latest_mailbox"
+              media_content_type: "image/jpeg"
         response_variable: generated_content
       # send a notification
       - action: notify.phones
         data_template:
           title: "Mailbox motion"
-          message: "{{ generated_content.text }}"
+          message: "{{ generated_content.data }}"
           data:
             image: "/local/cameras/mailbox.jpg"
             url: "/lovelace/cameras"
