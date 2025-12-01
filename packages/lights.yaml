@@ -47,9 +47,15 @@ automation:
     actions:
       - action: light.turn_on
         entity_id: light.hallway
-      - action: notify.house
+      - action: tts.speak
+        target:
+          entity_id: tts.google_ai_tts
         data_template:
+          media_player_entity_id: media_player.playroom_speakers
           message: "Welcome home I turned the lights on for you"
+          options:
+            voice: !secret google_tts_voice
+          cache: true
 
   - alias: "Lights - Turn off after sunrise"
     initial_state: True

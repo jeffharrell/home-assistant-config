@@ -3,13 +3,3 @@
   services:
     - service: mobile_app_jeffs_iphone
     - service: mobile_app_jillians_iphone
-
-- name: house
-  platform: tts
-  tts_service: tts.google_say
-  media_player: media_player.playroom_speakers
-
-- name: master_bedroom
-  platform: tts
-  tts_service: tts.google_say
-  media_player: media_player.master_bedroom_speaker
