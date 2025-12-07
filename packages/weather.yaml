@@ -3,31 +3,30 @@ sun:
 shell_command:
   get_weather: !secret get_weather_cmd
 
-sensor:
-  - platform: template
-    sensors:
-      outside_forecast:
-        value_template: >
-          {{ 
-            states("weather.krhv_daynight")
-            |replace("-", " ")
-            |replace("partlycloudy", "partly cloudy")
-            |replace("unknown", "")
-          }}
-        icon_template: >
-          {% set condition = states("weather.krhv_daynight") %}
+template:
+  - sensor:
+    - name: outside_forecast
+      icon:  >
+        {% set condition = states("weather.krhv_daynight") %}
 
-          {%- if "cloud" in condition -%}
-            mdi:weather-cloudy
-          {%- elif "fog" in condition -%}
-            mdi:weather-fog
-          {%- elif "rain" in condition -%}
-            mdi:umbrella-outline
-          {%- elif "wind" in condition -%}
-            mdi:weather-windy
-          {%- else -%}
-            mdi:weather-sunny
-          {%- endif %}
+        {%- if "cloud" in condition -%}
+          mdi:weather-cloudy
+        {%- elif "fog" in condition -%}
+          mdi:weather-fog
+        {%- elif "rain" in condition -%}
+          mdi:umbrella-outline
+        {%- elif "wind" in condition -%}
+          mdi:weather-windy
+        {%- else -%}
+          mdi:weather-sunny
+        {%- endif %}
+      state: >
+        {{ 
+          states("weather.krhv_daynight")
+          |replace("-", " ")
+          |replace("partlycloudy", "partly cloudy")
+          |replace("unknown", "")
+        }}
 
 automation:
   - alias: "Weather - Cache Local"

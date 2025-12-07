@@ -1,9 +1,8 @@
-binary_sensor:
-  - platform: template
-    sensors:
-      climate_operation:
-        value_template: "{{ not is_state_attr('climate.home', 'hvac_action', 'idle') }}"
-
+template:
+  - binary_sensor:
+    - name: climate_operation
+      state: '{{ not is_state_attr("climate.home", "hvac_action", "idle") }}'
+      
 automation:
   - alias: "Climate - Windows open"
     initial_state: True
