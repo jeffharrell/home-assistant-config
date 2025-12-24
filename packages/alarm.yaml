@@ -83,7 +83,7 @@ automation:
         data_template:
           media_player_entity_id: media_player.master_bedroom_speaker
           message: >
-            Alarm armed...
+            Alarm armed
 
             {%- if is_state("input_boolean.guest_mode_enabled", "on") -%}
               Guest mode enabled...
