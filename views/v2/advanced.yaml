@@ -24,6 +24,24 @@ cards:
       - type: horizontal-stack
         cards:
           - type: statistic
+            name: "Grid Import"
+            entity: sensor.powerwall_site_import
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: statistic
+            name: "Grid Export"
+            entity: sensor.powerwall_site_export
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+      - type: horizontal-stack
+        cards:
+          - type: statistic
             name: "Solar Generation"
             entity: sensor.powerwall_solar_export
             period:
@@ -48,24 +66,16 @@ cards:
           - type: sensor
             name: "Now"
             entity: sensor.powerwall_load_now
-            
+
       - type: horizontal-stack
         cards:
-          - type: statistic
-            name: "Grid Import"
-            entity: sensor.powerwall_site_import
-            period:
-              calendar:
-                period: day
-            stat_type: change
+          - type: sensor
+            name: "Water Usage"
+            entity: sensor.flume_sensor_home_current_day
 
-          - type: statistic
-            name: "Grid Export"
-            entity: sensor.powerwall_site_export
-            period:
-              calendar:
-                period: day
-            stat_type: change
+          - type: sensor
+            name: "Now"
+            entity: sensor.flume_sensor_home_current
             
       # batteries
       - type: vertical-stack
@@ -87,6 +97,7 @@ cards:
               - entity: sensor.garage_temp_battery
               - entity: sensor.outside_battery
                 name: "Weather Station Battery"
+              - entity: binary_sensor.flume_sensor_home_battery
 
       # settings
       - type: entities

@@ -28,7 +28,7 @@ cards:
           - type: button
             entity: group.garages
             name: "Garages"
-            icon: mdi:dots-horizontal
+            icon: mdi:garage
             theme: round_button
             tap_action:
               action: more-info
@@ -55,7 +55,7 @@ cards:
           - binary_sensor.playroom_window
           - binary_sensor.guest_window
           - binary_sensor.master_bedroom_window
-          - binary_sensor.garage_side_door
+          - binary_sensor.garage_door_side
         conditions:
           - condition: or
             conditions:

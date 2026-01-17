@@ -55,7 +55,7 @@
     light.house: off
     media_player.family_room_speakers: off
     media_player.living_room_speakers: off
-    media_player.playroom_speakers: off
+    media_player.office_speakers: off
     media_player.outside_speakers: off
     switch.house_fan: off
 
@@ -68,7 +68,7 @@
     light.master_bedroom: off
     media_player.family_room_speakers: off
     media_player.living_room_speakers: off
-    media_player.playroom_speakers: off
+    media_player.office_speakers: off
     media_player.outside_speakers: off
     switch.house_fan: off
 

@@ -52,7 +52,7 @@ automation:
         target:
           entity_id: tts.google_ai_tts
         data_template:
-          media_player_entity_id: media_player.playroom_speakers
+          media_player_entity_id: media_player.office_speakers
           message: "Welcome home I turned the lights on for you"
           options:
             voice: !secret google_tts_voice
@@ -113,18 +113,18 @@ automation:
           brightness: 255
           transition: 3
 
-  - alias: "Lights - Playroom light toggles bulb"
+  - alias: "Lights - Office light toggles bulb"
     initial_state: True
     trigger:
       # on
       - platform: state
-        entity_id: light.play_room
+        entity_id: light.office
         to: "on"
         variables:
           action: "turn_on"
       # off
       - platform: state
-        entity_id: light.play_room
+        entity_id: light.office
         to: "off"
         variables:
           action: "turn_off"

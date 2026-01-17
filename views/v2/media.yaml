@@ -30,7 +30,7 @@ cards:
           - type: button
             entity: group.media_player_tvs
             name: "TVs"
-            icon: mdi:dots-horizontal
+            icon: mdi:television
             theme: round_button
             tap_action:
               action: more-info
@@ -38,7 +38,7 @@ cards:
           - type: button
             entity: group.media_player_speakers
             name: "Speakers"
-            icon: mdi:dots-horizontal
+            icon: mdi:speaker-multiple
             theme: round_button
             tap_action:
               action: more-info
@@ -108,11 +108,11 @@ cards:
                 state_not: "off"
 
           - type: media-control
-            entity: media_player.playroom_speakers
-            name: "Playroom Speakers"
+            entity: media_player.office_speakers
+            name: "Office Speakers"
             visibility:
               - condition: state
-                entity: media_player.playroom_speakers
+                entity: media_player.office_speakers
                 state_not: "off"
 
           - type: media-control

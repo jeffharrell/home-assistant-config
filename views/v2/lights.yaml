@@ -28,7 +28,7 @@ cards:
           - type: button
             entity: light.house
             name: "Lights"
-            icon: mdi:dots-horizontal
+            icon: mdi:lightbulb-group
             theme: round_button
             tap_action:
               action: more-info
@@ -51,7 +51,7 @@ cards:
           - light.master_bedroom
           - light.boys_bedroom
           - light.guest_bedroom
-          - light.play_room
+          - light.office
           - light.back_doors
           - light.garage
           - light.pool

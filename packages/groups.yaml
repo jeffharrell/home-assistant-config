@@ -60,7 +60,7 @@ light:
       - light.boys_bedroom
       - light.guest_bedroom
       - light.master_bedroom
-      - light.play_room
+      - light.office
 
   - platform: group
     name: "Outside"
@@ -89,7 +89,7 @@ light:
       - light.boys_bedroom
       - light.guest_bedroom
       - light.master_bedroom
-      - light.play_room
+      - light.office
       # outside
       - light.back_doors
       - light.twinkle_lights
@@ -112,7 +112,7 @@ binary_sensor:
       - binary_sensor.living_room_window_right
       - binary_sensor.kitchen_window
       - binary_sensor.boys_window
-      - binary_sensor.playroom_window
+      - binary_sensor.office_window
       - binary_sensor.guest_window
       - binary_sensor.master_bedroom_window
 
@@ -152,7 +152,7 @@ group:
       - media_player.living_room_speakers
       - media_player.master_bedroom_speaker
       - media_player.outside_speakers
-      - media_player.playroom_speakers
+      - media_player.office_speakers
 
   media_player_tvs:
     name: "TVs"

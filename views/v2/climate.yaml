@@ -47,54 +47,54 @@ cards:
                 format: precision0
                 unit: " °F"
           - type: custom:multiple-entity-row
-            entity: sensor.family_room_temperature
+            entity: sensor.family_room_outlet_temperature
             name: "Family Room"
             show_state: false
             entities:
-              - entity: sensor.family_room_temperature
-                name: Temperature
+              - entity: sensor.family_room_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.family_room_outlet_temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.living_room_temperature
+            entity: sensor.living_room_outlet_temperature
             name: "Living Room"
             show_state: false
             entities:
-              - entity: sensor.living_room_temperature
-                name: Temperature
+              - entity: sensor.living_room_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.living_room_outlet_temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.master_bedroom_temperature
+            entity: sensor.master_bedroom_outlet_temperature
             name: "Master Bedroom"
             show_state: false
             entities:
-              - entity: sensor.master_bedroom_temperature
-                name: Temperature
+              - entity: sensor.master_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.master_bedroom_outlet_temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.boys_bedroom_temperature
+            entity: sensor.boys_bedroom_outlet_temperature
             name: "Boys Bedroom"
             show_state: false
             entities:
-              - entity: sensor.boys_bedroom_temperature
-                name: Temperature
+              - entity: sensor.boys_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.boys_bedroom_outlet_temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.playroom_temperature
-            name: "Playroom"
+            entity: sensor.guest_bedroom_outlet_temperature
+            name: "Guest Bedroom"
             show_state: false
             entities:
-              - entity: sensor.playroom_temperature
-                name: Temperature
-                format: precision0
-          - type: custom:multiple-entity-row
-            entity: sensor.office_outlet_temperature
-            name: "Office"
-            show_state: false
-            entities:
-              - entity: sensor.office_outlet_humidity
-                name: Humidity
-              - entity: sensor.office_outlet_temperature
-                name: Temperature
+              - entity: sensor.guest_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.guest_bedroom_outlet_temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
             entity: sensor.garage_temp
@@ -102,9 +102,9 @@ cards:
             show_state: false
             entities:
               - entity: sensor.garage_humidity
-                name: Humidity
+                name: "Humidity"
               - entity: sensor.garage_temp
-                name: Temperature
+                name: "Temperature"
                 format: precision0
 
       # settings

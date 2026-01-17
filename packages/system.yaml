@@ -64,7 +64,7 @@ automation:
           entity_id: 
             - media_player.kitchen_hub
             - media_player.living_room_speakers
-            - media_player.playroom_speakers
+            - media_player.office_speakers
         data:
           volume_level: 0.6
       # some speakers should be quieter
@@ -97,6 +97,26 @@ automation:
             - switch.back_yard
             - switch.house_fan
           refresh_all_values: false
+
+  - alias: "System - Refresh Apple TVs"
+    initial_state: True
+    mode: parallel
+    trigger:
+      platform: state
+      entity_id: 
+        - media_player.family_room_apple_tv
+        - media_player.living_room_apple_tv
+        - media_player.master_bedroom_apple_tv
+      to: "unavailable"
+      for:
+        minutes: 1
+    actions:
+      - action: homeassistant.reload_config_entry
+        target:
+          entity_id: "{{ trigger.entity_id }}"
+      - action: notify.mobile_app_jeffs_iphone
+        data:
+          message: "Resetting {{ trigger.entity_id }}"
 
   # Disabled by default
   - alias: "System - Entity health check"
