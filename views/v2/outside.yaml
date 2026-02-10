@@ -36,6 +36,7 @@ cards:
       # what's on
       - type: entity-filter
         card:
+          title: "Currently Open"
           state_color: true
           show_header_toggle: false
           theme: padded_card

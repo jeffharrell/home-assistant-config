@@ -66,10 +66,8 @@ cards:
         title: "Live Cameras"
         cards:
 
-          - camera_view: auto
-            type: picture-glance
+          - type: picture-glance
             camera_image: camera.front_door
-            aspect_ratio: 16x9
             entities:
               - entity: light.front_door
 

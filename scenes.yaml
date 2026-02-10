@@ -52,7 +52,7 @@
 
 - name: House Off
   entities:
-    light.house: off
+    group.house_lights: off
     media_player.family_room_speakers: off
     media_player.living_room_speakers: off
     media_player.office_speakers: off
@@ -74,7 +74,7 @@
 
 - name: House Alert
   entities:
-    light.house:
+    group.house_lights:
       state: on
       brightness: 255
     light.front_door:

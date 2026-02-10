@@ -87,17 +87,26 @@ cards:
 
               - entity: sensor.ups_battery_charge
                 name: "UPS"
+                secondary_info: last-changed
 
               - type: divider
 
               - entity: sensor.mailbox_battery_level
                 name: "Mailbox Sensor"
+                secondary_info: last-changed
               - entity: sensor.garage_side_door_battery_level
                 name: "Garage Side Door"
+                secondary_info: last-changed
               - entity: sensor.garage_temp_battery
+                name: "Garage Temperature Sensor"
+                secondary_info: last-changed
               - entity: sensor.outside_battery
-                name: "Weather Station Battery"
+                name: "Weather Station"
+                secondary_info: last-changed
               - entity: binary_sensor.flume_sensor_home_battery
+                name: "Flume Sensor"
+                secondary_info: last-changed
+
 
       # settings
       - type: entities

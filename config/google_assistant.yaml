@@ -38,9 +38,9 @@ entity_config:
     expose: true
   light.master_bedroom:
     expose: true
-  light.twinkle_lights:
+  light.office:
     expose: true
-  light.play_room:
+  light.twinkle_lights:
     expose: true
   script.away:
     expose: true

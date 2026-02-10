@@ -32,6 +32,11 @@ cards:
             theme: round_button
             tap_action:
               action: more-info
+            card_mod:
+              style: |
+                more-info-content$:
+                  more-info-light$:
+                    .controls { display: none !important; }
               
       # what's on
       - type: entity-filter

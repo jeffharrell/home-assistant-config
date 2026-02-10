@@ -65,11 +65,11 @@ automation:
       at: "08:00:00"
     condition:
       condition: state
-      entity_id: light.house
+      entity_id: group.house_lights
       state: "on"
     actions:
-      - action: light.turn_off
-        entity_id: light.house
+      - action: homeassistant.turn_off
+        entity_id: group.house_lights
 
   - alias: "Lights - Twinkle lights"
     initial_state: True

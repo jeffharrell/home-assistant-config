@@ -8,7 +8,6 @@ themes:
 
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
-
     ha-card-border-width: "0"
     ha-card-border-radius: "0"
     card-background-color: "transparent"
@@ -42,32 +41,32 @@ themes:
 
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
-
     ha-card-border-width: "1px"
     ha-card-border-radius: "28px"
 
     card-mod-card-yaml: |
       .: |
-        .type-button {
-          display: grid;
-          grid-template-columns: 50px auto auto;
+        ha-card {
+          display: grid !important;
+          grid-template-columns: 50px max-content 1fr;
           justify-content: start;
-          padding: 6px;
+          padding: 6px !important;
           transition: none !important;
+          text-align: left;
         }
 
-        .type-button ha-state-icon {
+        ha-card ha-state-icon {
           padding: 10px;
           background: var(--primary-background-color);
           border-radius: 24px;
           filter: none !important;
         }
 
-        .type-button ha-state-icon + span {
+        ha-card ha-state-icon + span {
           margin-top: 0 !important;
         }
 
-        .type-button .state:before {
+        ha-card .state:before {
           content:" • ";
           white-space: pre;
         }
@@ -96,6 +95,7 @@ themes:
     # Header
     app-header-text-color: "var(--primary-text-color)"
     app-header-background-color: "var(--primary-background-color)"
+    app-header-backdrop-filter: "none"
     app-header-selection-bar-color: "transparent"
     mdc-top-app-bar-fixed-box-shadow: "none"
 
@@ -123,6 +123,18 @@ themes:
     state-climate-fan_only-color: "var(--accent-color)"
 
     # CSS Overrides
+    card-mod-more-info-yaml: |
+      ha-more-info-info $ more-info-content $ more-info-group $ more-info-cover $: |
+          ha-more-info-state-header { display: none !important; }
+          .controls { display: none !important; }
+
+      ha-more-info-info $ more-info-content $ more-info-group $ more-info-light $: |
+          ha-more-info-state-header { display: none !important; }
+          .controls { display: none !important; }
+          
+      ha-more-info-info $ more-info-content $ more-info-group $ more-info-media_player $: |
+          div { display: none !important; }
+
     card-mod-root: |
       .header {
         position: relative !important;
@@ -134,6 +146,10 @@ themes:
       .header .main-title {
         font-size: 1.3em;
         font-weight: bold;
+      }
+
+      .header .toolbar {
+        border: 0 !important;
       }
 
       @media only screen and (hover: none) and (pointer: coarse) {

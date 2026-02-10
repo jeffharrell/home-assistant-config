@@ -23,10 +23,12 @@ cards:
             <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
           {%- endif %}
 
-          {% set energy = (states('sensor.energy_import')|float - states('sensor.energy_export')|float)|round %}
-          <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
-          {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}
-
+          {%- if has_value('binary_sensor.powerwall_status') and states('binary_sensor.powerwall_status') != 'unavailable' -%}
+            {% set energy = (states('sensor.energy_import')|float(default=0) - states('sensor.energy_export')|float(default=0))|round %}
+            <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
+            {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}
+          {%- endif -%}
+          
           {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
@@ -94,7 +96,7 @@ cards:
         square: false
         cards:
           - type: button
-            entity: light.house
+            entity: group.house_lights
             name: "Lights"
             theme: no_card
             show_state: true

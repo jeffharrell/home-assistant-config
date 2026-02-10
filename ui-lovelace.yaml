@@ -1,13 +1,19 @@
 kiosk_mode:
+  # app ui
   hide_header: false
   hide_sidebar: false
   hide_menubutton: false
+  hide_add_to_home_assistant: true
+  hide_search: true
+  hide_assistant: true
   hide_overflow: false
+  # overrides
   mobile_settings:
     hide_sidebar: true
     hide_overflow: true
-    hide_dialog_header_action_items: true
     hide_dialog_header_breadcrumb_navigation: true
+    hide_dialog_header_settings: true
+    hide_dialog_header_overflow: true
     
 swipe_nav:
   wrap: false
@@ -22,14 +28,3 @@ views:
   - !include views/v2/climate.yaml
   - !include views/v2/cameras.yaml
   - !include views/v2/advanced.yaml
-
-  
-
-
-
-
-
-
-
-
-

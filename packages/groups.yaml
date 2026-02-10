@@ -71,31 +71,6 @@ light:
       - light.garage
       - light.pool
 
-  - platform: group
-    name: "House"
-    unique_id: house
-    entities:
-      # living
-      - light.living_room
-      - light.dining_room
-      - light.entryway
-      - light.hallway
-      # kitchen
-      - light.kitchen
-      - light.island
-      - light.kitchen_cabinets
-      - light.family_room
-      # bedrooms
-      - light.boys_bedroom
-      - light.guest_bedroom
-      - light.master_bedroom
-      - light.office
-      # outside
-      - light.back_doors
-      - light.twinkle_lights
-      - light.garage
-      - light.pool
-
 binary_sensor:
   # Groups
   - platform: group
@@ -176,3 +151,28 @@ group:
       - cover.garage_door_1
       - cover.garage_door_2
       - cover.garage_door_3
+
+  house_lights:
+    name: "House Lights"
+    icon: "mdi:ceiling-light"
+    entities:
+      # living
+      - light.living_room
+      - light.dining_room
+      - light.entryway
+      - light.hallway
+      # kitchen
+      - light.kitchen
+      - light.island
+      - light.kitchen_cabinets
+      - light.family_room
+      # bedrooms
+      - light.boys_bedroom
+      - light.guest_bedroom
+      - light.master_bedroom
+      - light.office
+      # outside
+      - light.back_doors
+      - light.twinkle_lights
+      - light.garage
+      - light.pool
