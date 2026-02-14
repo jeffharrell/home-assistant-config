@@ -13,35 +13,25 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: input_boolean.play_kitchen_music
             name: "Kitchen Music"
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
-              
-          - type: button
+            icon_tap_action:
+              action: toggle        
+
+          - type: tile
             entity: input_boolean.play_outside_music
             name: "Outside Music"
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
-              
-          - type: button
-            entity: group.media_player_tvs
-            name: "TVs"
-            icon: mdi:television
-            theme: round_button
-            tap_action:
-              action: more-info
-
-          - type: button
-            entity: group.media_player_speakers
-            name: "Speakers"
-            icon: mdi:speaker-multiple
-            theme: round_button
-            tap_action:
-              action: more-info
+            icon_tap_action:
+              action: toggle     
 
       # currently playing
       - type: grid

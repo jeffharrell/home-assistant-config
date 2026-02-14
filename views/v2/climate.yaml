@@ -13,18 +13,20 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: climate.home
-            name: "Climate"
-            show_state: true
             theme: round_button
             tap_action:
               action: more-info
+            icon_tap_action:
+              action: more-info
 
-          - type: button
+          - type: tile
             entity: switch.house_fan
             theme: round_button
             tap_action:
+              action: toggle
+            icon_tap_action:
               action: toggle
 
       # room temperatures
@@ -109,12 +111,10 @@ cards:
 
       # settings
       - type: entities
-        title: "Advanced"
         state_color: true
         show_header_toggle: false
         theme: padded_card
         entities:
-          - type: divider
           - entity: automation.climate_windows_open
             name: "Turn climate off if windows open"
             icon: mdi:creation

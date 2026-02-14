@@ -7,74 +7,96 @@ cards:
 
   - type: vertical-stack
     cards:
-
+      
       # tiles
       - type: grid
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: script.mood_lights
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
-          - type: button
+          - type: tile
             entity: script.dinner_lights
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
-          - type: button
-            entity: light.house
-            name: "Lights"
-            icon: mdi:lightbulb-group
-            theme: round_button
-            tap_action:
-              action: more-info
-            card_mod:
-              style: |
-                more-info-content$:
-                  more-info-light$:
-                    .controls { display: none !important; }
-              
-      # what's on
-      - type: entity-filter
+      - type: 'custom:mod-card'
+        style: |
+          ha-card {
+            --ha-card-border-color: var(--secondary-background-color);
+
+            margin-top: 25px;
+            padding: 6px 0;
+            background-color: var(--secondary-background-color);
+          }
         card:
-          state_color: true
-          show_header_toggle: false
-          theme: padded_card
-        entities:
-          - light.family_room
-          - light.kitchen
-          - light.kitchen_cabinets
-          - light.island
-          - light.living_room
-          - light.dining_room
-          - light.entryway
-          - light.hallway
-          - light.master_bedroom
-          - light.boys_bedroom
-          - light.guest_bedroom
-          - light.office
-          - light.back_doors
-          - light.garage
-          - light.pool
-          # these aren't in the light group since they are fully automated
-          - light.front_door
-          - light.twinkle_lights
-        conditions:
-          - condition: state
-            state: "on"
-        show_empty: false
+          type: vertical-stack
+          cards:
+            - type: tile
+              entity: light.kitchen_area
+              name: "Kitchen"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+              
+            - type: tile
+              entity: light.family_room
+              name: "Family Room"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+              
+            - type: tile
+              entity: light.living_room
+              name: "Living Room"
+              hide_state: true
+
+            - type: tile
+              entity: light.dining_room
+              name: "Dining Room"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+
+            - type: tile
+              entity: light.bedroom_area
+              name: "Bedrooms"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+
+            - type: tile
+              entity: light.hallway
+              name: "Hallway"
+              icon: mdi:lightbulb
+              hide_state: true
+
+            - type: tile
+              entity: light.outside_area
+              name: "House"
+              icon: mdi:lightbulb
+              hide_state: true
 
       # settings
       - type: entities
-        title: "Advanced"
         state_color: true
         theme: padded_card
         entities:
-          - type: divider
           - entity: automation.landscape_automatic_back_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation

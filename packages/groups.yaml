@@ -37,39 +37,53 @@ light:
       - light.kitchen_2
 
   - platform: group
-    name: "Kitchen Area"
+    name: "Kitchen"
     unique_id: kitchen_area
     entities:
       - light.kitchen
       - light.island
       - light.kitchen_cabinets
-      - light.family_room
 
   - platform: group
-    name: "Living Area"
+    name: "Living and Dining Rooms"
     unique_id: living_area
     entities:
       - light.living_room
       - light.dining_room
-      - light.entryway
+
 
   - platform: group
-    name: "Bedroom Area"
+    name: "Bedrooms"
     unique_id: bedroom_area
     entities: 
       - light.boys_bedroom
-      - light.guest_bedroom
       - light.master_bedroom
       - light.office
+      - light.guest_bedroom
 
   - platform: group
     name: "Outside"
-    unique_id: outside
+    unique_id: outside_area
     entities:
-      - light.back_doors
-      - light.twinkle_lights
       - light.garage
+      # removed because it's automated
+      # - light.front_doors
+      - light.entryway 
+      - light.back_doors
+      # removed because it's automated
+      # - light.twinkle_lights
       - light.pool
+
+  - platform: group
+    name: "House"
+    unique_id: house
+    entities:
+      - light.family_room
+      - light.living_area
+      - light.kitchen_area
+      - light.bedroom_area
+      - light.outside_area
+      - light.hallway
 
 binary_sensor:
   # Groups
@@ -143,36 +157,3 @@ group:
     entities:
       - group.media_player_speakers
       - group.media_player_tvs
-
-  garages:
-    name: "Garages"
-    icon: "mdi:garage"
-    entities:
-      - cover.garage_door_1
-      - cover.garage_door_2
-      - cover.garage_door_3
-
-  house_lights:
-    name: "House Lights"
-    icon: "mdi:ceiling-light"
-    entities:
-      # living
-      - light.living_room
-      - light.dining_room
-      - light.entryway
-      - light.hallway
-      # kitchen
-      - light.kitchen
-      - light.island
-      - light.kitchen_cabinets
-      - light.family_room
-      # bedrooms
-      - light.boys_bedroom
-      - light.guest_bedroom
-      - light.master_bedroom
-      - light.office
-      # outside
-      - light.back_doors
-      - light.twinkle_lights
-      - light.garage
-      - light.pool

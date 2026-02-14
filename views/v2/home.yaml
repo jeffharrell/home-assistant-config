@@ -48,7 +48,7 @@ cards:
         card_mod:
           style: |
             ha-card { 
-              margin-top: -65px;
+              margin-top: -45px;
               padding-bottom: 20px;
               transition: none;
               line-height: 1.8em;
@@ -96,7 +96,7 @@ cards:
         square: false
         cards:
           - type: button
-            entity: group.house_lights
+            entity: light.house
             name: "Lights"
             theme: no_card
             show_state: true
@@ -151,10 +151,10 @@ cards:
         title: " "
         cards:
           # mood lights
-          - type: button
+          - type: tile
             entity: script.mood_lights
+            hide_state: true
             theme: round_button
-            icon_height: 24px
             visibility:
               - condition: state
                 entity: sun.sun
@@ -166,12 +166,14 @@ cards:
                     state: "disarmed"
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
           # dinner lights
-          - type: button
+          - type: tile
             entity: script.dinner_lights
+            hide_state: true
             theme: round_button
-            icon_height: 24px
             visibility:
               - condition: state
                 entity: sun.sun
@@ -186,12 +188,14 @@ cards:
                     state: "disarmed"
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
  
           # good night
-          - type: button
+          - type: tile
             entity: script.good_night
+            hide_state: true
             theme: round_button
-            icon_height: 24px
             visibility:
               - condition: state
                 entity: schedule.quick_actions_good_night
@@ -203,10 +207,13 @@ cards:
                     state: "disarmed"
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
           # let dog out
-          - type: button
+          - type: tile
             entity: script.let_dog_out
+            hide_state: true
             theme: round_button
             icon_height: 24px
             visibility:
@@ -220,10 +227,13 @@ cards:
                     state: "off"
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
           # wake up
-          - type: button
+          - type: tile
             entity: script.wake_up
+            hide_state: true
             theme: round_button
             icon_height: 24px
             visibility:
@@ -237,13 +247,18 @@ cards:
                     state: "armed_home"
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
           # alarm
-          - type: button
+          - type: tile
             entity: alarm_control_panel.alarm_panel_ui
+            hide_state: true
             theme: round_button
             icon_height: 24px
             tap_action:
+              action: more-info
+            icon_tap_action:
               action: more-info
             card_mod:
               style: |

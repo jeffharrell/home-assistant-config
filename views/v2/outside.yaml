@@ -13,25 +13,57 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: switch.fountain
             theme: round_button
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
-          - type: button
+          - type: tile
             entity: switch.garage_fan
             theme: round_button
             tap_action:
               action: toggle
-              
-          - type: button
-            entity: group.garages
-            name: "Garages"
-            icon: mdi:garage
-            theme: round_button
-            tap_action:
-              action: more-info
+            icon_tap_action:
+              action: toggle
+
+      - type: 'custom:mod-card'
+        style: |
+          ha-card {
+            --ha-card-border-color: var(--secondary-background-color);
+
+            margin-top: 30px;
+            padding: 6px 0;
+            background-color: var(--secondary-background-color);
+          }
+        card:
+          type: vertical-stack
+          cards:
+            - type: tile
+              entity: switch.garage_door_3
+              name: "Jillian's Garage"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: toggle
+
+            - type: tile
+              entity: switch.garage_door_2
+              name: "Jeffs's Garage"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: toggle
+
+            - type: tile
+              entity: switch.garage_door_1
+              name: "Guest Garage"
+              hide_state: true
+              features_position: inline
+              features:
+                - type: toggle
 
       # what's on
       - type: entity-filter
@@ -41,9 +73,6 @@ cards:
           show_header_toggle: false
           theme: padded_card
         entities:
-          - cover.garage_door_1
-          - cover.garage_door_2
-          - cover.garage_door_3
           - binary_sensor.front_door
           - binary_sensor.family_room_doors
           - binary_sensor.master_bedroom_doors
@@ -68,12 +97,10 @@ cards:
 
       # settings
       - type: entities
-        title: "Advanced"
         state_color: true
         show_header_toggle: false
         theme: padded_card
         entities:
-          - type: divider
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
             name: "Motion Alerts"

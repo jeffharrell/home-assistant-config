@@ -39,37 +39,10 @@ themes:
   round_button: 
     card-mod-theme: round_button
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
-    ha-card-border-width: "1px"
-    ha-card-border-radius: "28px"
-
     card-mod-card-yaml: |
-      .: |
-        ha-card {
-          display: grid !important;
-          grid-template-columns: 50px max-content 1fr;
-          justify-content: start;
-          padding: 6px !important;
-          transition: none !important;
-          text-align: left;
-        }
-
-        ha-card ha-state-icon {
-          padding: 10px;
-          background: var(--primary-background-color);
-          border-radius: 24px;
-          filter: none !important;
-        }
-
-        ha-card ha-state-icon + span {
-          margin-top: 0 !important;
-        }
-
-        ha-card .state:before {
-          content:" • ";
-          white-space: pre;
-        }
+      ha-card {
+        border-radius: 28px !important;
+      }
 
   subview:
     card-mod-theme: subview 
@@ -99,10 +72,14 @@ themes:
     app-header-selection-bar-color: "transparent"
     mdc-top-app-bar-fixed-box-shadow: "none"
 
+
     # Cards
     ha-card-border-width: "1px"
-    ha-card-border-radius: "12px"
+    ha-card-border-radius: "28px"
     ha-card-header-font-size: "15px"
+
+    ha-tile-info-primary-font-size: "var(--ha-font-size-l)"
+    ha-tile-info-primary-font-weight: "var(--ha-font-weight-normal)"
 
     divider-color: "rgba(0, 0, 0, 0.15)"
     code-editor-background-color: "#000"
@@ -150,6 +127,10 @@ themes:
 
       .header .toolbar {
         border: 0 !important;
+      }
+
+      #view {
+        padding-top: 40px !important;
       }
 
       @media only screen and (hover: none) and (pointer: coarse) {
