@@ -42,28 +42,28 @@ cards:
           type: vertical-stack
           cards:
             - type: tile
-              entity: switch.garage_door_3
+              entity: cover.garage_door_3
               name: "Jillian's Garage"
-              hide_state: true
+              hide_state: false
               features_position: inline
               features:
-                - type: toggle
-
+                - type: cover-open-close
+                
             - type: tile
-              entity: switch.garage_door_2
-              name: "Jeffs's Garage"
-              hide_state: true
+              entity: cover.garage_door_2
+              name: "Jeff's Garage"
+              hide_state: false
               features_position: inline
               features:
-                - type: toggle
+                - type: cover-open-close
 
             - type: tile
-              entity: switch.garage_door_1
+              entity: cover.garage_door_1
               name: "Guest Garage"
-              hide_state: true
+              hide_state: false
               features_position: inline
               features:
-                - type: toggle
+                - type: cover-open-close
 
       # what's on
       - type: entity-filter
@@ -97,9 +97,8 @@ cards:
 
       # settings
       - type: entities
-        state_color: true
-        show_header_toggle: false
-        theme: padded_card
+        state_color: false
+        theme: settings_card
         entities:
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation

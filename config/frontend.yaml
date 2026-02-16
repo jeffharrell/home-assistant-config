@@ -14,7 +14,7 @@ themes:
 
     card-mod-card-yaml: |
       .: |
-        .type-button ha-state-icon {
+        ha-state-icon {
           filter: none !important;
         }
 
@@ -35,6 +35,30 @@ themes:
         ha-card h1 {
           padding: 5px 15px 10px;
         }  
+
+  settings_card:
+    card-mod-theme: settings_card
+
+    primary-text-color: "#fff"
+    secondary-text-color: "#ccc"
+    card-background-color: "#313131"
+
+    card-mod-card-yaml: |
+      .: |
+        ha-card {
+          --ha-icon-display: none;
+          --primary-text-color: #E0E0E0;
+
+          border-color: transparent;
+
+          margin: 25px 0 0 -40px;
+          height: auto;
+          transition: none;
+        }
+
+        #states {
+          padding: 0;
+        }
 
   round_button: 
     card-mod-theme: round_button

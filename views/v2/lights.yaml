@@ -83,7 +83,6 @@ cards:
             - type: tile
               entity: light.hallway
               name: "Hallway"
-              icon: mdi:lightbulb
               hide_state: true
 
             - type: tile
@@ -94,11 +93,9 @@ cards:
 
       # settings
       - type: entities
-        state_color: true
-        theme: padded_card
+        state_color: false
+        theme: settings_card
         entities:
           - entity: automation.landscape_automatic_back_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation
-            tap_action:
-              action: none

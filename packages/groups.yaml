@@ -68,7 +68,6 @@ light:
       - light.garage
       # removed because it's automated
       # - light.front_doors
-      - light.entryway 
       - light.back_doors
       # removed because it's automated
       # - light.twinkle_lights

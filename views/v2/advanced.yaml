@@ -111,11 +111,9 @@ cards:
       # settings
       - type: entities
         title: "Settings"
-        state_color: true
-        show_header_toggle: false
-        theme: padded_card
+        state_color: false
+        theme: settings_card
         entities:
-          - type: divider
           - entity: input_text.camera_motion_prompt
             icon: mdi:creation
             name: "Camera Motion Prompt"

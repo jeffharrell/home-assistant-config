@@ -34,21 +34,6 @@ cards:
         theme: padded_card
         entities:
           - type: custom:multiple-entity-row
-            entity: climate.home
-            name: "Thermostat"
-            show_state: false
-            entities:
-              - entity: climate.home
-                name: Humidity
-                attribute: current_humidity
-                format: precision0
-                unit: " %"
-              - entity: climate.home
-                name: Temperature
-                attribute: current_temperature
-                format: precision0
-                unit: " °F"
-          - type: custom:multiple-entity-row
             entity: sensor.family_room_outlet_temperature
             name: "Family Room"
             show_state: false
@@ -111,9 +96,8 @@ cards:
 
       # settings
       - type: entities
-        state_color: true
-        show_header_toggle: false
-        theme: padded_card
+        state_color: false
+        theme: settings_card
         entities:
           - entity: automation.climate_windows_open
             name: "Turn climate off if windows open"
