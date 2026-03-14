@@ -58,6 +58,7 @@
     media_player.office_speakers: off
     media_player.outside_speakers: off
     switch.house_fan: off
+    switch.twinkle_lights: off
 
 - name: House Off Guest
   entities:

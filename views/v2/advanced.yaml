@@ -110,9 +110,8 @@ cards:
 
       # settings
       - type: entities
-        title: "Settings"
+        title: ""
         state_color: false
-        theme: settings_card
         entities:
           - entity: input_text.camera_motion_prompt
             icon: mdi:creation

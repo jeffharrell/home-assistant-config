@@ -215,7 +215,6 @@ cards:
             entity: script.let_dog_out
             hide_state: true
             theme: round_button
-            icon_height: 24px
             visibility:
               - condition: state
                 entity: alarm_control_panel.alarm
@@ -235,7 +234,6 @@ cards:
             entity: script.wake_up
             hide_state: true
             theme: round_button
-            icon_height: 24px
             visibility:
               - condition: state
                 entity: schedule.quick_actions_wake_up
@@ -255,7 +253,6 @@ cards:
             entity: alarm_control_panel.alarm_panel_ui
             hide_state: true
             theme: round_button
-            icon_height: 24px
             tap_action:
               action: more-info
             icon_tap_action:

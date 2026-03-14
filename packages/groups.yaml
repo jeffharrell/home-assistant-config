@@ -51,7 +51,6 @@ light:
       - light.living_room
       - light.dining_room
 
-
   - platform: group
     name: "Bedrooms"
     unique_id: bedroom_area

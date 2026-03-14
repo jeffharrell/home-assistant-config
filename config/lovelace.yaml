@@ -1,3 +1,5 @@
+resource_mode: yaml
+
 dashboards:
   lovelace:
     mode: yaml
@@ -5,8 +7,6 @@ dashboards:
     title: "Overview"
     icon: "mdi:view-dashboard"
     show_in_sidebar: true
-
-resource_mode: yaml
 
 resources:
   - url: /hacsfiles/kiosk-mode/kiosk-mode.js

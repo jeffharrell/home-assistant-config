@@ -87,8 +87,7 @@ cards:
 
             - type: tile
               entity: light.outside_area
-              name: "House"
-              icon: mdi:lightbulb
+              name: "Outside"
               hide_state: true
 
       # settings
@@ -99,3 +98,5 @@ cards:
           - entity: automation.landscape_automatic_back_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation
+            tap_action:
+              action: none

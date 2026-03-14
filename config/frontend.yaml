@@ -51,7 +51,7 @@ themes:
 
           border-color: transparent;
 
-          margin: 25px 0 0 -40px;
+          margin: 40px 0 0 -40px;
           height: auto;
           transition: none;
         }
@@ -125,16 +125,8 @@ themes:
 
     # CSS Overrides
     card-mod-more-info-yaml: |
-      ha-more-info-info $ more-info-content $ more-info-group $ more-info-cover $: |
-          ha-more-info-state-header { display: none !important; }
-          .controls { display: none !important; }
-
-      ha-more-info-info $ more-info-content $ more-info-group $ more-info-light $: |
-          ha-more-info-state-header { display: none !important; }
-          .controls { display: none !important; }
-          
-      ha-more-info-info $ more-info-content $ more-info-group $ more-info-media_player $: |
-          div { display: none !important; }
+      ha-more-info-info $ more-info-content $ more-info-light $: |
+          .controls {  }
 
     card-mod-root: |
       .header {
@@ -154,7 +146,7 @@ themes:
       }
 
       #view {
-        padding-top: 40px !important;
+        padding: 40px 0 0 !important;
       }
 
       @media only screen and (hover: none) and (pointer: coarse) {
