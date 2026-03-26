@@ -78,24 +78,17 @@ automation:
 
     trigger:
       platform: time_pattern
-      minutes: "/5"
+      minutes: "/20"
     actions:
       - action: zwave_js.refresh_value
         data:
           entity_id:
             - light.family_room
-            - light.entryway
             - light.island
             - light.kitchen_1
             - light.kitchen_2
             - light.master_bedroom
             - light.pantry
-            - light.play_room
-            - switch.hallway
-            - switch.kitchen_cabinets
-            - switch.living_room
-            - switch.back_yard
-            - switch.house_fan
           refresh_all_values: false
 
   - alias: "System - Refresh Apple TVs"
