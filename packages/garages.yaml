@@ -43,7 +43,7 @@ template:
 
 automation:
   - alias: "Garages - Door open"
-    initial_state: True
+
     trigger:
       platform: state
       entity_id:
@@ -62,7 +62,7 @@ automation:
           filename: "/config/www/cameras/garages.jpg"
       # send notification
       - action: notify.phones
-        data_template:
+        data:
           title: "Home"
           message: "{{ trigger.to_state.attributes.friendly_name }} is open"
           data:
@@ -73,7 +73,7 @@ automation:
                 title: "Close"
 
   - alias: "Garages - Fan"
-    initial_state: True
+
     trigger:
       - platform: numeric_state
         entity_id: sensor.garage_temp

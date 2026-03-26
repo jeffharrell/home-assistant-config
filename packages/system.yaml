@@ -13,17 +13,17 @@ input_boolean:
 
 automation:
   - alias: "System - Theme change"
-    initial_state: True
+
     trigger:
       - platform: homeassistant
         event: start
     actions:
       action: frontend.set_theme
-      data_template:
+      data:
         name: app_theme
 
   - alias: "System - Reset switches"
-    initial_state: True
+
     mode: parallel
     trigger:
       platform: state
@@ -39,7 +39,7 @@ automation:
           entity_id: "{{ trigger.entity_id }}"
 
   - alias: "System - Reset settings"
-    initial_state: True
+
     trigger:
       platform: time
       at: "04:00:00"
@@ -54,7 +54,7 @@ automation:
           - input_boolean.camera_motion_enabled
 
   - alias: "System - Reset speakers"
-    initial_state: True
+
     trigger:
       platform: time
       at: "12:00:00"
@@ -75,7 +75,7 @@ automation:
           volume_level: 0.5
 
   - alias: "System - Refresh non-zwave plus nodes"
-    initial_state: True
+
     trigger:
       platform: time_pattern
       minutes: "/5"
@@ -99,7 +99,7 @@ automation:
           refresh_all_values: false
 
   - alias: "System - Refresh Apple TVs"
-    initial_state: True
+
     mode: parallel
     trigger:
       platform: state

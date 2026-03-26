@@ -6,41 +6,41 @@ play_music_outside:
 
 wake_up:
   sequence:
-    - service: alarm_control_panel.alarm_disarm
+    - action: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
     - condition: template
       value_template: "{{ state_attr('sun.sun', 'elevation') < 2 }}"
-    - service: scene.turn_on
+    - action: scene.turn_on
       data:
         entity_id: scene.wake_up
 
 good_night:
   sequence:
-    - service: alarm_control_panel.alarm_arm_home
+    - action: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.alarm
 
 away:
   sequence:
-    - service: alarm_control_panel.alarm_arm_away
+    - action: alarm_control_panel.alarm_arm_away
       data:
         entity_id: alarm_control_panel.alarm
 
 dinner_lights:
   sequence:
-    - service: scene.turn_on
+    - action: scene.turn_on
       data:
         entity_id: scene.dinner_lights
     - condition: template
       value_template: "{{ state_attr('sun.sun', 'elevation') < 4 }}"
-    - service: scene.turn_on
+    - action: scene.turn_on
       data:
         entity_id: scene.dinner_lights_more
 
 mood_lights:
   sequence:
-    - service: scene.turn_on
+    - action: scene.turn_on
       data:
         entity_id: scene.mood_lights
 
@@ -51,45 +51,33 @@ hvac_disable:
         entity_id: climate.home
         state: "heat"
       then:
-        service: climate.set_temperature
+        action: climate.set_temperature
         data:
           entity_id: climate.home
           temperature: !secret climate_off_heat
       else:
-        service: climate.set_temperature
+        action: climate.set_temperature
         data:
           entity_id: climate.home
           temperature: !secret climate_off_cool
 
 hvac_resume:
   sequence:
-    - service: button.press
+    - action: button.press
       data:
         entity_id: button.home_clear_hold
 
 let_dog_out:
   mode: single
   sequence:
-    # Disable alarm voice and device updates
-    - service: automation.turn_off
+    - action: automation.turn_off
       data:
-        entity_id: 
+        entity_id:
           - automation.alarm_disarmed_mode
           - automation.alarm_home_mode
-    # Turn off alarm
-    - service: alarm_control_panel.alarm_disarm
+    - action: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm
-    # Turn back on alarm after specified time
-    - delay: "00:30:00"
-    - service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.alarm
-    # Turn back on voice and device updates for alarm
-    - delay: "00:01:00"
-    - service: automation.turn_on
-      data:
-        entity_id: 
-          - automation.alarm_disarmed_mode
-          - automation.alarm_home_mode
-        
+    - action: timer.start
+      target:
+        entity_id: timer.let_dog_out

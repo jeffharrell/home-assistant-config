@@ -37,45 +37,58 @@ binary_sensor:
         unavailable
       {% endif %}
 
+script:
+  camera_snapshot_notify:
+    fields:
+      camera_entity:
+        description: "Camera entity to snapshot"
+      filename:
+        description: "Snapshot filename"
+      title:
+        description: "Notification title"
+      media_content_id:
+        description: "Media source ID for AI task"
+    sequence:
+      - action: camera.snapshot
+        data:
+          entity_id: "{{ camera_entity }}"
+          filename: "/config/www/cameras/{{ filename }}"
+      - action: ai_task.generate_data
+        continue_on_error: true
+        data:
+          task_name: "{{ title }}"
+          instructions: "{{ states('input_text.camera_motion_prompt') }}"
+          attachments:
+            - media_content_id: "{{ media_content_id }}"
+              media_content_type: "image/jpeg"
+        response_variable: generated_content
+      - action: notify.phones
+        data:
+          title: "{{ title }}"
+          message: "{{ generated_content.data }}"
+          data:
+            image: "/local/cameras/{{ filename }}"
+            url: "/lovelace/cameras"
+      - action: counter.increment
+        target:
+          entity_id: counter.camera_motion
+
 automation:
   - alias: "Cameras - Doorbell"
-    initial_state: True
     mode: queued
     trigger:
       - platform: webhook
         webhook_id: "camera_doorbell"
         local_only: True
     actions:
-      # take a picture
-      - action: camera.snapshot
+      - action: script.camera_snapshot_notify
         data:
-          entity_id: "{{ trigger.json.camera }}"
-          filename: "/config/www/cameras/doorbell.jpg"
-      # create a text response for that picture
-      - action: ai_task.generate_data
-        continue_on_error: true
-        data:
-          task_name: "Doorbell camera description"
-          instructions: "{{ states('input_text.camera_motion_prompt') }}"
-          attachments:
-            - media_content_id: "media-source://camera/camera.latest_doorbell"
-              media_content_type: "image/jpeg"
-        response_variable: generated_content
-      # send notification
-      - action: notify.phones
-        data_template:
+          camera_entity: "{{ trigger.json.camera }}"
+          filename: "doorbell.jpg"
           title: "{{ trigger.json.name }}"
-          message: "{{ generated_content.data }}"
-          data:
-            image: "/local/cameras/doorbell.jpg"
-            url: "/lovelace/cameras"
-      # update the counter
-      - action: counter.increment
-        target:
-          entity_id: counter.camera_motion
+          media_content_id: "media-source://camera/camera.latest_doorbell"
 
   - alias: "Cameras - Motion"
-    initial_state: True
     mode: queued
     trigger:
       - platform: webhook
@@ -85,36 +98,14 @@ automation:
       condition: template
       value_template: "{{ is_state('input_boolean.camera_motion_enabled', 'on') }}"
     actions:
-      # take a picture
-      - action: camera.snapshot
+      - action: script.camera_snapshot_notify
         data:
-          entity_id: "{{ trigger.json.camera }}"
-          filename: "/config/www/cameras/motion.jpg"
-      # create a text response for that picture
-      - action: ai_task.generate_data
-        continue_on_error: true
-        data:
-          task_name: "Camera motion description"
-          instructions: "{{ states('input_text.camera_motion_prompt') }}"
-          attachments:
-            - media_content_id: "media-source://camera/camera.latest_motion"
-              media_content_type: "image/jpeg"
-        response_variable: generated_content
-      # send a notification
-      - action: notify.phones
-        data_template:
+          camera_entity: "{{ trigger.json.camera }}"
+          filename: "motion.jpg"
           title: "{{ trigger.json.name }}"
-          message: "{{ generated_content.data }}"
-          data:
-            image: "/local/cameras/motion.jpg"
-            url: "/lovelace/cameras"
-      # update the counter
-      - action: counter.increment
-        target:
-          entity_id: counter.camera_motion
-          
+          media_content_id: "media-source://camera/camera.latest_motion"
+
   - alias: "Cameras - Mailbox open"
-    initial_state: True
     mode: queued
     max_exceeded: silent
     trigger:
@@ -122,15 +113,14 @@ automation:
         entity_id: binary_sensor.mailbox_motion
         to: "on"
     actions:
-      # trigger a recording 
+      # trigger a recording
       - action: shell_command.record_driveway_camera
         continue_on_error: true
-      # take a picture
+      # snapshot, AI describe, and notify
       - action: camera.snapshot
         data:
           entity_id: camera.driveway
           filename: "/config/www/cameras/mailbox.jpg"
-      # create a text response for that picture
       - action: ai_task.generate_data
         continue_on_error: true
         data:
@@ -140,9 +130,8 @@ automation:
             - media_content_id: "media-source://camera/camera.latest_mailbox"
               media_content_type: "image/jpeg"
         response_variable: generated_content
-      # send a notification
       - action: notify.phones
-        data_template:
+        data:
           title: "Mailbox motion"
           message: "{{ generated_content.data }}"
           data:
@@ -153,7 +142,6 @@ automation:
                 name: "default"
                 critical: "{{ is_state('sun.sun', 'below_horizon')|int }}"
                 volume: "{{ is_state('sun.sun', 'below_horizon')|int }}"
-      # update the counter
       - action: counter.increment
         target:
           entity_id: counter.camera_motion
@@ -162,7 +150,6 @@ automation:
           minutes: 1
 
   - alias: "Camera - Swap recording profile"
-    initial_state: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -180,7 +167,6 @@ automation:
         entity_id: switch.surveillance_station_home_mode
 
   - alias: "Camera - Reset doorbell status"
-    initial_state: True
     trigger:
       - platform: state
         entity_id: binary_sensor.doorbell_status
@@ -192,7 +178,6 @@ automation:
           message: "Resetting doorbell status"
 
   - alias: "Cameras - Reset camera events"
-    initial_state: True
     trigger:
       - platform: time
         at: "00:00:00"

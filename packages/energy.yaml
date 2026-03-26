@@ -5,8 +5,8 @@ template:
       unit_of_measurement: "%"
       device_class: "battery"
       state: >-
-        {% set value = ((states('sensor.powerwall_charge') | float(0) / 100.0) - (0.05)) / (0.95) | float(0) %}
-        {{ (value * 100) | round(1) }}
+        {% set charge = states('sensor.powerwall_charge') | float(0) %}
+        {{ (((charge / 100.0) - 0.05) / 0.95 * 100) | round(1) }}
 
 utility_meter:
   energy_import:
@@ -18,7 +18,7 @@ utility_meter:
 
 automation:
   - alias: "Energy - Power grid status"
-    initial_state: True
+
     mode: single
     trigger:
       # Be explicit on on/off to avoid API outage notifications
@@ -32,12 +32,12 @@ automation:
         from: "on"
     actions:
       - action: notify.phones
-        data_template:
+        data:
           title: "Home"
-          message: "Power grid is {{ trigger.to_state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%."
+          message: "Power grid is {{ trigger.to_state.state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%."
 
   - alias: "Energy - UPS status change"
-    initial_state: True
+
     mode: single
     trigger:
       - platform: state
@@ -48,12 +48,12 @@ automation:
         to: "On Battery Battery Discharging"
     actions:
       action: notify.mobile_app_jeffs_iphone
-      data_template:
+      data:
         title: "Home"
         message: "UPS is {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%."
 
   - alias: "Energy - Disable climate if power out"
-    initial_state: True
+
     mode: single
     trigger:
       - platform: state
@@ -64,6 +64,6 @@ automation:
         data:
           entity_id: climate.home
       - action: notify.phones
-        data_template:
+        data:
           title: "Home"
           message: "Disabling HVAC. You can turn back on manually."

@@ -15,13 +15,18 @@ template:
           target:
             entity_id: alarm_control_panel.alarm
       disarm:
-        - action: alarm_control_panel.alarm_disarm 
+        - action: alarm_control_panel.alarm_disarm
           target:
             entity_id: alarm_control_panel.alarm
 
+timer:
+  let_dog_out:
+    name: "Let Dog Out"
+    duration: "00:30:00"
+    icon: mdi:dog
+
 automation:
   - alias: "Alarm - Away mode"
-    initial_state: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -37,23 +42,26 @@ automation:
           entity_id: input_boolean.camera_motion_enabled
       # notify if doors or garages are open (with built in delays for leaving)
       - delay: "00:00:15"
-      - action: notify.phones
-        data_template:
-          message: >
-            {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
-              Warning! The following are open: {{ expand("binary_sensor.doors_and_windows") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
-            {%- endif -%}
+      - if:
+          condition: state
+          entity_id: binary_sensor.doors_and_windows
+          state: "on"
+        then:
+          - action: notify.phones
+            data:
+              message: "Warning! The following are open: {{ expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | map(attribute='name') | join(', ') }}"
       - delay:
           minutes: 10
-      - action: notify.phones
-        data_template:
-          message: >
-            {%- if is_state("binary_sensor.garage_doors", "on") -%}
-              The garage is still open: {{ expand("binary_sensor.garage_doors") | selectattr("state", "eq", "on") | map(attribute="name") | join(", ") }}
-            {%- endif -%}
+      - if:
+          condition: state
+          entity_id: binary_sensor.garage_doors
+          state: "on"
+        then:
+          - action: notify.phones
+            data:
+              message: "The garage is still open: {{ expand('binary_sensor.garage_doors') | selectattr('state', 'eq', 'on') | map(attribute='name') | join(', ') }}"
 
   - alias: "Alarm - Home mode"
-    initial_state: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -80,7 +88,7 @@ automation:
       - action: tts.speak
         target:
           entity_id: tts.google_ai_tts
-        data_template:
+        data:
           media_player_entity_id: media_player.master_bedroom_speaker
           message: >
             Alarm armed
@@ -97,7 +105,6 @@ automation:
           cache: true
 
   - alias: "Alarm - Disarmed mode"
-    initial_state: True
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -107,7 +114,7 @@ automation:
       - action: tts.speak
         target:
           entity_id: tts.google_ai_tts
-        data_template:
+        data:
           media_player_entity_id: media_player.master_bedroom_speaker
           message: "Alarm off"
           options:
@@ -125,7 +132,6 @@ automation:
           entity_id: scene.good_morning
 
   - alias: "Alarm - Alert"
-    initial_state: True
     trigger:
       platform: state
       entity_id: alarm_control_panel.alarm
@@ -137,7 +143,7 @@ automation:
           entity_id: scene.house_alert
       # send an alert
       - action: notify.phones
-        data_template:
+        data:
           title: "Home"
           message: "Alarm triggered!"
           data:
@@ -148,3 +154,20 @@ automation:
                 name: "default"
                 critical: 1
                 volume: 1
+
+  - alias: "Alarm - Re-arm after dog"
+    trigger:
+      - platform: state
+        entity_id: timer.let_dog_out
+        from: "active"
+        to: "idle"
+    actions:
+      - action: alarm_control_panel.alarm_arm_home
+        data:
+          entity_id: alarm_control_panel.alarm
+      - delay: "00:01:00"
+      - action: automation.turn_on
+        data:
+          entity_id:
+            - automation.alarm_disarmed_mode
+            - automation.alarm_home_mode
