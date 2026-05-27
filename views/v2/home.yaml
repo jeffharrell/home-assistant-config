@@ -28,20 +28,20 @@ cards:
             <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
             {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}
           {%- endif -%}
-          
+
           {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
-          {% if len == 1 %} 
+          {%- if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {% elif len > 1 %}
+          {%- elif len > 1 %}
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
-          {%- endif %}
+          {%- endif -%}
 
-          {% if is_state('binary_sensor.flume_sensor_home_leak_detected', 'on') -%}
-            <ha-icon icon="mdi:water"></ha-icon> Potential leak detected!
-          {%- endif %}
+          {% if is_state('binary_sensor.flume_sensor_home_leak_detected', 'on') %}
+            <ha-icon icon="mdi:water"></ha-icon> Potential leak detected
+          {%- endif -%}
 
-          {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
+          {%- if is_state('input_boolean.guest_mode_enabled', 'on') %}
             <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
           {%- endif -%}
         text_only: true
@@ -109,7 +109,7 @@ cards:
               navigation_path: advanced?disable_km
             
           - type: button
-            entity: group.media_player_speakers_and_tvs
+            entity: binary_sensor.media_players
             name: "Media"
             theme: no_card
             show_state: true

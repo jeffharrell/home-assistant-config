@@ -51,7 +51,6 @@ automation:
           - automation.climate_windows_open
           - automation.landscape_fountain
           - automation.landscape_automatic_back_lights
-          - input_boolean.camera_motion_enabled
 
   - alias: "System - Reset speakers"
 

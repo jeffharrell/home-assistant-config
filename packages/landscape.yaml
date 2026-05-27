@@ -67,7 +67,7 @@ automation:
           action: "turn_on"
     condition:
       - condition: template
-        value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+        value_template: '{{ state_attr("sun.sun", "elevation") < 0 }}'
     actions:
       - action: >
           light.{{ action }}

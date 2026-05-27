@@ -22,7 +22,7 @@ template:
 timer:
   let_dog_out:
     name: "Let Dog Out"
-    duration: "00:30:00"
+    duration: "00:20:00"
     icon: mdi:dog
 
 automation:

@@ -44,7 +44,9 @@ cards:
             - type: tile
               entity: cover.garage_door_3
               name: "Jillian's Garage"
-              hide_state: false
+              state_content:
+                - state
+                - last_changed
               features_position: inline
               features:
                 - type: cover-open-close
@@ -52,7 +54,9 @@ cards:
             - type: tile
               entity: cover.garage_door_2
               name: "Jeff's Garage"
-              hide_state: false
+              state_content:
+                - state
+                - last_changed
               features_position: inline
               features:
                 - type: cover-open-close
@@ -60,7 +64,9 @@ cards:
             - type: tile
               entity: cover.garage_door_1
               name: "Guest Garage"
-              hide_state: false
+              state_content:
+                - state
+                - last_changed
               features_position: inline
               features:
                 - type: cover-open-close
@@ -68,7 +74,6 @@ cards:
       # what's on
       - type: entity-filter
         card:
-          title: "Currently Open"
           state_color: true
           show_header_toggle: false
           theme: padded_card
