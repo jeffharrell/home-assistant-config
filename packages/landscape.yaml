@@ -1,6 +1,5 @@
 automation:
   - alias: "Landscape - Lighting"
-
     trigger:
       # on
       - platform: sun
@@ -21,7 +20,6 @@ automation:
           - switch.back_landscape
 
   - alias: "Landscape - Fountain"
-
     trigger:
       # on
       - platform: time
@@ -40,7 +38,6 @@ automation:
           switch.fountain
 
   - alias: "Landscape - Automatic front lights"
-
     trigger:
       # time on
       - platform: time
@@ -75,7 +72,6 @@ automation:
           light.front_door
 
   - alias: "Landscape - Automatic back lights"
-
     trigger:
       - platform: state
         entity_id: 

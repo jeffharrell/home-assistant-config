@@ -1,6 +1,5 @@
 automation:
   - alias: "Lights - Toggle when away"
-
     trigger:
       # on
       - platform: sun
@@ -27,10 +26,8 @@ automation:
           state: "armed_away"
         then:
           - variables:
-              lights:
-                - light.living_room
-                - light.family_room
-                - light.kitchen
+              lights: >
+                {{ ['light.living_room', 'light.family_room', 'light.kitchen'] }}
               target_light: "{{ lights | random }}"
           - action: "light.{{ action }}"
             target:
@@ -41,7 +38,6 @@ automation:
               message: "Turning the lights {% if action == 'turn_on' %}on while you are away{% else %}off{% endif %}"
 
   - alias: "Lights - Turn on when coming home"
-
     trigger:
       platform: state
       entity_id: alarm_control_panel.alarm
@@ -65,7 +61,6 @@ automation:
           cache: true
 
   - alias: "Lights - Turn off after sunrise"
-
     trigger:
       platform: time
       at: "08:00:00"
@@ -78,7 +73,6 @@ automation:
         entity_id: light.house
 
   - alias: "Lights - Twinkle lights"
-
     trigger:
       # on
       - platform: sun
@@ -100,7 +94,6 @@ automation:
         entity_id: light.twinkle_lights
 
   - alias: "Lights - Reset dim level to full"
-
     trigger:
       - platform: state
         entity_id: 
@@ -119,7 +112,6 @@ automation:
           transition: 3
 
   - alias: "Lights - Office light toggles bulb"
-
     trigger:
       # on
       - platform: state

@@ -9,7 +9,7 @@ kiosk_mode:
   hide_overflow: false
   # overrides
   mobile_settings:
-    hide_sidebar: true
+    hide_sidebar: false
     hide_overflow: true
     hide_dialog_header_breadcrumb_navigation: true
     hide_dialog_header_settings: true

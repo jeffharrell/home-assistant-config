@@ -6,10 +6,12 @@ tts/
 secrets.yaml
 home-assistant.sublime-workspace
 FLUME_TOKEN_FILE-jeff@theharrells.com
+CLAUDE.md
 __pycache__
 .DS_Store
 .HA_VERSION
 .storage
+.cache
 .cloud
 .uuid
 .pip_progress

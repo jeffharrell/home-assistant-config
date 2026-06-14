@@ -30,25 +30,8 @@ template:
 
 automation:
   - alias: "Weather - Cache Local"
-
     trigger:
       platform: time_pattern
       minutes: "/5"
     actions:
       - action: shell_command.get_weather
-      
-  - alias: "Weather - Low Battery"
-
-    trigger:
-      - platform: state
-        entity_id: sensor.outside_battery
-        to:
-          - "- -"
-          - "unavailable"
-          - "unknown"
-        for: "01:00:00"
-    actions:
-      - action: persistent_notification.create
-        data:
-          notification_id: outside_weather_battery
-          message: "The outside weather sensor battery is low."

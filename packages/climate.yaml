@@ -5,7 +5,6 @@ template:
       
 automation:
   - alias: "Climate - Windows open"
-
     trigger:
       - platform: state
         entity_id: binary_sensor.doors_and_windows
@@ -25,7 +24,6 @@ automation:
       - action: script.hvac_resume
 
   - alias: "Climate - Disable HVAC with house fan"
-
     mode: single
     max_exceeded: silent
     trigger:
@@ -39,7 +37,6 @@ automation:
       - action: script.hvac_resume
 
   - alias: "Climate - Notify cooler outside than inside"
-
     trigger:
       - platform: state
         entity_id: binary_sensor.climate_operation

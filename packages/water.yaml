@@ -1,0 +1,41 @@
+automation:
+  - alias: "Water - Leak detected"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.flume_sensor_home_leak_detected
+        to: "on"
+    actions:
+      - action: persistent_notification.create
+        data:
+          notification_id: water_leak
+          title: "Water leak"
+          message: "Potential water leak detected. Current flow: {{ states('sensor.flume_sensor_home_current') }}."
+      - action: notify.phones
+        data:
+          title: "Water leak"
+          message: "Potential water leak detected! Current flow: {{ states('sensor.flume_sensor_home_current') }}."
+          data:
+            url: "/lovelace/advanced"
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+
+  - alias: "Water - High flow"
+    initial_state: false
+    mode: single
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.flume_sensor_home_current
+        above: !secret high_flow_threshold
+        for:
+          minutes: 45
+    actions:
+      - action: notify.phones
+        data:
+          title: "Water"
+          message: "Unusually high water flow for 15 min: {{ states('sensor.flume_sensor_home_current') }}. Something may be running."
+          data:
+            url: "/lovelace/advanced"

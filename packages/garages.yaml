@@ -43,7 +43,6 @@ template:
 
 automation:
   - alias: "Garages - Door open"
-
     trigger:
       platform: state
       entity_id:

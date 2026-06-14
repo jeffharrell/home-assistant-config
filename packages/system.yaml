@@ -13,7 +13,6 @@ input_boolean:
 
 automation:
   - alias: "System - Theme change"
-
     trigger:
       - platform: homeassistant
         event: start
@@ -23,7 +22,6 @@ automation:
         name: app_theme
 
   - alias: "System - Reset switches"
-
     mode: parallel
     trigger:
       platform: state
@@ -39,7 +37,6 @@ automation:
           entity_id: "{{ trigger.entity_id }}"
 
   - alias: "System - Reset settings"
-
     trigger:
       platform: time
       at: "04:00:00"
@@ -53,7 +50,6 @@ automation:
           - automation.landscape_automatic_back_lights
 
   - alias: "System - Reset speakers"
-
     trigger:
       platform: time
       at: "12:00:00"
@@ -74,7 +70,6 @@ automation:
           volume_level: 0.5
 
   - alias: "System - Refresh non-zwave plus nodes"
-
     trigger:
       platform: time_pattern
       minutes: "/20"
@@ -91,7 +86,6 @@ automation:
           refresh_all_values: false
 
   - alias: "System - Refresh Apple TVs"
-
     mode: parallel
     trigger:
       platform: state
@@ -131,3 +125,87 @@ automation:
           data:
             notification_id: unhealthy
             message: "The following are unavailable: {{ unhealthy }}"
+
+  - alias: "System - Handle notification actions"
+    mode: parallel
+    trigger:
+      - platform: event
+        event_type: mobile_app_notification_action
+    variables:
+      action: "{{ trigger.event.data.action }}"
+    actions:
+      - choose:
+          # garage "Close" button: action id is garage_close_binary_sensor.garage_door_N_open
+          - conditions: "{{ action.startswith('garage_close_') }}"
+            sequence:
+              - action: switch.turn_on
+                target:
+                  entity_id: >
+                    {{ action | replace('garage_close_', '') | replace('binary_sensor.', 'switch.') | replace('_open', '') }}
+          # bedtime reminder arm buttons
+          - conditions: "{{ action == 'alarm_arm_home' }}"
+            sequence:
+              - action: script.good_night
+          - conditions: "{{ action == 'alarm_arm_away' }}"
+            sequence:
+              - action: script.away
+
+  - alias: "System - Low battery scan"
+    trigger:
+      - platform: time
+        at: "09:00:00"
+      - platform: homeassistant
+        event: start
+    variables:
+      threshold: !secret low_battery_threshold
+      low: >
+        {% set ns = namespace(items=[]) %}
+        {% for s in states.sensor
+           if s.attributes.get('device_class') == 'battery'
+           and s.state not in ['unknown', 'unavailable']
+           and (s.state | float(101)) < threshold | float %}
+          {% set ns.items = ns.items + [s.name] %}
+        {% endfor %}
+        {% for b in states.binary_sensor
+           if b.attributes.get('device_class') == 'battery' and b.state == 'on' %}
+          {% set ns.items = ns.items + [b.name] %}
+        {% endfor %}
+        {% if states('sensor.outside_battery') == '- -' %}
+          {% set ns.items = ns.items + ['Weather Station'] %}
+        {% endif %}
+        {{ ns.items | join(', ') }}
+    condition:
+      - condition: template
+        value_template: "{{ low | length > 0 }}"
+    actions:
+      - action: persistent_notification.create
+        data:
+          notification_id: low_battery
+          title: "Low batteries"
+          message: "The following batteries are low: {{ low }}."
+      - action: notify.phones
+        data:
+          title: "Home"
+          message: "Low batteries: {{ low }}."
+
+  - alias: "System - Critical entity down"
+    mode: parallel
+    trigger:
+      - platform: state
+        entity_id:
+          - alarm_control_panel.alarm
+          - climate.home
+          - binary_sensor.powerwall_status
+          - camera.front_door
+          - camera.driveway
+          - camera.front_patio
+        to:
+          - "unavailable"
+          - "unknown"
+        for:
+          minutes: 5
+    actions:
+      - action: notify.phones
+        data:
+          title: "Home"
+          message: "{{ trigger.to_state.attributes.friendly_name }} is {{ trigger.to_state.state }}."
