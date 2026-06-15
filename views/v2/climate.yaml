@@ -20,6 +20,11 @@ cards:
               action: more-info
             icon_tap_action:
               action: more-info
+            card_mod:
+              style: |
+                ha-card {
+                  --tile-color: var(--accent-color) !important;
+                }
 
           - type: tile
             entity: switch.house_fan

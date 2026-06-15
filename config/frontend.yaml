@@ -1,14 +1,243 @@
 extra_module_url:
   - /local/community/lovelace-card-mod/card-mod.js
 
-# Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
 themes:
+  app_theme:
+    card-mod-theme: app_theme
+
+    # --- Palette tokens (defined once, reused below and in other themes) -----
+    accent:        &accent        "#FFD600"   # amber accent
+    accent-light:  &accent-light  "#FFE54C"
+    accent-dark:   &accent-dark   "#FBC02D"
+    on-accent:     &on-accent     "#60573a"   # dark text/icons ON amber
+
+    gray-canvas:   &gray-canvas   "#313131"   # darkest — behind cards
+    gray-surface:  &gray-surface  "#3D3D3D"   # medium gray — cards & buttons
+    gray-pop:      &gray-pop      "#666666"   # subtle lift for menus/dialogs
+    gray-elevated: &gray-elevated "#6B6B6B"   # hover / input fills
+    gray-deep:     &gray-deep     "#3E3E3E"   # header / sidebar / panels
+    gray-line:     &gray-line     "#757575"
+
+    white:         &white         "#FFFFFF"
+    white-dim:     &white-dim     "#D6D6D6"
+    white-faint:   &white-faint   "#9E9E9E"
+    divider:       &divider       "rgba(255, 255, 255, 0.12)"
+    hairline:      &hairline      "transparent" 
+
+    red:           &red           "#F44336"
+    orange:        &orange        "#FFA726"
+    green:         &green         "#66BB6A"
+    blue:          &blue          "#29B6F6"
+
+    # --- Core colors ---------------------------------------------------------
+    primary-color:        *accent
+    light-primary-color:  *accent-light
+    dark-primary-color:   *accent-dark
+    accent-color:         *accent
+
+    primary-text-color:    *white
+    secondary-text-color:  *white-dim
+    text-primary-color:    *on-accent
+    disabled-text-color:   *white-faint
+
+    divider-color:         *divider
+    scrollbar-thumb-color: *gray-elevated
+
+    error-color:    *red
+    warning-color:  *orange
+    success-color:  *green
+    info-color:     *blue
+
+    # --- Backgrounds ---------------------------------------------------------
+    primary-background-color:    *gray-surface
+    secondary-background-color:  *gray-surface
+    card-background-color:       *gray-canvas
+
+    # --- Header --------------------------------------------------------------
+    app-header-text-color: "var(--primary-text-color)"
+    app-header-background-color: *gray-deep
+    app-header-backdrop-filter: "none"
+    app-header-selection-bar-color: "transparent"
+
+    state-inactive-color: "red"
+
+    # --- Cards ---------------------------------------------------------------
+    ha-card-border-width:  "1px"
+    ha-card-border-radius: "28px"
+    ha-card-border-color:  *hairline
+    ha-card-box-shadow:    "none"
+    ha-card-header-font-size: "15px"
+
+    ha-tile-info-primary-font-size:   "var(--ha-font-size-l)"
+    ha-tile-info-primary-font-weight: "var(--ha-font-weight-normal)"
+
+    code-editor-background-color: "#000"
+
+    # --- Icons / states ------------------------------------------------------
+    state-icon-color:    *white-dim
+    state-active-color:  "var(--accent-color)"
+    state-inactive-color: "var(--state-icon-color)"
+
+    state-light-active-color:         "var(--accent-color)"
+    state-binary_sensor-active-color: "var(--accent-color)"
+    state-cover-active-color:         "var(--accent-color)"
+    state-media_player-active-color:  "var(--accent-color)"
+    state-switch-active-color:        "var(--accent-color)"
+    state-fan-active-color:           "var(--accent-color)"
+    state-climate-auto-color:         "var(--accent-color)"
+    state-climate-cool-color:         "var(--accent-color)"
+    state-climate-heat-color:         "var(--accent-color)"
+    state-climate-fan_only-color:     "var(--accent-color)"
+
+    # --- Switch -------------
+    ha-switch-checked-background-color:       *accent
+    ha-switch-checked-thumb-background-color: *on-accent
+    ha-switch-checked-border-color:           *accent
+    ha-switch-background-color:               *gray-line      # off track
+    ha-switch-thumb-background-color:         "#E0E0E0"       # off thumb
+    ha-switch-border-color:                   *gray-line
+
+    # --- Checkbox ----
+    ha-checkbox-checked-background-color: *accent
+    ha-checkbox-checked-icon-color:       *on-accent
+    ha-checkbox-border-color:             "#BDBDBD"
+    ha-checkbox-background-color:         "transparent"
+    ha-switch-checked-thumb-border-color: "transparent"
+
+    # --- Slider --------
+    slider-color:           *accent
+    slider-secondary-color: *accent-light
+    slider-track-color:     *gray-elevated
+
+    # --- Progress bar ----------------------------
+    ha-progress-bar-indicator-color: *accent
+    ha-progress-bar-track-color:     *gray-elevated
+
+    # --- Inputs / text fields ------------------------------------------------
+    input-fill-color:                  *gray-elevated
+    input-ink-color:                   *white
+    input-label-ink-color:             *white-dim
+    input-disabled-ink-color:          *white-faint
+    input-idle-line-color:             "rgba(255, 255, 255, 0.42)"
+    input-hover-line-color:            "rgba(255, 255, 255, 0.87)"
+    input-dropdown-icon-color:         *white-dim
+    paper-input-container-focus-color: *accent
+
+    ha-color-form-background:          *gray-elevated
+
+    # --- Material (MDC) mapping ----------------------------------------------
+    mdc-theme-primary:                      *accent
+    mdc-theme-secondary:                    *accent
+    mdc-theme-on-primary:                   *on-accent
+    mdc-theme-on-secondary:                 *on-accent
+    mdc-theme-surface:                      *gray-surface
+    mdc-theme-on-surface:                   *white
+    mdc-theme-background:                   *gray-canvas
+    mdc-theme-text-primary-on-background:   *white
+    mdc-theme-text-secondary-on-background: *white-dim
+    mdc-theme-error:                        *red
+
+    # --- HA surface layer ----
+    ha-color-surface-default: *gray-surface
+    ha-color-surface-low:     *gray-canvas
+    ha-color-surface-lower:   *gray-deep
+
+    # --- MD3 system colors ---------------------------------------------------
+    md-sys-color-primary:                 *accent
+    md-sys-color-on-primary:              *on-accent
+    md-sys-color-surface:                   *gray-surface
+    md-sys-color-surface-container-lowest:  *gray-surface
+    md-sys-color-surface-container-low:     *gray-surface
+    md-sys-color-surface-container:         *gray-pop
+    md-sys-color-surface-container-high:    *gray-pop
+    md-sys-color-surface-container-highest: *gray-pop
+    md-sys-color-on-surface:              *white
+    md-sys-color-on-surface-variant:      *white-dim
+    md-sys-color-secondary-container:     *gray-surface
+    md-sys-color-on-secondary-container:  *white
+    md-sys-color-outline:                 "rgba(255, 255, 255, 0.20)"
+
+    # --- Tables / dialogs / badges -------------------------------------------
+    data-table-background-color:           *gray-surface
+    mdc-data-table-header-row-text-color:  *white-dim
+    mdc-data-table-row-text-color:         *white
+    mdc-dialog-scrim-color:               "rgba(0, 0, 0, 0.60)"
+    paper-toast-background-color:          *gray-deep
+
+    label-badge-background-color: *gray-surface
+    label-badge-text-color:       *white
+    label-badge-title-color:      *white-dim
+    label-badge-red:    *red
+    label-badge-green:  *green
+    label-badge-blue:   *blue
+    label-badge-yellow: *accent
+    label-badge-grey:   *white-faint
+
+    # --- Energy dashboard ----------------------------------------------------
+    energy-grid-consumption-color: "#EF5350"
+    energy-grid-return-color:      "#66BB6A"
+    energy-solar-color:            *accent
+    energy-non-fossil-color:       "#26C6DA"
+    energy-battery-in-color:       "#8E24AA"
+    energy-battery-out-color:      "#AB47BC"
+    energy-gas-color:              "#8D6E63"
+    energy-water-color:            "#4FC3F7"
+
+    # --- RGB variants (kept in sync for opacity blends) ----------------------
+    rgb-primary-color:              "255, 214, 0"
+    rgb-accent-color:               "255, 214, 0"
+    rgb-primary-text-color:         "255, 255, 255"
+    rgb-secondary-text-color:       "214, 214, 214"
+    rgb-text-primary-color:         "26, 26, 26"
+    rgb-primary-background-color:   "92, 92, 92"
+    rgb-secondary-background-color: "92, 92, 92"
+    rgb-card-background-color:      "92, 92, 92"
+    rgb-state-active-color:         "255, 214, 0"
+    rgb-state-inactive-color:       "158, 158, 158"
+
+    # --- CSS overrides --------------------------
+    card-mod-more-info-yaml: |
+      ha-more-info-info $ more-info-content $ more-info-light $: |
+          .controls {  }
+
+    card-mod-root: |
+      .header {
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        width: auto !important;
+        box-shadow: none !important;
+      }
+
+      .header .main-title {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+
+      .header .toolbar {
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+
+      #view {
+        padding: 40px 0 0 !important;
+      }
+
+      @media only screen and (hover: none) and (pointer: coarse) {
+        .header .main-title {
+          margin-left: 10px;
+        }
+      }
+
+  # ===========================================================================
+  #  Structural / card-mod helper themes
+  # ===========================================================================
   no_card:
     card-mod-theme: no_card
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
-    ha-card-border-width: "0"
+    primary-text-color:    *white
+    secondary-text-color:  *white-dim
+    ha-card-border-width:  "0"
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
@@ -21,8 +250,8 @@ themes:
   padded_card:
     card-mod-theme: padded_card
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
+    primary-text-color:   *white
+    secondary-text-color: *white-dim
 
     card-mod-card-yaml: |
       .: |
@@ -34,21 +263,20 @@ themes:
 
         ha-card h1 {
           padding: 5px 15px 10px;
-        }  
+        }
 
   settings_card:
     card-mod-theme: settings_card
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
-    card-background-color: "#313131"
+    primary-text-color:    *white
+    secondary-text-color:  *white-dim
 
     card-mod-card-yaml: |
       .: |
         ha-card {
           --ha-icon-display: none;
-          --primary-text-color: #E0E0E0;
 
+          background: transparent;
           border-color: transparent;
 
           margin: 40px 0 0 -40px;
@@ -60,97 +288,20 @@ themes:
           padding: 0;
         }
 
-  round_button: 
+  round_button:
     card-mod-theme: round_button
 
     card-mod-card-yaml: |
-      ha-card {
-        border-radius: 28px !important;
-      }
+      .: |
+        ha-card {
+          border-radius: 28px !important;
+        }
 
   subview:
-    card-mod-theme: subview 
+    card-mod-theme: subview
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
+    primary-text-color:   *white
+    secondary-text-color: *white-dim
 
-    primary-background-color: "#313131" 
-    card-background-color: "#3D3D3D"
-
-  app_theme:
-    card-mod-theme: app_theme
-     
-    primary-background-color: "#3D3D3D"
-    card-background-color: "#313131"
-    secondary-background-color: "var(--primary-background-color)"
-
-    primary-text-color: "#E0E0E0"
-    secondary-text-color: "#E0E0E0"
-
-    accent-color: "#F3BB00"
-
-    # Header
-    app-header-text-color: "var(--primary-text-color)"
-    app-header-background-color: "var(--primary-background-color)"
-    app-header-backdrop-filter: "none"
-    app-header-selection-bar-color: "transparent"
-    mdc-top-app-bar-fixed-box-shadow: "none"
-
-
-    # Cards
-    ha-card-border-width: "1px"
-    ha-card-border-radius: "28px"
-    ha-card-header-font-size: "15px"
-
-    ha-tile-info-primary-font-size: "var(--ha-font-size-l)"
-    ha-tile-info-primary-font-weight: "var(--ha-font-weight-normal)"
-
-    divider-color: "rgba(0, 0, 0, 0.15)"
-    code-editor-background-color: "#000"
-
-    # Icons
-    state-icon-color: "#E0E0E0"
-    state-active-color: "var(--accent-color)"
-    state-inactive-color: "var(--state-icon-color)"
-
-    state-light-active-color: "var(--accent-color)"
-    state-binary_sensor-active-color: "var(--accent-color)"
-    state-cover-open-color: "var(--accent-color)"
-    state-media_player-on-color: "var(--accent-color)"
-    state-media_player-active-color: "var(--accent-color)"
-    state-climate-auto-color: "var(--accent-color)"
-    state-climate-cool-color: "var(--accent-color)"
-    state-climate-heat-color: "var(--accent-color)"
-    state-climate-fan_only-color: "var(--accent-color)"
-
-    # CSS Overrides
-    card-mod-more-info-yaml: |
-      ha-more-info-info $ more-info-content $ more-info-light $: |
-          .controls {  }
-
-    card-mod-root: |
-      .header {
-        position: relative !important;
-        top: auto !important;
-        height: auto !important;
-        width: auto !important;
-      }
-
-      .header .main-title {
-        font-size: 1.3em;
-        font-weight: bold;
-      }
-
-      .header .toolbar {
-        border: 0 !important;
-      }
-
-      #view {
-        padding: 40px 0 0 !important;
-      }
-
-      @media only screen and (hover: none) and (pointer: coarse) {
-        .header .main-title {
-          margin-left: 10px;
-        }
-      }
+    primary-background-color: *gray-canvas
+    card-background-color:    *gray-surface
