@@ -6,12 +6,14 @@ automation:
         event: sunset
         offset: "-00:15:00"
         variables:
-          action: "turn_on"
+          action: "light.turn_on"
+          target: "{{ ['light.living_room', 'light.family_room', 'light.kitchen'] | random }}"
       # off
       - platform: time
         at: "22:00:00"
         variables:
-          action: "turn_off"
+          action: "light.turn_off"
+          target: "light.house"
     condition:
       condition: state
       entity_id: alarm_control_panel.alarm
@@ -25,13 +27,9 @@ automation:
           entity_id: alarm_control_panel.alarm
           state: "armed_away"
         then:
-          - variables:
-              lights: >
-                {{ ['light.living_room', 'light.family_room', 'light.kitchen'] }}
-              target_light: "{{ lights | random }}"
-          - action: "light.{{ action }}"
+          - action: "{{ action }}"
             target:
-              entity_id: "{{ target_light }}"
+              entity_id: "{{ target }}"
           - action: notify.phones
             data:
               title: "Home"

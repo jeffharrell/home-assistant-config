@@ -250,7 +250,7 @@ cards:
 
           # alarm
           - type: tile
-            entity: alarm_control_panel.alarm_panel_ui
+            entity: alarm_control_panel.alarm_panel
             hide_state: true
             theme: round_button
             tap_action:
@@ -263,7 +263,7 @@ cards:
                   --card-mod-icon-color: white;
                   
                   background:
-                    {% if "armed_" in states("alarm_control_panel.alarm_panel_ui") %}
+                    {% if "armed_" in states("alarm_control_panel.alarm_panel") %}
                       #aa2e25
                     {% else %}
                       var(--card-background-color)

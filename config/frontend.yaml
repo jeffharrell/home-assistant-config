@@ -59,8 +59,6 @@ themes:
     app-header-backdrop-filter: "none"
     app-header-selection-bar-color: "transparent"
 
-    state-inactive-color: "red"
-
     # --- Cards ---------------------------------------------------------------
     ha-card-border-width:  "1px"
     ha-card-border-radius: "28px"
