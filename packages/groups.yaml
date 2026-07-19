@@ -123,6 +123,18 @@ binary_sensor:
       - binary_sensor.garage_side_door
       - binary_sensor.doors_and_windows
 
+  - platform: group
+    name: "Alarm Sensors"
+    unique_id: alarm_sensors
+    entities:
+      - binary_sensor.doors_and_windows
+      - binary_sensor.dining_room_motion
+      - binary_sensor.hallway_motion
+      - binary_sensor.laundry_room_keypad
+      - binary_sensor.laundry_room_water_leak
+      - binary_sensor.siren
+      - binary_sensor.smoke_alarm_sensor
+
 group:
   climate:
     name: "Climate"
