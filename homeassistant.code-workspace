@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/*.sublime-project": true,
+			"**/*.sublime-workspace": true,
+			"**/.HA_VERSION": true,
+			"**/.pip_progress": true,
+			"**/*.uuid": true,
+			"**/*.txt": true,
+			"**/*.lock": true,
+			"**/*.token": true,
+			"**/*.pickle": true,
+			"**/*.conf": true,
+			"**/*.json": true,
+			"**/*.log": true,
+			"**/home-assistant.log.*": true,
+			"**/*.db*": true,
+			"**/*.xml": true,
+			"**/*.sqlite": true,
+			"**/*.bak": true,
+			"**/backups": true,
+			"**/deps": true,
+			"**/src": true,
+			"**/.cache": true,
+			"**/.cloud": true,
+			"**/.storage": true,
+			"**/Abode": true,
+			"**/tts": true,
+			"**/FLUME_TOKEN_FILE*": true,
+		}
+	}
+}

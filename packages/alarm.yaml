@@ -150,3 +150,37 @@ automation:
           entity_id:
             - automation.alarm_disarmed_mode
             - automation.alarm_home_mode
+
+  - alias: "Alarm sensor low battery notifications"
+    triggers:
+      - trigger: state
+        entity_id: alarm_control_panel.alarm
+        to: "disarmed"
+        from: "armed_away"
+      - trigger: homeassistant
+        event: start
+    actions:
+      - repeat:
+          for_each: >
+            {{ expand('binary_sensor.alarm_sensors') }}
+              | selectattr('attributes.battery_low', 'eq', true)
+              | map(attribute='entity_id')
+              | list }}
+          sequence:
+            - action: persistent_notification.create
+              data:
+                notification_id: "low_battery_{{ repeat.item }}"
+                title: "Low battery"
+                message: >
+                  {{ state_attr(repeat.item, 'friendly_name') }}
+                  ({{ repeat.item }}) is reporting a low battery.
+      - repeat:
+          for_each: >
+            {{ expand('binary_sensor.alarm_sensors')
+              | rejectattr('attributes.battery_low', 'eq', true)
+              | map(attribute='entity_id')
+              | list }}
+          sequence:
+            - action: persistent_notification.dismiss
+              data:
+                notification_id: "low_battery_{{ repeat.item }}"
