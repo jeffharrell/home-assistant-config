@@ -91,6 +91,9 @@ cards:
           - binary_sensor.guest_window
           - binary_sensor.master_bedroom_window
           - binary_sensor.garage_door_side
+          - binary_sensor.garage_door_1_open
+          - binary_sensor.garage_door_2_open
+          - binary_sensor.garage_door_3_open
         conditions:
           - condition: or
             conditions:

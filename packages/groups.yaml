@@ -110,9 +110,9 @@ binary_sensor:
     unique_id: garage_doors
     entities:
       - binary_sensor.garage_door_side
-      - binary_sensor.garage_door_1
-      - binary_sensor.garage_door_2
-      - binary_sensor.garage_door_3
+      - binary_sensor.garage_door_1_open
+      - binary_sensor.garage_door_2_open
+      - binary_sensor.garage_door_3_open
 
   - platform: group
     name: "Doors and Windows and Garages"

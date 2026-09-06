@@ -76,6 +76,7 @@ themes:
     state-light-active-color:         "var(--accent-color)"
     state-binary_sensor-active-color: "var(--accent-color)"
     state-cover-active-color:         "var(--accent-color)"
+    state-cover-garage-open-color:    "var(--accent-color)"
     state-media_player-active-color:  "var(--accent-color)"
     state-switch-active-color:        "var(--accent-color)"
     state-fan-active-color:           "var(--accent-color)"
