@@ -1,6 +1,6 @@
 title: "Outside"
 path: "outside"
-back_path: "/lovelace/home"
+back_path: "home"
 subview: true
 theme: subview
 cards:

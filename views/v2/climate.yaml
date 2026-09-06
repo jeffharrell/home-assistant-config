@@ -1,6 +1,6 @@
 title: "Climate"
 path: "climate"
-back_path: "/lovelace/home"
+back_path: "home"
 subview: true
 theme: subview
 cards:

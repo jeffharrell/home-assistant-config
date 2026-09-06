@@ -164,14 +164,14 @@ automation:
            if s.attributes.get('device_class') == 'battery'
            and s.state not in ['unknown', 'unavailable']
            and (s.state | float(101)) < threshold | float %}
-          {% set ns.items = ns.items + [s.name] %}
+          {% set ns.items = ns.items + [s.entity_id] %}
         {% endfor %}
         {% for b in states.binary_sensor
            if b.attributes.get('device_class') == 'battery' and b.state == 'on' %}
-          {% set ns.items = ns.items + [b.name] %}
+          {% set ns.items = ns.items + [b.entity_id] %}
         {% endfor %}
         {% if states('sensor.outside_battery') == '- -' %}
-          {% set ns.items = ns.items + ['Weather Station'] %}
+          {% set ns.items = ns.items + ['sensor.outside_battery'] %}
         {% endif %}
         {{ ns.items | join(', ') }}
     condition:

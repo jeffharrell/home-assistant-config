@@ -2,6 +2,7 @@ template:
   - sensor:
     # fix data discrepancy between integration and app
     - unique_id: "powerwall_charge_actual"
+      name: "Powerwall Charge Actual"
       unit_of_measurement: "%"
       device_class: "battery"
       state: >-

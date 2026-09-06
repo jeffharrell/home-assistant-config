@@ -1,6 +1,3 @@
-extra_module_url:
-  - /local/community/lovelace-card-mod/card-mod.js
-
 themes:
   app_theme:
     card-mod-theme: app_theme

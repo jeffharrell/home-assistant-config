@@ -77,36 +77,53 @@ let_dog_out:
         entity_id: timer.let_dog_out
 
 camera_snapshot_notify:
+  mode: queued
+  max: 10
   fields:
     camera_entity:
       description: "Camera entity to snapshot"
-    filename:
-      description: "Snapshot filename"
+    slug:
+      description: "Short name, e.g. latest_doorbell"
     title:
       description: "Notification title"
-    media_content_id:
-      description: "Media source ID for AI task"
+    push_args:
+      description: "Push arguments (optional)"
   sequence:
+    - variables:
+        filename: "{{ slug }}-{{ now().strftime('%Y%m%d-%H%M%S-%f') }}.jpg"
+    # take pic
     - action: camera.snapshot
       data:
         entity_id: "{{ camera_entity }}"
         filename: "/config/www/cameras/{{ filename }}"
+    # update path
+    - action: local_file.update_file_path
+      target:
+        entity_id: "camera.{{ slug }}"
+      data:
+        file_path: "/config/www/cameras/{{ filename }}"
+    # describe
     - action: ai_task.generate_data
       continue_on_error: true
       data:
         task_name: "{{ title }}"
         instructions: "{{ states('input_text.camera_motion_prompt') }}"
         attachments:
-          - media_content_id: "{{ media_content_id }}"
+          - media_content_id: "media-source://camera/camera.{{ slug }}"
             media_content_type: "image/jpeg"
       response_variable: generated_content
+    # send message
     - action: notify.phones
       data:
         title: "{{ title }}"
-        message: "{{ generated_content.data }}"
+        message: >-
+          {{ generated_content.data if generated_content is defined
+             else 'Motion detected (no description)' }}
         data:
           image: "/local/cameras/{{ filename }}"
           url: "/lovelace/cameras"
+          push: "{{ push_args if push_args is defined else {} }}"
+    # update counter
     - action: counter.increment
       target:
-        entity_id: counter.camera_motion        
+        entity_id: counter.camera_motion
