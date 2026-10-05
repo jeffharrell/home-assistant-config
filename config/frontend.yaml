@@ -111,8 +111,8 @@ themes:
 
     # --- Inputs / text fields ------------------------------------------------
     input-fill-color:                  *gray-elevated
-    input-ink-color:                   *white
-    input-label-ink-color:             *white-dim
+    input-ink-color:                   *gray-pop
+    input-label-ink-color:             *gray-surface
     input-disabled-ink-color:          *white-faint
     input-idle-line-color:             "rgba(255, 255, 255, 0.42)"
     input-hover-line-color:            "rgba(255, 255, 255, 0.87)"

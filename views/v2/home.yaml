@@ -20,7 +20,7 @@ cards:
           {%- endif -%}
 
           {% if has_value('sensor.air_pollution_level') and states('sensor.air_pollution_level') != 'good' %}
-            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
+            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') | replace("_", " ") }}
           {%- endif %}
 
           {%- if has_value('binary_sensor.powerwall_status') and states('binary_sensor.powerwall_status') != 'unavailable' -%}

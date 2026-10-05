@@ -105,50 +105,26 @@ automation:
           message: "Resetting {{ trigger.entity_id }}"
 
   # Disabled by default
-  - alias: "System - Entity health check"
-    initial_state: False
-    trigger:
-      platform: time
-      at: "04:00:00"
-      variables:
-         unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
-    condition:
-      - condition: time
-        weekday:
-          - sun
-    actions:
-      - if:
-          condition: template
-          value_template: "{{ unhealthy | length > 0 }}"
-        then:
-          action: persistent_notification.create
-          data:
-            notification_id: unhealthy
-            message: "The following are unavailable: {{ unhealthy }}"
-
-  - alias: "System - Handle notification actions"
-    mode: parallel
-    trigger:
-      - platform: event
-        event_type: mobile_app_notification_action
-    variables:
-      action: "{{ trigger.event.data.action }}"
-    actions:
-      - choose:
-          # garage "Close" button: action id is garage_close_binary_sensor.garage_door_N_open
-          - conditions: "{{ action.startswith('garage_close_') }}"
-            sequence:
-              - action: switch.turn_on
-                target:
-                  entity_id: >
-                    {{ action | replace('garage_close_', '') | replace('binary_sensor.', 'switch.') | replace('_open', '') }}
-          # bedtime reminder arm buttons
-          - conditions: "{{ action == 'alarm_arm_home' }}"
-            sequence:
-              - action: script.good_night
-          - conditions: "{{ action == 'alarm_arm_away' }}"
-            sequence:
-              - action: script.away
+  # - alias: "System - Entity health check"
+  #   initial_state: True
+  #   trigger:
+  #     platform: time
+  #     at: "04:00:00"
+  #     variables:
+  #        unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
+  #   condition:
+  #     - condition: time
+  #       weekday:
+  #         - sun
+  #   actions:
+  #     - if:
+  #         condition: template
+  #         value_template: "{{ unhealthy | length > 0 }}"
+  #       then:
+  #         action: persistent_notification.create
+  #         data:
+  #           notification_id: unhealthy
+  #           message: "The following are unavailable: {{ unhealthy }}"
 
   - alias: "System - Low battery scan"
     trigger:
@@ -194,11 +170,10 @@ automation:
       - platform: state
         entity_id:
           - alarm_control_panel.alarm
-          - climate.home
-          - binary_sensor.powerwall_status
           - camera.front_door
-          - camera.driveway
           - camera.front_patio
+          - camera.driveway
+          - camera.back_yard
         to:
           - "unavailable"
           - "unknown"

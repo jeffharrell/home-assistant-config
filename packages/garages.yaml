@@ -52,24 +52,13 @@ automation:
       to: "on"
       for:
         minutes: 10
-    mode: parallel
+    mode: queued
     actions:
-      # take a picture
-      - action: camera.snapshot
+      - action: script.camera_snapshot_notify
         data:
-          entity_id: camera.driveway
-          filename: "/config/www/cameras/garages.jpg"
-      # send notification
-      - action: notify.phones
-        data:
-          title: "Home"
-          message: "{{ trigger.to_state.attributes.friendly_name }} is open"
-          data:
-            url: "/lovelace/outside"
-            image: "/local/cameras/garages.jpg"
-            actions:
-              - action: "garage_close_{{ trigger.to_state.entity_id }}"
-                title: "Close"
+          camera_entity: "camera.driveway"
+          slug: "latest_garage"
+          title: "{{ trigger.to_state.attributes.friendly_name }} is open"
 
   - alias: "Garages - Fan"
     trigger:

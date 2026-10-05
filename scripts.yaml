@@ -90,7 +90,7 @@ camera_snapshot_notify:
       description: "Push arguments (optional)"
   sequence:
     - variables:
-        filename: "{{ slug }}-{{ now().strftime('%Y%m%d-%H%M%S-%f') }}.jpg"
+        filename: "{{ slug }}.jpg"
     # take pic
     - action: camera.snapshot
       data:
@@ -117,8 +117,7 @@ camera_snapshot_notify:
       data:
         title: "{{ title }}"
         message: >-
-          {{ generated_content.data if generated_content is defined
-             else 'Motion detected (no description)' }}
+          {{ generated_content.data if generated_content is defined else '' }}
         data:
           image: "/local/cameras/{{ filename }}"
           url: "/lovelace/cameras"
