@@ -32,8 +32,9 @@ automation:
               entity_id: "{{ target }}"
           - action: notify.phones
             data:
+            
               title: "Home"
-              message: "Turning {{ target }} {% if action == 'light.turn_on' %}on while you are away{% else %}off{% endif %}"
+              message: "Turning {{ states[target].attributes.friendly_name }} {% if action == 'light.turn_on' %}on while you are away{% else %}off{% endif %}"
 
   - alias: "Lights - Turn on when coming home"
     trigger:
