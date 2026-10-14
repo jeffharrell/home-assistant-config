@@ -4,6 +4,7 @@ logs:
   homeassistant.setup: error
   homeassistant.loader: error
   homeassistant.helpers.entity: error
+  homeassistant.helpers.service: error
   homeassistant.components.switch: error
   homeassistant.components.sensor: error
   homeassistant.components.scrape.sensor: error

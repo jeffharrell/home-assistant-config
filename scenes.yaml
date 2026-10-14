@@ -1,4 +1,5 @@
 - name: Good Morning
+  id: scene_good_morning
   entities:
     light.kitchen_cabinets:
       state: on
@@ -11,6 +12,7 @@
     light.pantry: off
 
 - name: Wake Up
+  id: scene_wake_up
   entities:
     light.hallway: on
     light.boys_bedroom: on
@@ -19,6 +21,7 @@
       brightness: 80
       
 - name: Mood Lights
+  id: scene_mood_lights
   entities:
     light.kitchen:
       state: on
@@ -33,6 +36,7 @@
     light.kitchen_cabinets: off
 
 - name: Dinner Lights
+  id: scene_dinner_lights
   entities:
     light.kitchen:
       state: on
@@ -42,6 +46,7 @@
     light.kitchen_cabinets: off
 
 - name: Dinner Lights More
+  id: scene_dinner_lights_more
   entities:
     light.family_room:
       state: on
@@ -51,6 +56,7 @@
       brightness: 255
 
 - name: House Off
+  id: scene_house_off
   entities:
     light.house: off
     media_player.family_room_speakers: off
@@ -61,6 +67,7 @@
     switch.twinkle_lights: off
 
 - name: House Off Guest
+  id: scene_house_off_guest
   entities:
     light.outside_area: off
     light.kitchen_area: off
@@ -74,6 +81,7 @@
     switch.house_fan: off
 
 - name: House Alert
+  id: scene_house_alert
   entities:
     light.house:
       state: on
