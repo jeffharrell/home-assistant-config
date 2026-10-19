@@ -50,20 +50,20 @@ automation:
       - if:
           condition: state
           entity_id: input_boolean.guest_mode_enabled
-          state: "off"
+          state: "on"
         then:
           action: scene.turn_on
           data:
-            entity_id: scene.house_off
+            entity_id: scene.house_off_guest
         else:
           action: scene.turn_on
           data:
-            entity_id: scene.house_off_guest
+            entity_id: scene.house_off
       # update camera motion alerts
       - action: input_boolean.turn_on
         data:
           entity_id: input_boolean.camera_motion_enabled
-      # notify if doors or garages are open
+      # notify 
       - action: tts.speak
         target:
           entity_id: tts.google_ai_tts
@@ -89,6 +89,10 @@ automation:
         entity_id: alarm_control_panel.alarm
         to: "disarmed"
     actions:
+      # update camera motion alerts
+      - action: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.camera_motion_enabled
       # notify on status change
       - action: tts.speak
         target:
@@ -99,10 +103,6 @@ automation:
           options:
             voice: !secret google_tts_voice
           cache: true
-      # update camera motion alerts
-      - action: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.camera_motion_enabled
       # turn on the house if morning
       - condition: time
         before: "08:00:00"
