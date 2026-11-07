@@ -19,6 +19,7 @@ utility_meter:
 
 automation:
   - alias: "Energy - Power grid status"
+    id: energy_power_grid_status
     mode: single
     trigger:
       # Be explicit on on/off to avoid API outage notifications
@@ -37,6 +38,7 @@ automation:
           message: "Power grid is {{ trigger.to_state.state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%."
 
   - alias: "Energy - UPS status change"
+    id: energy_ups_status_change
     mode: single
     trigger:
       - platform: state
@@ -52,6 +54,7 @@ automation:
         message: "UPS is {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%."
 
   - alias: "Energy - Disable climate if power out"
+    id: energy_disable_climate_if_power_out
     mode: single
     trigger:
       - platform: state

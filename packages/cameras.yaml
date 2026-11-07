@@ -39,6 +39,7 @@ binary_sensor:
 
 automation:
   - alias: "Cameras - Doorbell"
+    id: cameras_doorbell
     trigger:
       - platform: webhook
         webhook_id: "camera_doorbell"
@@ -51,6 +52,7 @@ automation:
           title: "{{ trigger.json.name }}"
 
   - alias: "Cameras - Motion"
+    id: cameras_motion
     trigger:
       - platform: webhook
         webhook_id: "camera_motion"
@@ -66,6 +68,7 @@ automation:
           title: "{{ trigger.json.name }}"
 
   - alias: "Cameras - Mailbox open"
+    id: cameras_mailbox_open
     trigger:
       - platform: state
         entity_id: binary_sensor.mailbox_motion
@@ -90,6 +93,7 @@ automation:
           minutes: 1
 
   - alias: "Camera - Swap recording profile"
+    id: camera_swap_recording_profile
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -107,6 +111,7 @@ automation:
         entity_id: switch.surveillance_station_home_mode
 
   - alias: "Camera - Reset doorbell status"
+    id: camera_reset_doorbell_status
     trigger:
       - platform: state
         entity_id: binary_sensor.doorbell_status
@@ -118,6 +123,7 @@ automation:
           message: "Resetting doorbell status"
 
   - alias: "Cameras - Reset camera events"
+    id: cameras_reset_camera_events
     trigger:
       - platform: time
         at: "00:00:00"

@@ -46,6 +46,7 @@ template:
 
 automation:
   - alias: "Garages - Door open"
+    id: garages_door_open
     trigger:
       platform: state
       entity_id:
@@ -64,6 +65,7 @@ automation:
           title: "{{ trigger.to_state.attributes.friendly_name }} is open"
 
   - alias: "Garages - Fan"
+    id: garages_fan
     trigger:
       - platform: numeric_state
         entity_id: sensor.garage_temp

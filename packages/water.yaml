@@ -1,5 +1,6 @@
 automation:
   - alias: "Water - Leak detected"
+    id: water_leak_detected
     mode: single
     trigger:
       - platform: state
@@ -24,6 +25,7 @@ automation:
                 volume: 1
 
   - alias: "Water - High flow"
+    id: water_high_flow
     initial_state: false
     mode: single
     trigger:

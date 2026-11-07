@@ -30,6 +30,7 @@ template:
 
 automation:
   - alias: "Weather - Cache Local"
+    id: weather_cache_local
     trigger:
       platform: time_pattern
       minutes: "/5"

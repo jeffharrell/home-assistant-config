@@ -1,5 +1,6 @@
 automation:
   - alias: "Lights - Toggle when away"
+    id: lights_toggle_when_away
     trigger:
       # on
       - platform: sun
@@ -37,6 +38,7 @@ automation:
               message: "Turning {{ states[target].attributes.friendly_name }} {% if action == 'light.turn_on' %}on while you are away{% else %}off{% endif %}"
 
   - alias: "Lights - Turn on when coming home"
+    id: lights_turn_on_when_coming_home
     trigger:
       platform: state
       entity_id: alarm_control_panel.alarm
@@ -60,6 +62,7 @@ automation:
           cache: true
 
   - alias: "Lights - Turn off after sunrise"
+    id: lights_turn_off_after_sunrise
     trigger:
       platform: time
       at: "08:00:00"
@@ -72,6 +75,7 @@ automation:
         entity_id: light.house
 
   - alias: "Lights - Twinkle lights"
+    id: lights_twinkle_lights
     trigger:
       # on
       - platform: sun
@@ -93,6 +97,7 @@ automation:
         entity_id: light.twinkle_lights
 
   - alias: "Lights - Reset dim level to full"
+    id: lights_reset_dim_level_to_full
     trigger:
       - platform: state
         entity_id: 
@@ -111,6 +116,7 @@ automation:
           transition: 3
 
   - alias: "Lights - Office light toggles bulb"
+    id: lights_office_light_toggles_bulb
     trigger:
       # on
       - platform: state

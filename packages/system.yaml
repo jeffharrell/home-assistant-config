@@ -13,6 +13,7 @@ input_boolean:
 
 automation:
   - alias: "System - Theme change"
+    id: system_theme_change
     trigger:
       - platform: homeassistant
         event: start
@@ -22,6 +23,7 @@ automation:
         name: app_theme
 
   - alias: "System - Reset switches"
+    id: system_reset_switches
     mode: parallel
     trigger:
       platform: state
@@ -37,6 +39,7 @@ automation:
           entity_id: "{{ trigger.entity_id }}"
 
   - alias: "System - Reset settings"
+    id: system_reset_settings
     trigger:
       platform: time
       at: "04:00:00"
@@ -52,6 +55,7 @@ automation:
           - automation.landscape_automatic_back_lights
 
   - alias: "System - Reset speakers"
+    id: system_reset_speakers
     trigger:
       platform: time
       at: "12:00:00"
@@ -72,6 +76,7 @@ automation:
           volume_level: 0.5
 
   - alias: "System - Refresh non-zwave plus nodes"
+    id: system_refresh_non_zwave_plus_nodes
     trigger:
       platform: time_pattern
       minutes: "/20"
@@ -88,6 +93,7 @@ automation:
           refresh_all_values: false
 
   - alias: "System - Refresh Apple TVs"
+    id: system_refresh_apple_tvs
     mode: parallel
     trigger:
       platform: state
@@ -129,6 +135,7 @@ automation:
   #           message: "The following are unavailable: {{ unhealthy }}"
 
   - alias: "System - Low battery scan"
+    id: system_low_battery_scan
     trigger:
       - platform: time
         at: "09:00:00"
@@ -167,6 +174,7 @@ automation:
           message: "Low batteries: {{ low }}."
 
   - alias: "System - Critical entity down"
+    id: system_critical_entity_down
     mode: parallel
     trigger:
       - platform: state

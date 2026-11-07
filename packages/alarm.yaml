@@ -7,6 +7,7 @@ timer:
 
 automation:
   - alias: "Alarm - Away mode"
+    id: alarm_away_mode
     mode: restart
     trigger:
       - platform: state
@@ -47,6 +48,7 @@ automation:
               message: "The garage is still open: {{ expand('binary_sensor.garage_doors') | selectattr('state', 'eq', 'on') | map(attribute='name') | join(', ') }}"
 
   - alias: "Alarm - Home mode"
+    id: alarm_home_mode
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -90,6 +92,7 @@ automation:
           cache: true
 
   - alias: "Alarm - Disarmed mode"
+    id: alarm_disarmed_mode
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -117,6 +120,7 @@ automation:
           entity_id: scene.good_morning
 
   - alias: "Alarm - Alert"
+    id: alarm_alert
     trigger:
       platform: state
       entity_id: alarm_control_panel.alarm
@@ -141,6 +145,7 @@ automation:
                 volume: 1
 
   - alias: "Alarm - Re-arm after dog"
+    id: alarm_re_arm_after_dog
     trigger:
       - platform: state
         entity_id: timer.let_dog_out
@@ -158,6 +163,7 @@ automation:
             - automation.alarm_home_mode
 
   - alias: "Alarm sensor low battery notifications"
+    id: alarm_sensor_low_battery_notifications
     triggers:
       - trigger: state
         entity_id: alarm_control_panel.alarm
