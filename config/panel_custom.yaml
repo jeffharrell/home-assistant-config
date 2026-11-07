@@ -1,9 +1,0 @@
-- name: ha_logs
-  sidebar_title: Logs
-  sidebar_icon: mdi:math-log
-  js_url: /api/hassio/app/entrypoint.js
-  url_path: config/logs
-  embed_iframe: true
-  require_admin: true
-  config:
-    ingress: core_logs

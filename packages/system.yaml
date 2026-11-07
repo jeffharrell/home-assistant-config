@@ -112,28 +112,6 @@ automation:
         data:
           message: "Resetting {{ trigger.entity_id }}"
 
-  # Disabled by default
-  # - alias: "System - Entity health check"
-  #   initial_state: True
-  #   trigger:
-  #     platform: time
-  #     at: "04:00:00"
-  #     variables:
-  #        unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
-  #   condition:
-  #     - condition: time
-  #       weekday:
-  #         - sun
-  #   actions:
-  #     - if:
-  #         condition: template
-  #         value_template: "{{ unhealthy | length > 0 }}"
-  #       then:
-  #         action: persistent_notification.create
-  #         data:
-  #           notification_id: unhealthy
-  #           message: "The following are unavailable: {{ unhealthy }}"
-
   - alias: "System - Low battery scan"
     id: system_low_battery_scan
     trigger:
