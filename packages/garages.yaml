@@ -7,6 +7,7 @@ template:
   - cover:
     - unique_id: garage_door_1
       state: '{{ is_state("binary_sensor.garage_door_1_open", "on") }}'
+      availability: '{{ has_value("binary_sensor.garage_door_1_open") }}'
       device_class: garage
       open_cover:
         - action: switch.turn_on
@@ -19,6 +20,7 @@ template:
 
     - unique_id: garage_door_2
       state: '{{ is_state("binary_sensor.garage_door_2_open", "on") }}'
+      availability: '{{ has_value("binary_sensor.garage_door_2_open") }}'
       device_class: garage
       open_cover:
         - action: switch.turn_on
@@ -31,6 +33,7 @@ template:
 
     - unique_id: garage_door_3
       state: '{{ is_state("binary_sensor.garage_door_3_open", "on") }}'
+      availability: '{{ has_value("binary_sensor.garage_door_3_open") }}'
       device_class: garage
       open_cover:
         - action: switch.turn_on
