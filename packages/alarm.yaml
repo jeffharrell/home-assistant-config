@@ -7,6 +7,7 @@ timer:
 
 automation:
   - alias: "Alarm - Away mode"
+    mode: restart
     trigger:
       - platform: state
         entity_id: alarm_control_panel.alarm
@@ -32,10 +33,14 @@ automation:
               message: "Warning! The following are open: {{ expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | map(attribute='name') | join(', ') }}"
       - delay:
           minutes: 10
+      # only if still away (skip if disarmed or switched to home)
       - if:
-          condition: state
-          entity_id: binary_sensor.garage_doors
-          state: "on"
+          - condition: state
+            entity_id: alarm_control_panel.alarm
+            state: "armed_away"
+          - condition: state
+            entity_id: binary_sensor.garage_doors
+            state: "on"
         then:
           - action: notify.phones
             data:
