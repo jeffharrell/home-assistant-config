@@ -3,6 +3,7 @@ timer:
     name: "Let Dog Out"
     duration: "00:20:00"
     icon: mdi:dog
+    restore: true
 
 automation:
   - alias: "Alarm - Away mode"

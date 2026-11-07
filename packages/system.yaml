@@ -43,6 +43,8 @@ automation:
     actions:
       - action: homeassistant.turn_on
         entity_id:
+          - automation.alarm_disarmed_mode
+          - automation.alarm_home_mode
           - automation.cameras_doorbell
           - automation.cameras_mailbox_open
           - automation.climate_windows_open
