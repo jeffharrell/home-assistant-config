@@ -4,7 +4,13 @@ theme: home_v3
 type: sections
 max_columns: 1
 
-# status chips
+# status chips: one left-aligned row; if they ever outgrow the phone
+# they scroll sideways instead of wrapping
+header:
+  layout: start
+  badges_position: bottom
+  badges_wrap: scroll
+
 badges:
   - type: entity
     entity: sensor.outside_temp

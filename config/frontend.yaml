@@ -342,3 +342,12 @@ themes:
         hui-view-header:not([hidden]) ~ .container {
           padding-top: 16px !important;
         }
+
+    # tighter status chips (mock: 10px sides, 6px icon gap) so all four fit
+    # on one row of a 390px phone
+    card-mod-badge-yaml: |
+      "ha-badge $": |
+        .badge {
+          padding: 0 10px !important;
+          gap: 6px !important;
+        }
