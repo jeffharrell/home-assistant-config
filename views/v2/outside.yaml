@@ -98,8 +98,6 @@ cards:
           - condition: or
             conditions:
             - condition: state
-              state: "open"
-            - condition: state
               state: "on"
         show_empty: false
 
