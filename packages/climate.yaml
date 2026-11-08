@@ -2,7 +2,7 @@ input_boolean:
   # on while hvac_disable is holding the thermostat; survives restarts
   hvac_paused:
     name: "HVAC Paused"
-    icon: mdi:thermostat-off
+    icon: mdi:hvac-off
 
 template:
   - binary_sensor:
