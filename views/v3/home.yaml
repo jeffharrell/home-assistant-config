@@ -58,9 +58,6 @@ sections:
             entity: binary_sensor.flume_sensor_home_leak_detected
             state: "on"
           - condition: state
-            entity: binary_sensor.laundry_room_water_leak
-            state: "on"
-          - condition: state
             entity: binary_sensor.grid_status
             state: "off"
           - condition: state
@@ -91,9 +88,6 @@ sections:
                 state: ["open", "opening"]
               - condition: state
                 entity: binary_sensor.flume_sensor_home_leak_detected
-                state: "on"
-              - condition: state
-                entity: binary_sensor.laundry_room_water_leak
                 state: "on"
               - condition: state
                 entity: binary_sensor.grid_status
@@ -164,16 +158,6 @@ sections:
             row:
               entity: binary_sensor.flume_sensor_home_leak_detected
               name: "Potential water leak"
-              icon: mdi:water-alert
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: binary_sensor.laundry_room_water_leak
-                state: "on"
-            row:
-              entity: binary_sensor.laundry_room_water_leak
-              name: "Laundry room leak"
               icon: mdi:water-alert
 
           - type: conditional
