@@ -13,6 +13,7 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "armed_away"
+        not_from: "unavailable"
     actions:
       # turn off the devices in house
       - action: scene.turn_on
@@ -53,6 +54,7 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "armed_home"
+        not_from: "unavailable"
     actions:
       # turn off the devices in house
       - if:
@@ -97,6 +99,7 @@ automation:
       - platform: state
         entity_id: alarm_control_panel.alarm
         to: "disarmed"
+        not_from: "unavailable"
     actions:
       # update camera motion alerts
       - action: input_boolean.turn_off
