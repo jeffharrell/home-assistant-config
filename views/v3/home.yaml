@@ -78,152 +78,362 @@ sections:
         heading: "Needs attention"
         icon: mdi:alert-circle-outline
 
-      # actions: garages close without confirmation, hvac resume, dog timer
-      - type: entities
-        show_header_toggle: false
+      # one amber pill per item. Garages and HVAC: tapping anywhere on the
+      # pill runs the action and the "Close"/"Resume" button is drawn by the
+      # att-close/att-resume classes in the home_v3 theme. Hold and double
+      # tap are off so more-info (which has an unconfirmed Open) can't open.
+      - type: tile
+        entity: cover.garage_door_3
+        name: "Jillian's Garage is open"
+        icon: mdi:garage-open
+        state_content: last_changed
+        grid_options:
+          columns: full
         visibility:
-          - condition: or
-            conditions:
-              - condition: state
-                entity: cover.garage_door_1
-                state: ["open", "opening"]
-              - condition: state
-                entity: cover.garage_door_2
-                state: ["open", "opening"]
-              - condition: state
-                entity: cover.garage_door_3
-                state: ["open", "opening"]
-              - condition: state
-                entity: binary_sensor.flume_sensor_home_leak_detected
-                state: "on"
-              - condition: state
-                entity: binary_sensor.grid_status
-                state: "off"
-              - condition: state
-                entity: input_boolean.hvac_paused
-                state: "on"
-              - condition: state
-                entity: timer.let_dog_out
-                state: ["active", "paused"]
-        entities:
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: cover.garage_door_3
-                state: ["open", "opening"]
-            row:
-              type: button
-              entity: cover.garage_door_3
-              name: "Jillian's Garage is open"
-              icon: mdi:garage-open
-              action_name: "Close"
-              tap_action:
-                action: perform-action
-                perform_action: cover.close_cover
-                target:
-                  entity_id: cover.garage_door_3
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: cover.garage_door_2
-                state: ["open", "opening"]
-            row:
-              type: button
-              entity: cover.garage_door_2
-              name: "Jeff's Garage is open"
-              icon: mdi:garage-open
-              action_name: "Close"
-              tap_action:
-                action: perform-action
-                perform_action: cover.close_cover
-                target:
-                  entity_id: cover.garage_door_2
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: cover.garage_door_1
-                state: ["open", "opening"]
-            row:
-              type: button
-              entity: cover.garage_door_1
-              name: "Guest Garage is open"
-              icon: mdi:garage-open
-              action_name: "Close"
-              tap_action:
-                action: perform-action
-                perform_action: cover.close_cover
-                target:
-                  entity_id: cover.garage_door_1
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: binary_sensor.flume_sensor_home_leak_detected
-                state: "on"
-            row:
-              entity: binary_sensor.flume_sensor_home_leak_detected
-              name: "Potential water leak"
-              icon: mdi:water-alert
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: binary_sensor.grid_status
-                state: "off"
-            row:
-              entity: sensor.powerwall_charge_actual
-              name: "Grid is down, on Powerwall"
-              icon: mdi:transmission-tower-off
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.hvac_paused
-                state: "on"
-            row:
-              type: button
-              entity: input_boolean.hvac_paused
-              name: "HVAC is paused"
-              icon: mdi:hvac-off
-              action_name: "Resume"
-              tap_action:
-                action: perform-action
-                perform_action: script.hvac_resume
-
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: timer.let_dog_out
-                state: ["active", "paused"]
-            row:
-              entity: timer.let_dog_out
-              name: "Alarm re-arms in"
-              icon: mdi:dog-side
-
-      # open doors and windows; hides itself when nothing is open
-      - type: entity-filter
-        card:
-          show_header_toggle: false
-        entities:
-          - binary_sensor.front_door
-          - binary_sensor.family_room_doors
-          - binary_sensor.master_bedroom_doors
-          - binary_sensor.laundry_room_door
-          - binary_sensor.dining_room_window
-          - binary_sensor.living_room_window_left
-          - binary_sensor.living_room_window_right
-          - binary_sensor.kitchen_window
-          - binary_sensor.boys_window
-          - binary_sensor.office_window
-          - binary_sensor.guest_window
-          - binary_sensor.master_bedroom_window
-          - binary_sensor.garage_side_door_open
-        conditions:
           - condition: state
+            entity: cover.garage_door_3
+            state: ["open", "opening"]
+        tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_3
+        icon_tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_3
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon_hold_action:
+          action: none
+        icon_double_tap_action:
+          action: none
+        card_mod:
+          class: "att att-close"
+
+      - type: tile
+        entity: cover.garage_door_2
+        name: "Jeff's Garage is open"
+        icon: mdi:garage-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: cover.garage_door_2
+            state: ["open", "opening"]
+        tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_2
+        icon_tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_2
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon_hold_action:
+          action: none
+        icon_double_tap_action:
+          action: none
+        card_mod:
+          class: "att att-close"
+
+      - type: tile
+        entity: cover.garage_door_1
+        name: "Guest Garage is open"
+        icon: mdi:garage-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: cover.garage_door_1
+            state: ["open", "opening"]
+        tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_1
+        icon_tap_action:
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_1
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon_hold_action:
+          action: none
+        icon_double_tap_action:
+          action: none
+        card_mod:
+          class: "att att-close"
+
+      - type: tile
+        entity: input_boolean.hvac_paused
+        name: "HVAC is paused"
+        icon: mdi:hvac-off
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: input_boolean.hvac_paused
             state: "on"
-        show_empty: false
+        tap_action:
+          action: perform-action
+          perform_action: script.hvac_resume
+        icon_tap_action:
+          action: perform-action
+          perform_action: script.hvac_resume
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon_hold_action:
+          action: none
+        icon_double_tap_action:
+          action: none
+        card_mod:
+          class: "att att-resume"
+
+      # informational: no button, tap opens more-info as before
+      - type: tile
+        entity: binary_sensor.flume_sensor_home_leak_detected
+        name: "Potential water leak"
+        icon: mdi:water-alert
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.flume_sensor_home_leak_detected
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.grid_status
+        name: "Grid is down, on Powerwall"
+        icon: mdi:transmission-tower-off
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.grid_status
+            state: "off"
+        tap_action:
+          action: more-info
+          entity: sensor.powerwall_charge_actual
+        card_mod:
+          class: att
+
+      # the timer's own state is the countdown
+      - type: tile
+        entity: timer.let_dog_out
+        name: "Alarm re-arms in"
+        icon: mdi:dog-side
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: timer.let_dog_out
+            state: ["active", "paused"]
+        card_mod:
+          class: att
+
+      # open doors and windows, one pill each
+      - type: tile
+        entity: binary_sensor.front_door
+        name: "Front Door is open"
+        icon: mdi:door-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.front_door
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.family_room_doors
+        name: "Family Room Doors are open"
+        icon: mdi:door-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.family_room_doors
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.master_bedroom_doors
+        name: "Master Bedroom Doors are open"
+        icon: mdi:door-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.master_bedroom_doors
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.laundry_room_door
+        name: "Laundry Room Door is open"
+        icon: mdi:door-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.laundry_room_door
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.garage_side_door_open
+        name: "Garage Side Door is open"
+        icon: mdi:door-open
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.garage_side_door_open
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.dining_room_window
+        name: "Dining Room Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.dining_room_window
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.living_room_window_left
+        name: "Living Room Window (left) is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.living_room_window_left
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.living_room_window_right
+        name: "Living Room Window (right) is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.living_room_window_right
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.kitchen_window
+        name: "Kitchen Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.kitchen_window
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.boys_window
+        name: "Boys' Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.boys_window
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.office_window
+        name: "Office Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.office_window
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.guest_window
+        name: "Guest Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.guest_window
+            state: "on"
+        card_mod:
+          class: att
+
+      - type: tile
+        entity: binary_sensor.master_bedroom_window
+        name: "Master Bedroom Window is open"
+        icon: mdi:window-open-variant
+        state_content: last_changed
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: binary_sensor.master_bedroom_window
+            state: "on"
+        card_mod:
+          class: att
 
   # cameras
   - type: grid

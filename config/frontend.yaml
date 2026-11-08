@@ -354,3 +354,49 @@ themes:
           padding: 0 10px !important;
           gap: 6px !important;
         }
+
+    # "Needs attention" pills on Home (mock .att/.ic.y/.btn.y). UIX puts a
+    # card's classes on the card element and its CSS in that card's shadow
+    # root, so these match with :host(.class). Only cards that set
+    # `card_mod: class: att` (plus att-close / att-resume) are touched.
+    card-mod-card-yaml: |
+      .: |
+        :host(.att) ha-card {
+          --ha-card-border-color: rgba(255, 214, 0, 0.35);
+          --tile-color: #FFD600 !important;
+          --ha-tile-info-primary-font-size: 15px;
+          --ha-tile-info-secondary-font-size: 12.5px;
+          --ha-tile-info-secondary-color: var(--secondary-text-color);
+        }
+        :host(.att) ha-tile-icon {
+          --tile-icon-color: #FFD600;
+          --tile-icon-opacity: 0.16;
+          --tile-icon-hover-opacity: 0.16;
+        }
+        :host(.att-close) ha-tile-info {
+          padding-inline-end: 84px;
+        }
+        :host(.att-resume) ha-tile-info {
+          padding-inline-end: 100px;
+        }
+        :host(.att-close) ha-card::after,
+        :host(.att-resume) ha-card::after {
+          position: absolute;
+          top: 50%;
+          right: 14px;
+          transform: translateY(-50%);
+          padding: 7px 14px;
+          border-radius: 16px;
+          background: #FFD600;
+          color: #222222;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 1.2;
+          pointer-events: none;
+        }
+        :host(.att-close) ha-card::after {
+          content: "Close";
+        }
+        :host(.att-resume) ha-card::after {
+          content: "Resume";
+        }
