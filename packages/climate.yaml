@@ -1,3 +1,9 @@
+input_boolean:
+  # on while hvac_disable is holding the thermostat; survives restarts
+  hvac_paused:
+    name: "HVAC Paused"
+    icon: mdi:thermostat-off
+
 template:
   - binary_sensor:
     - name: climate_operation
@@ -36,6 +42,34 @@ automation:
       - action: script.hvac_disable
       - delay: "00:01:00"
       - wait_template: "{{ is_state('binary_sensor.doors_and_windows', 'off') }}"
+      - action: script.hvac_resume
+
+  # safety net: a restart drops the wait in the two automations above,
+  # so resume once it's safe if HVAC is still paused
+  - alias: "Climate - Resume after restart"
+    id: climate_resume_after_restart
+    mode: single
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id: binary_sensor.doors_and_windows
+        to: "off"
+        for: "00:01:00"
+      - platform: state
+        entity_id: switch.house_fan
+        to: "off"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hvac_paused
+        state: "on"
+      - condition: state
+        entity_id: binary_sensor.doors_and_windows
+        state: "off"
+      - condition: state
+        entity_id: switch.house_fan
+        state: "off"
+    actions:
       - action: script.hvac_resume
 
   - alias: "Climate - Notify cooler outside than inside"

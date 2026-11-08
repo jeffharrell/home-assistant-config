@@ -40,6 +40,9 @@ mood_lights:
 
 hvac_disable:
   sequence:
+    - action: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.hvac_paused
     - if:
         condition: state
         entity_id: climate.home
@@ -60,6 +63,9 @@ hvac_resume:
     - action: button.press
       data:
         entity_id: button.home_clear_hold
+    - action: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.hvac_paused
 
 let_dog_out:
   mode: single
