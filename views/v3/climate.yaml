@@ -16,7 +16,7 @@ sections:
       - type: tile
         entity: input_boolean.hvac_paused
         name: "HVAC paused, tap to resume"
-        icon: mdi:thermostat-off
+        icon: mdi:hvac-off
         hide_state: true
         grid_options:
           columns: 12

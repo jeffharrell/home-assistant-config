@@ -186,7 +186,7 @@ sections:
               type: button
               entity: input_boolean.hvac_paused
               name: "HVAC is paused"
-              icon: mdi:thermostat-off
+              icon: mdi:hvac-off
               action_name: "Resume"
               tap_action:
                 action: perform-action
