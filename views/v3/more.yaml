@@ -1,5 +1,6 @@
 title: "More"
 path: "more"
+theme: home_v3
 back_path: "home"
 subview: true
 type: sections

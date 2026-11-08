@@ -1,5 +1,6 @@
 title: "Climate"
 path: "climate"
+theme: home_v3
 back_path: "home"
 subview: true
 type: sections

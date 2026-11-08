@@ -1,5 +1,6 @@
 title: "Cameras"
 path: "cameras"
+theme: home_v3
 back_path: "home"
 subview: true
 type: sections

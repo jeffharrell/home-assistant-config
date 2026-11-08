@@ -1,5 +1,6 @@
 title: "Advanced"
 path: "advanced"
+theme: home_v3
 back_path: "more"
 subview: true
 type: sections

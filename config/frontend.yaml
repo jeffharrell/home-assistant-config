@@ -301,3 +301,28 @@ themes:
 
     primary-background-color: *gray-canvas
     card-background-color:    *gray-surface
+
+  # ===========================================================================
+  #  New dashboard (home-v3): set as `theme:` on each v3 view, so it only
+  #  layers on top of app_theme there. The classic dashboard never uses it.
+  # ===========================================================================
+  home_v3:
+    card-mod-theme: home_v3
+
+    # content starts right under the title: drop app_theme's 40px view
+    # padding and the sections view's 24px top padding
+    card-mod-view-yaml: |
+      .: |
+        #view#view {
+          padding-top: 0 !important;
+        }
+      "hui-sections-view $": |
+        hui-view-header {
+          padding-top: 0 !important;
+        }
+        .container {
+          padding-top: 0 !important;
+        }
+        hui-view-header:not([hidden]) ~ .container {
+          padding-top: 16px !important;
+        }

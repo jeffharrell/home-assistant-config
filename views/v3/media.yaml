@@ -1,5 +1,6 @@
 title: "Media"
 path: "media"
+theme: home_v3
 back_path: "home"
 subview: true
 type: sections

@@ -1,5 +1,6 @@
 title: "Home"
 path: "home"
+theme: home_v3
 type: sections
 max_columns: 1
 
