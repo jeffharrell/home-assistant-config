@@ -63,7 +63,10 @@ sections:
           target:
             entity_id: light.house
 
-  # inside: tiles show brightness when on (tile default for lights)
+  # inside: one full-width row per room, like a list. dimmable rooms are
+  # two tiles each: on shows a brightness slider + %, off shows no bar
+  # (tile features have no visibility of their own). living room and
+  # hallway are switches, so they never get a bar.
   - type: grid
     cards:
       - type: heading
@@ -73,26 +76,110 @@ sections:
       - type: tile
         entity: light.kitchen_area
         name: "Kitchen"
+        state_content: brightness
+        features_position: inline
+        features:
+          - type: light-brightness
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.kitchen_area
+            state: "on"
+
+      - type: tile
+        entity: light.kitchen_area
+        name: "Kitchen"
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.kitchen_area
+            state_not: "on"
 
       - type: tile
         entity: light.family_room
         name: "Family Room"
+        state_content: brightness
+        features_position: inline
+        features:
+          - type: light-brightness
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.family_room
+            state: "on"
+
+      - type: tile
+        entity: light.family_room
+        name: "Family Room"
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.family_room
+            state_not: "on"
 
       - type: tile
         entity: light.living_room
         name: "Living Room"
+        grid_options:
+          columns: full
 
       - type: tile
         entity: light.dining_room
         name: "Dining Room"
+        state_content: brightness
+        features_position: inline
+        features:
+          - type: light-brightness
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.dining_room
+            state: "on"
+
+      - type: tile
+        entity: light.dining_room
+        name: "Dining Room"
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.dining_room
+            state_not: "on"
 
       - type: tile
         entity: light.bedroom_area
         name: "Bedrooms"
+        state_content: brightness
+        features_position: inline
+        features:
+          - type: light-brightness
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.bedroom_area
+            state: "on"
+
+      - type: tile
+        entity: light.bedroom_area
+        name: "Bedrooms"
+        grid_options:
+          columns: full
+        visibility:
+          - condition: state
+            entity: light.bedroom_area
+            state_not: "on"
 
       - type: tile
         entity: light.hallway
         name: "Hallway"
+        grid_options:
+          columns: full
 
   - type: grid
     cards:
