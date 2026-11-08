@@ -1,0 +1,114 @@
+title: "Climate"
+path: "climate"
+back_path: "home"
+subview: true
+type: sections
+max_columns: 1
+sections:
+
+  - type: grid
+    cards:
+      - type: thermostat
+        entity: climate.home
+
+      # paused by the windows-open or house-fan automations
+      - type: tile
+        entity: input_boolean.hvac_paused
+        name: "HVAC paused, tap to resume"
+        icon: mdi:thermostat-off
+        hide_state: true
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: input_boolean.hvac_paused
+            state: "on"
+        tap_action:
+          action: perform-action
+          perform_action: script.hvac_resume
+        icon_tap_action:
+          action: perform-action
+          perform_action: script.hvac_resume
+
+      - type: tile
+        entity: switch.house_fan
+        name: "House Fan"
+        grid_options:
+          columns: 12
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+  # rooms: temperature + humidity
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Rooms"
+        heading_style: subtitle
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - type: custom:multiple-entity-row
+            entity: sensor.family_room_outlet_temperature
+            name: "Family Room"
+            show_state: false
+            entities:
+              - entity: sensor.family_room_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.family_room_outlet_temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.living_room_outlet_temperature
+            name: "Living Room"
+            show_state: false
+            entities:
+              - entity: sensor.living_room_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.living_room_outlet_temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.master_bedroom_outlet_temperature
+            name: "Master Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.master_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.master_bedroom_outlet_temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.boys_bedroom_outlet_temperature
+            name: "Boys Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.boys_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.boys_bedroom_outlet_temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.guest_bedroom_outlet_temperature
+            name: "Guest Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.guest_bedroom_outlet_humidity
+                name: "Humidity"
+              - entity: sensor.guest_bedroom_outlet_temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.garage_temp
+            name: "Garage"
+            show_state: false
+            entities:
+              - entity: sensor.garage_humidity
+                name: "Humidity"
+              - entity: sensor.garage_temp
+                name: "Temperature"
+                format: precision0
+
+      - !include navbar.yaml

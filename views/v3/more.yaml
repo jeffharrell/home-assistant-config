@@ -1,0 +1,341 @@
+title: "More"
+path: "more"
+back_path: "home"
+subview: true
+type: sections
+max_columns: 1
+sections:
+
+  # house: energy, water, batteries, guest mode
+  - type: grid
+    cards:
+      - type: heading
+        heading: "House"
+        heading_style: subtitle
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/advanced
+
+      - type: tile
+        entity: sensor.powerwall_charge_actual
+        name: "Powerwall"
+        icon: mdi:home-battery-outline
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/advanced
+
+      - type: tile
+        entity: sensor.energy_import
+        name: "Grid today"
+        icon: mdi:transmission-tower
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/advanced
+
+      - type: tile
+        entity: sensor.powerwall_solar_now
+        name: "Solar now"
+        icon: mdi:solar-power
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/advanced
+
+      - type: tile
+        entity: sensor.flume_sensor_home_current_day
+        name: "Water today"
+        icon: mdi:water
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/advanced
+
+      # batteries: one line, names any that are low
+      - type: markdown
+        text_only: true
+        content: >-
+          {% set low = namespace(items=[]) %}
+          {%- for e, n in [
+            ('sensor.ups_battery_charge', 'UPS'),
+            ('sensor.mailbox_battery_level', 'Mailbox'),
+            ('sensor.garage_side_door_battery_level', 'Garage side door'),
+            ('sensor.garage_temp_battery', 'Garage temperature'),
+          ] -%}
+            {%- if has_value(e) and states(e) | float(100) < 20 -%}
+              {%- set low.items = low.items + [n ~ ' ' ~ states(e) | float(0) | int ~ '%'] -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if is_state('sensor.outside_battery', '- -') -%}
+            {%- set low.items = low.items + ['Weather station'] -%}
+          {%- endif -%}
+          {%- if is_state('binary_sensor.flume_sensor_home_battery', 'on') -%}
+            {%- set low.items = low.items + ['Flume'] -%}
+          {%- endif -%}
+          {%- if low.items -%}
+            <ha-icon icon="mdi:battery-alert"></ha-icon> Low battery: {{ low.items | join(', ') }}
+          {%- else -%}
+            <ha-icon icon="mdi:battery-check"></ha-icon> All batteries OK
+          {%- endif %}
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.guest_mode_enabled
+            name: "Guest mode"
+            icon: mdi:bed
+          - type: button
+            name: "Power graphs and batteries"
+            icon: mdi:chart-line
+            action_name: "Open"
+            tap_action:
+              action: navigate
+              navigation_path: /home-v3/advanced
+
+  # garages: opening asks first, closing doesn't.
+  # each garage has one tile per state so tap does the right thing;
+  # hold/more-info is off so the dialog can't open a door unconfirmed.
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Garages"
+        heading_style: subtitle
+
+      # jillian's
+      - type: tile
+        entity: cover.garage_door_3
+        name: "Jillian's Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_3
+            state: "closed"
+        tap_action: &open_3
+          action: perform-action
+          perform_action: cover.open_cover
+          target:
+            entity_id: cover.garage_door_3
+          confirmation:
+            text: "Open Jillian's Garage?"
+            confirm_text: "Open"
+            dismiss_text: "Cancel"
+        icon_tap_action: *open_3
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_3
+        name: "Jillian's Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_3
+            state: ["open", "opening", "closing"]
+        tap_action: &close_3
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_3
+        icon_tap_action: *close_3
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_3
+        name: "Jillian's Garage"
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_3
+            state_not: ["closed", "open", "opening", "closing"]
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+
+      # jeff's
+      - type: tile
+        entity: cover.garage_door_2
+        name: "Jeff's Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_2
+            state: "closed"
+        tap_action: &open_2
+          action: perform-action
+          perform_action: cover.open_cover
+          target:
+            entity_id: cover.garage_door_2
+          confirmation:
+            text: "Open Jeff's Garage?"
+            confirm_text: "Open"
+            dismiss_text: "Cancel"
+        icon_tap_action: *open_2
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_2
+        name: "Jeff's Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_2
+            state: ["open", "opening", "closing"]
+        tap_action: &close_2
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_2
+        icon_tap_action: *close_2
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_2
+        name: "Jeff's Garage"
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_2
+            state_not: ["closed", "open", "opening", "closing"]
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+
+      # guest
+      - type: tile
+        entity: cover.garage_door_1
+        name: "Guest Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_1
+            state: "closed"
+        tap_action: &open_1
+          action: perform-action
+          perform_action: cover.open_cover
+          target:
+            entity_id: cover.garage_door_1
+          confirmation:
+            text: "Open Guest Garage?"
+            confirm_text: "Open"
+            dismiss_text: "Cancel"
+        icon_tap_action: *open_1
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_1
+        name: "Guest Garage"
+        state_content:
+          - state
+          - last_changed
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_1
+            state: ["open", "opening", "closing"]
+        tap_action: &close_1
+          action: perform-action
+          perform_action: cover.close_cover
+          target:
+            entity_id: cover.garage_door_1
+        icon_tap_action: *close_1
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+        double_tap_action:
+          action: none
+
+      - type: tile
+        entity: cover.garage_door_1
+        name: "Guest Garage"
+        grid_options:
+          columns: 12
+        visibility:
+          - condition: state
+            entity: cover.garage_door_1
+            state_not: ["closed", "open", "opening", "closing"]
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        hold_action:
+          action: none
+        icon_hold_action:
+          action: none
+
+  # automations (moved from the classic lights and climate views)
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Automations"
+        heading_style: subtitle
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: automation.landscape_automatic_back_lights
+            name: "Opening doors turns on lights"
+            icon: mdi:creation
+            tap_action:
+              action: none
+          - entity: automation.climate_windows_open
+            name: "Turn climate off if windows open"
+            icon: mdi:creation
+            tap_action:
+              action: none
+
+      - !include navbar.yaml

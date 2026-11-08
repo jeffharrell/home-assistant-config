@@ -1,0 +1,34 @@
+title: "Home"
+
+kiosk_mode:
+  # app ui
+  hide_header: false
+  hide_sidebar: false
+  hide_menubutton: false
+  hide_add_to_home_assistant: true
+  hide_search: true
+  hide_assistant: true
+  hide_overflow: false
+  # overrides
+  mobile_settings:
+    hide_sidebar: true
+    hide_overflow: true
+    hide_dialog_header_breadcrumb_navigation: true
+    hide_dialog_header_settings: true
+    hide_dialog_header_overflow: true
+
+# swipe-navigation is loaded for every dashboard; the navbar replaces it here
+swipe_nav:
+  enable: false
+
+# home is the only main view; the rest are subviews so the header
+# shows a title + back arrow instead of a second row of tabs.
+# the bottom navbar (views/v3/navbar.yaml) does the navigation.
+views:
+  - !include views/v3/home.yaml
+  - !include views/v3/lights.yaml
+  - !include views/v3/climate.yaml
+  - !include views/v3/media.yaml
+  - !include views/v3/more.yaml
+  - !include views/v3/cameras.yaml
+  - !include views/v3/advanced.yaml

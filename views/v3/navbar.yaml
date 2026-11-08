@@ -1,0 +1,42 @@
+# bottom tab bar, included at the end of every v3 view
+type: custom:navbar-card
+mobile:
+  show_labels: true
+  safe_area: true
+desktop:
+  position: bottom
+  show_labels: true
+routes:
+  - label: "Home"
+    url: /home-v3/home
+    icon: mdi:home-outline
+    icon_selected: mdi:home
+    # cameras is reached from home, so keep home lit there
+    selected: >-
+      [[[ return ['/home-v3', '/home-v3/', '/home-v3/home', '/home-v3/cameras'].includes(window.location.pathname); ]]]
+
+  - label: "Lights"
+    url: /home-v3/lights
+    icon: mdi:lightbulb-outline
+    icon_selected: mdi:lightbulb
+
+  - label: "Climate"
+    url: /home-v3/climate
+    icon: mdi:thermometer
+    icon_selected: mdi:thermometer
+
+  - label: "Media"
+    url: /home-v3/media
+    icon: mdi:play-circle-outline
+    icon_selected: mdi:play-circle
+    badge:
+      show: >-
+        [[[ return states['binary_sensor.media_players']?.state === 'on'; ]]]
+
+  - label: "More"
+    url: /home-v3/more
+    icon: mdi:dots-horizontal
+    icon_selected: mdi:dots-horizontal-circle
+    # advanced is reached from more
+    selected: >-
+      [[[ return ['/home-v3/more', '/home-v3/advanced'].includes(window.location.pathname); ]]]

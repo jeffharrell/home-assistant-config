@@ -1,0 +1,403 @@
+title: "Home"
+path: "home"
+type: sections
+max_columns: 1
+
+# status chips
+badges:
+  - type: entity
+    entity: sensor.outside_temp
+    icon: mdi:weather-partly-cloudy
+    show_name: false
+
+  - type: entity
+    entity: climate.home
+    show_name: false
+    state_content:
+      - state
+      - temperature
+    tap_action:
+      action: navigate
+      navigation_path: /home-v3/climate
+
+  - type: entity
+    entity: sensor.powerwall_charge_actual
+    icon: mdi:home-battery-outline
+    show_name: false
+    tap_action:
+      action: navigate
+      navigation_path: /home-v3/advanced
+
+  - type: entity
+    entity: alarm_control_panel.alarm
+    show_name: false
+
+sections:
+
+  # needs attention: only shows when something does
+  - type: grid
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: cover.garage_door_1
+            state: ["open", "opening"]
+          - condition: state
+            entity: cover.garage_door_2
+            state: ["open", "opening"]
+          - condition: state
+            entity: cover.garage_door_3
+            state: ["open", "opening"]
+          - condition: state
+            entity: binary_sensor.doors_and_windows
+            state: "on"
+          - condition: state
+            entity: binary_sensor.garage_side_door_open
+            state: "on"
+          - condition: state
+            entity: binary_sensor.flume_sensor_home_leak_detected
+            state: "on"
+          - condition: state
+            entity: binary_sensor.laundry_room_water_leak
+            state: "on"
+          - condition: state
+            entity: binary_sensor.grid_status
+            state: "off"
+          - condition: state
+            entity: input_boolean.hvac_paused
+            state: "on"
+          - condition: state
+            entity: timer.let_dog_out
+            state: ["active", "paused"]
+    cards:
+      - type: heading
+        heading: "Needs attention"
+        icon: mdi:alert-circle-outline
+
+      # actions: garages close without confirmation, hvac resume, dog timer
+      - type: entities
+        show_header_toggle: false
+        visibility:
+          - condition: or
+            conditions:
+              - condition: state
+                entity: cover.garage_door_1
+                state: ["open", "opening"]
+              - condition: state
+                entity: cover.garage_door_2
+                state: ["open", "opening"]
+              - condition: state
+                entity: cover.garage_door_3
+                state: ["open", "opening"]
+              - condition: state
+                entity: binary_sensor.flume_sensor_home_leak_detected
+                state: "on"
+              - condition: state
+                entity: binary_sensor.laundry_room_water_leak
+                state: "on"
+              - condition: state
+                entity: binary_sensor.grid_status
+                state: "off"
+              - condition: state
+                entity: input_boolean.hvac_paused
+                state: "on"
+              - condition: state
+                entity: timer.let_dog_out
+                state: ["active", "paused"]
+        entities:
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: cover.garage_door_3
+                state: ["open", "opening"]
+            row:
+              type: button
+              entity: cover.garage_door_3
+              name: "Jillian's Garage is open"
+              icon: mdi:garage-open
+              action_name: "Close"
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_3
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: cover.garage_door_2
+                state: ["open", "opening"]
+            row:
+              type: button
+              entity: cover.garage_door_2
+              name: "Jeff's Garage is open"
+              icon: mdi:garage-open
+              action_name: "Close"
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_2
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: cover.garage_door_1
+                state: ["open", "opening"]
+            row:
+              type: button
+              entity: cover.garage_door_1
+              name: "Guest Garage is open"
+              icon: mdi:garage-open
+              action_name: "Close"
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_1
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.flume_sensor_home_leak_detected
+                state: "on"
+            row:
+              entity: binary_sensor.flume_sensor_home_leak_detected
+              name: "Potential water leak"
+              icon: mdi:water-alert
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.laundry_room_water_leak
+                state: "on"
+            row:
+              entity: binary_sensor.laundry_room_water_leak
+              name: "Laundry room leak"
+              icon: mdi:water-alert
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.grid_status
+                state: "off"
+            row:
+              entity: sensor.powerwall_charge_actual
+              name: "Grid is down, on Powerwall"
+              icon: mdi:transmission-tower-off
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: input_boolean.hvac_paused
+                state: "on"
+            row:
+              type: button
+              entity: input_boolean.hvac_paused
+              name: "HVAC is paused"
+              icon: mdi:thermostat-off
+              action_name: "Resume"
+              tap_action:
+                action: perform-action
+                perform_action: script.hvac_resume
+
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: timer.let_dog_out
+                state: ["active", "paused"]
+            row:
+              entity: timer.let_dog_out
+              name: "Alarm re-arms in"
+              icon: mdi:dog-side
+
+      # open doors and windows; hides itself when nothing is open
+      - type: entity-filter
+        card:
+          show_header_toggle: false
+        entities:
+          - binary_sensor.front_door
+          - binary_sensor.family_room_doors
+          - binary_sensor.master_bedroom_doors
+          - binary_sensor.laundry_room_door
+          - binary_sensor.dining_room_window
+          - binary_sensor.living_room_window_left
+          - binary_sensor.living_room_window_right
+          - binary_sensor.kitchen_window
+          - binary_sensor.boys_window
+          - binary_sensor.office_window
+          - binary_sensor.guest_window
+          - binary_sensor.master_bedroom_window
+          - binary_sensor.garage_side_door_open
+        conditions:
+          - condition: state
+            state: "on"
+        show_empty: false
+
+  # cameras
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Cameras"
+        icon: mdi:cctv
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        badges:
+          - type: entity
+            entity: counter.camera_motion
+            icon: mdi:motion-sensor
+            show_state: true
+            visibility:
+              - condition: numeric_state
+                entity: counter.camera_motion
+                above: 0
+            tap_action:
+              action: navigate
+              navigation_path: /home-v3/cameras
+
+      - type: picture-entity
+        entity: camera.front_patio
+        camera_view: live
+        show_name: false
+        show_state: false
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+      - type: picture-entity
+        entity: camera.front_door
+        name: "Front Door"
+        aspect_ratio: 16x9
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+      - type: picture-entity
+        entity: camera.driveway
+        name: "Driveway"
+        aspect_ratio: 16x9
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+      - type: picture-entity
+        entity: camera.back_yard
+        name: "Back Yard"
+        aspect_ratio: 16x9
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+  # quick: contextual actions (same rules as the classic home) + alarm
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Quick"
+        heading_style: subtitle
+
+      - type: tile
+        entity: script.mood_lights
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: sun.sun
+            state: "below_horizon"
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: "disarmed"
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: script.dinner_lights
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: sun.sun
+            state: "below_horizon"
+          - condition: state
+            entity: schedule.quick_actions_dinner_time
+            state: "on"
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: "disarmed"
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: script.good_night
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_good_night
+            state: "on"
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: "disarmed"
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: script.let_dog_out
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: "armed_home"
+          - condition: state
+            entity: script.let_dog_out
+            state: "off"
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+      - type: tile
+        entity: script.wake_up
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: schedule.quick_actions_wake_up
+            state: "on"
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: "armed_home"
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: toggle
+
+      # alarm: always here
+      - type: tile
+        entity: alarm_control_panel.alarm
+        name: "Alarm"
+        tap_action:
+          action: more-info
+        icon_tap_action:
+          action: more-info
+
+      - !include navbar.yaml
