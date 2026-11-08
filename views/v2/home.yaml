@@ -23,7 +23,7 @@ cards:
             <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') | replace("_", " ") }}
           {%- endif %}
 
-          {%- if has_value('binary_sensor.powerwall_status') and states('binary_sensor.powerwall_status') != 'unavailable' -%}
+          {%- if has_value('binary_sensor.powerwall_status') and has_value('sensor.powerwall_charge_actual') -%}
             {% set energy = (states('sensor.energy_import')|float(default=0) - states('sensor.energy_export')|float(default=0))|round %}
             <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
             {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}

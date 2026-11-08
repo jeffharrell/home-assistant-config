@@ -5,9 +5,10 @@ template:
       name: "Powerwall Charge Actual"
       unit_of_measurement: "%"
       device_class: "battery"
+      availability: "{{ has_value('sensor.powerwall_charge') }}"
       state: >-
         {% set charge = states('sensor.powerwall_charge') | float(0) %}
-        {{ (((charge / 100.0) - 0.05) / 0.95 * 100) | round(1) }}
+        {{ [(((charge / 100.0) - 0.05) / 0.95 * 100) | round(1), 0] | max }}
 
 utility_meter:
   energy_import:
@@ -35,7 +36,7 @@ automation:
       - action: notify.phones
         data:
           title: "Home"
-          message: "Power grid is {{ trigger.to_state.state }}! Powerwall at {{ states('sensor.powerwall_charge') }}%."
+          message: "Power grid is {{ trigger.to_state.state }}! Powerwall at {{ states('sensor.powerwall_charge_actual') | round }}%."
 
   - alias: "Energy - UPS status change"
     id: energy_ups_status_change
