@@ -309,6 +309,22 @@ themes:
   home_v3:
     card-mod-theme: home_v3
 
+    # action buttons (Close, Open, Resume) in amber with dark text instead of
+    # HA's default light blue. The wa-* brand tokens are set too because they
+    # resolve once at the document root and won't pick up the ha-* ones here.
+    ha-color-fill-primary-normal-resting: *accent
+    ha-color-fill-primary-normal-hover:   *accent-light
+    ha-color-fill-primary-normal-active:  *accent-dark
+    ha-color-on-primary-normal:           "#222222"
+    ha-color-fill-primary-loud-resting:   *accent
+    ha-color-fill-primary-loud-hover:     *accent-light
+    ha-color-fill-primary-loud-active:    *accent-dark
+    ha-color-on-primary-loud:             "#222222"
+    wa-color-brand-fill-normal:           *accent
+    wa-color-brand-on-normal:             "#222222"
+    wa-color-brand-fill-loud:             *accent
+    wa-color-brand-on-loud:               "#222222"
+
     # content starts right under the title: drop app_theme's 40px view
     # padding and the sections view's 24px top padding
     card-mod-view-yaml: |
