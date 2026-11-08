@@ -55,7 +55,7 @@ automation:
         target:
           entity_id: tts.google_ai_tts
         data:
-          media_player_entity_id: media_player.office_speakers
+          media_player_entity_id: media_player.master_bedroom_speaker
           message: "Welcome home I turned the lights on for you"
           options:
             voice: !secret google_tts_voice
