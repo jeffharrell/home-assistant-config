@@ -1,5 +1,5 @@
 themes:
-  app_theme:
+  app_theme: &app_theme
     card-mod-theme: app_theme
 
     # --- Palette tokens (defined once, reused below and in other themes) -----
@@ -307,6 +307,9 @@ themes:
   #  layers on top of app_theme there. The classic dashboard never uses it.
   # ===========================================================================
   home_v3:
+    # start from everything in app_theme (view themes don't inherit it), then
+    # layer the v3 tweaks below on top
+    <<: *app_theme
     card-mod-theme: home_v3
 
     # action buttons (Close, Open, Resume) in amber with dark text instead of
