@@ -41,35 +41,226 @@ cards:
         card:
           type: vertical-stack
           cards:
+            # garages: one row each with a single button (drawn by the gar-*
+            # classes in the subview theme). Tapping the row asks first, for
+            # both open and close. Hold / double tap are off so more-info's
+            # unconfirmed controls can't fire. Each garage has two tiles that
+            # swap on state, so a row never disappears.
+            # Jillian's Garage: closed (also closing / unknown) shows "Open"
             - type: tile
               entity: cover.garage_door_3
               name: "Jillian's Garage"
               state_content:
                 - state
                 - last_changed
-              features_position: inline
-              features:
-                - type: cover-open-close
-                
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_3
+                  state_not: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_3
+                confirmation:
+                  text: "Open Jillian's garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_3
+                confirmation:
+                  text: "Open Jillian's garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-open"
+
+            # Jillian's Garage: open / opening shows amber with "Close"
+            - type: tile
+              entity: cover.garage_door_3
+              name: "Jillian's Garage"
+              state_content:
+                - state
+                - last_changed
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_3
+                  state: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_3
+                confirmation:
+                  text: "Close Jillian's garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_3
+                confirmation:
+                  text: "Close Jillian's garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-close"
+
+            # Jeff's Garage: closed (also closing / unknown) shows "Open"
             - type: tile
               entity: cover.garage_door_2
               name: "Jeff's Garage"
               state_content:
                 - state
                 - last_changed
-              features_position: inline
-              features:
-                - type: cover-open-close
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_2
+                  state_not: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_2
+                confirmation:
+                  text: "Open Jeff's garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_2
+                confirmation:
+                  text: "Open Jeff's garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-open"
 
+            # Jeff's Garage: open / opening shows amber with "Close"
+            - type: tile
+              entity: cover.garage_door_2
+              name: "Jeff's Garage"
+              state_content:
+                - state
+                - last_changed
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_2
+                  state: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_2
+                confirmation:
+                  text: "Close Jeff's garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_2
+                confirmation:
+                  text: "Close Jeff's garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-close"
+
+            # Guest Garage: closed (also closing / unknown) shows "Open"
             - type: tile
               entity: cover.garage_door_1
               name: "Guest Garage"
               state_content:
                 - state
                 - last_changed
-              features_position: inline
-              features:
-                - type: cover-open-close
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_1
+                  state_not: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_1
+                confirmation:
+                  text: "Open the guest garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.open_cover
+                target:
+                  entity_id: cover.garage_door_1
+                confirmation:
+                  text: "Open the guest garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-open"
+
+            # Guest Garage: open / opening shows amber with "Close"
+            - type: tile
+              entity: cover.garage_door_1
+              name: "Guest Garage"
+              state_content:
+                - state
+                - last_changed
+              visibility:
+                - condition: state
+                  entity: cover.garage_door_1
+                  state: ["open", "opening"]
+              tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_1
+                confirmation:
+                  text: "Close the guest garage?"
+              icon_tap_action:
+                action: perform-action
+                perform_action: cover.close_cover
+                target:
+                  entity_id: cover.garage_door_1
+                confirmation:
+                  text: "Close the guest garage?"
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
+              card_mod:
+                class: "gar gar-act-close"
 
       # what's on
       - type: entity-filter

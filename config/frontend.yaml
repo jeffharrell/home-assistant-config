@@ -342,6 +342,47 @@ themes:
   subview:
     card-mod-theme: subview
 
+    # garage rows on the classic Outside view (this is that view's theme, so
+    # UIX reads this card-mod-card-yaml there, not app_theme's). Cards with
+    # class "gar" get one button: gar-act-open draws a subtle gray "Open",
+    # gar-act-close a yellow "Close" with amber icon and state text.
+    card-mod-card-yaml: |
+      .: |
+        :host(.gar) ha-tile-info {
+          padding-inline-end: 92px;
+        }
+        :host(.gar) ha-card::after {
+          position: absolute;
+          top: 50%;
+          right: 16px;
+          transform: translateY(-50%);
+          padding: 9px 18px;
+          border-radius: 20px;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.2;
+          pointer-events: none;
+        }
+        :host(.gar-act-open) ha-card::after {
+          content: "Open";
+          background: rgba(255, 255, 255, 0.08);
+          color: var(--primary-text-color);
+        }
+        :host(.gar-act-close) ha-card {
+          --tile-color: #FFD600 !important;
+          --ha-tile-info-secondary-color: #FFD600;
+        }
+        :host(.gar-act-close) ha-tile-icon {
+          --tile-icon-color: #FFD600;
+          --tile-icon-opacity: 0.16;
+          --tile-icon-hover-opacity: 0.16;
+        }
+        :host(.gar-act-close) ha-card::after {
+          content: "Close";
+          background: #FFD600;
+          color: #222222;
+        }
+
     primary-text-color:   *white
     secondary-text-color: *white-dim
 
