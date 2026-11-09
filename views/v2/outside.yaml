@@ -262,6 +262,40 @@ cards:
               card_mod:
                 class: "gar gar-act-close"
 
+      # landscape lights, same round tiles as Fountain / Garage Fan
+      - type: 'custom:mod-card'
+        style: |
+          ha-card {
+            margin-top: 22px;
+            background: none;
+            border: none;
+            box-shadow: none;
+          }
+        card:
+          type: grid
+          columns: 2
+          square: false
+          cards:
+            - type: tile
+              entity: switch.front_landscape
+              name: "Front Landscape"
+              icon: mdi:outdoor-lamp
+              theme: round_button
+              tap_action:
+                action: toggle
+              icon_tap_action:
+                action: toggle
+
+            - type: tile
+              entity: switch.back_landscape
+              name: "Back Landscape"
+              icon: mdi:outdoor-lamp
+              theme: round_button
+              tap_action:
+                action: toggle
+              icon_tap_action:
+                action: toggle
+
       # what's on
       - type: entity-filter
         card:
