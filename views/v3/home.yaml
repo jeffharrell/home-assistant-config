@@ -438,9 +438,14 @@ sections:
   # cameras
   - type: grid
     cards:
+      # a bit more room above Cameras than the default section gap
       - type: heading
         heading: "Cameras"
-        icon: mdi:cctv
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: 12px;
+            }
         tap_action:
           action: navigate
           navigation_path: /home-v3/cameras
@@ -524,8 +529,45 @@ sections:
         hold_action:
           action: none
 
-  # quick: contextual actions (same rules as the classic home) + alarm
+  # quick: contextual actions (same rules as the classic home). The section
+  # only shows when at least one action does; each "and" mirrors one tile's
+  # visibility below, so keep them in step.
   - type: grid
+    visibility:
+      - condition: or
+        conditions:
+          - condition: and
+            conditions:
+              - condition: state
+                entity: sun.sun
+                state: "below_horizon"
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: "disarmed"
+          - condition: and
+            conditions:
+              - condition: state
+                entity: schedule.quick_actions_good_night
+                state: "on"
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: "disarmed"
+          - condition: and
+            conditions:
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: "armed_home"
+              - condition: state
+                entity: script.let_dog_out
+                state: "off"
+          - condition: and
+            conditions:
+              - condition: state
+                entity: schedule.quick_actions_wake_up
+                state: "on"
+              - condition: state
+                entity: alarm_control_panel.alarm
+                state: "armed_home"
     cards:
       - type: heading
         heading: "Quick"
@@ -608,14 +650,5 @@ sections:
           action: toggle
         icon_tap_action:
           action: toggle
-
-      # alarm: always here
-      - type: tile
-        entity: alarm_control_panel.alarm
-        name: "Alarm"
-        tap_action:
-          action: more-info
-        icon_tap_action:
-          action: more-info
 
       - !include navbar.yaml

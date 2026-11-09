@@ -378,6 +378,13 @@ themes:
           margin-bottom: 6px;
           --mdc-icon-size: 16px;
         }
+        /* camera and picture cards: square corners, and drop the card's
+           75px minimum height, which left a gray strip under the small
+           16:9 thumbnails */
+        ha-card:has(> .image-container) {
+          border-radius: 0 !important;
+          min-height: 0 !important;
+        }
         :host(.att) ha-card {
           --ha-card-border-color: rgba(255, 214, 0, 0.35);
           --tile-color: #FFD600 !important;
