@@ -142,6 +142,31 @@ group:
       - switch.house_fan
       
 template:
+  # one line for the classic home's attention tile: the name is the sentence
+  # ("Front Door is open", "Living Room Window and 2 more are open") and the
+  # state is when the longest-open one opened. Unknown when all are closed.
+  # Doors and windows plus the garage side door; garage doors have their own
+  # tiles.
+  - sensor:
+      - name: >-
+          {%- set open = expand('binary_sensor.doors_and_windows', 'binary_sensor.garage_side_door_open')
+             | selectattr('state', 'eq', 'on') | sort(attribute='last_changed') | list -%}
+          {%- if open | count == 0 -%} Doors and windows are closed
+          {%- elif open | count == 1 -%} {{ open[0].name }} {{ 'are' if open[0].name.endswith('s') else 'is' }} open
+          {%- else -%} {{ open[0].name }} and {{ open | count - 1 }} more are open
+          {%- endif -%}
+        unique_id: open_doors_and_windows
+        default_entity_id: sensor.open_doors_and_windows
+        device_class: timestamp
+        icon: >-
+          {%- set open = expand('binary_sensor.doors_and_windows', 'binary_sensor.garage_side_door_open')
+             | selectattr('state', 'eq', 'on') | sort(attribute='last_changed') | list -%}
+          {{ 'mdi:window-open-variant' if open and 'window' in open[0].entity_id else 'mdi:door-open' }}
+        state: >-
+          {%- set open = expand('binary_sensor.doors_and_windows', 'binary_sensor.garage_side_door_open')
+             | selectattr('state', 'eq', 'on') | sort(attribute='last_changed') | list -%}
+          {{ open[0].last_changed.isoformat() if open else none }}
+
   - binary_sensor:
       - name: "Media"
         unique_id: media_players

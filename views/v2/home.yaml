@@ -28,22 +28,6 @@ cards:
             <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
             {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}
           {%- endif -%}
-
-          {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
-          {% set len = list | count %}
-          {%- if len == 1 %} 
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {%- elif len > 1 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
-          {%- endif -%}
-
-          {% if is_state('binary_sensor.flume_sensor_home_leak_detected', 'on') %}
-            <ha-icon icon="mdi:water"></ha-icon> Potential leak detected
-          {%- endif -%}
-
-          {%- if is_state('input_boolean.guest_mode_enabled', 'on') %}
-            <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
-          {%- endif -%}
         text_only: true
         card_mod:
           style: |
@@ -52,7 +36,6 @@ cards:
               padding-bottom: 20px;
               transition: none;
               line-height: 1.8em;
-              min-height: 7em;
             }
 
       # picture
@@ -150,6 +133,183 @@ cards:
       - type: vertical-stack
         title: " "
         cards:
+          # needs attention: amber tiles, each only while it's true (same
+          # as the v3 dashboard). Garages and HVAC: tapping anywhere runs the
+          # action (Close / Resume drawn by the attention theme), and hold /
+          # double tap are off so more-info's unconfirmed Open can't fire.
+          - type: tile
+            entity: cover.garage_door_3
+            name: "Jillian's Garage is open"
+            icon: mdi:garage-open
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: cover.garage_door_3
+                state: ["open", "opening"]
+            tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_3
+            icon_tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_3
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_hold_action:
+              action: none
+            icon_double_tap_action:
+              action: none
+            card_mod:
+              class: "att att-close"
+
+          - type: tile
+            entity: cover.garage_door_2
+            name: "Jeff's Garage is open"
+            icon: mdi:garage-open
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: cover.garage_door_2
+                state: ["open", "opening"]
+            tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_2
+            icon_tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_2
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_hold_action:
+              action: none
+            icon_double_tap_action:
+              action: none
+            card_mod:
+              class: "att att-close"
+
+          - type: tile
+            entity: cover.garage_door_1
+            name: "Guest Garage is open"
+            icon: mdi:garage-open
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: cover.garage_door_1
+                state: ["open", "opening"]
+            tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_1
+            icon_tap_action:
+              action: perform-action
+              perform_action: cover.close_cover
+              target:
+                entity_id: cover.garage_door_1
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_hold_action:
+              action: none
+            icon_double_tap_action:
+              action: none
+            card_mod:
+              class: "att att-close"
+
+          - type: tile
+            entity: input_boolean.hvac_paused
+            name: "HVAC is paused"
+            icon: mdi:hvac-off
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: input_boolean.hvac_paused
+                state: "on"
+            tap_action:
+              action: perform-action
+              perform_action: script.hvac_resume
+            icon_tap_action:
+              action: perform-action
+              perform_action: script.hvac_resume
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_hold_action:
+              action: none
+            icon_double_tap_action:
+              action: none
+            card_mod:
+              class: "att att-resume"
+
+          # doors and windows, rolled up into one line by
+          # sensor.open_doors_and_windows (its name is the sentence)
+          - type: tile
+            entity: sensor.open_doors_and_windows
+            theme: attention
+            visibility:
+              - condition: state
+                entity: sensor.open_doors_and_windows
+                state_not: ["unknown", "unavailable"]
+            tap_action:
+              action: navigate
+              navigation_path: outside
+            icon_tap_action:
+              action: navigate
+              navigation_path: outside
+
+          # informational: tap opens more-info
+          - type: tile
+            entity: binary_sensor.flume_sensor_home_leak_detected
+            name: "Potential water leak"
+            icon: mdi:water-alert
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: binary_sensor.flume_sensor_home_leak_detected
+                state: "on"
+
+          - type: tile
+            entity: binary_sensor.grid_status
+            name: "Grid is down, on Powerwall"
+            icon: mdi:transmission-tower-off
+            state_content: last_changed
+            theme: attention
+            visibility:
+              - condition: state
+                entity: binary_sensor.grid_status
+                state: "off"
+            tap_action:
+              action: more-info
+              entity: sensor.powerwall_charge_actual
+
+          # the timer's own state is the countdown
+          - type: tile
+            entity: timer.let_dog_out
+            name: "Alarm re-arms in"
+            icon: mdi:dog-side
+            theme: attention
+            visibility:
+              - condition: state
+                entity: timer.let_dog_out
+                state: ["active", "paused"]
+
           # mood lights
           - type: tile
             entity: script.mood_lights
