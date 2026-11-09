@@ -19,7 +19,7 @@ cards:
           ha-card {
             --ha-card-border-color: var(--secondary-background-color);
 
-            padding: 16px 20px 0;
+            padding: 12px 20px 0;
             background-color: var(--secondary-background-color);
           }
         card:
@@ -36,11 +36,11 @@ cards:
                   card_mod:
                     style:
                       .: |
-                        ha-card { background: none; border: none; box-shadow: none; padding: 0 0 4px 2px !important; overflow: visible; }
+                        ha-card { background: none; border: none; box-shadow: none; padding: 0 0 0 2px !important; overflow: visible; }
                         ha-markdown { overflow: visible; }
                       ha-markdown $: |
                         p { margin: 0; color: var(--secondary-text-color); font-size: 14px; white-space: nowrap; }
-                        h1 { margin: 2px 0 4px; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
+                        h1 { margin: 0 0 2px; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
                 - type: horizontal-stack
                   cards:
                   - type: button
@@ -105,7 +105,7 @@ cards:
                       border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 4px;
+                      margin-top: 0;
                       {% if is_state('climate.home', '"off"') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
@@ -134,7 +134,7 @@ cards:
                       border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 4px;
+                      margin-top: 0;
                       {% if is_state('climate.home', 'heat') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
@@ -163,7 +163,7 @@ cards:
                       border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 4px;
+                      margin-top: 0;
                       {% if is_state('climate.home', 'cool') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
@@ -185,7 +185,8 @@ cards:
                         state-badge { background: rgba(255, 255, 255, 0.08); border-radius: 50%; }
               card_mod:
                 style: |
-                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 8px -20px 0; padding: 0 4px; }
+                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 4px -20px 0; padding: 0 4px; }
+                  .card-content { padding-top: 4px !important; padding-bottom: 8px !important; }
 
       # rooms: one table with a header row; no icons. Holding a room opens
       # its outlet's device page (all its sensors); Garage is a Scrape
