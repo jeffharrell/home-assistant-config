@@ -6,6 +6,26 @@ type: custom:navbar-card
 mobile:
   show_labels: true
   safe_area: true
+# shorter bar on phones: 6px above, 4px plus the home-indicator inset below
+# (was 12px and 12px), a 30px icon pill (was 36) and 16px labels (was 19).
+# Each tab stays 46px tall to tap. 81px to 58px before the inset.
+styles: |
+  .navbar-card.mobile {
+    padding-top: 6px !important;
+  }
+  .navbar.mobile.safe-area:not(.floating) .navbar-card {
+    padding-bottom: calc(4px + var(--safe-area-inset-bottom, 0px)) !important;
+  }
+  .navbar-card.mobile .button {
+    height: 30px;
+  }
+  .navbar-card.mobile .label {
+    line-height: 16px;
+  }
+# room left under the last card for the bar (default 80, sized for the old one)
+layout:
+  auto_padding:
+    mobile_px: 64
 desktop:
   position: bottom
   show_labels: true
