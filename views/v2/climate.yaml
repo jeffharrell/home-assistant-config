@@ -10,7 +10,8 @@ cards:
 
       # thermostat first (design mock "climate-1-thermostat-first"): inside
       # temp big on the left, the set point with round - / + on the right
-      # (script.hvac_step nudges it a degree), mode pills, then the house fan
+      # (script.hvac_step nudges it a degree), Off / Heat / Cool pills (Auto doesn't work on this thermostat),
+      # then the house fan
       # as a slim row. Built from markdown and button cards, styled with
       # card_mod (Jinja templates pick the selected mode and its color).
       - type: 'custom:mod-card'
@@ -18,7 +19,7 @@ cards:
           ha-card {
             --ha-card-border-color: var(--secondary-background-color);
 
-            padding: 20px 20px 0;
+            padding: 16px 20px 0;
             background-color: var(--secondary-background-color);
           }
         card:
@@ -31,13 +32,15 @@ cards:
                   content: >-
                     <p>Inside now</p>
                     <h1>{{ state_attr('climate.home', 'current_temperature') | round(0) }}°</h1>
+                    <p class="sub">{{ states('climate.home') | replace('heat_cool', 'auto') | capitalize }} · {{ state_attr('climate.home', 'hvac_action') }} · {{ state_attr('climate.home', 'current_humidity') | round(0) }}% humidity</p>
                   card_mod:
                     style:
                       .: |
-                        ha-card { background: none; border: none; box-shadow: none; padding: 0 0 0 2px !important; }
+                        ha-card { background: none; border: none; box-shadow: none; padding: 0 0 4px 2px !important; overflow: visible; }
+                        ha-markdown { overflow: visible; }
                       ha-markdown $: |
-                        p { margin: 0; color: var(--secondary-text-color); font-size: 14px; }
-                        h1 { margin: 2px 0 0; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
+                        p { margin: 0; color: var(--secondary-text-color); font-size: 14px; white-space: nowrap; }
+                        h1 { margin: 2px 0 4px; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
                 - type: horizontal-stack
                   cards:
                   - type: button
@@ -79,18 +82,6 @@ cards:
                       style: |
                         ha-card { width: 44px; height: 44px !important; border-radius: 50%; margin-top: 18px; padding: 0 !important; border: none; background: rgba(255, 255, 255, 0.08); --mdc-icon-size: 22px; }
 
-            # status line on its own row so it never clips
-            - type: markdown
-              text_only: true
-              content: >-
-                {{ states('climate.home') | replace('heat_cool', 'auto') | capitalize }} · {{ state_attr('climate.home', 'hvac_action') }} · {{ state_attr('climate.home', 'current_humidity') | round(0) }}% humidity
-              card_mod:
-                style:
-                  .: |
-                    ha-card { background: none; border: none; box-shadow: none; padding: 0 0 6px 2px !important; margin-top: -6px; }
-                  ha-markdown $: |
-                    p { margin: 0; color: var(--secondary-text-color); font-size: 15px; }
-
             - type: horizontal-stack
               cards:
               - type: button
@@ -108,13 +99,13 @@ cards:
                 card_mod:
                   style: |
                     ha-card {
-                      height: 44px !important;
+                      height: 38px !important;
                       padding: 0 !important;
                       border: none;
-                      border-radius: 22px;
+                      border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 8px;
+                      margin-top: 4px;
                       {% if is_state('climate.home', '"off"') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
@@ -137,13 +128,13 @@ cards:
                 card_mod:
                   style: |
                     ha-card {
-                      height: 44px !important;
+                      height: 38px !important;
                       padding: 0 !important;
                       border: none;
-                      border-radius: 22px;
+                      border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 8px;
+                      margin-top: 4px;
                       {% if is_state('climate.home', 'heat') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
@@ -166,43 +157,14 @@ cards:
                 card_mod:
                   style: |
                     ha-card {
-                      height: 44px !important;
+                      height: 38px !important;
                       padding: 0 !important;
                       border: none;
-                      border-radius: 22px;
+                      border-radius: 19px;
                       font-size: 15px !important;
                       font-weight: 500;
-                      margin-top: 8px;
+                      margin-top: 4px;
                       {% if is_state('climate.home', 'cool') %}
-                      background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
-                      color: #222222;
-                      {% else %}
-                      background: rgba(255, 255, 255, 0.08);
-                      {% endif %}
-                    }
-              - type: button
-                name: "Auto"
-                show_icon: false
-                tap_action:
-                  action: perform-action
-                  perform_action: climate.set_hvac_mode
-                  target:
-                    entity_id: climate.home
-                  data:
-                    hvac_mode: heat_cool
-                hold_action:
-                  action: none
-                card_mod:
-                  style: |
-                    ha-card {
-                      height: 44px !important;
-                      padding: 0 !important;
-                      border: none;
-                      border-radius: 22px;
-                      font-size: 15px !important;
-                      font-weight: 500;
-                      margin-top: 8px;
-                      {% if is_state('climate.home', 'heat_cool') %}
                       background: {% if is_state('climate.home', 'heat') %}var(--state-climate-heat-color, #ff8100){% elif is_state('climate.home', 'cool') %}var(--state-climate-cool-color, #2b9af9){% elif is_state('climate.home', 'heat_cool') %}var(--state-climate-heat-cool-color, #ffb700){% else %}rgba(255, 255, 255, 0.3){% endif %};
                       color: #222222;
                       {% else %}
@@ -223,7 +185,7 @@ cards:
                         state-badge { background: rgba(255, 255, 255, 0.08); border-radius: 50%; }
               card_mod:
                 style: |
-                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 10px -20px 0; padding: 6px 4px; }
+                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 8px -20px 0; padding: 0 4px; }
 
       # rooms: one table with a header row; no icons. Tapping a room opens
       # its outlet's device page (all its sensors); Garage is a Scrape
@@ -275,7 +237,7 @@ cards:
             entities:
               - entity: sensor.family_room_outlet_temperature
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -285,7 +247,7 @@ cards:
                   navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
               - entity: sensor.family_room_outlet_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
@@ -308,7 +270,7 @@ cards:
             entities:
               - entity: sensor.living_room_outlet_temperature
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -318,7 +280,7 @@ cards:
                   navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
               - entity: sensor.living_room_outlet_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
@@ -341,7 +303,7 @@ cards:
             entities:
               - entity: sensor.master_bedroom_outlet_temperature
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -351,7 +313,7 @@ cards:
                   navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
               - entity: sensor.master_bedroom_outlet_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
@@ -374,7 +336,7 @@ cards:
             entities:
               - entity: sensor.boys_bedroom_outlet_temperature
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -384,7 +346,7 @@ cards:
                   navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
               - entity: sensor.boys_bedroom_outlet_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
@@ -407,7 +369,7 @@ cards:
             entities:
               - entity: sensor.guest_bedroom_outlet_temperature
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -417,7 +379,7 @@ cards:
                   navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
               - entity: sensor.guest_bedroom_outlet_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
@@ -440,7 +402,7 @@ cards:
             entities:
               - entity: sensor.garage_temp
                 name: false
-                template: "{{ states(entity) | round(0) }}°"
+                template: "{{ (states(entity) | round(0) ~ '°') if is_number(states(entity)) else '–' }}"
                 styles:
                   font-size: 18px
                   width: 52px
@@ -450,7 +412,7 @@ cards:
                   navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
               - entity: sensor.garage_humidity
                 name: false
-                template: "{{ states(entity) | round(0) }}%"
+                template: "{{ (states(entity) | round(0) ~ '%') if is_number(states(entity)) else '–' }}"
                 styles:
                   color: var(--secondary-text-color)
                   width: 80px
