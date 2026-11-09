@@ -127,14 +127,14 @@ cards:
               action: none
 
       # actions. The blank title is breathing room under the nav buttons,
-      # squeezed from its default 40px to 12px (about 26px of gap in all).
+      # squeezed from its default 40px to 20px (about 34px of gap in all).
       - type: vertical-stack
         title: " "
         card_mod:
           style: |
             .card-header {
               padding: 0 !important;
-              height: 12px;
+              height: 20px;
               font-size: 0;
               line-height: 0;
               overflow: hidden;
