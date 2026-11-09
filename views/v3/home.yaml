@@ -13,6 +13,10 @@ header:
 
 badges:
   - type: entity
+    entity: alarm_control_panel.alarm
+    show_name: false
+
+  - type: entity
     entity: sensor.outside_temp
     icon: mdi:weather-partly-cloudy
     show_name: false
@@ -34,10 +38,6 @@ badges:
     tap_action:
       action: navigate
       navigation_path: /home-v3/advanced
-
-  - type: entity
-    entity: alarm_control_panel.alarm
-    show_name: false
 
 sections:
 
