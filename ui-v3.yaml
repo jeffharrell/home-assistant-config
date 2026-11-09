@@ -28,7 +28,7 @@ swipe_nav:
 # HA only re-reads this dashboard when THIS file's mtime changes, not the
 # included views/v3/*.yaml. After pulling a views-only change, restart HA
 # or touch this file, or the old views keep showing.
-# last views change: 2026-11-08, square cameras
+# last views change: 2026-11-08, home camera back to stills
 views:
   - !include views/v3/home.yaml
   - !include views/v3/lights.yaml
