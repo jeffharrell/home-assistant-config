@@ -375,8 +375,12 @@ themes:
         ha-card > .container > .content {
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          margin-bottom: 6px;
           --mdc-icon-size: 16px;
+        }
+        /* one shared gap under every section header, padded on the whole
+           header row so a header with badges (Cameras) gets the same gap */
+        ha-card > .container:has(> .content) {
+          padding-bottom: 12px;
         }
         /* camera and picture cards: square corners, and drop the card's
            75px minimum height, which left a gray strip under the small
