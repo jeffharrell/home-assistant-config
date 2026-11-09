@@ -17,9 +17,16 @@ kiosk_mode:
     hide_dialog_header_settings: true
     hide_dialog_header_overflow: true
 
-# swipe-navigation is loaded for every dashboard; the navbar replaces it here
+# swipe between the navbar tabs, like the classic. home/lights/media/more
+# are subviews here, so don't skip subviews; instead skip the views that
+# aren't tabs (climate, cameras, advanced = indexes 4,5,6 below). Keep the
+# view order in step with skip_tabs.
 swipe_nav:
-  enable: false
+  wrap: false
+  animate: swipe
+  animate_duration: 100
+  skip_subviews: false
+  skip_tabs: 4,5,6
 
 # home is the only main view; the rest are subviews so the header
 # shows a title + back arrow instead of a second row of tabs.
@@ -28,12 +35,14 @@ swipe_nav:
 # HA only re-reads this dashboard when THIS file's mtime changes, not the
 # included views/v3/*.yaml. After pulling a views-only change, restart HA
 # or touch this file, or the old views keep showing.
-# last views change: 2026-11-08, climate tab removed
+# last views change: 2026-11-08, swipe nav between tabs
 views:
+  # tabs, in navbar order (swiped through)
   - !include views/v3/home.yaml
   - !include views/v3/lights.yaml
-  - !include views/v3/climate.yaml
   - !include views/v3/media.yaml
   - !include views/v3/more.yaml
+  # reached from a page, not swiped to
+  - !include views/v3/climate.yaml
   - !include views/v3/cameras.yaml
   - !include views/v3/advanced.yaml
