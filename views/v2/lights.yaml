@@ -31,6 +31,9 @@ cards:
             icon_tap_action:
               action: toggle
 
+      # rooms. Icons set here so every single light is a bulb and every
+      # group is a bulb group (HA's own default swaps to the slashed "off"
+      # icons for the ones without a custom icon).
       - type: 'custom:mod-card'
         style: |
           ha-card {
@@ -46,6 +49,7 @@ cards:
             - type: tile
               entity: light.kitchen_area
               name: "Kitchen"
+              icon: mdi:lightbulb-group
               hide_state: true
               features_position: inline
               features:
@@ -54,6 +58,7 @@ cards:
             - type: tile
               entity: light.family_room
               name: "Family Room"
+              icon: mdi:lightbulb
               hide_state: true
               features_position: inline
               features:
@@ -62,11 +67,13 @@ cards:
             - type: tile
               entity: light.living_room
               name: "Living Room"
+              icon: mdi:lightbulb
               hide_state: true
 
             - type: tile
               entity: light.dining_room
               name: "Dining Room"
+              icon: mdi:lightbulb
               hide_state: true
               features_position: inline
               features:
@@ -75,6 +82,7 @@ cards:
             - type: tile
               entity: light.bedroom_area
               name: "Bedrooms"
+              icon: mdi:lightbulb-group
               hide_state: true
               features_position: inline
               features:
@@ -83,11 +91,13 @@ cards:
             - type: tile
               entity: light.hallway
               name: "Hallway"
+              icon: mdi:lightbulb
               hide_state: true
 
             - type: tile
               entity: light.outside_area
               name: "Outside"
+              icon: mdi:lightbulb-group
               hide_state: true
 
       # settings
