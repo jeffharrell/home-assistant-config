@@ -530,6 +530,10 @@ sections:
         hold_action:
           action: none
 
+      # the bottom navbar lives here, in a section that always shows (Quick
+      # hides itself when it has nothing, and would take the navbar with it)
+      - !include navbar.yaml
+
   # quick: contextual actions (same rules as the classic home). The section
   # only shows when at least one action does; each "and" mirrors one tile's
   # visibility below, so keep them in step.
@@ -651,5 +655,3 @@ sections:
           action: toggle
         icon_tap_action:
           action: toggle
-
-      - !include navbar.yaml
