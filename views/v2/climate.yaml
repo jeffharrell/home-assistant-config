@@ -19,7 +19,7 @@ cards:
           ha-card {
             --ha-card-border-color: var(--secondary-background-color);
 
-            padding: 12px 20px 0;
+            padding: 16px 20px 0;
             background-color: var(--secondary-background-color);
           }
         card:
@@ -40,7 +40,7 @@ cards:
                         ha-markdown { overflow: visible; }
                       ha-markdown $: |
                         p { margin: 0; color: var(--secondary-text-color); font-size: 14px; white-space: nowrap; }
-                        h1 { margin: 0 0 4px; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
+                        h1 { margin: 2px 0 4px; font-size: 52px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
                 - type: horizontal-stack
                   cards:
                   - type: button
@@ -185,8 +185,7 @@ cards:
                         state-badge { background: rgba(255, 255, 255, 0.08); border-radius: 50%; }
               card_mod:
                 style: |
-                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 4px -20px 0; padding: 0 4px; }
-                  .card-content { padding-top: 4px !important; padding-bottom: 8px !important; }
+                  ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 8px -20px 0; padding: 0 4px; }
 
       # rooms: one table with a header row; no icons. Holding a room opens
       # its outlet's device page (all its sensors); Garage is a Scrape
