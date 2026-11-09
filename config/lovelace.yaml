@@ -7,12 +7,6 @@ dashboards:
     title: "Overview"
     icon: "mdi:view-dashboard"
     show_in_sidebar: true
-  home-v3:
-    mode: yaml
-    filename: "ui-v3.yaml"
-    title: "Home (new)"
-    icon: "mdi:home-variant-outline"
-    show_in_sidebar: true
 
 resources:
   - url: /hacsfiles/kiosk-mode/kiosk-mode.js
@@ -22,6 +16,4 @@ resources:
   - url: /hacsfiles/config-template-card/config-template-card.js
     type: module
   - url: /hacsfiles/hass-swipe-navigation/swipe-navigation.js
-    type: module
-  - url: /hacsfiles/lovelace-navbar-card/navbar-card.js
     type: module

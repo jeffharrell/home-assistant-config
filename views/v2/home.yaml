@@ -140,8 +140,8 @@ cards:
               overflow: hidden;
             }
         cards:
-          # needs attention: amber tiles, each only while it's true (same
-          # as the v3 dashboard). Garages and HVAC: tapping anywhere runs the
+          # needs attention: amber tiles, each only while it's true.
+          # Garages and HVAC: tapping anywhere runs the
           # action (Close / Resume drawn by the attention theme), and hold /
           # double tap are off so more-info's unconfirmed Open can't fire.
           # Close asks for confirmation first (Jeff, 11/8).
