@@ -14,9 +14,10 @@ routes:
     url: /home-v3/home
     icon: mdi:home-outline
     icon_selected: mdi:home
-    # cameras is reached from home, so keep home lit there
+    # cameras and climate are reached from home (camera image, thermostat chip),
+    # so keep home lit there
     selected: >-
-      [[[ return ['/home-v3', '/home-v3/', '/home-v3/home', '/home-v3/cameras'].includes(window.location.pathname); ]]]
+      [[[ return ['/home-v3', '/home-v3/', '/home-v3/home', '/home-v3/cameras', '/home-v3/climate'].includes(window.location.pathname); ]]]
 
   - label: "Lights"
     url: /home-v3/lights
@@ -25,14 +26,6 @@ routes:
     # amber when any light is on (light.house), like the classic home buttons
     icon_color: >-
       [[[ return states['light.house']?.state === 'on' ? '#FFD600' : null; ]]]
-
-  - label: "Climate"
-    url: /home-v3/climate
-    icon: mdi:thermometer
-    icon_selected: mdi:thermometer
-    # amber when heating, cooling or the house fan is on (group.climate), like the classic home buttons
-    icon_color: >-
-      [[[ return states['group.climate']?.state === 'on' ? '#FFD600' : null; ]]]
 
   - label: "Media"
     url: /home-v3/media
