@@ -8,28 +8,48 @@ cards:
   - type: vertical-stack
     cards:
 
-      # tiles
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: climate.home
-            theme: round_button
-            tap_action:
-              action: more-info
-            icon_tap_action:
-              action: more-info
+      # thermostat first: inside temp and humidity on the tile, the set point
+      # as its own - / + control (so 71 inside and 69 set can't be confused),
+      # mode buttons, then the house fan, all in one block like the garages
+      - type: 'custom:mod-card'
+        style: |
+          ha-card {
+            --ha-card-border-color: var(--secondary-background-color);
 
-          - type: tile
-            entity: switch.house_fan
-            theme: round_button
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
+            padding: 6px 0;
+            background-color: var(--secondary-background-color);
+          }
+        card:
+          type: vertical-stack
+          cards:
+            - type: tile
+              entity: climate.home
+              name: "Inside now"
+              state_content:
+                - current_temperature
+                - hvac_action
+                - current_humidity
+              features_position: bottom
+              features:
+                - type: target-temperature
+                - type: climate-hvac-modes
+                  style: icons
+                  hvac_modes:
+                    - "off"
+                    - heat
+                    - cool
+                    - heat_cool
 
-      # room temperatures
+            - type: tile
+              entity: switch.house_fan
+              tap_action:
+                action: toggle
+              icon_tap_action:
+                action: toggle
+
+      # rooms: one table, column labels on the first row only, no icons.
+      # Tapping a room opens its outlet's device page (all its sensors);
+      # Garage is a Scrape sensor, so its "device" is just that sensor.
       - type: entities
         theme: padded_card
         entities:
@@ -37,62 +57,200 @@ cards:
             entity: sensor.family_room_outlet_temperature
             name: "Family Room"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
             entities:
-              - entity: sensor.family_room_outlet_humidity
-                name: "Humidity"
               - entity: sensor.family_room_outlet_temperature
-                name: "Temperature"
-                format: precision0
+                name: "TEMP"
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
+              - entity: sensor.family_room_outlet_humidity
+                name: "HUMIDITY"
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
           - type: custom:multiple-entity-row
             entity: sensor.living_room_outlet_temperature
             name: "Living Room"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
             entities:
-              - entity: sensor.living_room_outlet_humidity
-                name: "Humidity"
               - entity: sensor.living_room_outlet_temperature
-                name: "Temperature"
-                format: precision0
+                name: false
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
+              - entity: sensor.living_room_outlet_humidity
+                name: false
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
           - type: custom:multiple-entity-row
             entity: sensor.master_bedroom_outlet_temperature
             name: "Master Bedroom"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
             entities:
-              - entity: sensor.master_bedroom_outlet_humidity
-                name: "Humidity"
               - entity: sensor.master_bedroom_outlet_temperature
-                name: "Temperature"
-                format: precision0
+                name: false
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
+              - entity: sensor.master_bedroom_outlet_humidity
+                name: false
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
           - type: custom:multiple-entity-row
             entity: sensor.boys_bedroom_outlet_temperature
             name: "Boys Bedroom"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
             entities:
-              - entity: sensor.boys_bedroom_outlet_humidity
-                name: "Humidity"
               - entity: sensor.boys_bedroom_outlet_temperature
-                name: "Temperature"
-                format: precision0
+                name: false
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
+              - entity: sensor.boys_bedroom_outlet_humidity
+                name: false
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
           - type: custom:multiple-entity-row
             entity: sensor.guest_bedroom_outlet_temperature
             name: "Guest Bedroom"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
             entities:
-              - entity: sensor.guest_bedroom_outlet_humidity
-                name: "Humidity"
               - entity: sensor.guest_bedroom_outlet_temperature
-                name: "Temperature"
-                format: precision0
+                name: false
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
+              - entity: sensor.guest_bedroom_outlet_humidity
+                name: false
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
           - type: custom:multiple-entity-row
             entity: sensor.garage_temp
             name: "Garage"
             show_state: false
+            tap_action:
+              action: navigate
+              navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
             entities:
-              - entity: sensor.garage_humidity
-                name: "Humidity"
               - entity: sensor.garage_temp
-                name: "Temperature"
-                format: precision0
+                name: false
+                template: "{{ states(entity) | round(0) }}°"
+                styles:
+                  font-size: 18px
+                  width: 52px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
+              - entity: sensor.garage_humidity
+                name: false
+                template: "{{ states(entity) | round(0) }}%"
+                styles:
+                  color: var(--secondary-text-color)
+                  width: 80px
+                  text-align: right
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
+            card_mod:
+              style:
+                hui-generic-entity-row $: |
+                  state-badge { display: none; }
+                  .info { padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
 
       # settings
       - type: entities
