@@ -262,7 +262,8 @@ cards:
               card_mod:
                 class: "gar gar-act-close"
 
-      # landscape lights, same round tiles as Fountain / Garage Fan
+      # landscape lights: status only (they run on their own schedule),
+      # stacked full width so the names don't truncate
       - type: 'custom:mod-card'
         style: |
           ha-card {
@@ -273,7 +274,7 @@ cards:
           }
         card:
           type: grid
-          columns: 2
+          columns: 1
           square: false
           cards:
             - type: tile
@@ -282,9 +283,17 @@ cards:
               icon: mdi:outdoor-lamp
               theme: round_button
               tap_action:
-                action: toggle
+                action: none
               icon_tap_action:
-                action: toggle
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
 
             - type: tile
               entity: switch.back_landscape
@@ -292,9 +301,17 @@ cards:
               icon: mdi:outdoor-lamp
               theme: round_button
               tap_action:
-                action: toggle
+                action: none
               icon_tap_action:
-                action: toggle
+                action: none
+              hold_action:
+                action: none
+              double_tap_action:
+                action: none
+              icon_hold_action:
+                action: none
+              icon_double_tap_action:
+                action: none
 
       # what's on
       - type: entity-filter
