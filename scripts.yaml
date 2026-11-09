@@ -67,6 +67,34 @@ hvac_resume:
       data:
         entity_id: input_boolean.hvac_paused
 
+# the classic Climate view's - / + buttons: move the set point by `step`
+# degrees (both ends of the range in auto). Does nothing while off.
+hvac_step:
+  mode: queued
+  max: 5
+  fields:
+    step:
+      description: "Degrees to move the set point, e.g. 1 or -1"
+      example: 1
+  sequence:
+    - if:
+        condition: state
+        entity_id: climate.home
+        state: "heat_cool"
+      then:
+        action: climate.set_temperature
+        data:
+          entity_id: climate.home
+          target_temp_low: "{{ state_attr('climate.home', 'target_temp_low') | float + step }}"
+          target_temp_high: "{{ state_attr('climate.home', 'target_temp_high') | float + step }}"
+      else:
+        - condition: template
+          value_template: "{{ state_attr('climate.home', 'temperature') is number }}"
+        - action: climate.set_temperature
+          data:
+            entity_id: climate.home
+            temperature: "{{ state_attr('climate.home', 'temperature') | float + step }}"
+
 let_dog_out:
   mode: single
   sequence:
