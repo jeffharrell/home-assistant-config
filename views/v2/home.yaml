@@ -126,9 +126,19 @@ cards:
             hold_action:
               action: none
 
-      # actions (the blank title is breathing room under the nav buttons)
+      # actions. The blank title is breathing room under the nav buttons,
+      # squeezed from its default 40px to 12px (about 26px of gap in all).
       - type: vertical-stack
         title: " "
+        card_mod:
+          style: |
+            .card-header {
+              padding: 0 !important;
+              height: 12px;
+              font-size: 0;
+              line-height: 0;
+              overflow: hidden;
+            }
         cards:
           # needs attention: amber tiles, each only while it's true (same
           # as the v3 dashboard). Garages and HVAC: tapping anywhere runs the
