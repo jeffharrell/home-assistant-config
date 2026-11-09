@@ -283,11 +283,11 @@ cards:
             <ha-icon icon="mdi:outdoor-lamp"></ha-icon>
             <h3>Landscape Lights</h3>
             <p>
-            {%- if front and back -%} Front and back on · off at 11 PM
-            {%- elif front -%} Front on · off at 11 PM
-            {%- elif back -%} Back on · off at 11 PM
-            {%- elif state_attr('sun.sun', 'next_setting') -%} Off · on at {{ (as_datetime(state_attr('sun.sun', 'next_setting')) + timedelta(minutes=15)) | as_local | as_timestamp | timestamp_custom('%-I:%M %p') }}
-            {%- else -%} Off · on at sunset
+            {%- if front and back -%} Front and back on · Off at 11 PM
+            {%- elif front -%} Front on · Off at 11 PM
+            {%- elif back -%} Back on · Off at 11 PM
+            {%- elif state_attr('sun.sun', 'next_setting') -%} Off · On at {{ (as_datetime(state_attr('sun.sun', 'next_setting')) + timedelta(minutes=15)) | as_local | as_timestamp | timestamp_custom('%-I:%M %p') }}
+            {%- else -%} Off · On at sunset
             {%- endif -%}
             </p>
           card_mod:
