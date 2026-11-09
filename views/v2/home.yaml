@@ -19,9 +19,6 @@ cards:
             {%- endif -%}
           {%- endif -%}
 
-          {% if has_value('sensor.air_pollution_level') and states('sensor.air_pollution_level') != 'good' %}
-            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') | replace("_", " ") }}
-          {%- endif %}
 
           {%- if has_value('binary_sensor.powerwall_status') and has_value('sensor.powerwall_charge_actual') -%}
             {% set energy = (states('sensor.energy_import')|float(default=0) - states('sensor.energy_export')|float(default=0))|round %}
@@ -129,13 +126,15 @@ cards:
             hold_action:
               action: none
 
-      # actions
+      # actions (the blank title is breathing room under the nav buttons)
       - type: vertical-stack
+        title: " "
         cards:
           # needs attention: amber tiles, each only while it's true (same
           # as the v3 dashboard). Garages and HVAC: tapping anywhere runs the
           # action (Close / Resume drawn by the attention theme), and hold /
           # double tap are off so more-info's unconfirmed Open can't fire.
+          # Close asks for confirmation first (Jeff, 11/8).
           - type: tile
             entity: cover.garage_door_3
             name: "Jillian's Garage is open"
@@ -150,11 +149,15 @@ cards:
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_3
+              confirmation:
+                text: "Close Jillian's garage?"
             icon_tap_action:
               action: perform-action
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_3
+              confirmation:
+                text: "Close Jillian's garage?"
             hold_action:
               action: none
             double_tap_action:
@@ -180,11 +183,15 @@ cards:
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_2
+              confirmation:
+                text: "Close Jeff's garage?"
             icon_tap_action:
               action: perform-action
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_2
+              confirmation:
+                text: "Close Jeff's garage?"
             hold_action:
               action: none
             double_tap_action:
@@ -210,11 +217,15 @@ cards:
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_1
+              confirmation:
+                text: "Close the guest garage?"
             icon_tap_action:
               action: perform-action
               perform_action: cover.close_cover
               target:
                 entity_id: cover.garage_door_1
+              confirmation:
+                text: "Close the guest garage?"
             hold_action:
               action: none
             double_tap_action:
