@@ -382,23 +382,12 @@ themes:
         ha-card > .container:has(> .content) {
           padding-bottom: 12px;
         }
-        /* camera and picture cards: drop the card's 75px minimum height,
-           which left a gray strip under the small 16:9 thumbnails */
+        /* camera and picture cards: square corners, and drop the card's
+           75px minimum height, which left a gray strip under the small
+           16:9 thumbnails */
         ha-card:has(> .image-container) {
+          border-radius: 0 !important;
           min-height: 0 !important;
-        }
-        /* one shared, in-between radius (square, 0; app_theme's cards are 28px)
-           for buttons and camera images: tiles (incl. Needs attention
-           pills), button cards, tile features (sliders etc., also square) and picture-entity cards. The Home hero
-           (class "hero") stays square, edge to edge. */
-        :host(hui-tile-card) ha-card,
-        :host(hui-button-card) ha-card,
-        :host(hui-picture-entity-card:not(.hero)) ha-card {
-          border-radius: 0 !important;
-          --ha-card-features-border-radius: 0;
-        }
-        :host(.hero) ha-card {
-          border-radius: 0 !important;
         }
         :host(.att) ha-card {
           --ha-card-border-color: rgba(255, 214, 0, 0.35);
@@ -425,7 +414,7 @@ themes:
           right: 14px;
           transform: translateY(-50%);
           padding: 7px 14px;
-          border-radius: 0;
+          border-radius: 16px;
           background: #FFD600;
           color: #222222;
           font-size: 13px;
