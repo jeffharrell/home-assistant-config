@@ -238,9 +238,20 @@ themes:
     rgb-state-inactive-color:       "158, 158, 158"
 
     # --- CSS overrides --------------------------
+    # light groups' more-info dialog (Bedrooms, Outside, ...): hide the big
+    # brightness slider and power button and show just the member lights.
+    # Only groups have the member list (hui-section) next to more-info-light,
+    # so single lights keep their slider. Paths from UIX's uix_path().
     card-mod-more-info-yaml: |
-      ha-more-info-info $ more-info-content $ more-info-light $: |
-          .controls {  }
+      "ha-more-info-info $ more-info-content $": |
+        more-info-light:has(~ hui-section) {
+          --group-light-controls: none;
+          flex: 0 0 auto !important;
+        }
+      "ha-more-info-info $ more-info-content $ more-info-light $": |
+        .controls {
+          display: var(--group-light-controls, flex) !important;
+        }
 
     card-mod-root: |
       .header {
