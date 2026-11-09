@@ -457,7 +457,8 @@ sections:
               action: navigate
               navigation_path: /home-v3/cameras
 
-      # one full-width live camera, like the classic home: flat, square
+      # one live camera, edge to edge like the classic home: the -8px side
+      # margins cancel the sections view's 8px inset on a phone. Flat, square
       # corners, thin top/bottom rule. Taps through to Cameras.
       - type: picture-entity
         entity: camera.front_patio
@@ -474,6 +475,7 @@ sections:
         card_mod:
           style: |
             ha-card {
+              margin: 0 -8px;
               border-radius: 0;
               border: 2px solid rgba(0, 0, 0, 0.1);
               border-left: 0;
@@ -481,6 +483,46 @@ sections:
               background: rgba(0, 0, 0, 0.1);
               transition: none;
             }
+
+      # the other three, small and unlabeled, for now (Jeff, 2026-11-08)
+      - type: picture-entity
+        entity: camera.front_door
+        aspect_ratio: 16x9
+        show_name: false
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+      - type: picture-entity
+        entity: camera.driveway
+        aspect_ratio: 16x9
+        show_name: false
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
+
+      - type: picture-entity
+        entity: camera.back_yard
+        aspect_ratio: 16x9
+        show_name: false
+        show_state: false
+        grid_options:
+          columns: 4
+        tap_action:
+          action: navigate
+          navigation_path: /home-v3/cameras
+        hold_action:
+          action: none
 
   # quick: contextual actions (same rules as the classic home) + alarm
   - type: grid

@@ -338,8 +338,9 @@ themes:
     ha-heading-card-subtitle-font-size:   "13px"
     ha-heading-card-subtitle-font-weight: "500"
 
-    # content starts right under the title: drop app_theme's 40px view
-    # padding and the sections view's 24px top padding
+    # a little room under the title: drop app_theme's 40px view padding and
+    # the sections view's 24px top padding, then add back 12px so the chips
+    # (or the first section on views without chips) don't sit on the title
     card-mod-view-yaml: |
       .: |
         #view#view {
@@ -347,10 +348,10 @@ themes:
         }
       "hui-sections-view $": |
         hui-view-header {
-          padding-top: 0 !important;
+          padding-top: 12px !important;
         }
         .container {
-          padding-top: 0 !important;
+          padding-top: 12px !important;
         }
         hui-view-header:not([hidden]) ~ .container {
           padding-top: 16px !important;
@@ -374,6 +375,7 @@ themes:
         ha-card > .container > .content {
           text-transform: uppercase;
           letter-spacing: 0.1em;
+          margin-bottom: 6px;
           --mdc-icon-size: 16px;
         }
         :host(.att) ha-card {

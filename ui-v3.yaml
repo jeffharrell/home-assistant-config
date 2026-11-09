@@ -24,6 +24,10 @@ swipe_nav:
 # home is the only main view; the rest are subviews so the header
 # shows a title + back arrow instead of a second row of tabs.
 # the bottom navbar (views/v3/navbar.yaml) does the navigation.
+#
+# HA only re-reads this dashboard when THIS file's mtime changes, not the
+# included views/v3/*.yaml. After pulling a views-only change, restart HA
+# or touch this file, or the old views keep showing.
 views:
   - !include views/v3/home.yaml
   - !include views/v3/lights.yaml
