@@ -187,7 +187,7 @@ cards:
                 style: |
                   ha-card { background: none; box-shadow: none; border: none; border-top: 1px solid var(--divider-color); border-radius: 0; margin: 8px -20px 0; padding: 0 4px; }
 
-      # rooms: one table with a header row; no icons. Tapping a room opens
+      # rooms: one table with a header row; no icons. Holding a room opens
       # its outlet's device page (all its sensors); Garage is a Scrape
       # sensor, so its "device" is just that sensor.
       - type: entities
@@ -232,6 +232,8 @@ cards:
             name: "Family Room"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
             entities:
@@ -243,6 +245,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
               - entity: sensor.family_room_outlet_humidity
@@ -253,6 +257,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/a963cf83ef138925606b313fdd454d43
             card_mod:
@@ -265,6 +271,8 @@ cards:
             name: "Living Room"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
             entities:
@@ -276,6 +284,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
               - entity: sensor.living_room_outlet_humidity
@@ -286,6 +296,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/430257d55cfa65a22f2e9927a9077897
             card_mod:
@@ -298,6 +310,8 @@ cards:
             name: "Master Bedroom"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
             entities:
@@ -309,6 +323,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
               - entity: sensor.master_bedroom_outlet_humidity
@@ -319,6 +335,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/5257bb98346ceaa53cc6d7ec5de88314
             card_mod:
@@ -331,6 +349,8 @@ cards:
             name: "Boys Bedroom"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
             entities:
@@ -342,6 +362,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
               - entity: sensor.boys_bedroom_outlet_humidity
@@ -352,6 +374,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/432afa811020afba3827df52e02b1974
             card_mod:
@@ -364,6 +388,8 @@ cards:
             name: "Guest Bedroom"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
             entities:
@@ -375,6 +401,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
               - entity: sensor.guest_bedroom_outlet_humidity
@@ -385,6 +413,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/db66f8c5662c21f1fecf7aa9c5edc1d4
             card_mod:
@@ -397,6 +427,8 @@ cards:
             name: "Garage"
             show_state: false
             tap_action:
+              action: none
+            hold_action:
               action: navigate
               navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
             entities:
@@ -408,6 +440,8 @@ cards:
                   width: 52px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
               - entity: sensor.garage_humidity
@@ -418,6 +452,8 @@ cards:
                   width: 80px
                   text-align: right
                 tap_action:
+                  action: none
+                hold_action:
                   action: navigate
                   navigation_path: /config/devices/device/35a8e902307cfd34ff346d7d9abfe9b3
             card_mod:
