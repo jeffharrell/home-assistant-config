@@ -262,8 +262,9 @@ cards:
               card_mod:
                 class: "gar gar-act-close"
 
-      # landscape lights: status only (they run on their own schedule),
-      # one box styled like the garage block above
+      # landscape lights: one status row (read-only; they run on the
+      # "Landscape - Lighting" schedule in packages/landscape.yaml: on at
+      # sunset + 15 min, off at 23:00; keep "11 PM" below in step with it)
       - type: 'custom:mod-card'
         style: |
           ha-card {
@@ -274,41 +275,41 @@ cards:
             background-color: var(--secondary-background-color);
           }
         card:
-          type: vertical-stack
-          cards:
-            - type: tile
-              entity: switch.front_landscape
-              name: "Front Landscape"
-              icon: mdi:outdoor-lamp
-              tap_action:
-                action: none
-              icon_tap_action:
-                action: none
-              hold_action:
-                action: none
-              double_tap_action:
-                action: none
-              icon_hold_action:
-                action: none
-              icon_double_tap_action:
-                action: none
-
-            - type: tile
-              entity: switch.back_landscape
-              name: "Back Landscape"
-              icon: mdi:outdoor-lamp
-              tap_action:
-                action: none
-              icon_tap_action:
-                action: none
-              hold_action:
-                action: none
-              double_tap_action:
-                action: none
-              icon_hold_action:
-                action: none
-              icon_double_tap_action:
-                action: none
+          type: markdown
+          text_only: true
+          content: >-
+            {%- set front = is_state('switch.front_landscape', 'on') -%}
+            {%- set back = is_state('switch.back_landscape', 'on') -%}
+            <ha-icon icon="mdi:outdoor-lamp"></ha-icon>
+            <h3>Landscape Lights</h3>
+            <p>
+            {%- if front and back -%} Front and back on · off at 11 PM
+            {%- elif front -%} Front on · off at 11 PM
+            {%- elif back -%} Back on · off at 11 PM
+            {%- elif state_attr('sun.sun', 'next_setting') -%} Off · on at {{ (as_datetime(state_attr('sun.sun', 'next_setting')) + timedelta(minutes=15)) | as_local | as_timestamp | timestamp_custom('%-I:%M %p') }}
+            {%- else -%} Off · on at sunset
+            {%- endif -%}
+            </p>
+          card_mod:
+            style:
+              .: |
+                ha-card { background: none; border: none; box-shadow: none; padding: 12px 16px !important; }
+              ha-markdown $: |
+                ha-markdown-element, :host { position: relative; display: block; min-height: 40px; }
+                ha-icon {
+                  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+                  width: 40px; height: 40px; border-radius: 50%;
+                  display: flex; align-items: center; justify-content: center;
+                  --mdc-icon-size: 24px;
+                  {% if is_state('switch.front_landscape', 'on') or is_state('switch.back_landscape', 'on') %}
+                  background: rgba(255, 214, 0, 0.16); color: #FFD600;
+                  {% else %}
+                  background: rgba(255, 255, 255, 0.08); color: var(--state-inactive-color, var(--secondary-text-color));
+                  {% endif %}
+                }
+                h3, p { margin: 0 0 0 56px; }
+                h3 { font-size: 16px; font-weight: 400; line-height: 22px; }
+                p { font-size: 14px; line-height: 20px; color: var(--secondary-text-color); }
 
       # what's on
       - type: entity-filter
