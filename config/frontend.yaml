@@ -1,7 +1,6 @@
 themes:
   app_theme: &app_theme
     card-mod-theme: app_theme
-    uix-theme: app_theme
 
     # amber attention tiles at the top of the classic home's quick actions
     # (the v3 "Needs attention" pills, sized like the classic tiles). Only
