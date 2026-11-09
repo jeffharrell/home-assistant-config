@@ -1,4 +1,7 @@
-# bottom tab bar, included at the end of every v3 view
+# bottom tab bar, included at the end of every v3 view.
+# icon_color lights a tab's icon amber when its group is on (like the classic
+# home's buttons); off returns null, which keeps the normal icon color. The
+# selected tab still gets its own pill and amber label.
 type: custom:navbar-card
 mobile:
   show_labels: true
@@ -19,16 +22,25 @@ routes:
     url: /home-v3/lights
     icon: mdi:lightbulb-outline
     icon_selected: mdi:lightbulb
+    # amber when any light is on (light.house), like the classic home buttons
+    icon_color: >-
+      [[[ return states['light.house']?.state === 'on' ? '#FFD600' : null; ]]]
 
   - label: "Climate"
     url: /home-v3/climate
     icon: mdi:thermometer
     icon_selected: mdi:thermometer
+    # amber when heating, cooling or the house fan is on (group.climate), like the classic home buttons
+    icon_color: >-
+      [[[ return states['group.climate']?.state === 'on' ? '#FFD600' : null; ]]]
 
   - label: "Media"
     url: /home-v3/media
     icon: mdi:play-circle-outline
     icon_selected: mdi:play-circle
+    # amber when anything is playing (binary_sensor.media_players), like the classic home buttons
+    icon_color: >-
+      [[[ return states['binary_sensor.media_players']?.state === 'on' ? '#FFD600' : null; ]]]
     badge:
       show: >-
         [[[ return states['binary_sensor.media_players']?.state === 'on'; ]]]

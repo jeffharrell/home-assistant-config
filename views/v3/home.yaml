@@ -575,7 +575,7 @@ sections:
                 state: "armed_home"
     cards:
       - type: heading
-        heading: "Quick"
+        heading: "Quick actions"
         heading_style: subtitle
 
       - type: tile
