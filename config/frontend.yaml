@@ -364,8 +364,17 @@ themes:
     # UIX reads this card-mod-card-yaml there, not app_theme's). Cards with
     # class "gar" get one button: gar-act-open draws a subtle gray "Open",
     # gar-act-close a yellow "Close" with amber icon and state text.
+    # Every card on a subview (Lights, Climate, Outside, Media) also drops
+    # ha-card's built-in transition, so nothing eases in on load (Jeff).
     card-mod-card-yaml: |
+      "ha-tile-icon $": |
+        .container { transition: none !important; }
+      "hui-card-features $ hui-card-feature $ hui-light-brightness-card-feature $ ha-control-slider $": |
+        .slider, .slider * { transition: none !important; }
       .: |
+        ha-card, ha-tile-icon, ha-state-icon, ha-tile-info {
+          transition: none !important;
+        }
         :host(.gar) ha-tile-info {
           padding-inline-end: 92px;
         }
