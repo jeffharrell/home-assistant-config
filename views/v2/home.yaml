@@ -33,7 +33,7 @@ cards:
           style: |
             ha-card { 
               margin-top: -45px;
-              padding-bottom: 20px;
+              padding-bottom: 4px;
               transition: none;
               line-height: 1.8em;
             }
@@ -55,7 +55,7 @@ cards:
           card_mod:
             style: |
               ha-card { 
-                margin: 15px -8px 30px;
+                margin: 8px -8px 12px;
                 min-height: 225px;
                 max-height: 240px;
                 background: rgba(0, 0, 0, 0.1);
@@ -131,7 +131,6 @@ cards:
 
       # actions
       - type: vertical-stack
-        title: " "
         cards:
           # needs attention: amber tiles, each only while it's true (same
           # as the v3 dashboard). Garages and HVAC: tapping anywhere runs the
@@ -142,7 +141,6 @@ cards:
             name: "Jillian's Garage is open"
             icon: mdi:garage-open
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: cover.garage_door_3
@@ -173,7 +171,6 @@ cards:
             name: "Jeff's Garage is open"
             icon: mdi:garage-open
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: cover.garage_door_2
@@ -204,7 +201,6 @@ cards:
             name: "Guest Garage is open"
             icon: mdi:garage-open
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: cover.garage_door_1
@@ -235,7 +231,6 @@ cards:
             name: "HVAC is paused"
             icon: mdi:hvac-off
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: input_boolean.hvac_paused
@@ -261,7 +256,6 @@ cards:
           # sensor.open_doors_and_windows (its name is the sentence)
           - type: tile
             entity: sensor.open_doors_and_windows
-            theme: attention
             visibility:
               - condition: state
                 entity: sensor.open_doors_and_windows
@@ -272,6 +266,8 @@ cards:
             icon_tap_action:
               action: navigate
               navigation_path: outside
+            card_mod:
+              class: att
 
           # informational: tap opens more-info
           - type: tile
@@ -279,18 +275,18 @@ cards:
             name: "Potential water leak"
             icon: mdi:water-alert
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: binary_sensor.flume_sensor_home_leak_detected
                 state: "on"
+            card_mod:
+              class: att
 
           - type: tile
             entity: binary_sensor.grid_status
             name: "Grid is down, on Powerwall"
             icon: mdi:transmission-tower-off
             state_content: last_changed
-            theme: attention
             visibility:
               - condition: state
                 entity: binary_sensor.grid_status
@@ -298,17 +294,20 @@ cards:
             tap_action:
               action: more-info
               entity: sensor.powerwall_charge_actual
+            card_mod:
+              class: att
 
           # the timer's own state is the countdown
           - type: tile
             entity: timer.let_dog_out
             name: "Alarm re-arms in"
             icon: mdi:dog-side
-            theme: attention
             visibility:
               - condition: state
                 entity: timer.let_dog_out
                 state: ["active", "paused"]
+            card_mod:
+              class: att
 
           # mood lights
           - type: tile

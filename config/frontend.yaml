@@ -2,6 +2,52 @@ themes:
   app_theme: &app_theme
     card-mod-theme: app_theme
 
+    # amber attention tiles at the top of the classic home's quick actions
+    # (the v3 "Needs attention" pills, sized like the classic tiles). Only
+    # cards with `card_mod: class: att` are touched; att-close / att-resume
+    # draw the yellow Close / Resume button. Lives here because a card-level
+    # `theme:` doesn't get card-mod-card-yaml applied. home_v3 sets its own
+    # card-mod-card-yaml, so this doesn't reach the v3 dashboard.
+    card-mod-card-yaml: |
+      .: |
+        :host(.att) ha-card {
+          --ha-card-border-color: rgba(255, 214, 0, 0.35);
+          --tile-color: #FFD600 !important;
+          --ha-tile-info-secondary-color: var(--secondary-text-color);
+        }
+        :host(.att) ha-tile-icon {
+          --tile-icon-color: #FFD600;
+          --tile-icon-opacity: 0.16;
+          --tile-icon-hover-opacity: 0.16;
+        }
+        :host(.att-close) ha-tile-info {
+          padding-inline-end: 96px;
+        }
+        :host(.att-resume) ha-tile-info {
+          padding-inline-end: 116px;
+        }
+        :host(.att-close) ha-card::after,
+        :host(.att-resume) ha-card::after {
+          position: absolute;
+          top: 50%;
+          right: 16px;
+          transform: translateY(-50%);
+          padding: 9px 18px;
+          border-radius: 20px;
+          background: #FFD600;
+          color: #222222;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.2;
+          pointer-events: none;
+        }
+        :host(.att-close) ha-card::after {
+          content: "Close";
+        }
+        :host(.att-resume) ha-card::after {
+          content: "Resume";
+        }
+
     # --- Palette tokens (defined once, reused below and in other themes) -----
     accent:        &accent        "#FFD600"   # amber accent
     accent-light:  &accent-light  "#FFE54C"
@@ -291,54 +337,6 @@ themes:
       .: |
         ha-card {
           border-radius: 28px !important;
-        }
-
-  # amber attention tiles at the top of the classic home's quick actions
-  # (the v3 "Needs attention" pills, sized like the classic round_button
-  # tiles). Set as `theme:` on those tiles only; att-close / att-resume
-  # classes draw the yellow Close / Resume button.
-  attention:
-    card-mod-theme: attention
-
-    card-mod-card-yaml: |
-      .: |
-        ha-card {
-          border-radius: 28px !important;
-          --ha-card-border-color: rgba(255, 214, 0, 0.35);
-          --tile-color: #FFD600 !important;
-          --ha-tile-info-secondary-color: var(--secondary-text-color);
-        }
-        ha-tile-icon {
-          --tile-icon-color: #FFD600;
-          --tile-icon-opacity: 0.16;
-          --tile-icon-hover-opacity: 0.16;
-        }
-        :host(.att-close) ha-tile-info {
-          padding-inline-end: 96px;
-        }
-        :host(.att-resume) ha-tile-info {
-          padding-inline-end: 116px;
-        }
-        :host(.att-close) ha-card::after,
-        :host(.att-resume) ha-card::after {
-          position: absolute;
-          top: 50%;
-          right: 16px;
-          transform: translateY(-50%);
-          padding: 9px 18px;
-          border-radius: 20px;
-          background: #FFD600;
-          color: #222222;
-          font-size: 15px;
-          font-weight: 500;
-          line-height: 1.2;
-          pointer-events: none;
-        }
-        :host(.att-close) ha-card::after {
-          content: "Close";
-        }
-        :host(.att-resume) ha-card::after {
-          content: "Resume";
         }
 
   subview:
