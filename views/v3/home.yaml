@@ -479,6 +479,7 @@ sections:
         hold_action:
           action: none
         card_mod:
+          class: hero
           style: |
             ha-card {
               margin: 0 -8px;
