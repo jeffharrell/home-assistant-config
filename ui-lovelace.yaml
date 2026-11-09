@@ -22,7 +22,7 @@ swipe_nav:
   
 # HA only re-reads this dashboard when THIS file changes, not the included
 # views/v2/*.yaml: after pulling a views-only change, restart HA or touch it.
-# last views change: 2026-11-08, tighter thermostat block
+# last views change: 2026-11-08, thermostat block +10px
 views:
   - !include views/v2/home.yaml
   - !include views/v2/lights.yaml
