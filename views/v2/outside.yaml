@@ -263,25 +263,23 @@ cards:
                 class: "gar gar-act-close"
 
       # landscape lights: status only (they run on their own schedule),
-      # stacked full width so the names don't truncate
+      # one box styled like the garage block above
       - type: 'custom:mod-card'
         style: |
           ha-card {
-            margin-top: 22px;
-            background: none;
-            border: none;
-            box-shadow: none;
+            --ha-card-border-color: var(--secondary-background-color);
+
+            margin-top: 16px;
+            padding: 6px 0;
+            background-color: var(--secondary-background-color);
           }
         card:
-          type: grid
-          columns: 1
-          square: false
+          type: vertical-stack
           cards:
             - type: tile
               entity: switch.front_landscape
               name: "Front Landscape"
               icon: mdi:outdoor-lamp
-              theme: round_button
               tap_action:
                 action: none
               icon_tap_action:
@@ -299,7 +297,6 @@ cards:
               entity: switch.back_landscape
               name: "Back Landscape"
               icon: mdi:outdoor-lamp
-              theme: round_button
               tap_action:
                 action: none
               icon_tap_action:
