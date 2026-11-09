@@ -14,6 +14,7 @@ sections:
         entity: camera.front_door
         name: "Front Door"
         camera_view: live
+        show_name: false
         aspect_ratio: 16x9
         show_state: false
         grid_options:
@@ -27,6 +28,7 @@ sections:
         entity: camera.front_patio
         name: "Front Patio"
         camera_view: live
+        show_name: false
         aspect_ratio: 16x9
         show_state: false
         grid_options:
@@ -40,6 +42,7 @@ sections:
         entity: camera.driveway
         name: "Driveway"
         camera_view: live
+        show_name: false
         aspect_ratio: 16x9
         show_state: false
         grid_options:
@@ -53,6 +56,7 @@ sections:
         entity: camera.back_yard
         name: "Back Yard"
         camera_view: live
+        show_name: false
         aspect_ratio: 16x9
         show_state: false
         grid_options:
