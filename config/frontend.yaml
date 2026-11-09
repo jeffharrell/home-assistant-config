@@ -242,9 +242,9 @@ themes:
     # brightness slider and power button and show just the member lights.
     # Only groups have the member list (hui-section) next to more-info-light,
     # so single lights keep their slider. Paths from UIX's uix_path().
-    # UIX reads the uix-* key name for dialogs (the legacy card-mod-* one
-    # wasn't picked up live, 2026-11-08).
-    uix-more-info-yaml: |
+    # UIX uses the theme of the view the dialog opened from (subview on the
+    # classic subviews), so subview repeats this via the anchor.
+    uix-more-info-yaml: &group_light_popup |
       "ha-more-info-info $ more-info-content $": |
         more-info-light:has(~ hui-section) {
           --group-light-controls: none;
@@ -354,6 +354,11 @@ themes:
 
   subview:
     card-mod-theme: subview
+
+    # UIX styles the more-info dialog with the theme of the view it opened
+    # from, so subviews (Lights, Outside, ...) need the light-group popup
+    # rule too (same as app_theme's, see there)
+    uix-more-info-yaml: *group_light_popup
 
     # garage rows on the classic Outside view (this is that view's theme, so
     # UIX reads this card-mod-card-yaml there, not app_theme's). Cards with
