@@ -387,16 +387,16 @@ themes:
         ha-card:has(> .image-container) {
           min-height: 0 !important;
         }
-        /* one shared, in-between radius (8px; app_theme's cards are 28px)
+        /* one shared, in-between radius (12px; app_theme's cards are 28px)
            for buttons and camera images: tiles (incl. Needs attention
-           pills), button cards, tile features (sliders etc., 6px to sit
-           inside the 8px tile) and picture-entity cards. The Home hero
+           pills), button cards, tile features (sliders etc., 9px to sit
+           inside the 12px tile) and picture-entity cards. The Home hero
            (class "hero") stays square, edge to edge. */
         :host(hui-tile-card) ha-card,
         :host(hui-button-card) ha-card,
         :host(hui-picture-entity-card:not(.hero)) ha-card {
-          border-radius: 8px !important;
-          --ha-card-features-border-radius: 6px;
+          border-radius: 12px !important;
+          --ha-card-features-border-radius: 9px;
         }
         :host(.hero) ha-card {
           border-radius: 0 !important;
@@ -426,7 +426,7 @@ themes:
           right: 14px;
           transform: translateY(-50%);
           padding: 7px 14px;
-          border-radius: 6px;
+          border-radius: 9px;
           background: #FFD600;
           color: #222222;
           font-size: 13px;
