@@ -14,6 +14,7 @@ themes:
           --ha-card-border-color: rgba(255, 214, 0, 0.35);
           --tile-color: #FFD600 !important;
           --ha-tile-info-secondary-color: var(--secondary-text-color);
+          --ha-tile-info-secondary-font-size: 13px;
         }
         :host(.att) ha-tile-icon {
           --tile-icon-color: #FFD600;
@@ -301,9 +302,29 @@ themes:
         ha-state-icon {
           filter: none !important;
         }
+        /* home's Lights / Media / Climate / Outside buttons: state line in
+           the shared small-text style (13px, secondary) */
+        .state {
+          font-size: 13px !important;
+          color: var(--secondary-text-color) !important;
+        }
 
   padded_card:
     card-mod-theme: padded_card
+
+    # entity rows on the classic dashboard: names and values 16px, the
+    # secondary line ("14 hours ago") 13px. UIX styles rows with the theme
+    # of their card (padded_card / settings_card) or else the view
+    # (subview), so all three share this.
+    card-mod-row-yaml: &classic_rows |
+      .: |
+        hui-generic-entity-row {
+          font-size: 16px;
+        }
+      "hui-generic-entity-row $": |
+        .secondary, ha-relative-time {
+          font-size: 13px;
+        }
 
     primary-text-color:   *white
     secondary-text-color: *white-dim
@@ -322,6 +343,8 @@ themes:
 
   settings_card:
     card-mod-theme: settings_card
+
+    card-mod-row-yaml: *classic_rows
 
     primary-text-color:    *white
     secondary-text-color:  *white-dim
@@ -366,6 +389,10 @@ themes:
     # gar-act-close a yellow "Close" with amber icon and state text.
     # Every card on a subview (Lights, Climate, Outside, Media) also drops
     # ha-card's built-in transition, so nothing eases in on load (Jeff).
+    # Typography, shared by all classic subviews (2026-11-09):
+    #   section labels (card titles) 13px / 500 / caps / 0.1em, secondary
+    #   small status text (tile state, row secondary) 13px, secondary
+    #   row names and values 16px (card-mod-row-yaml below)
     card-mod-card-yaml: |
       "ha-tile-icon $": |
         .container { transition: none !important; }
@@ -374,6 +401,18 @@ themes:
       .: |
         ha-card, ha-tile-icon, ha-state-icon, ha-tile-info {
           transition: none !important;
+        }
+        ha-card {
+          --ha-tile-info-secondary-font-size: 13px;
+          --ha-tile-info-secondary-color: var(--secondary-text-color);
+          --ha-tile-info-secondary-letter-spacing: normal;
+        }
+        .card-header {
+          font-size: 13px !important;
+          font-weight: 500 !important;
+          text-transform: uppercase;
+          letter-spacing: 0.1em !important;
+          color: var(--secondary-text-color) !important;
         }
         :host(.gar) ha-tile-info {
           padding-inline-end: 92px;
@@ -410,11 +449,19 @@ themes:
           color: #222222;
         }
 
+    card-mod-row-yaml: *classic_rows
+
     primary-text-color:   *white
     secondary-text-color: *white-dim
 
     primary-background-color: *gray-canvas
     card-background-color:    *gray-surface
+
+    # text fields (e.g. Advanced's Camera Motion Prompt): a view theme
+    # doesn't inherit app_theme, so without this HA's light-mode default
+    # fills them near-white. A dark, subtle field on the dark cards.
+    ha-color-form-background:       "rgba(255, 255, 255, 0.08)"
+    ha-color-form-background-hover: "rgba(255, 255, 255, 0.12)"
 
   # ===========================================================================
   #  New dashboard (home-v3): set as `theme:` on each v3 view, so it only

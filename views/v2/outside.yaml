@@ -309,7 +309,7 @@ cards:
                 }
                 h3, p { margin: 0 0 0 56px; }
                 h3 { font-size: 16px; font-weight: 400; line-height: 22px; }
-                p { font-size: 14px; line-height: 20px; color: var(--secondary-text-color); }
+                p { font-size: 13px; line-height: 20px; color: var(--secondary-text-color); }
 
       # what's on
       - type: entity-filter
