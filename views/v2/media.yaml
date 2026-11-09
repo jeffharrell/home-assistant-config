@@ -33,90 +33,1000 @@ cards:
             icon_tap_action:
               action: toggle     
 
-      # currently playing
-      - type: grid
-        title: " "
-        columns: 1
-        square: false
-        cards:
-          # tvs
-          - type: media-control
-            entity: media_player.family_room_apple_tv
-            name: "Family Room TV"
-            visibility:
-              - condition: state
-                entity: media_player.family_room_apple_tv
-                state: "playing"
+      # media (approved mock media4): one markdown row per player (artwork
+      # or icon, room, what's playing; tap for more-info) plus round buttons
+      # for its controls, shown by state. Shared styles are YAML anchors,
+      # defined where first used. TVs: not the garage TV (Jeff).
+      - type: 'custom:mod-card'
+        style: &box |
+          ha-card {
+            --ha-card-border-color: var(--secondary-background-color);
+            --vertical-stack-card-gap: 0px;
 
-          - type: media-control
-            entity: media_player.living_room_apple_tv
-            name: "Living Room TV"
-            visibility:
-              - condition: state
-                entity: media_player.living_room_apple_tv
-                state: "playing"
+            margin-top: 25px;
+            padding: 0 0 8px;
+            background-color: var(--secondary-background-color);
+          }
+        card:
+          type: vertical-stack
+          cards:
+            - type: markdown
+              text_only: true
+              content: "TVs"
+              card_mod:
+                style:
+                  .: &header_card |
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: 16px 16px 4px !important; }
+                  ha-markdown $: &header_text |
+                    p { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary-text-color); }
 
-          - type: media-control
-            entity: media_player.master_bedroom_apple_tv
-            name: "Master Bedroom TV"
-            visibility:
-              - condition: state
-                entity: media_player.master_bedroom_apple_tv
-                state: "playing"
+            # Family Room: row, with a power button on the right while idle
+            - type: 'custom:mod-card'
+              style:
+                .: &flat |
+                  ha-card { background: none; border: none; box-shadow: none; border-radius: 0; }
+                hui-horizontal-stack-card $: &row_stack |
+                  #root { gap: 14px !important; padding-right: 16px; align-items: center; }
+                  #root > hui-card > hui-markdown-card { flex: 1 1 auto !important; min-width: 0; }
+                  #root > hui-card > hui-button-card { flex: 0 0 38px !important; width: 38px; }
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: markdown
+                    text_only: true
+                    tap_action:
+                      action: more-info
+                      entity: media_player.family_room_apple_tv
+                    content: |-
+                      {%- set e = 'media_player.family_room_apple_tv' -%}
+                      {%- set s = states(e) -%}
+                      {%- if s in ['playing', 'paused'] -%}
+                      {%- set a = states[e].attributes -%}
+                      {%- set series = a.get('media_series_title') or '' -%}
+                      {%- set mt = a.get('media_title') or '' -%}
+                      {%- set app = a.get('app_name') or '' -%}
+                      {%- set pic = a.get('entity_picture') or '' -%}
+                      {%- set title = series or mt or app or 'Playing' -%}
+                      {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                      {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                      <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:television"></ha-icon>{% endif %}</div><h4>Family Room{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                      {%- else -%}
+                      <div><ha-icon icon="mdi:television"></ha-icon></div><h3>Family Room</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                      {%- endif -%}
+                    card_mod:
+                      style:
+                        .: |
+                          {% set p = states('media_player.family_room_apple_tv') in ['playing', 'paused'] %}
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                        ha-markdown $: |
+                          {% set s = states('media_player.family_room_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                          img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                          ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                            width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                            background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                            color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                            --mdc-icon-size: {{ '26px' if p else '20px' }};
+                            opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                          h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          em { font-style: normal; color: #FFD600; }
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_on
+                      target:
+                        entity_id: media_player.family_room_apple_tv
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.family_room_apple_tv
+                        state_not: ["playing", "paused", "unavailable"]
+                    card_mod:
+                      style: &btn_gray |
+                        ha-card { width: 38px; height: 38px !important; border-radius: 50%; padding: 0 !important; border: none; background: rgba(255, 255, 255, 0.08); --mdc-icon-size: 20px; --state-icon-color: var(--primary-text-color); }
+                        ha-state-icon { color: var(--primary-text-color) !important; }
+            # Family Room: volume and power under the text while playing or paused
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.family_room_apple_tv
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: &controls_tv |
+                  #root { gap: 8px !important; padding: 10px 16px 12px 82px; justify-content: flex-start; }
+                  #root > hui-card > * { flex: 0 0 38px !important; width: 38px; }
+                  #root > hui-card:last-child > * { margin-left: auto !important; }
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:volume-minus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_down
+                      target:
+                        entity_id: media_player.family_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:volume-plus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_up
+                      target:
+                        entity_id: media_player.family_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_off
+                      target:
+                        entity_id: media_player.family_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: &btn_amber |
+                        ha-card { width: 38px; height: 38px !important; border-radius: 50%; padding: 0 !important; border: none; background: #FFD600; --mdc-icon-size: 20px; --state-icon-color: #222222; }
+                        ha-state-icon { color: #222222 !important; }
 
-          # speakers
-          - type: media-control
-            entity: media_player.family_room_speakers
-            name: "Family Room Speakers"
-            visibility:
-              - condition: state
+            # Living Room: row, with a power button on the right while idle
+            - type: 'custom:mod-card'
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *row_stack
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: markdown
+                    text_only: true
+                    tap_action:
+                      action: more-info
+                      entity: media_player.living_room_apple_tv
+                    content: |-
+                      {%- set e = 'media_player.living_room_apple_tv' -%}
+                      {%- set s = states(e) -%}
+                      {%- if s in ['playing', 'paused'] -%}
+                      {%- set a = states[e].attributes -%}
+                      {%- set series = a.get('media_series_title') or '' -%}
+                      {%- set mt = a.get('media_title') or '' -%}
+                      {%- set app = a.get('app_name') or '' -%}
+                      {%- set pic = a.get('entity_picture') or '' -%}
+                      {%- set title = series or mt or app or 'Playing' -%}
+                      {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                      {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                      <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:television"></ha-icon>{% endif %}</div><h4>Living Room{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                      {%- else -%}
+                      <div><ha-icon icon="mdi:television"></ha-icon></div><h3>Living Room</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                      {%- endif -%}
+                    card_mod:
+                      style:
+                        .: |
+                          {% set p = states('media_player.living_room_apple_tv') in ['playing', 'paused'] %}
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                        ha-markdown $: |
+                          {% set s = states('media_player.living_room_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                          img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                          ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                            width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                            background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                            color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                            --mdc-icon-size: {{ '26px' if p else '20px' }};
+                            opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                          h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          em { font-style: normal; color: #FFD600; }
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_on
+                      target:
+                        entity_id: media_player.living_room_apple_tv
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.living_room_apple_tv
+                        state_not: ["playing", "paused", "unavailable"]
+                    card_mod:
+                      style: *btn_gray
+            # Living Room: volume and power under the text while playing or paused
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.living_room_apple_tv
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_tv
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:volume-minus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_down
+                      target:
+                        entity_id: media_player.living_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:volume-plus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_up
+                      target:
+                        entity_id: media_player.living_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_off
+                      target:
+                        entity_id: media_player.living_room_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_amber
+
+            # Master Bedroom: row, with a power button on the right while idle
+            - type: 'custom:mod-card'
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *row_stack
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: markdown
+                    text_only: true
+                    tap_action:
+                      action: more-info
+                      entity: media_player.master_bedroom_apple_tv
+                    content: |-
+                      {%- set e = 'media_player.master_bedroom_apple_tv' -%}
+                      {%- set s = states(e) -%}
+                      {%- if s in ['playing', 'paused'] -%}
+                      {%- set a = states[e].attributes -%}
+                      {%- set series = a.get('media_series_title') or '' -%}
+                      {%- set mt = a.get('media_title') or '' -%}
+                      {%- set app = a.get('app_name') or '' -%}
+                      {%- set pic = a.get('entity_picture') or '' -%}
+                      {%- set title = series or mt or app or 'Playing' -%}
+                      {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                      {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                      <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:television"></ha-icon>{% endif %}</div><h4>Master Bedroom{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                      {%- else -%}
+                      <div><ha-icon icon="mdi:television"></ha-icon></div><h3>Master Bedroom</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                      {%- endif -%}
+                    card_mod:
+                      style:
+                        .: |
+                          {% set p = states('media_player.master_bedroom_apple_tv') in ['playing', 'paused'] %}
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                        ha-markdown $: |
+                          {% set s = states('media_player.master_bedroom_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                          img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                          ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                            width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                            background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                            color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                            --mdc-icon-size: {{ '26px' if p else '20px' }};
+                            opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                          h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          em { font-style: normal; color: #FFD600; }
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_on
+                      target:
+                        entity_id: media_player.master_bedroom_apple_tv
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.master_bedroom_apple_tv
+                        state_not: ["playing", "paused", "unavailable"]
+                    card_mod:
+                      style: *btn_gray
+            # Master Bedroom: volume and power under the text while playing or paused
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.master_bedroom_apple_tv
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_tv
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:volume-minus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_down
+                      target:
+                        entity_id: media_player.master_bedroom_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:volume-plus
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.volume_up
+                      target:
+                        entity_id: media_player.master_bedroom_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_gray
+                  - type: button
+                    icon: mdi:power
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.turn_off
+                      target:
+                        entity_id: media_player.master_bedroom_apple_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: *btn_amber
+
+      # speakers (same list as before)
+      - type: 'custom:mod-card'
+        style: *box
+        card:
+          type: vertical-stack
+          cards:
+            - type: markdown
+              text_only: true
+              content: "Speakers"
+              card_mod:
+                style:
+                  .: *header_card
+                  ha-markdown $: *header_text
+
+            # Family Room
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.family_room_speakers
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.family_room_speakers' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Family Room{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Family Room</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.family_room_speakers') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.family_room_speakers') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.family_room_speakers
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: &controls_spk |
+                  #root { gap: 8px !important; padding: 10px 16px 12px 82px; justify-content: flex-start; }
+                  #root > hui-card > * { flex: 0 0 38px !important; width: 38px; }
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.family_room_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.family_room_speakers
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.family_room_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.family_room_speakers
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.living_room_speakers
-            name: "Living Room Speakers"
-            visibility:
-              - condition: state
+            # Living Room
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.living_room_speakers
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.living_room_speakers' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Living Room{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Living Room</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.living_room_speakers') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.living_room_speakers') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.living_room_speakers
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.living_room_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.living_room_speakers
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.living_room_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.living_room_speakers
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.kitchen_hub
-            name: "Kitchen Hub Speaker"
-            visibility:
-              - condition: state
+            # Kitchen
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.kitchen_hub
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.kitchen_hub' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Kitchen{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Kitchen</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.kitchen_hub') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.kitchen_hub') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.kitchen_hub
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.kitchen_hub
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.kitchen_hub
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.kitchen_hub
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.kitchen_hub
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.master_bedroom_speaker
-            name: "Master Bedroom Speakers"
-            visibility:
-              - condition: state
+            # Master Bedroom
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.master_bedroom_speaker
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.master_bedroom_speaker' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Master Bedroom{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Master Bedroom</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.master_bedroom_speaker') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.master_bedroom_speaker') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.master_bedroom_speaker
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.master_bedroom_speaker
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.master_bedroom_speaker
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.master_bedroom_speaker
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.master_bedroom_speaker
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.office_speakers
-            name: "Office Speakers"
-            visibility:
-              - condition: state
+            # Office
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.office_speakers
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.office_speakers' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Office{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Office</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.office_speakers') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.office_speakers') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.office_speakers
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.office_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.office_speakers
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.office_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.office_speakers
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.garage_speakers
-            name: "Garage Speakers"
-            visibility:
-              - condition: state
+            # Garage
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.garage_speakers
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.garage_speakers' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Garage{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Garage</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.garage_speakers') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.garage_speakers') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.garage_speakers
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.garage_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.garage_speakers
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.garage_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.garage_speakers
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
 
-          - type: media-control
-            entity: media_player.outside_speakers
-            name: "Outside Speakers"
-            visibility:
-              - condition: state
+            # Outside
+            - type: markdown
+              text_only: true
+              tap_action:
+                action: more-info
                 entity: media_player.outside_speakers
-                state_not: "off"
+              content: |-
+                {%- set e = 'media_player.outside_speakers' -%}
+                {%- set s = states(e) -%}
+                {%- if s in ['playing', 'paused'] -%}
+                {%- set a = states[e].attributes -%}
+                {%- set series = a.get('media_series_title') or '' -%}
+                {%- set mt = a.get('media_title') or '' -%}
+                {%- set app = a.get('app_name') or '' -%}
+                {%- set pic = a.get('entity_picture') or '' -%}
+                {%- set title = series or mt or app or 'Playing' -%}
+                {%- set ep = mt if (series and mt) else (a.get('media_artist') or '') -%}
+                {%- set sub = [ep, app if (series or mt) else ''] | select | join(' · ') -%}
+                <div>{% if pic %}<img src="{{ pic }}">{% else %}<ha-icon icon="mdi:speaker"></ha-icon>{% endif %}</div><h4>Outside{{ ' · Paused' if s == 'paused' else '' }}</h4><h3>{{ title }}</h3>{% if sub %}<p>{{ sub }}</p>{% endif %}
+                {%- else -%}
+                <div><ha-icon icon="mdi:speaker"></ha-icon></div><h3>Outside</h3><p>{% if s == 'unavailable' %}<em>Not responding</em>{% elif s == 'off' %}Off{% else %}{{ s | capitalize }}{% endif %}</p>
+                {%- endif -%}
+              card_mod:
+                style:
+                  .: |
+                    {% set p = states('media_player.outside_speakers') in ['playing', 'paused'] %}
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                  ha-markdown $: |
+                    {% set s = states('media_player.outside_speakers') %}{% set p = s in ['playing', 'paused'] %}
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: center; margin: 0; }
+                    img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
+                    ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
+                      width: {{ '52px' if p else '36px' }}; height: {{ '52px' if p else '36px' }}; border-radius: {{ '10px' if p else '50%' }};
+                      background: {{ 'rgba(255, 214, 0, 0.16)' if p else 'rgba(255, 255, 255, 0.08)' }};
+                      color: {{ '#FFD600' if p else 'var(--secondary-text-color)' }};
+                      --mdc-icon-size: {{ '26px' if p else '20px' }};
+                      opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
+                    h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    em { font-style: normal; color: #FFD600; }
+            - type: 'custom:mod-card'
+              visibility:
+                - condition: state
+                  entity: media_player.outside_speakers
+                  state: ["playing", "paused"]
+              style:
+                .: *flat
+                hui-horizontal-stack-card $: *controls_spk
+              card:
+                type: horizontal-stack
+                cards:
+                  - type: button
+                    icon: mdi:pause
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_pause
+                      target:
+                        entity_id: media_player.outside_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.outside_speakers
+                        state: "playing"
+                    card_mod:
+                      style: *btn_amber
+                  - type: button
+                    icon: mdi:play
+                    show_name: false
+                    tap_action:
+                      action: perform-action
+                      perform_action: media_player.media_play
+                      target:
+                        entity_id: media_player.outside_speakers
+                    hold_action:
+                      action: none
+                    visibility:
+                      - condition: state
+                        entity: media_player.outside_speakers
+                        state: "paused"
+                    card_mod:
+                      style: *btn_gray
