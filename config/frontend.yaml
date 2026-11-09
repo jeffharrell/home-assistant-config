@@ -314,8 +314,8 @@ themes:
 
     # entity rows on the classic dashboard: names and values 16px, the
     # secondary line ("14 hours ago") 13px. UIX styles rows with the theme
-    # of their card (padded_card / settings_card) or else the view
-    # (subview), so all three share this.
+    # of their card (padded_card) or else the view (subview), so both share
+    # this. settings_card rows stay at HA's 14px on purpose (quieter).
     card-mod-row-yaml: &classic_rows |
       .: |
         hui-generic-entity-row {
@@ -343,8 +343,6 @@ themes:
 
   settings_card:
     card-mod-theme: settings_card
-
-    card-mod-row-yaml: *classic_rows
 
     primary-text-color:    *white
     secondary-text-color:  *white-dim
