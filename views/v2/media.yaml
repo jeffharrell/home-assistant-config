@@ -44,7 +44,7 @@ cards:
             --vertical-stack-card-gap: 0px;
 
             margin-top: 25px;
-            padding: 0 0 8px;
+            padding: 0 0 2px;
             background-color: var(--secondary-background-color);
           }
         card:
@@ -97,10 +97,10 @@ cards:
                       style:
                         .: |
                           {% set p = states('media_player.family_room_apple_tv') in ['playing', 'paused'] %}
-                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '12px 0 12px 16px' }} !important; }
                         ha-markdown $: |
                           {% set s = states('media_player.family_room_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
-                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                           div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                           img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                           ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -110,8 +110,9 @@ cards:
                             --mdc-icon-size: {{ '26px' if p else '20px' }};
                             opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                           h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                           h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          {{ '' if p else 'p { line-height: 16px; }' }}
                           em { font-style: normal; color: #FFD600; }
                   - type: button
                     icon: mdi:power
@@ -218,10 +219,10 @@ cards:
                       style:
                         .: |
                           {% set p = states('media_player.living_room_apple_tv') in ['playing', 'paused'] %}
-                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '12px 0 12px 16px' }} !important; }
                         ha-markdown $: |
                           {% set s = states('media_player.living_room_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
-                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                           div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                           img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                           ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -231,8 +232,9 @@ cards:
                             --mdc-icon-size: {{ '26px' if p else '20px' }};
                             opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                           h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                           h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          {{ '' if p else 'p { line-height: 16px; }' }}
                           em { font-style: normal; color: #FFD600; }
                   - type: button
                     icon: mdi:power
@@ -332,10 +334,10 @@ cards:
                       style:
                         .: |
                           {% set p = states('media_player.master_bedroom_apple_tv') in ['playing', 'paused'] %}
-                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '10px 0 10px 16px' }} !important; }
+                          ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 0 0 16px' if p else '12px 0 12px 16px' }} !important; }
                         ha-markdown $: |
                           {% set s = states('media_player.master_bedroom_apple_tv') %}{% set p = s in ['playing', 'paused'] %}
-                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                          ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                           div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                           img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                           ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -345,8 +347,9 @@ cards:
                             --mdc-icon-size: {{ '26px' if p else '20px' }};
                             opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                           h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                          h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                           h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                          {{ '' if p else 'p { line-height: 16px; }' }}
                           em { font-style: normal; color: #FFD600; }
                   - type: button
                     icon: mdi:power
@@ -453,10 +456,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.family_room_speakers') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.family_room_speakers') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -466,8 +469,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -541,10 +545,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.living_room_speakers') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.living_room_speakers') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -554,8 +558,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -627,10 +632,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.kitchen_hub') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.kitchen_hub') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -640,8 +645,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -713,10 +719,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.master_bedroom_speaker') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.master_bedroom_speaker') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -726,8 +732,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -799,10 +806,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.office_speakers') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.office_speakers') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -812,8 +819,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -885,10 +893,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.garage_speakers') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.garage_speakers') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -898,8 +906,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
@@ -971,10 +980,10 @@ cards:
                 style:
                   .: |
                     {% set p = states('media_player.outside_speakers') in ['playing', 'paused'] %}
-                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '10px 16px 10px 16px' }} !important; }
+                    ha-card { background: none; border: none; box-shadow: none; border-radius: 0; padding: {{ '12px 16px 0 16px' if p else '12px 16px 12px 16px' }} !important; }
                   ha-markdown $: |
                     {% set s = states('media_player.outside_speakers') %}{% set p = s in ['playing', 'paused'] %}
-                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '44px' }}; }
+                    ha-markdown-element, :host { position: relative; display: block; min-height: {{ '52px' if p else '36px' }}; }
                     div { position: absolute; left: 0; top: {{ '0' if p else '50%' }}; {{ '' if p else 'transform: translateY(-50%);' }} width: 52px; height: {{ '52px' if p else '36px' }}; display: flex; justify-content: flex-start; margin: 0; }
                     img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; background: #222222; }
                     ha-icon { display: flex; align-items: center; justify-content: center; flex: none;
@@ -984,8 +993,9 @@ cards:
                       --mdc-icon-size: {{ '26px' if p else '20px' }};
                       opacity: {{ '0.45' if s == 'unavailable' else '1' }}; }
                     h3, h4, p { margin: 0 0 0 66px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'padding-top: 3px;' }} }
+                    h3 { font-size: 16px; font-weight: {{ '500' if p else '400' }}; color: var(--primary-text-color); {{ '' if p else 'line-height: 20px;' }} }
                     h4, p { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }
+                    {{ '' if p else 'p { line-height: 16px; }' }}
                     em { font-style: normal; color: #FFD600; }
             - type: 'custom:mod-card'
               visibility:
