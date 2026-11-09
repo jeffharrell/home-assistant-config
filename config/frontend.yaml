@@ -328,6 +328,16 @@ themes:
     wa-color-brand-fill-loud:             *accent
     wa-color-brand-on-loud:               "#222222"
 
+    # section headers (heading cards, title and subtitle alike): small, dim,
+    # all caps and letter-spaced like the mock. Caps and spacing are in
+    # card-mod-card-yaml below; the heading card has no variable for them.
+    ha-heading-card-title-color:          var(--secondary-text-color)
+    ha-heading-card-title-font-size:      "13px"
+    ha-heading-card-title-font-weight:    "500"
+    ha-heading-card-subtitle-color:       var(--secondary-text-color)
+    ha-heading-card-subtitle-font-size:   "13px"
+    ha-heading-card-subtitle-font-weight: "500"
+
     # content starts right under the title: drop app_theme's 40px view
     # padding and the sections view's 24px top padding
     card-mod-view-yaml: |
@@ -361,6 +371,11 @@ themes:
     # `card_mod: class: att` (plus att-close / att-resume) are touched.
     card-mod-card-yaml: |
       .: |
+        ha-card > .container > .content {
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          --mdc-icon-size: 16px;
+        }
         :host(.att) ha-card {
           --ha-card-border-color: rgba(255, 214, 0, 0.35);
           --tile-color: #FFD600 !important;
